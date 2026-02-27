@@ -5,7 +5,6 @@
 @use '@carbon/styles/scss/theme';
 
 @use '../../src' as carbon-html;
-@use '../elements/button';
 
 :root {
   @include carbon-html.emit-carbon-colors;

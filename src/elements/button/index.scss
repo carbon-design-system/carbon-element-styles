@@ -13,13 +13,12 @@ $default-config: (
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include layout.body;
+  @include layout.mode--body;
   appearance: none;
   border: none;
   box-shadow: none;
   border-radius: 0;
-  color: theme.$text-primary;
-  color: theme.$text-on-color;
+  text-align: start;
   block-size: layout.$size--block-size;
   padding-inline-start: spacing.$spacing-05;
   padding-inline-end: calc(spacing.$spacing-05 + 1rem + spacing.$spacing-05);
@@ -37,6 +36,7 @@ $default-config: (
 
   @if map.get($props, 'kind') == 'primary' {
     background-color: carbon-button.$button-primary;
+    color: theme.$text-on-color;
 
     &:enabled:hover {
       background-color: carbon-button.$button-primary-hover;
@@ -54,6 +54,7 @@ $default-config: (
 
   @if map.get($props, 'kind') == 'secondary' {
     background-color: carbon-button.$button-secondary;
+    color: theme.$text-on-color;
 
     &:enabled:hover {
       background-color: carbon-button.$button-secondary-hover;

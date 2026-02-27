@@ -19,6 +19,18 @@ $-modes: (
         font-family: type.font-family('sans'),
       )),
     ),
+    heading: (
+      name: 'heading-01',
+      style: map.merge(type.$heading-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    heading-compact: (
+      name: 'heading-compact-01',
+      style: map.merge(type.$heading-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
     label: (
       name: 'label-01',
       style: map.merge(type.$body-01, (
@@ -42,6 +54,18 @@ $-modes: (
     body-compact: (
       name: 'body-compact-02',
       style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    heading: (
+      name: 'heading-02',
+      style: map.merge(type.$heading-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    heading-compact: (
+      name: 'heading-compact-02',
+      style: map.merge(type.$heading-01, (
         font-family: type.font-family('sans'),
       )),
     ),
@@ -93,18 +117,26 @@ $-properties: (
   }
 }
 
-@mixin body {
+@mixin mode--body {
   @include -type-style('body');
 }
 
-@mixin body-compact {
+@mixin mode--body-compact {
   @include -type-style('body-compact');
 }
 
-@mixin label {
+@mixin mode--heading {
+  @include -type-style('heading');
+}
+
+@mixin mode--heading-compact {
+  @include -type-style('heading-compact');
+}
+
+@mixin mode--label {
   @include -type-style('label');
 }
 
-@mixin helper-text {
+@mixin mode--helper-text {
   @include -type-style('helper-text');
 }

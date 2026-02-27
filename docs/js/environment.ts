@@ -1,7 +1,9 @@
 import { prefix } from './config';
-import * as Elements from '../elements';
+import * as elementExports from '../elements';
 
 export const RequestRenderEvent = `${prefix}:request-render`;
+
+export const Elements = Object.values(elementExports).map((e) => e.meta.id);
 
 export const Modes = {
   Productive: 'productive',
@@ -16,7 +18,7 @@ export const Themes = {
 } as const;
 
 export type DemoEnvironmentOptions = {
-  element: keyof typeof Elements;
+  element: typeof Elements[0];
   demo: string;
   mode: typeof Modes[keyof typeof Modes];
   theme: typeof Themes[keyof typeof Themes];
@@ -36,7 +38,7 @@ export function set(environment: Partial<DemoEnvironmentOptions>) {
 }
 
 function isValidElement(id: string | null): id is DemoEnvironmentOptions['element'] {
-  return (id !== null && Object.keys(Elements).includes(id as DemoEnvironmentOptions['element']));
+  return (id !== null && Elements.includes(id as DemoEnvironmentOptions['element']));
 }
 
 function isValidMode(id: string | null): id is DemoEnvironmentOptions['mode'] {
@@ -56,7 +58,7 @@ export function get(): DemoEnvironmentOptions {
   const theme = url.searchParams.get('theme');
 
   return {
-    element: isValidElement(element) ? element : Elements.button.meta.id,
+    element: isValidElement(element) ? element : elementExports.button.meta.id,
     demo: demo ?? 'default',
     mode: isValidMode(mode) ? mode : Modes.Expressive,
     theme: isValidTheme(theme) ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? Themes.Gray100 : Themes.White),

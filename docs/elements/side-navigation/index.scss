@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/side-navigation';
+
+$name: 'side-navigation';
+
+@include docs.demo($name, 'default') {
+  nav {
+    @include side-navigation.styles;
+  }
+};

@@ -6,11 +6,11 @@ export const meta = {
 } as const satisfies Meta;
 
 const html = /* html */`
-<button>Button</button>
+<button type="button">Button</button>
 
 <br /><br />
 
-<button disabled>Button (disabled)</button>
+<button type="button" disabled>Button (disabled)</button>
 `;
 
 export const demos: Demo[] = [

@@ -15,9 +15,15 @@ function buildMenuItem(element: ElementDetails): HTMLElement {
   const menuItem = document.createElement('li');
 
   const button = document.createElement('button');
-  button.setAttribute('aria-expanded', 'true');
+  button.setAttribute('aria-expanded', getEnvironment().element === element.meta.id ? 'true' : 'false');
   button.setAttribute('type', 'button');
   button.innerText = element.meta.name;
+
+  button.addEventListener('click', () => {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+  });
+
   menuItem.appendChild(button);
 
   const list = document.createElement('ul');
