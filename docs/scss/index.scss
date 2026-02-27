@@ -1,5 +1,6 @@
 @use './base';
 @use './elements';
+@use './environment';
 
 @use '../../src' as carbon-html;
 
@@ -18,12 +19,12 @@
   }
 }
 
-header > nav {
+body > header {
   @include layout.size('lg');
   @include header-navigation.styles;
 }
 
-header + nav {
+body > header + nav {
   @include layout.size('sm');
   @include side-navigation.styles;
   position: fixed;
@@ -44,31 +45,14 @@ main {
   grid-template-rows: 1fr 0 20rem;
 }
 
-// #controls {
-//   inline-size: 100%;
-//   display: flex;
-//   justify-content: end;
-//   align-items: center;
-//   column-gap: spacing.$spacing-05;
-//   padding-inline-end: spacing.$spacing-05;
-// }
-
-// #controls label {
-//   display: flex;
-//   inline-size: fit-content;
-//   align-items: center;
-//   column-gap: spacing.$spacing-03;
-//   block-size: defaults.$block-size;
-// }
-
-// #controls label select {
-//   margin-block-start: 0;
-//   border-block-end: 0;
-// }
-
-// #controls label select:not(:hover) {
-//   background-color: transparent;
-// }
+#controls {
+  inline-size: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: spacing.$spacing-05;
+  padding-inline-end: spacing.$spacing-05;
+}
 
 #demo {
   overflow: auto;

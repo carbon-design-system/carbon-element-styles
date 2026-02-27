@@ -10,6 +10,13 @@ export const Modes = {
   Expressive: 'expressive',
 } as const;
 
+export const Sizes = {
+  Xs: 'xs',
+  Sm: 'sm',
+  Md: 'md',
+  Lg: 'lg',
+} as const;
+
 export const Themes = {
   White: 'white',
   Gray10: 'g10',
@@ -21,6 +28,7 @@ export type DemoEnvironmentOptions = {
   element: typeof Elements[0];
   demo: string;
   mode: typeof Modes[keyof typeof Modes];
+  size: typeof Sizes[keyof typeof Sizes];
   theme: typeof Themes[keyof typeof Themes];
 };
 
@@ -45,6 +53,10 @@ function isValidMode(id: string | null): id is DemoEnvironmentOptions['mode'] {
   return (id !== null && Object.values(Modes).includes(id as DemoEnvironmentOptions['mode']));
 }
 
+function isValidSize(id: string | null): id is DemoEnvironmentOptions['size'] {
+  return (id !== null && Object.values(Sizes).includes(id as DemoEnvironmentOptions['size']));
+}
+
 function isValidTheme(id: string | null): id is DemoEnvironmentOptions['theme'] {
   return (id !== null && Object.values(Themes).includes(id as DemoEnvironmentOptions['theme']));
 }
@@ -55,12 +67,14 @@ export function get(): DemoEnvironmentOptions {
   const element = url.searchParams.get('element');
   const demo = url.searchParams.get('demo');
   const mode = url.searchParams.get('mode');
+  const size = url.searchParams.get('size');
   const theme = url.searchParams.get('theme');
 
   return {
     element: isValidElement(element) ? element : elementExports.button.meta.id,
     demo: demo ?? 'default',
     mode: isValidMode(mode) ? mode : Modes.Expressive,
+    size: isValidSize(size) ? size : Sizes.Md,
     theme: isValidTheme(theme) ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? Themes.Gray100 : Themes.White),
   };
 }

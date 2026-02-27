@@ -4,7 +4,7 @@
 $name: 'header-navigation';
 
 @include docs.demo($name, 'default') {
-  header > nav {
+  header {
     @include header-navigation.styles;
   }
 };

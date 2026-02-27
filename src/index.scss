@@ -1,6 +1,7 @@
 @forward './utilities/carbon';
 
 @use './layout';
+@forward './layout';
 
 @mixin styles {
   @include layout.size;

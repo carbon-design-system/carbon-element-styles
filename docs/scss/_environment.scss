@@ -1,0 +1,29 @@
+@use '../../src' as carbon-html;
+
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../src/config';
+
+@each $theme in ('white', 'g10', 'g90', 'g100') {
+  :root:has([data-#{carbon-config.$prefix}-#{config.$prefix}-theme="#{$theme}"]) {
+    @include carbon-html.emit-carbon-tokens($theme);
+
+    @if $theme == 'white' or $theme == 'g10' {
+      color-scheme: light;
+    } @else {
+      color-scheme: dark;
+    }
+  }
+}
+
+@each $mode in ('productive', 'expressive') {
+  #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-mode="#{$mode}"] {
+    @include carbon-html.mode($mode);
+  }
+}
+
+@each $size in ('xs', 'sm', 'md', 'lg') {
+  #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-size="#{$size}"] {
+    @include carbon-html.size($size);
+  }
+}

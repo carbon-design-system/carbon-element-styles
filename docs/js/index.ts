@@ -6,7 +6,7 @@ import {
 
 import { render as renderMenu } from './menu';
 import { render as renderDemo } from './demo';
-// import { render as renderControls } from './controls';
+import { render as renderControls } from './controls';
 
 function render() {
   const container = document.getElementById('demo');
@@ -18,7 +18,7 @@ function render() {
 
     renderMenu();
     renderDemo();
-    // renderControls();
+    renderControls();
   }
 }
 

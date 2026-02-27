@@ -20,10 +20,16 @@ $default-config: (
   block-size: layout.$size--block-size;
   background-color: theme.$layer-background;
   border-block-end: 0.0625rem solid theme.$border-subtle;
-  display: flex;
   align-items: center;
+  display: flex;
 
-  & > ul {
+  & > nav {
+    flex-shrink: 0;
+    display: flex;
+    block-size: 100%;
+  }
+
+  & > nav ul {
     position: relative;
     margin: 0;
     padding: 0;
@@ -32,12 +38,12 @@ $default-config: (
     display: flex;
   }
 
-  & > ul li {
+  & > nav ul li {
     @include layout.mode--body;
     block-size: 100%;
   }
 
-  & > ul li a {
+  & > nav ul li a {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -59,12 +65,12 @@ $default-config: (
     }
   }
 
-  & > ul li a[aria-current="page"] {
+  & > nav ul li a[aria-current="page"] {
     color: theme.$text-primary;
     box-shadow: inset 0 -0.25rem 0 0 theme.$border-interactive;
   }
 
-  & > a:first-child {
+  & > nav a:first-child {
     @include layout.mode--body;
     color: theme.$text-primary;
     text-decoration: none;
@@ -78,16 +84,16 @@ $default-config: (
     }
   }
 
-  & > a:first-child b {
+  & > nav a:first-child b {
     margin-inline-start: spacing.$spacing-02;
   }
 
-  & > a:first-child + ul {
+  & > nav a:first-child + ul {
     margin-inline-start: spacing.$spacing-05;
     padding-inline-start: spacing.$spacing-05;
   }
 
-  & > a:first-child + ul::before {
+  & > nav a:first-child + ul::before {
     content: '';
     display: block;
     inline-size: 0.0625rem;

@@ -20,6 +20,7 @@ $default-config: (
   border-radius: 0;
   text-align: start;
   block-size: layout.$size--block-size;
+  padding-block: 0;
   padding-inline-start: spacing.$spacing-05;
   padding-inline-end: calc(spacing.$spacing-05 + 1rem + spacing.$spacing-05);
   cursor: pointer;
