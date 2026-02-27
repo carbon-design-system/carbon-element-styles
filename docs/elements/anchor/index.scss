@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/anchor';
+
+$name: 'anchor';
+
+@include docs.demo($name, 'default') {
+  a {
+    @include anchor.styles;
+  }
+};

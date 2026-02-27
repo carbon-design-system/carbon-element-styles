@@ -1,0 +1,26 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  color: theme.$link-primary;
+  text-decoration: underline;
+  transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+  &:hover {
+    color: theme.$link-primary-hover;
+  }
+
+  &:focus {
+    @include focus-outline.focus-outline('outline');
+  }
+}
