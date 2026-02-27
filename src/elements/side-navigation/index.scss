@@ -42,6 +42,9 @@ $default-config: (
     block-size: layout.$size--block-size;
     padding-inline: spacing.$spacing-05;
     cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: layout.$mode--transition-duration;
+    transition-timing-function: layout.$mode--transition-timing-function;
 
     &:hover {
       background-color: theme.$layer-hover;

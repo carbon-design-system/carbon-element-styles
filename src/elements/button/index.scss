@@ -24,6 +24,9 @@ $default-config: (
   padding-inline-start: spacing.$spacing-05;
   padding-inline-end: calc(spacing.$spacing-05 + 1rem + spacing.$spacing-05);
   cursor: pointer;
+  transition-property: color, background-color;
+  transition-duration: layout.$mode--transition-duration;
+  transition-timing-function: layout.$mode--transition-timing-function;
 
   &:focus {
     outline: 0.125rem solid theme.$focus;

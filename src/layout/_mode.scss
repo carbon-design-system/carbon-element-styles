@@ -2,6 +2,7 @@
 
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/motion';
 @use '@carbon/styles/scss/utilities/custom-property';
 
 @use '../utilities/tokens';
@@ -125,8 +126,12 @@ $-properties: (
 
   @if ($mode == 'productive') {
     @include tokens.set('mode--margin-block', spacing.$spacing-05);
+    @include tokens.set('mode--transition-duration', motion.$duration-fast-02);
+    @include tokens.set('mode--transition-timing-function', motion.motion('standard', 'productive'));
   } @else if ($mode == 'expressive') {
     @include tokens.set('mode--margin-block', spacing.$spacing-07);
+    @include tokens.set('mode--transition-duration', motion.$duration-moderate-01);
+    @include tokens.set('mode--transition-timing-function', motion.motion('standard', 'expressive'));
   }
 }
 
@@ -165,3 +170,5 @@ $-properties: (
 }
 
 $mode--margin-block: tokens.get('mode--margin-block', spacing.$spacing-05);
+$mode--transition-duration: tokens.get('mode--transition-duration', motion.$duration-fast-02);
+$mode--transition-timing-function: tokens.get('mode--transition-timing-function', motion.motion('standard', 'productive'));
