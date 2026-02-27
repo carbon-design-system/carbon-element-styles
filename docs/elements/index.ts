@@ -9,6 +9,7 @@ export * as deletedText from './deleted-text';
 export * as descriptionList from './description-list';
 export * as fieldset from './fieldset';
 export * as headerNavigation from './header-navigation';
+export * as heading from './heading';
 export * as insertedText from './inserted-text';
 export * as italicText from './italic-text';
 export * as label from './label';

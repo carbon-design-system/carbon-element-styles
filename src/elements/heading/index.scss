@@ -1,0 +1,42 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../label';
+
+@use '../../layout';
+
+$default-config: (
+  level: 1,
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  margin-block-end: spacing.$spacing-03;
+  margin-block-start: 1em;
+
+  @if map.get($props, 'level') == 1 {
+    @include layout.mode--heading-level-1;
+  }
+
+  @if map.get($props, 'level') == 2 {
+    @include layout.mode--heading-level-2;
+  }
+
+  @if map.get($props, 'level') == 3 {
+    @include layout.mode--heading-level-3;
+  }
+
+  @if map.get($props, 'level') == 4 {
+    @include layout.mode--heading-level-4;
+  }
+
+  @if map.get($props, 'level') == 5 {
+    @include layout.mode--heading-level-5;
+  }
+
+  @if map.get($props, 'level') == 6 {
+    @include layout.mode--heading-level-6;
+  }
+}

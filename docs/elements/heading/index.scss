@@ -1,0 +1,42 @@
+@use '../../scss/docs';
+@use '../../../src/elements/heading';
+
+$name: 'heading';
+
+@include docs.demo($name, 'default') {
+  h1 {
+    @include heading.styles((
+      level: 1,
+    ));
+  }
+
+  h2 {
+    @include heading.styles((
+      level: 2,
+    ));
+  }
+
+  h3 {
+    @include heading.styles((
+      level: 3,
+    ));
+  }
+
+  h4 {
+    @include heading.styles((
+      level: 4,
+    ));
+  }
+
+  h5 {
+    @include heading.styles((
+      level: 5,
+    ));
+  }
+
+  h6 {
+    @include heading.styles((
+      level: 6,
+    ));
+  }
+};
