@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/horizontal-rule';
+
+$name: 'horizontal-rule';
+
+@include docs.demo($name, 'default') {
+  hr {
+    @include horizontal-rule.styles;
+  }
+};

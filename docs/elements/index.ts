@@ -10,6 +10,7 @@ export * as descriptionList from './description-list';
 export * as fieldset from './fieldset';
 export * as headerNavigation from './header-navigation';
 export * as heading from './heading';
+export * as horizontalRule from './horizontal-rule';
 export * as insertedText from './inserted-text';
 export * as italicText from './italic-text';
 export * as label from './label';
