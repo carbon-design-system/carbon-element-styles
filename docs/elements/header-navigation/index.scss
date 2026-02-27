@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/header-navigation';
+
+$name: 'header-navigation';
+
+@include docs.demo($name, 'default') {
+  header > nav {
+    @include header-navigation.styles;
+  }
+};

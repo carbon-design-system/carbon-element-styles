@@ -13,6 +13,7 @@ $default-config: (
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
+  padding-block: spacing.$spacing-05;
   inline-size: 16rem;
   background-color: theme.$layer-background;
   border-inline-end: 0.0625rem solid theme.$border-subtle;

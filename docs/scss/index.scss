@@ -4,6 +4,7 @@
 @use '../../src' as carbon-html;
 
 @use '../../src/layout';
+@use '../../src/elements/header-navigation';
 @use '../../src/elements/side-navigation';
 
 @use '@carbon/styles/scss/theme';
@@ -14,6 +15,11 @@
   :root[data-cdsh-theme="#{$theme}"] {
     @include carbon-html.emit-carbon-tokens($theme);
   }
+}
+
+header > nav {
+  @include layout.size('lg');
+  @include header-navigation.styles;
 }
 
 header + nav {

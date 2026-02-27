@@ -1,0 +1,99 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  position: fixed;
+  z-index: 99999;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: layout.$size--block-size;
+  background-color: theme.$layer-background;
+  border-block-end: 0.0625rem solid theme.$border-subtle;
+  display: flex;
+  align-items: center;
+
+  & > ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    block-size: 100%;
+    display: flex;
+  }
+
+  & > ul li {
+    @include layout.mode--body;
+    block-size: 100%;
+  }
+
+  & > ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: theme.$text-secondary;
+    block-size: 100%;
+    padding-inline: spacing.$spacing-05;
+
+    &:hover {
+      background-color: theme.$layer-hover;
+      color: theme.$text-primary;
+    }
+
+    &:active {
+      background-color: theme.$layer-hover;
+    }
+
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+  }
+
+  & > ul li a[aria-current="page"] {
+    color: theme.$text-primary;
+    box-shadow: inset 0 -0.25rem 0 0 theme.$border-interactive;
+  }
+
+  & > a:first-child {
+    @include layout.mode--body;
+    color: theme.$text-primary;
+    text-decoration: none;
+    padding-inline: spacing.$spacing-05;
+    block-size: 100%;
+    display: inline-flex;
+    align-items: center;
+
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+  }
+
+  & > a:first-child b {
+    margin-inline-start: spacing.$spacing-02;
+  }
+
+  & > a:first-child + ul {
+    margin-inline-start: spacing.$spacing-05;
+    padding-inline-start: spacing.$spacing-05;
+  }
+
+  & > a:first-child + ul::before {
+    content: '';
+    display: block;
+    inline-size: 0.0625rem;
+    inset-inline-start: -0.0625rem;
+    position: absolute;
+    inset-block: spacing.$spacing-04;
+    background-color: theme.$border-subtle;
+  }
+}
