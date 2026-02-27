@@ -1,0 +1,23 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include layout.mode--code;
+  white-space: pre;
+  margin-block: layout.$mode--margin-block;
+  padding: spacing.$spacing-05;
+  background-color: theme.$layer;
+  inline-size: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}

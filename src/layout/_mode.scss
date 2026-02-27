@@ -1,6 +1,7 @@
 @use 'sass:map';
 
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/custom-property';
 
 @use '../utilities/tokens';
@@ -43,6 +44,12 @@ $-modes: (
         font-family: type.font-family('sans'),
       )),
     ),
+    code: (
+      name: 'code-01',
+      style: map.merge(type.$code-01, (
+        font-family: type.font-family('mono'),
+      )),
+    ),
   ),
   'expressive': (
     body: (
@@ -81,6 +88,12 @@ $-modes: (
         font-family: type.font-family('sans'),
       )),
     ),
+    code: (
+      name: 'code-02',
+      style: map.merge(type.$code-02, (
+        font-family: type.font-family('mono'),
+      )),
+    ),
   ),
 );
 
@@ -108,6 +121,12 @@ $-properties: (
         ),
       );
     }
+  }
+
+  @if ($mode == 'productive') {
+    @include tokens.set('mode--margin-block', spacing.$spacing-05);
+  } @else if ($mode == 'expressive') {
+    @include tokens.set('mode--margin-block', spacing.$spacing-07);
   }
 }
 
@@ -140,3 +159,9 @@ $-properties: (
 @mixin mode--helper-text {
   @include -type-style('helper-text');
 }
+
+@mixin mode--code {
+  @include -type-style('code');
+}
+
+$mode--margin-block: tokens.get('mode--margin-block', spacing.$spacing-05);

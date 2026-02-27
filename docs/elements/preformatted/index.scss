@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/preformatted';
+
+$name: 'preformatted';
+
+@include docs.demo($name, 'default') {
+  pre {
+    @include preformatted.styles;
+  }
+};

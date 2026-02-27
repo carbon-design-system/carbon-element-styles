@@ -6,6 +6,7 @@
 @use '../../src/layout';
 @use '../../src/elements/header-navigation';
 @use '../../src/elements/side-navigation';
+@use '../../src/elements/preformatted';
 
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
@@ -88,8 +89,8 @@ main {
 
 #code {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   position: relative;
+  grid-template-columns: 1fr 1fr;
   border-block-start: 0.0625rem solid theme.$border-subtle;
   background-color: theme.$layer;
   overflow: hidden;
@@ -121,10 +122,16 @@ main {
   );
 }
 
-#code > pre {
+#code > div {
+  position: relative;
+}
+
+#code pre {
+  @include preformatted.styles;
   position: absolute;
   inset: 0;
-  margin-block: 0;
+  margin: 0;
+  background-color: transparent;
 }
 
 #code > div:not(:first-child) {
