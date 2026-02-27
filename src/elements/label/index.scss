@@ -1,0 +1,29 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../../layout';
+
+$default-config: (
+  axis: 'block',
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  display: flex;
+  gap: spacing.$spacing-03;
+  color: theme.$text-secondary;
+
+  @if map.get($props, 'axis') == 'block' {
+    @include layout.mode--label;
+    flex-direction: column;
+  }
+
+  @if map.get($props, 'axis') == 'inline' {
+    @include layout.mode--body-compact;
+    flex-direction: row;
+    align-items: center;
+  }
+}

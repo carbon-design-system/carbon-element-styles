@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/label';
+
+$name: 'label';
+
+@include docs.demo($name, 'default') {
+  label {
+    @include label.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label {
+    @include label.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label {
+    @include label.styles((
+      axis: 'inline',
+    ));
+  }
+};

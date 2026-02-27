@@ -1,0 +1,70 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../label';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include label.styles((
+    axis: 'inline',
+  ));
+
+  flex-direction: row-reverse;
+  justify-content: start;
+  cursor: pointer;
+
+  & input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    inline-size: 1rem;
+    block-size: 1rem;
+    border: 0.0625rem solid theme.$icon-primary;
+    border-radius: 0.125rem;
+
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+      outline-offset: 0.125rem;
+    }
+
+    &:disabled {
+      border-color: theme.$icon-disabled;
+    }
+
+    &:checked,
+    &:indeterminate {
+      border: none;
+      background-color: theme.$icon-primary;
+      color: theme.$icon-inverse;
+
+      &:disabled {
+        background-color: theme.$icon-disabled;
+      }
+    }
+  }
+
+  & input[type="checkbox"]::before {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.25em;
+  }
+
+  & input[type="checkbox"]:checked::before {
+    content: '✓';
+  }
+
+  & input[type="checkbox"]:indeterminate::before {
+    content: '–';
+    margin-block-start: -0.0625rem;
+  }
+}

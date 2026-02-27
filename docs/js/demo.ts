@@ -34,7 +34,7 @@ export async function render() {
 
       codeScss.innerText = `\n${mixin}`;
 
-      // element.setup?.(container);
+      demo.setup?.(container);
     }
   }
 }

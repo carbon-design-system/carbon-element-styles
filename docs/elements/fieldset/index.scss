@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/fieldset';
+
+$name: 'fieldset';
+
+@include docs.demo($name, 'default') {
+  fieldset {
+    @include fieldset.styles;
+  }
+};

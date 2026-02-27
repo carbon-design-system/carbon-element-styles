@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/checkbox';
+
+$name: 'checkbox';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="checkbox"]) {
+    @include checkbox.styles;
+  }
+};

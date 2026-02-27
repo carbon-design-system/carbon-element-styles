@@ -7,4 +7,5 @@ export type Demo = {
   id: string;
   name: string;
   html: string;
+  setup?: (frame: HTMLElement) => void;
 };

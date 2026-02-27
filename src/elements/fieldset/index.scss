@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../label';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  border: none;
+  padding: 0;
+  margin-block: layout.$mode--margin-block;
+
+  legend {
+    @include label.styles;
+    padding: 0;
+    margin-block-end: spacing.$spacing-03;
+  }
+}
