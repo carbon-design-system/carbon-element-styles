@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/inserted-text';
+
+$name: 'inserted-text';
+
+@include docs.demo($name, 'default') {
+  ins {
+    @include inserted-text.styles;
+  }
+};

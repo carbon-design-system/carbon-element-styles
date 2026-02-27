@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/deleted-text';
+
+$name: 'deleted-text';
+
+@include docs.demo($name, 'default') {
+  del {
+    @include deleted-text.styles;
+  }
+};
