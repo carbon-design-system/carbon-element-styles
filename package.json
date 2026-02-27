@@ -1,0 +1,22 @@
+{
+  "name": "carbon-html",
+  "private": true,
+  "version": "0.1.0",
+  "author": "Jan Hassel <jan.hassel@ibm.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon-html.git"
+  },
+  "scripts": {
+    "dev": "vite docs",
+    "build:docs": "vite build docs",
+    "deploy:docs": "gh-pages -d docs/dist -f --dotfiles"
+  },
+  "devDependencies": {
+    "@carbon/styles": "^1.101.0",
+    "gh-pages": "^6.3.0",
+    "sass": "^1.97.3",
+    "vite": "^7.3.1"
+  }
+}

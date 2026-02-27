@@ -1,0 +1,18 @@
+@use 'sass:map';
+
+@use '../utilities/tokens';
+
+$-sizes: (
+  xs: 1.5rem,
+  sm: 2rem,
+  md: 2.5rem,
+  lg: 3rem,
+);
+
+$-default-size: 'md';
+
+@mixin size($size: $-default-size) {
+  @include tokens.set('size--block-size', map.get($-sizes, $size));
+}
+
+$size--block-size: tokens.get('size--block-size', map.get($-sizes, $-default-size));

@@ -1,0 +1,112 @@
+@use './base';
+
+@use '../../src' as carbon-html;
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/visually-hidden';
+
+@each $theme in ('white', 'g10', 'g90', 'g100') {
+  :root[data-cdsh-theme="#{$theme}"] {
+    @include carbon-html.emit-carbon-tokens($theme);
+  }
+}
+
+main {
+  position: fixed;
+  inset-block-start: 3rem;
+  inset-inline-start: calc(16rem + 0.0625rem);
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  margin: 0 !important;
+  display: grid;
+  grid-template-rows: 1fr 0 20rem;
+}
+
+// #controls {
+//   inline-size: 100%;
+//   display: flex;
+//   justify-content: end;
+//   align-items: center;
+//   column-gap: spacing.$spacing-05;
+//   padding-inline-end: spacing.$spacing-05;
+// }
+
+// #controls label {
+//   display: flex;
+//   inline-size: fit-content;
+//   align-items: center;
+//   column-gap: spacing.$spacing-03;
+//   block-size: defaults.$block-size;
+// }
+
+// #controls label select {
+//   margin-block-start: 0;
+//   border-block-end: 0;
+// }
+
+// #controls label select:not(:hover) {
+//   background-color: transparent;
+// }
+
+#demo {
+  overflow: auto;
+  padding: 2rem;
+  translate: 0 0;
+  background-color: theme.$background;
+}
+
+#fade {
+  block-size: 2.5rem;
+  background-image: linear-gradient(
+    transparent,
+    theme.$layer-background,
+  );
+  opacity: 0.5;
+  translate: 0 -100%;
+}
+
+#code {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  border-block-start: 0.0625rem solid theme.$border-subtle;
+  background-color: theme.$layer;
+  overflow: hidden;
+}
+
+#code::before,
+#code::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: 2.5rem;
+  z-index: 1;
+}
+
+#code::before {
+  inset-block-start: 0;
+  background-image: linear-gradient(
+    0deg,
+    transparent,
+    theme.$layer,
+  );
+}
+
+#code::after {
+  inset-block-end: 0;
+  background-image: linear-gradient(
+    transparent,
+    theme.$layer,
+  );
+}
+
+#code > pre {
+  position: absolute;
+  inset: 0;
+  margin-block: 0;
+}
+
+#code > div:not(:first-child) {
+  box-shadow: inset 0.0625rem 0 0 0 theme.$border-subtle;
+}

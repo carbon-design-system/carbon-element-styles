@@ -1,0 +1,11 @@
+@use '@carbon/styles/scss/utilities/custom-property';
+
+@use '../config';
+
+@mixin set($name, $value) {
+  @include custom-property.declaration('#{config.$prefix}--#{$name}', $value);
+}
+
+@function get($name, $fallback: false) {
+  @return custom-property.get-var('#{config.$prefix}--#{$name}', $fallback);
+}

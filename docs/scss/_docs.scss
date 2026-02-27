@@ -1,0 +1,9 @@
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../src/config';
+
+@mixin demo($element, $demo) {
+  [data-#{carbon-config.$prefix}-#{config.$prefix}-element="#{$element}"][data-#{carbon-config.$prefix}-#{config.$prefix}-demo="#{$demo}"] {
+    @content;
+  }
+}

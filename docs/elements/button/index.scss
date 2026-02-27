@@ -1,0 +1,66 @@
+@use '../../scss/docs';
+@use '../../../src/elements/button';
+
+$name: 'button';
+
+@include docs.demo($name, 'default') {
+  button {
+    @include button.styles;
+  }
+};
+
+@include docs.demo($name, 'primary') {
+  button {
+    @include button.styles((
+      kind: 'primary',
+    ));
+  }
+};
+
+@include docs.demo($name, 'secondary') {
+  button {
+    @include button.styles((
+      kind: 'secondary',
+    ));
+  }
+};
+
+@include docs.demo($name, 'tertiary') {
+  button {
+    @include button.styles((
+      kind: 'tertiary',
+    ));
+  }
+};
+
+@include docs.demo($name, 'ghost') {
+  button {
+    @include button.styles((
+      kind: 'ghost',
+    ));
+  }
+};
+
+@include docs.demo($name, 'danger--primary') {
+  button {
+    @include button.styles((
+      kind: 'danger--primary',
+    ));
+  }
+};
+
+@include docs.demo($name, 'danger--tertiary') {
+  button {
+    @include button.styles((
+      kind: 'danger--tertiary',
+    ));
+  }
+};
+
+@include docs.demo($name, 'danger--ghost') {
+  button {
+    @include button.styles((
+      kind: 'danger--ghost',
+    ));
+  }
+};

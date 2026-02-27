@@ -1,0 +1,110 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/custom-property';
+
+@use '../utilities/tokens';
+
+$-modes: (
+  'productive': (
+    body: (
+      name: 'body-01',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    body-compact: (
+      name: 'body-compact-01',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    label: (
+      name: 'label-01',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    helper-text: (
+      name: 'helper-text-01',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+  ),
+  'expressive': (
+    body: (
+      name: 'body-02',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    body-compact: (
+      name: 'body-compact-02',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    label: (
+      name: 'label-02',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+    helper-text: (
+      name: 'helper-text-02',
+      style: map.merge(type.$body-01, (
+        font-family: type.font-family('sans'),
+      )),
+    ),
+  ),
+);
+
+$-default-mode: 'productive';
+
+$-properties: (
+  'font-family',
+  'font-size',
+  'font-weight',
+  'line-height',
+  'letter-spacing',
+);
+
+@mixin mode($mode: $-default-mode) {
+  @each $type-style, $mapped-type-style in map.get($-modes, $mode) {
+    $name: map.get($mapped-type-style, 'name');
+    $style: map.get($mapped-type-style, 'style');
+
+    @each $property in $-properties {
+      @include tokens.set(
+        'mode--#{$type-style}-#{$property}',
+        custom-property.get-var(
+          '#{$name}-#{$property}',
+          map.get($style, $property),
+        ),
+      );
+    }
+  }
+}
+
+@mixin -type-style($name) {
+  @each $property in $-properties {
+    #{$property}: tokens.get('mode--#{$name}-#{$property}');
+  }
+}
+
+@mixin body {
+  @include -type-style('body');
+}
+
+@mixin body-compact {
+  @include -type-style('body-compact');
+}
+
+@mixin label {
+  @include -type-style('label');
+}
+
+@mixin helper-text {
+  @include -type-style('helper-text');
+}

@@ -1,0 +1,64 @@
+import { prefix } from './config';
+import * as Elements from '../elements';
+
+export const RequestRenderEvent = `${prefix}:request-render`;
+
+export const Modes = {
+  Productive: 'productive',
+  Expressive: 'expressive',
+} as const;
+
+export const Themes = {
+  White: 'white',
+  Gray10: 'g10',
+  Gray90: 'g90',
+  Gray100: 'g100',
+} as const;
+
+export type DemoEnvironmentOptions = {
+  element: keyof typeof Elements;
+  demo: string;
+  mode: typeof Modes[keyof typeof Modes];
+  theme: typeof Themes[keyof typeof Themes];
+};
+
+export function set(environment: Partial<DemoEnvironmentOptions>) {
+  const url = new URL(window.location.toString());
+
+  for (const key in environment) {
+    const value = environment[key as keyof DemoEnvironmentOptions] as string;
+    url.searchParams.set(key, value);
+  }
+
+  window.history.pushState(null, '', url.href);
+
+  window.dispatchEvent(new Event(RequestRenderEvent));
+}
+
+function isValidElement(id: string | null): id is DemoEnvironmentOptions['element'] {
+  return (id !== null && Object.keys(Elements).includes(id as DemoEnvironmentOptions['element']));
+}
+
+function isValidMode(id: string | null): id is DemoEnvironmentOptions['mode'] {
+  return (id !== null && Object.values(Modes).includes(id as DemoEnvironmentOptions['mode']));
+}
+
+function isValidTheme(id: string | null): id is DemoEnvironmentOptions['theme'] {
+  return (id !== null && Object.values(Themes).includes(id as DemoEnvironmentOptions['theme']));
+}
+
+export function get(): DemoEnvironmentOptions {
+  const url = new URL(window.location.toString());
+
+  const element = url.searchParams.get('element');
+  const demo = url.searchParams.get('demo');
+  const mode = url.searchParams.get('mode');
+  const theme = url.searchParams.get('theme');
+
+  return {
+    element: isValidElement(element) ? element : Elements.button.meta.id,
+    demo: demo ?? 'default',
+    mode: isValidMode(mode) ? mode : Modes.Expressive,
+    theme: isValidTheme(theme) ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? Themes.Gray100 : Themes.White),
+  };
+}

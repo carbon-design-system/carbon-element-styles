@@ -1,0 +1,26 @@
+@use '@carbon/styles/scss/config' with (
+  $use-akamai-cdn: true,
+);
+@use '@carbon/styles/scss/fonts';
+@use '@carbon/styles/scss/theme';
+
+@use '../../src' as carbon-html;
+@use '../elements/button';
+
+:root {
+  @include carbon-html.emit-carbon-colors;
+
+  @include carbon-html.emit-carbon-tokens('white');
+  color-scheme: light;
+
+  @media (prefers-color-scheme: dark) {
+    @include carbon-html.emit-carbon-tokens('g100');
+    color-scheme: dark;
+  }
+
+  @include carbon-html.styles;
+}
+
+html {
+  background-color: theme.$background;
+}
