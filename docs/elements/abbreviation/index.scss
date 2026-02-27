@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/abbreviation';
+
+$name: 'abbreviation';
+
+@include docs.demo($name, 'default') {
+  abbr {
+    @include abbreviation.styles;
+  }
+};

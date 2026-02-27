@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  text-decoration: none;
+  cursor: help;
+  border-block-end: 0.0625rem dotted theme.$border-strong;
+}

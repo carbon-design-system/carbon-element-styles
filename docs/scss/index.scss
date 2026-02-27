@@ -55,6 +55,7 @@ main {
 }
 
 #demo {
+  @include layout.mode--body;
   overflow: auto;
   padding: 2rem;
   translate: 0 0;
