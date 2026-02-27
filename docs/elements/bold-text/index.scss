@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/bold-text';
+
+$name: 'bold-text';
+
+@include docs.demo($name, 'default') {
+  strong, b {
+    @include bold-text.styles;
+  }
+};

@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/italic-text';
+
+$name: 'italic-text';
+
+@include docs.demo($name, 'default') {
+  em, i {
+    @include italic-text.styles;
+  }
+};

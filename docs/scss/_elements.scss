@@ -1,6 +1,7 @@
 @use '../elements/abbreviation';
 @use '../elements/anchor';
 @use '../elements/block-quotation';
+@use '../elements/bold-text';
 @use '../elements/button';
 @use '../elements/checkbox';
 @use '../elements/code';
@@ -9,7 +10,9 @@
 @use '../elements/fieldset';
 @use '../elements/header-navigation';
 @use '../elements/inserted-text';
+@use '../elements/italic-text';
 @use '../elements/label';
 @use '../elements/marked-text';
 @use '../elements/preformatted';
 @use '../elements/side-navigation';
+@use '../elements/small-text';

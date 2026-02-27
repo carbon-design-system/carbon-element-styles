@@ -6,7 +6,7 @@ export const meta = {
 } as const satisfies Meta;
 
 const html = /* html */`
-<mark>marked</mark>
+<mark>Marked</mark>
 `;
 
 export const demos: Demo[] = [

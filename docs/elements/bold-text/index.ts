@@ -1,12 +1,16 @@
 import type { Demo, Meta } from '../../js/_types';
 
 export const meta = {
-  id: 'deleted-text',
-  name: 'Deleted text',
+  id: 'bold-text',
+  name: 'Bold text',
 } as const satisfies Meta;
 
 const html = /* html */`
-<del>Deleted</del>
+<strong>Strong importance</strong>
+
+<br /><br />
+
+<b>Bold</b>
 `;
 
 export const demos: Demo[] = [

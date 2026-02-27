@@ -1,5 +1,6 @@
 @use 'sass:map';
 
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
 
 @use '../../layout';
@@ -11,6 +12,7 @@ $default-config: (
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
+  padding-inline: spacing.$spacing-01;
   background-color: tag-tokens.$tag-background-green;
   color: tag-tokens.$tag-color-green;
   text-decoration: underline;

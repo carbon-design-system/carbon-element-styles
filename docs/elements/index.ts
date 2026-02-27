@@ -1,6 +1,7 @@
 export * as abbreviation from './abbreviation';
 export * as anchor from './anchor';
 export * as blockQuotation from './block-quotation';
+export * as boldText from './bold-text';
 export * as button from './button';
 export * as checkbox from './checkbox';
 export * as code from './code';
@@ -9,7 +10,9 @@ export * as descriptionList from './description-list';
 export * as fieldset from './fieldset';
 export * as headerNavigation from './header-navigation';
 export * as insertedText from './inserted-text';
+export * as italicText from './italic-text';
 export * as label from './label';
 export * as markedText from './marked-text';
 export * as preformatted from './preformatted';
 export * as sideNavigation from './side-navigation';
+export * as smallText from './small-text';

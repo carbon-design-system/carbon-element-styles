@@ -6,7 +6,7 @@ export const meta = {
 } as const satisfies Meta;
 
 const html = /* html */`
-<ins>inserted</ins>
+<ins>Inserted</ins>
 `;
 
 export const demos: Demo[] = [

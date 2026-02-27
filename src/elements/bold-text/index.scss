@@ -1,0 +1,13 @@
+@use 'sass:map';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  font-weight: 600;
+}
