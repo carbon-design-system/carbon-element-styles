@@ -3,6 +3,7 @@ export * as anchor from './anchor';
 export * as blockQuotation from './block-quotation';
 export * as button from './button';
 export * as checkbox from './checkbox';
+export * as code from './code';
 export * as fieldset from './fieldset';
 export * as headerNavigation from './header-navigation';
 export * as label from './label';

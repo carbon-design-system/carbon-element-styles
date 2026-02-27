@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/code';
+
+$name: 'code';
+
+@include docs.demo($name, 'default') {
+  code {
+    @include code.styles;
+  }
+};
