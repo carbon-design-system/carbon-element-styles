@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/block-quotation';
+
+$name: 'block-quotation';
+
+@include docs.demo($name, 'default') {
+  blockquote {
+    @include block-quotation.styles;
+  }
+};

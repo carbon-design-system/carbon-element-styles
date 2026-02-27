@@ -1,5 +1,6 @@
 export * as abbreviation from './abbreviation';
 export * as anchor from './anchor';
+export * as blockQuotation from './block-quotation';
 export * as button from './button';
 export * as headerNavigation from './header-navigation';
 export * as preformatted from './preformatted';

@@ -3,104 +3,129 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/motion';
+@use '@carbon/styles/scss/breakpoint';
 @use '@carbon/styles/scss/utilities/custom-property';
 
 @use '../utilities/tokens';
 
 $-modes: (
   'productive': (
-    body: (
-      name: 'body-01',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
+    constants: (
+      margin-block: spacing.$spacing-05,
+      transition-duration: motion.$duration-fast-02,
+      transition-timing-function: motion.motion('standard', 'productive'),
     ),
-    body-compact: (
-      name: 'body-compact-01',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    heading: (
-      name: 'heading-01',
-      style: map.merge(type.$heading-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    heading-compact: (
-      name: 'heading-compact-01',
-      style: map.merge(type.$heading-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    label: (
-      name: 'label-01',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    helper-text: (
-      name: 'helper-text-01',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    code: (
-      name: 'code-01',
-      style: map.merge(type.$code-01, (
-        font-family: type.font-family('mono'),
-      )),
+    type-styles: (
+      body: (
+        name: 'body-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      body-compact: (
+        name: 'body-compact-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading: (
+        name: 'heading-01',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-compact: (
+        name: 'heading-compact-01',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      label: (
+        name: 'label-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      helper-text: (
+        name: 'helper-text-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      code: (
+        name: 'code-01',
+        style: map.merge(type.$code-01, (
+          font-family: type.font-family('mono'),
+        )),
+      ),
+      quotation: (
+        name: 'quotation',
+        style: map.merge(type.$body-02, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
     ),
   ),
   'expressive': (
-    body: (
-      name: 'body-02',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
+    constants: (
+      margin-block: spacing.$spacing-07,
+      transition-duration: motion.$duration-moderate-01,
+      transition-timing-function: motion.motion('standard', 'expressive'),
     ),
-    body-compact: (
-      name: 'body-compact-02',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    heading: (
-      name: 'heading-02',
-      style: map.merge(type.$heading-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    heading-compact: (
-      name: 'heading-compact-02',
-      style: map.merge(type.$heading-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    label: (
-      name: 'label-02',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    helper-text: (
-      name: 'helper-text-02',
-      style: map.merge(type.$body-01, (
-        font-family: type.font-family('sans'),
-      )),
-    ),
-    code: (
-      name: 'code-02',
-      style: map.merge(type.$code-02, (
-        font-family: type.font-family('mono'),
-      )),
+    type-styles: (
+      body: (
+        name: 'body-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      body-compact: (
+        name: 'body-compact-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading: (
+        name: 'heading-02',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-compact: (
+        name: 'heading-compact-02',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      label: (
+        name: 'label-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      helper-text: (
+        name: 'helper-text-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      code: (
+        name: 'code-02',
+        style: map.merge(type.$code-02, (
+          font-family: type.font-family('mono'),
+        )),
+      ),
+      quotation: (
+        name: 'quotation',
+        style: type.$quotation-01,
+      ),
     ),
   ),
 );
 
 $-default-mode: 'productive';
 
-$-properties: (
+$-type-properties: (
   'font-family',
   'font-size',
   'font-weight',
@@ -108,35 +133,49 @@ $-properties: (
   'letter-spacing',
 );
 
-@mixin mode($mode: $-default-mode) {
-  @each $type-style, $mapped-type-style in map.get($-modes, $mode) {
-    $name: map.get($mapped-type-style, 'name');
-    $style: map.get($mapped-type-style, 'style');
+@mixin -emit-type-properties($type-style, $name, $style) {
+  @each $property in $-type-properties {
+    $fallback-value: map.get($style, $property);
 
-    @each $property in $-properties {
+    @if $fallback-value {
       @include tokens.set(
         'mode--#{$type-style}-#{$property}',
         custom-property.get-var(
           '#{$name}-#{$property}',
-          map.get($style, $property),
+          $fallback-value,
         ),
       );
     }
   }
+}
 
-  @if ($mode == 'productive') {
-    @include tokens.set('mode--margin-block', spacing.$spacing-05);
-    @include tokens.set('mode--transition-duration', motion.$duration-fast-02);
-    @include tokens.set('mode--transition-timing-function', motion.motion('standard', 'productive'));
-  } @else if ($mode == 'expressive') {
-    @include tokens.set('mode--margin-block', spacing.$spacing-07);
-    @include tokens.set('mode--transition-duration', motion.$duration-moderate-01);
-    @include tokens.set('mode--transition-timing-function', motion.motion('standard', 'expressive'));
+@mixin mode($mode: $-default-mode) {
+  @each $constant, $value in map.get($-modes, $mode, 'constants') {
+    @include tokens.set('mode--#{$constant}', $value);
+  }
+
+  @each $type-style, $mapped-type-style in map.get($-modes, $mode, 'type-styles') {
+    $name: map.get($mapped-type-style, 'name');
+    $style: map.get($mapped-type-style, 'style');
+
+    @include -emit-type-properties($type-style, $name, $style);
+
+    @if map.has-key($style, 'breakpoints') {
+      @each $breakpoint, $overrides in map.get($style, 'breakpoints') {
+        @include breakpoint.breakpoint-up($breakpoint) {
+          @include -emit-type-properties($type-style, $name, $overrides);
+        }
+      }
+    }
   }
 }
 
+$mode--margin-block: tokens.get('mode--margin-block', map.get($-modes, $-default-mode, 'constants', 'margin-block'));
+$mode--transition-duration: tokens.get('mode--transition-duration', map.get($-modes, $-default-mode, 'constants', 'transition-duration'));
+$mode--transition-timing-function: tokens.get('mode--transition-timing-function', map.get($-modes, $-default-mode, 'constants', 'transition-timing-function'));
+
 @mixin -type-style($name) {
-  @each $property in $-properties {
+  @each $property in $-type-properties {
     #{$property}: tokens.get('mode--#{$name}-#{$property}');
   }
 }
@@ -169,6 +208,6 @@ $-properties: (
   @include -type-style('code');
 }
 
-$mode--margin-block: tokens.get('mode--margin-block', spacing.$spacing-05);
-$mode--transition-duration: tokens.get('mode--transition-duration', motion.$duration-fast-02);
-$mode--transition-timing-function: tokens.get('mode--transition-timing-function', motion.motion('standard', 'productive'));
+@mixin mode--quotation {
+  @include -type-style('quotation');
+}
