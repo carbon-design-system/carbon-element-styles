@@ -11,6 +11,7 @@
 $-modes: (
   'productive': (
     constants: (
+      max-inline-size: 70ch,
       margin-block: spacing.$spacing-05,
       transition-duration: motion.$duration-fast-02,
       transition-timing-function: motion.motion('standard', 'productive'),
@@ -68,6 +69,7 @@ $-modes: (
   ),
   'expressive': (
     constants: (
+      max-inline-size: 50ch,
       margin-block: spacing.$spacing-07,
       transition-duration: motion.$duration-moderate-01,
       transition-timing-function: motion.motion('standard', 'expressive'),
@@ -170,6 +172,7 @@ $-type-properties: (
   }
 }
 
+$mode--max-inline-size: tokens.get('mode--max-inline-size', map.get($-modes, $-default-mode, 'constants', 'max-inline-size'));
 $mode--margin-block: tokens.get('mode--margin-block', map.get($-modes, $-default-mode, 'constants', 'margin-block'));
 $mode--transition-duration: tokens.get('mode--transition-duration', map.get($-modes, $-default-mode, 'constants', 'transition-duration'));
 $mode--transition-timing-function: tokens.get('mode--transition-timing-function', map.get($-modes, $-default-mode, 'constants', 'transition-timing-function'));

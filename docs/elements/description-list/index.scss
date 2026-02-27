@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/description-list';
+
+$name: 'description-list';
+
+@include docs.demo($name, 'default') {
+  dl {
+    @include description-list.styles;
+  }
+};
