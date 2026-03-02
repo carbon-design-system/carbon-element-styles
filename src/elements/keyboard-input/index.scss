@@ -1,0 +1,20 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include layout.mode--code;
+  background-color: transparent;
+  outline: 0.0625rem solid theme.$border-subtle;
+  border-radius: 0.125rem;
+  padding-inline: spacing.$spacing-02;
+}

@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/keyboard-input';
+
+$name: 'keyboard-input';
+
+@include docs.demo($name, 'default') {
+  kbd {
+    @include keyboard-input.styles;
+  }
+};

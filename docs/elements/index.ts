@@ -20,6 +20,7 @@ export * as inlineLoading from './inline-loading';
 export * as inlineQuotation from './inline-quotation';
 export * as insertedText from './inserted-text';
 export * as italicText from './italic-text';
+export * as keyboardInput from './keyboard-input';
 export * as label from './label';
 export * as markedText from './marked-text';
 export * as numberInput from './number-input';
