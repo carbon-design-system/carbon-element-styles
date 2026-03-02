@@ -21,8 +21,8 @@ $default-config: (
   text-align: start;
   block-size: layout.$size--block-size;
   padding-block: 0;
-  padding-inline-start: spacing.$spacing-05;
-  padding-inline-end: calc(spacing.$spacing-05 + 1rem + spacing.$spacing-05);
+  padding-inline-start: layout.$density--padding;
+  padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
   cursor: pointer;
   transition-property: color, background-color;
   transition-duration: layout.$mode--transition-duration;
@@ -103,7 +103,7 @@ $default-config: (
   @if map.get($props, 'kind') == 'ghost' {
     background-color: transparent;
     color: theme.$link-primary;
-    padding-inline-end: spacing.$spacing-05;
+    padding-inline-end: layout.$density--padding;
 
     &:enabled:hover {
       color: theme.$link-primary-hover;
@@ -168,7 +168,7 @@ $default-config: (
   @if map.get($props, 'kind') == 'danger--ghost' {
     background-color: transparent;
     color: carbon-button.$button-danger-secondary;
-    padding-inline-end: spacing.$spacing-05;
+    padding-inline-end: layout.$density--padding;
 
     &:enabled:hover {
       color: theme.$text-on-color;

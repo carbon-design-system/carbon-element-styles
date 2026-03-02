@@ -14,7 +14,7 @@ $default-config: (
   display: grid;
   grid-template-columns: max-content 1fr;
   column-gap: spacing.$spacing-04;
-  row-gap: spacing.$spacing-05;
+  row-gap: layout.$density--padding;
 
   & dt {
     @include layout.mode--heading;

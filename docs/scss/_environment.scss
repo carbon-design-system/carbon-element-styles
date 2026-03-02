@@ -27,3 +27,9 @@
     @include carbon-html.size($size);
   }
 }
+
+@each $density in ('condensed', 'normal') {
+  #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-density="#{$density}"] {
+    @include carbon-html.density($density);
+  }
+}

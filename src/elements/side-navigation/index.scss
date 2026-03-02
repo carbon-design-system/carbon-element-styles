@@ -13,7 +13,7 @@ $default-config: (
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  padding-block: spacing.$spacing-05;
+  padding-block: layout.$density--padding;
   inline-size: 16rem;
   background-color: theme.$layer-background;
   border-inline-end: 0.0625rem solid theme.$border-subtle;
@@ -40,7 +40,7 @@ $default-config: (
     background-color: transparent;
     text-decoration: none;
     block-size: layout.$size--block-size;
-    padding-inline: spacing.$spacing-05;
+    padding-inline: layout.$density--padding;
     cursor: pointer;
     transition-property: color, background-color;
     transition-duration: layout.$mode--transition-duration;
@@ -62,7 +62,7 @@ $default-config: (
 
   & li > button[aria-expanded] + ul a {
     @include layout.mode--body;
-    padding-inline-start: calc(spacing.$spacing-05 * 2);
+    padding-inline-start: calc(layout.$density--padding * 2);
   }
 
   & li > button[aria-expanded="false"]:has(+ ul a[aria-current="page"]),

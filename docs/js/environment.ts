@@ -17,6 +17,11 @@ export const Sizes = {
   Lg: 'lg',
 } as const;
 
+export const Densities = {
+  Condensed: 'condensed',
+  Normal: 'normal',
+} as const;
+
 export const Themes = {
   White: 'white',
   Gray10: 'g10',
@@ -29,6 +34,7 @@ export type DemoEnvironmentOptions = {
   demo: string;
   mode: typeof Modes[keyof typeof Modes];
   size: typeof Sizes[keyof typeof Sizes];
+  density: typeof Densities[keyof typeof Densities];
   theme: typeof Themes[keyof typeof Themes];
 };
 
@@ -57,6 +63,10 @@ function isValidSize(id: string | null): id is DemoEnvironmentOptions['size'] {
   return (id !== null && Object.values(Sizes).includes(id as DemoEnvironmentOptions['size']));
 }
 
+function isValidDensity(id: string | null): id is DemoEnvironmentOptions['density'] {
+  return (id !== null && Object.values(Densities).includes(id as DemoEnvironmentOptions['density']));
+}
+
 function isValidTheme(id: string | null): id is DemoEnvironmentOptions['theme'] {
   return (id !== null && Object.values(Themes).includes(id as DemoEnvironmentOptions['theme']));
 }
@@ -68,6 +78,7 @@ export function get(): DemoEnvironmentOptions {
   const demo = url.searchParams.get('demo');
   const mode = url.searchParams.get('mode');
   const size = url.searchParams.get('size');
+  const density = url.searchParams.get('density');
   const theme = url.searchParams.get('theme');
 
   return {
@@ -75,6 +86,7 @@ export function get(): DemoEnvironmentOptions {
     demo: demo ?? 'default',
     mode: isValidMode(mode) ? mode : Modes.Expressive,
     size: isValidSize(size) ? size : Sizes.Md,
+    density: isValidDensity(density) ? density : Densities.Normal,
     theme: isValidTheme(theme) ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? Themes.Gray100 : Themes.White),
   };
 }

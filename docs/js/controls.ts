@@ -1,5 +1,6 @@
 import {
   DemoEnvironmentOptions,
+  Densities,
   Modes,
   Sizes,
   Themes,
@@ -88,6 +89,17 @@ export function render() {
       },
     ]);
 
-    controls.replaceChildren(themes, modes, sizes);
+    const densities = buildSelect('density', 'Density', [
+      {
+        value: Densities.Condensed,
+        label: 'Condensed',
+      },
+      {
+        value: Densities.Normal,
+        label: 'Normal',
+      },
+    ]);
+
+    controls.replaceChildren(themes, modes, sizes, densities);
   }
 }

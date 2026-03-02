@@ -50,8 +50,8 @@ main {
   display: flex;
   justify-content: end;
   align-items: center;
-  column-gap: spacing.$spacing-05;
-  padding-inline-end: spacing.$spacing-05;
+  column-gap: layout.$density--padding;
+  padding-inline-end: layout.$density--padding;
 }
 
 #demo {

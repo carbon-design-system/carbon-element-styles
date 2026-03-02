@@ -1,0 +1,18 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../utilities/tokens';
+
+$-densities: (
+  condensed: spacing.$spacing-03,
+  normal: spacing.$spacing-05,
+);
+
+$-default-density: 'normal';
+
+@mixin density($density: $-default-density) {
+  @include tokens.set('density--padding', map.get($-densities, $density));
+}
+
+$density--padding: tokens.get('density--padding', map.get($-densities, $-default-density));

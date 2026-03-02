@@ -1,6 +1,5 @@
 @use 'sass:map';
 
-@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/theme';
 
 @use '../../layout';
@@ -15,7 +14,7 @@ $default-config: (
   @include layout.mode--code;
   white-space: pre;
   margin-block: layout.$mode--margin-block;
-  padding: spacing.$spacing-05;
+  padding: layout.$density--padding;
   background-color: theme.$layer;
   inline-size: 100%;
   overflow-x: auto;
