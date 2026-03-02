@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/date-time-input';
+
+$name: 'date-time-input';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="datetime-local"]) {
+    @include date-time-input.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label:has(input[type="datetime-local"]) {
+    @include date-time-input.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label:has(input[type="datetime-local"]) {
+    @include date-time-input.styles((
+      axis: 'inline',
+    ));
+  }
+};

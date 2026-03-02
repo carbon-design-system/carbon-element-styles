@@ -19,11 +19,6 @@ function buildMenuItem(element: ElementDetails): HTMLElement {
   button.setAttribute('type', 'button');
   button.innerText = element.meta.name;
 
-  button.addEventListener('click', () => {
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-  });
-
   menuItem.appendChild(button);
 
   const list = document.createElement('ul');
@@ -55,6 +50,12 @@ function buildMenuItem(element: ElementDetails): HTMLElement {
 
     listItem.appendChild(anchor);
   }
+
+  button.addEventListener('click', () => {
+    // const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    // button.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+    list.querySelector('a')?.click();
+  });
 
   return menuItem;
 }

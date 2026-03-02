@@ -1,0 +1,22 @@
+@use 'sass:map';
+
+@use '../label';
+@use '../input';
+
+@use '../../layout';
+
+$default-config: (
+  axis: 'block',
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include label.styles((
+    axis: map.get($props, 'axis'),
+  ));
+
+  input[type="search"] {
+    @include input.styles;
+  }
+}

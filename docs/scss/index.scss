@@ -70,6 +70,7 @@ main {
   );
   opacity: 0.5;
   translate: 0 -100%;
+  pointer-events: none;
 }
 
 #code {

@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/search-input';
+
+$name: 'search-input';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="search"]) {
+    @include search-input.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label:has(input[type="search"]) {
+    @include search-input.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label:has(input[type="search"]) {
+    @include search-input.styles((
+      axis: 'inline',
+    ));
+  }
+};

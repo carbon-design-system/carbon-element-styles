@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/number-input';
+
+$name: 'number-input';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="number"]) {
+    @include number-input.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label:has(input[type="number"]) {
+    @include number-input.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label:has(input[type="number"]) {
+    @include number-input.styles((
+      axis: 'inline',
+    ));
+  }
+};

@@ -1,0 +1,50 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include layout.mode--body-compact;
+  position: relative;
+  appearance: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  block-size: layout.$size--block-size;
+  padding-inline: layout.$density--padding;
+  background-color: theme.$field;
+  border-block-end: 0.0625rem solid theme.$border-strong;
+  box-sizing: border-box;
+
+  &:read-only {
+    background-color: transparent;
+    border-block-end-color: theme.$border-subtle;
+  }
+
+  &:disabled {
+    color: theme.$text-disabled;
+    background-color: theme.$layer;
+    border-block-end-color: transparent;
+    cursor: not-allowed;
+  }
+
+  &:invalid,
+  &[aria-invalid="true"] {
+    outline: 0.125rem solid theme.$support-error;
+    border-block-end-color: transparent;
+  }
+
+  &:focus,
+  &:focus:invalid,
+  &:focus[aria-invalid="true"] {
+    @include focus-outline.focus-outline('outline');
+  }
+}

@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/text-input';
+
+$name: 'text-input';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="text"]) {
+    @include text-input.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label:has(input[type="text"]) {
+    @include text-input.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label:has(input[type="text"]) {
+    @include text-input.styles((
+      axis: 'inline',
+    ));
+  }
+};

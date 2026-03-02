@@ -5,6 +5,8 @@
 @use '../elements/button';
 @use '../elements/checkbox';
 @use '../elements/code';
+@use '../elements/date-input';
+@use '../elements/date-time-input';
 @use '../elements/deleted-text';
 @use '../elements/description-list';
 @use '../elements/fieldset';
@@ -16,6 +18,10 @@
 @use '../elements/italic-text';
 @use '../elements/label';
 @use '../elements/marked-text';
+@use '../elements/number-input';
 @use '../elements/preformatted';
+@use '../elements/search-input';
 @use '../elements/side-navigation';
 @use '../elements/small-text';
+@use '../elements/text-input';
+@use '../elements/time-input';
