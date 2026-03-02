@@ -12,6 +12,7 @@ export * as deletedText from './deleted-text';
 export * as descriptionList from './description-list';
 export * as details from './details';
 export * as fieldset from './fieldset';
+export * as fileInput from './file-input';
 export * as headerNavigation from './header-navigation';
 export * as heading from './heading';
 export * as horizontalRule from './horizontal-rule';

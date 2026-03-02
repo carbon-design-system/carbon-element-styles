@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/file-input';
+
+$name: 'file-input';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="file"]) {
+    @include file-input.styles;
+  }
+};

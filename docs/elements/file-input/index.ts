@@ -1,21 +1,21 @@
 import type { Demo, Meta } from '../../js/_types';
 
 export const meta = {
-  id: 'label',
-  name: 'Label',
+  id: 'file-input',
+  name: 'File input',
 } as const satisfies Meta;
 
 const html = /* html */`
 <label>
-  Enabled
-  <input />
+  Upload files
+  <input type="file" />
 </label>
 
 <br />
 
 <label>
-  Disabled
-  <input disabled />
+  Upload files (disabled)
+  <input type="file" disabled />
 </label>
 `;
 
@@ -23,16 +23,6 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
-  },
-  {
-    id: 'block',
-    name: 'Block',
-    html,
-  },
-  {
-    id: 'inline',
-    name: 'Inline',
     html,
   },
 ];

@@ -16,6 +16,10 @@ $default-config: (
   gap: spacing.$spacing-03;
   color: theme.$text-secondary;
 
+  &:has([disabled]) {
+    color: theme.$text-disabled;
+  }
+
   @if map.get($props, 'axis') == 'block' {
     @include layout.mode--label;
     flex-direction: column;

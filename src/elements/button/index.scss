@@ -42,11 +42,11 @@ $default-config: (
     background-color: carbon-button.$button-primary;
     color: theme.$text-on-color;
 
-    &:enabled:hover {
+    &:hover {
       background-color: carbon-button.$button-primary-hover;
     }
 
-    &:enabled:active {
+    &:active {
       background-color: carbon-button.$button-primary-active;
     }
 
