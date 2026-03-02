@@ -28,6 +28,7 @@ export * as orderedList from './ordered-list';
 export * as paragraph from './paragraph';
 export * as preformatted from './preformatted';
 export * as radioButton from './radio-button';
+export * as rangeInput from './range-input';
 export * as seaerchInput from './search-input';
 export * as select from './select';
 export * as sideNavigation from './side-navigation';

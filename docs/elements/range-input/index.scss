@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/range-input';
+
+$name: 'range-input';
+
+@include docs.demo($name, 'default') {
+  label:has(input[type="range"]) {
+    @include range-input.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label:has(input[type="range"]) {
+    @include range-input.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label:has(input[type="range"]) {
+    @include range-input.styles((
+      axis: 'inline',
+    ));
+  }
+};
