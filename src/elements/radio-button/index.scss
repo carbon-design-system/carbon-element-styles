@@ -1,13 +1,11 @@
 @use 'sass:map';
 
 @use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/focus-outline';
 
 @use '../label';
 
 @use '../../layout';
-@use '../../utilities/icons';
 
 $default-config: (
 
@@ -24,14 +22,15 @@ $default-config: (
   justify-content: start;
   cursor: pointer;
 
-  & input[type="checkbox"] {
+  & input[type="radio"] {
     position: relative;
     appearance: none;
     border: none;
     block-size: 1rem;
     inline-size: 1rem;
+    border-radius: 100%;
     color: theme.$icon-primary;
-    border-radius: 0.125rem;
+    border: 0.0625rem solid currentColor;
 
     &:focus {
       @include focus-outline.focus-outline('outline');
@@ -42,20 +41,12 @@ $default-config: (
       color: theme.$icon-disabled;
     }
 
-    &::before {
+    &:checked::before {
       content: '';
       position: absolute;
-      inset: 0;
-      @include icons.checkbox;
-      scale: 1.25;
-    }
-
-    &:checked::before {
-      @include icons.checkbox--checked--filled;
-    }
-
-    &:indeterminate::before {
-      @include icons.checkbox--indeterminate--filled;
+      inset: 0.25rem;
+      border-radius: 100%;
+      background-color: currentColor;
     }
   }
 }
