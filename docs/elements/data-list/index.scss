@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/data-list';
+
+$name: 'data-list';
+
+@include docs.demo($name, 'default') {
+  label:has(input[list]) {
+    @include data-list.styles;
+  }
+};
+
+@include docs.demo($name, 'block') {
+  label:has(input[list]) {
+    @include data-list.styles((
+      axis: 'block',
+    ));
+  }
+};
+
+@include docs.demo($name, 'inline') {
+  label:has(input[list]) {
+    @include data-list.styles((
+      axis: 'inline',
+    ));
+  }
+};

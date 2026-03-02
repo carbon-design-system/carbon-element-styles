@@ -1,0 +1,61 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../label';
+@use '../input';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$default-config: (
+  axis: 'block',
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include label.styles((
+    axis: map.get($props, 'axis'),
+  ));
+
+  position: relative;
+
+  input[list] {
+    @include input.styles((
+      emit-readonly: false,
+    ));
+
+    padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+    cursor: pointer;
+
+    &:enabled:hover {
+      background-color: theme.$field-hover;
+    }
+
+    &:enabled:active {
+      background-color: theme.$layer-active;
+    }
+  }
+
+  &::after {
+    content: '';
+    @include icons.chevron--down;
+    position: absolute;
+    inset-block-end: calc((layout.$size--block-size - 1rem) * 0.5);
+    inset-inline-end: layout.$density--padding;
+    pointer-events: none;
+  }
+
+  &:has(input[list]:disabled)::after {
+    color: theme.$text-disabled;
+  }
+
+  @if map.get($props, 'axis') == 'inline' {
+    input[list]:enabled,
+    input[list]:disabled {
+      background-color: transparent;
+      border-block-end: none;
+    }
+  }
+}

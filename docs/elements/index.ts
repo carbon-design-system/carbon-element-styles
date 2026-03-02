@@ -5,6 +5,7 @@ export * as boldText from './bold-text';
 export * as button from './button';
 export * as checkbox from './checkbox';
 export * as code from './code';
+export * as dataList from './data-list';
 export * as dateInput from './date-input';
 export * as dateTimeInput from './date-time-input';
 export * as deletedText from './deleted-text';
