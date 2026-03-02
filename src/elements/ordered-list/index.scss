@@ -1,0 +1,32 @@
+@use 'sass:map';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  list-style-type: decimal;
+  padding: 0;
+  margin-inline-start: layout.$density--padding;
+
+  & li p {
+    margin-block: 0;
+  }
+
+  & li {
+    max-inline-size: layout.$mode--max-inline-size;
+    margin-inline-start: layout.$density--padding;
+  }
+
+  & ol {
+    list-style-type: lower-alpha;
+  }
+
+  & ol ol {
+    list-style-type: lower-roman;
+  }
+}

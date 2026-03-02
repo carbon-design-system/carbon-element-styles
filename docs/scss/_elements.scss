@@ -24,6 +24,7 @@
 @use '../elements/label';
 @use '../elements/marked-text';
 @use '../elements/number-input';
+@use '../elements/ordered-list';
 @use '../elements/preformatted';
 @use '../elements/search-input';
 @use '../elements/select';
@@ -31,3 +32,4 @@
 @use '../elements/small-text';
 @use '../elements/text-input';
 @use '../elements/time-input';
+@use '../elements/unordered-list';

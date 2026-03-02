@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/unordered-list';
+
+$name: 'unordered-list';
+
+@include docs.demo($name, 'default') {
+  ul {
+    @include unordered-list.styles;
+  }
+};

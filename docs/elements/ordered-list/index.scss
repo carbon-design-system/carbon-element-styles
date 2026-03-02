@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/ordered-list';
+
+$name: 'ordered-list';
+
+@include docs.demo($name, 'default') {
+  ol {
+    @include ordered-list.styles;
+  }
+};
