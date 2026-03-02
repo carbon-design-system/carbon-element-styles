@@ -39,10 +39,12 @@ $default-config: (
   }
 
   &::after {
-    @include icons.chevron-down;
+    content: '';
+    @include icons.chevron--down;
     position: absolute;
     inset-block-end: calc((layout.$size--block-size - 1rem) * 0.5);
     inset-inline-end: layout.$density--padding;
+    pointer-events: none;
   }
 
   &:has(select:disabled)::after {

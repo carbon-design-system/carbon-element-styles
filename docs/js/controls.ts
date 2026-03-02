@@ -1,3 +1,8 @@
+import themeIcon from '@carbon/icons/svg/32/color-palette.svg?raw';
+import modeIcon from '@carbon/icons/svg/32/scale.svg?raw';
+import sizeIcon from '@carbon/icons/svg/32/fit-to-height.svg?raw';
+import densityIcon from '@carbon/icons/svg/32/fit-to-width.svg?raw';
+
 import {
   DemoEnvironmentOptions,
   Densities,
@@ -8,12 +13,24 @@ import {
   set as setEnvironment,
 } from './environment';
 
-export function buildSelect(key: keyof DemoEnvironmentOptions, label: string, options: {
-  value: string;
-  label: string;
-}[]): HTMLLabelElement {
+export function buildSelect(
+  key: keyof DemoEnvironmentOptions,
+  label: string,
+  icon: string,
+  options: {
+    value: string;
+    label: string;
+  }[],
+): HTMLLabelElement {
   const labelElement = document.createElement('label');
-  labelElement.innerText = label;
+  labelElement.innerHTML = icon;
+  labelElement.setAttribute('title', label);
+
+  const svg = labelElement.querySelector('svg');
+  svg?.setAttribute('width', '16');
+  svg?.setAttribute('height', '16');
+  svg?.setAttribute('fill', 'currentColor');
+  svg?.setAttribute('aria-label', label);
 
   const select = document.createElement('select');
   select.addEventListener('change', ({ target }) => {
@@ -40,7 +57,7 @@ export function render() {
   const controls = document.getElementById('controls');
 
   if (controls) {
-    const themes = buildSelect('theme', 'Theme', [
+    const themes = buildSelect('theme', 'Theme', themeIcon, [
       {
         value: Themes.White,
         label: 'White',
@@ -59,7 +76,7 @@ export function render() {
       },
     ]);
 
-    const modes = buildSelect('mode', 'Mode', [
+    const modes = buildSelect('mode', 'Mode', modeIcon, [
       {
         value: Modes.Productive,
         label: 'Productive',
@@ -70,7 +87,7 @@ export function render() {
       },
     ]);
 
-    const sizes = buildSelect('size', 'Size', [
+    const sizes = buildSelect('size', 'Size', sizeIcon, [
       {
         value: Sizes.Xs,
         label: 'XS',
@@ -89,7 +106,7 @@ export function render() {
       },
     ]);
 
-    const densities = buildSelect('density', 'Density', [
+    const densities = buildSelect('density', 'Density', densityIcon, [
       {
         value: Densities.Condensed,
         label: 'Condensed',
