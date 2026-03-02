@@ -1,0 +1,68 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$default-config: (
+  axis: 'block',
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  border-block-start: 0.0625rem solid theme.$border-subtle;
+  box-sizing: border-box;
+  padding-inline-start: calc(layout.$density--padding + 1rem + layout.$density--padding);
+  padding-inline-end: layout.$density--padding;
+
+  &:last-of-type {
+    border-block-end: 0.0625rem solid theme.$border-subtle;
+  }
+
+  & summary {
+    @include layout.mode--body-compact;
+    block-size: layout.$size--block-size;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-inline-start: calc((layout.$density--padding + 1rem + layout.$density--padding) * -1);
+    padding-inline-start: layout.$density--padding;
+    margin-inline-end: calc(layout.$density--padding * -1);
+    padding-inline-end: layout.$density--padding;
+
+    &:hover {
+      background-color: theme.$layer-hover;
+    }
+
+    &:active {
+      background-color: theme.$layer-active;
+    }
+
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+  }
+
+  & summary::before {
+    content: '';
+    @include icons.chevron--down;
+    display: inline-block;
+    margin-inline-end: layout.$density--padding;
+    transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+  }
+
+  &[open] {
+    padding-block-end: layout.$density--padding;
+  }
+
+  &[open] summary {
+    margin-block-end: layout.$density--padding;
+  }
+
+  &[open] summary::before {
+    rotate: 180deg;
+  }
+}

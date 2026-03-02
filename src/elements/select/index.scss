@@ -21,7 +21,7 @@ $default-config: (
 
   position: relative;
 
-  select {
+  & select {
     @include input.styles((
       emit-readonly: false,
     ));
@@ -52,8 +52,8 @@ $default-config: (
   }
 
   @if map.get($props, 'axis') == 'inline' {
-    select:enabled,
-    select:disabled {
+    & select:enabled,
+    & select:disabled {
       background-color: transparent;
       border-block-end: none;
     }

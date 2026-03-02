@@ -16,7 +16,7 @@ $default-config: (
     axis: map.get($props, 'axis'),
   ));
 
-  input[type="datetime-local"] {
+  & input[type="datetime-local"] {
     @include input.styles;
   }
 }

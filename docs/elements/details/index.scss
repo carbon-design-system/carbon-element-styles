@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/details';
+
+$name: 'details';
+
+@include docs.demo($name, 'default') {
+  details {
+    @include details.styles;
+  }
+};

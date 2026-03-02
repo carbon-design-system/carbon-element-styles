@@ -16,7 +16,7 @@ $default-config: (
     axis: map.get($props, 'axis'),
   ));
 
-  input[type="text"] {
+  & input[type="text"] {
     @include input.styles;
   }
 }

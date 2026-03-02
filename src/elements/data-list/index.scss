@@ -21,7 +21,7 @@ $default-config: (
 
   position: relative;
 
-  input[list] {
+  & input[list] {
     @include input.styles((
       emit-readonly: false,
     ));
@@ -52,8 +52,8 @@ $default-config: (
   }
 
   @if map.get($props, 'axis') == 'inline' {
-    input[list]:enabled,
-    input[list]:disabled {
+    & input[list]:enabled,
+    & input[list]:disabled {
       background-color: transparent;
       border-block-end: none;
     }
