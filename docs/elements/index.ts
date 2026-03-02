@@ -33,6 +33,7 @@ export * as seaerchInput from './search-input';
 export * as select from './select';
 export * as sideNavigation from './side-navigation';
 export * as smallText from './small-text';
+export * as table from './table';
 export * as textInput from './text-input';
 export * as timeInput from './time-input';
 export * as unorderedList from './unordered-list';
