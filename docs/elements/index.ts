@@ -25,6 +25,7 @@ export * as label from './label';
 export * as markedText from './marked-text';
 export * as numberInput from './number-input';
 export * as orderedList from './ordered-list';
+export * as paragraph from './paragraph';
 export * as preformatted from './preformatted';
 export * as seaerchInput from './search-input';
 export * as select from './select';

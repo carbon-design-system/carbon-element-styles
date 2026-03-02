@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/paragraph';
+
+$name: 'paragraph';
+
+@include docs.demo($name, 'default') {
+  p {
+    @include paragraph.styles;
+  }
+};

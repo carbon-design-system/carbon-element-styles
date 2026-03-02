@@ -11,7 +11,7 @@
 $-modes: (
   'productive': (
     constants: (
-      max-inline-size: 70ch,
+      max-inline-size: 75ch,
       margin-block: spacing.$spacing-05,
       transition-duration: motion.$duration-fast-02,
       transition-timing-function: motion.motion('standard', 'productive'),
@@ -105,7 +105,7 @@ $-modes: (
   ),
   'expressive': (
     constants: (
-      max-inline-size: 50ch,
+      max-inline-size: 60ch,
       margin-block: spacing.$spacing-07,
       transition-duration: motion.$duration-moderate-01,
       transition-timing-function: motion.motion('standard', 'expressive'),
