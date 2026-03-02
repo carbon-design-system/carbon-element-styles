@@ -6,7 +6,10 @@
 @use '../../layout';
 
 $default-config: (
-
+  emit-readonly: true,
+  emit-disabled: true,
+  emit-invalid: true,
+  emit-focus: true,
 );
 
 @mixin styles($config: ()) {
@@ -23,28 +26,44 @@ $default-config: (
   background-color: theme.$field;
   border-block-end: 0.0625rem solid theme.$border-strong;
   box-sizing: border-box;
+  transition-property: color, background-color;
+  transition-duration: layout.$mode--transition-duration;
+  transition-timing-function: layout.$mode--transition-timing-function;
 
-  &:read-only {
-    background-color: transparent;
-    border-block-end-color: theme.$border-subtle;
+  @if map.get($props, 'emit-readonly') {
+    &:read-only {
+      background-color: transparent;
+      border-block-end-color: theme.$border-subtle;
+    }
   }
 
-  &:disabled {
-    color: theme.$text-disabled;
-    background-color: theme.$layer;
-    border-block-end-color: transparent;
-    cursor: not-allowed;
+  @if map.get($props, 'emit-disabled') {
+    &:disabled {
+      color: theme.$text-disabled;
+      background-color: theme.$layer;
+      border-block-end-color: transparent;
+      cursor: not-allowed;
+    }
   }
 
-  &:invalid,
-  &[aria-invalid="true"] {
-    outline: 0.125rem solid theme.$support-error;
-    border-block-end-color: transparent;
+  @if map.get($props, 'emit-invalid') {
+    &:invalid,
+    &[aria-invalid="true"] {
+      outline: 0.125rem solid theme.$support-error;
+      border-block-end-color: transparent;
+    }
   }
 
-  &:focus,
-  &:focus:invalid,
-  &:focus[aria-invalid="true"] {
-    @include focus-outline.focus-outline('outline');
+  @if map.get($props, 'emit-focus') {
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+
+    @if map.get($props, 'emit-invalid') {
+      &:focus:invalid,
+      &:focus[aria-invalid="true"] {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
   }
 }

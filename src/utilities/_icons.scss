@@ -1,0 +1,38 @@
+@use '@carbon/styles/scss/type';
+
+@mixin chevron-up() {
+  @include type.font-family('sans');
+  content: '\2303' / '';
+  transform: translateY(0.15em) rotate(0);
+}
+
+@mixin chevron-down() {
+  @include chevron-up;
+  transform: translateY(-0.15em) rotate(-180deg);
+}
+
+@mixin arrow-right() {
+  @include type.font-family('mono');
+  content: '\2192' / '';
+}
+
+@mixin close() {
+  content: '';
+  block-size: 0.75rem;
+  inline-size: 0.75rem;
+  background-color: currentColor;
+  clip-path: polygon(
+    0.0625rem 0,
+    50% calc(50% - 0.0625rem),
+    calc(100% - 0.0625rem) 0,
+    100% 0.0625rem,
+    calc(50% + 0.0625rem) 50%,
+    100% calc(100% - 0.0625rem),
+    calc(100% - 0.0625rem) 100%,
+    50% calc(50% + 0.0625rem),
+    0.0625rem 100%,
+    0 calc(100% - 0.0625rem),
+    calc(50% - 0.0625rem) 50%,
+    0 0.0625rem,
+  );
+}

@@ -5,9 +5,11 @@
 @use '../../src' as carbon-html;
 
 @use '../../src/layout';
+
 @use '../../src/elements/header-navigation';
-@use '../../src/elements/side-navigation';
 @use '../../src/elements/preformatted';
+@use '../../src/elements/select';
+@use '../../src/elements/side-navigation';
 
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
@@ -52,6 +54,14 @@ main {
   align-items: center;
   column-gap: layout.$density--padding;
   padding-inline-end: layout.$density--padding;
+}
+
+#controls label:has(select) {
+  @include layout.size('sm');
+  @include layout.density('condensed');
+  @include select.styles((
+    axis: 'inline',
+  ));
 }
 
 #demo {

@@ -21,6 +21,7 @@ export * as markedText from './marked-text';
 export * as numberInput from './number-input';
 export * as preformatted from './preformatted';
 export * as seaerchInput from './search-input';
+export * as select from './select';
 export * as sideNavigation from './side-navigation';
 export * as smallText from './small-text';
 export * as textInput from './text-input';
