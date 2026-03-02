@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/inline-quotation';
+
+$name: 'inline-quotation';
+
+@include docs.demo($name, 'default') {
+  q {
+    @include inline-quotation.styles;
+  }
+};

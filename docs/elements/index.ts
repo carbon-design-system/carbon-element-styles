@@ -17,6 +17,7 @@ export * as headerNavigation from './header-navigation';
 export * as heading from './heading';
 export * as horizontalRule from './horizontal-rule';
 export * as inlineLoading from './inline-loading';
+export * as inlineQuotation from './inline-quotation';
 export * as insertedText from './inserted-text';
 export * as italicText from './italic-text';
 export * as label from './label';
