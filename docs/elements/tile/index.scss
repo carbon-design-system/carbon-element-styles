@@ -1,0 +1,23 @@
+@use '../../scss/docs';
+@use '../../../src/elements/tile';
+
+@use '../../../src/elements/text-input';
+@use '../../../src/elements/paragraph';
+
+$name: 'tile';
+
+@include docs.demo($name, 'default') {
+  [data-tile] {
+    @include tile.styles;
+  }
+
+  // ↓ for demo only ↓
+
+  label:has(input[type="text"]) {
+    @include text-input.styles;
+  }
+
+  p {
+    @include paragraph.styles;
+  }
+};

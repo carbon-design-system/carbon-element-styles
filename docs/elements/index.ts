@@ -37,6 +37,7 @@ export * as table from './table';
 export * as tabs from './tabs';
 export * as textArea from './text-area';
 export * as textInput from './text-input';
+export * as tile from './tile';
 export * as timeInput from './time-input';
 export * as toggle from './toggle';
 export * as unorderedList from './unordered-list';
