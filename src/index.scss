@@ -1,10 +1,3 @@
 @forward './utilities/carbon';
 
-@use './layout';
 @forward './layout';
-
-@mixin styles {
-  @include layout.density;
-  @include layout.mode;
-  @include layout.size;
-}

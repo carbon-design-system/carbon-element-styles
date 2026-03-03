@@ -1,0 +1,276 @@
+@use '@carbon/styles/scss/theme';
+
+@use '../utilities/carbon';
+@use '../layout';
+
+@use '../elements/abbreviation';
+@use '../elements/anchor';
+@use '../elements/block-quotation';
+@use '../elements/bold-text';
+@use '../elements/button';
+@use '../elements/checkbox';
+@use '../elements/code';
+@use '../elements/data-list';
+@use '../elements/date-input';
+@use '../elements/date-time-input';
+@use '../elements/deleted-text';
+@use '../elements/description-list';
+@use '../elements/details';
+@use '../elements/dialog';
+@use '../elements/fieldset';
+@use '../elements/file-input';
+@use '../elements/header-navigation';
+@use '../elements/heading';
+@use '../elements/horizontal-rule';
+@use '../elements/inline-loading';
+@use '../elements/inline-quotation';
+@use '../elements/inserted-text';
+@use '../elements/italic-text';
+@use '../elements/keyboard-input';
+@use '../elements/label';
+@use '../elements/marked-text';
+@use '../elements/number-input';
+@use '../elements/ordered-list';
+@use '../elements/paragraph';
+@use '../elements/preformatted';
+@use '../elements/radio-button';
+@use '../elements/range-input';
+@use '../elements/search-input';
+@use '../elements/select';
+@use '../elements/side-navigation';
+@use '../elements/small-text';
+@use '../elements/table';
+@use '../elements/text-area';
+@use '../elements/text-input';
+@use '../elements/tile';
+@use '../elements/time-input';
+@use '../elements/toggle';
+@use '../elements/unordered-list';
+
+:root {
+  @include carbon.emit-carbon-colors;
+
+  @include carbon.emit-carbon-tokens('g10');
+  color-scheme: light;
+
+  @media (prefers-color-scheme: dark) {
+    @include carbon.emit-carbon-tokens('g100');
+    color-scheme: dark;
+  }
+
+  @include layout.density('normal');
+  @include layout.mode('productive');
+  @include layout.size('md');
+
+  background-color: theme.$background;
+}
+
+abbr[title] {
+  @include abbreviation.styles;
+}
+
+a {
+  @include anchor.styles;
+}
+
+blockquote {
+  @include block-quotation.styles;
+}
+
+strong, b {
+  @include bold-text.styles;
+}
+
+button {
+  @include button.styles;
+}
+
+button[type="submit"] {
+  @include button.styles((
+    kind: 'primary',
+  ));
+}
+
+label:has(input[type="checkbox"]) {
+  @include checkbox.styles;
+}
+
+code {
+  @include code.styles;
+}
+
+label:has(input[list]) {
+  @include data-list.styles;
+}
+
+label:has(input[type="date"]) {
+  @include date-input.styles;
+}
+
+label:has(input[type="datetime-local"]) {
+  @include date-time-input.styles;
+}
+
+del {
+  @include deleted-text.styles;
+}
+
+dl {
+  @include description-list.styles;
+}
+
+details {
+  @include details.styles;
+}
+
+dialog {
+  @include dialog.styles;
+}
+
+fieldset {
+  @include fieldset.styles;
+}
+
+label:has(input[type="file"]) {
+  @include file-input.styles;
+}
+
+body > header:first-child {
+  @include header-navigation.styles;
+}
+
+h1 {
+  @include heading.styles((
+    level: 1,
+  ));
+}
+
+h2 {
+  @include heading.styles((
+    level: 2,
+  ));
+}
+
+h3 {
+  @include heading.styles((
+    level: 3,
+  ));
+}
+
+h4 {
+  @include heading.styles((
+    level: 4,
+  ));
+}
+
+h5 {
+  @include heading.styles((
+    level: 5,
+  ));
+}
+
+h6 {
+  @include heading.styles((
+    level: 6,
+  ));
+}
+
+hr {
+  @include horizontal-rule.styles;
+}
+
+[aria-live="polite"][aria-busy="true"]:empty {
+  @include inline-loading.styles;
+}
+
+q {
+  @include inline-quotation.styles;
+}
+
+ins {
+  @include inserted-text.styles;
+}
+
+em, i {
+  @include italic-text.styles;
+}
+
+kbd {
+  @include keyboard-input.styles;
+}
+
+label {
+  @include label.styles;
+}
+
+mark {
+  @include marked-text.styles;
+}
+
+label:has(input[type="number"]) {
+  @include number-input.styles;
+}
+
+ol {
+  @include ordered-list.styles;
+}
+
+p {
+  @include paragraph.styles;
+}
+
+pre {
+  @include preformatted.styles;
+}
+
+label:has(input[type="radio"]) {
+  @include radio-button.styles;
+}
+
+label:has(input[type="range"]) {
+  @include range-input.styles;
+}
+
+label:has(input[type="search"]) {
+  @include search-input.styles;
+}
+
+label:has(select) {
+  @include select.styles;
+}
+
+nav:has(+ main) {
+  @include side-navigation.styles;
+}
+
+small {
+  @include small-text.styles;
+}
+
+table {
+  @include table.styles;
+}
+
+textarea {
+  @include text-area.styles;
+}
+
+label:has(input[type="text"]) {
+  @include text-input.styles;
+}
+
+[data-tile] {
+  @include tile.styles;
+}
+
+label:has(input[type="time"]) {
+  @include time-input.styles;
+}
+
+button[role="switch"] {
+  @include toggle.styles;
+}
+
+ul {
+  @include unordered-list.styles;
+}

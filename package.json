@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "vite docs",
     "build:icons": "node build/icons.ts",
+    "build:prebuilts": "sass -I node_modules --no-source-map --style=compressed src/prebuilt:dist/prebuilt",
     "build:docs": "vite build docs",
     "deploy:docs": "gh-pages -d docs/dist -f --dotfiles"
   },

@@ -51,6 +51,7 @@ $default-config: (
   & summary::before {
     content: '';
     @include icons.chevron--down;
+    translate: 0 calc((1lh - 1rem) * 0.5);
     display: inline-block;
     margin-inline-end: layout.$density--padding;
     transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;

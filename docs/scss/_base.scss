@@ -17,7 +17,7 @@
     color-scheme: dark;
   }
 
-  @include carbon-html.styles;
+  @include carbon-html.emit-layout-tokens;
 }
 
 html {
