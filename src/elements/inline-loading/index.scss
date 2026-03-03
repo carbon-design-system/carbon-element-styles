@@ -27,7 +27,7 @@ $default-config: (
     display: inline-block;
     block-size: calc($-size - $-stroke-width * 2);
     inline-size: calc($-size - $-stroke-width * 2);
-    border-radius: 100%;
+    border-radius: 50%;
     border: $-stroke-width solid theme.$layer-accent;
     border-block-end-color: theme.$border-interactive;
     border-inline-end-color: theme.$border-interactive;

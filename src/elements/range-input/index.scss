@@ -28,7 +28,7 @@ $default-config: (
     appearance: none;
     block-size: 0.875rem;
     inline-size: 0.875rem;
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: theme.$layer-selected-inverse;
     translate: 0 calc(-50% + 0.125rem * 0.5);
     cursor: pointer;

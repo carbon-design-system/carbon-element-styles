@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/toggle';
+
+$name: 'toggle';
+
+@include docs.demo($name, 'default') {
+  label:has(button[role="switch"]) {
+    @include toggle.styles;
+  }
+};
