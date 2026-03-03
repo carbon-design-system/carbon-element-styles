@@ -1,0 +1,81 @@
+import type { Demo, Meta } from '../../js/_types';
+
+export const meta = {
+  id: 'tabs',
+  name: 'Tabs',
+} as const satisfies Meta;
+
+const html = /* html */`
+<div role="tablist">
+  <button role="tab" id="tab-1" aria-controls="tabpanel-1" aria-selected="true" type="button">
+    Lorem ipsum
+  </button>
+  <button role="tab" id="tab-2" aria-controls="tabpanel-2" aria-selected="false" type="button">
+    Dolor sit
+  </button>
+  <button role="tab" id="tab-3" aria-controls="tabpanel-3" aria-selected="false" type="button">
+    Amet
+  </button>
+  <button role="tab" id="tab-4" aria-controls="tabpanel-4" aria-selected="false" type="button" disabled>
+    Consetetur
+  </button>
+</div>
+<div role="tabpanel" id="tabpanel-1" aria-labelledby="tab-1">
+  Tab panel 1
+</div>
+<div role="tabpanel" id="tabpanel-2" aria-labelledby="tab-2" hidden>
+  Tab panel 2
+</div>
+<div role="tabpanel" id="tabpanel-3" aria-labelledby="tab-3" hidden>
+  Tab panel 3
+</div>
+<div role="tabpanel" id="tabpanel-4" aria-labelledby="tab-4" hidden>
+  Tab panel 4
+</div>
+`;
+
+const setup = (frame: HTMLElement) => {
+  frame.querySelectorAll('[role="tab"]').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('aria-controls');
+
+      if (targetId) {
+        const target = document.getElementById(targetId);
+
+        if (target) {
+          frame.querySelectorAll('[role="tab"]').forEach((t) => {
+            t.setAttribute('aria-selected', 'false');
+          });
+
+          frame.querySelectorAll('[role="tabpanel"]').forEach((t) => {
+            t.setAttribute('hidden', '');
+          });
+
+          tab.setAttribute('aria-selected', 'true');
+          target.removeAttribute('hidden');
+        }
+      }
+    });
+  });
+};
+
+export const demos: Demo[] = [
+  {
+    id: 'default',
+    name: 'Default',
+    html,
+    setup,
+  },
+  {
+    id: 'line',
+    name: 'Line',
+    html,
+    setup,
+  },
+  {
+    id: 'contained',
+    name: 'Contained',
+    html,
+    setup,
+  },
+];

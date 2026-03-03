@@ -1,0 +1,26 @@
+@use '../../scss/docs';
+@use '../../../src/elements/tabs';
+
+$name: 'tabs';
+
+@include docs.demo($name, 'default') {
+  [role="tablist"] {
+    @include tabs.styles;
+  }
+};
+
+@include docs.demo($name, 'line') {
+  [role="tablist"] {
+    @include tabs.styles((
+      kind: 'line',
+    ));
+  }
+};
+
+@include docs.demo($name, 'contained') {
+  [role="tablist"] {
+    @include tabs.styles((
+      kind: 'contained',
+    ));
+  }
+};
