@@ -20,7 +20,12 @@
 @use '../elements/fieldset';
 @use '../elements/file-input';
 @use '../elements/header-navigation';
-@use '../elements/heading';
+@use '../elements/heading-level-1';
+@use '../elements/heading-level-2';
+@use '../elements/heading-level-3';
+@use '../elements/heading-level-4';
+@use '../elements/heading-level-5';
+@use '../elements/heading-level-6';
 @use '../elements/horizontal-rule';
 @use '../elements/inline-loading';
 @use '../elements/inline-quotation';
@@ -65,212 +70,55 @@
   background-color: theme.$background;
 }
 
-abbr[title] {
-  @include abbreviation.styles;
-}
-
-a {
-  @include anchor.styles;
-}
-
-blockquote {
-  @include block-quotation.styles;
-}
-
-strong, b {
-  @include bold-text.styles;
-}
-
-button {
-  @include button.styles;
-}
-
-button[type="submit"] {
-  @include button.styles((
-    kind: 'primary',
-  ));
-}
-
-label:has(input[type="checkbox"]) {
-  @include checkbox.styles;
-}
-
-code {
-  @include code.styles;
-}
-
-label:has(input[list]) {
-  @include data-list.styles;
-}
-
-label:has(input[type="date"]) {
-  @include date-input.styles;
-}
-
-label:has(input[type="datetime-local"]) {
-  @include date-time-input.styles;
-}
-
-del {
-  @include deleted-text.styles;
-}
-
-dl {
-  @include description-list.styles;
-}
-
-details {
-  @include details.styles;
-}
-
-dialog {
-  @include dialog.styles;
-}
-
-fieldset {
-  @include fieldset.styles;
-}
-
-label:has(input[type="file"]) {
-  @include file-input.styles;
-}
-
-body > header:first-child {
-  @include header-navigation.styles;
-}
-
-h1 {
-  @include heading.styles((
-    level: 1,
-  ));
-}
-
-h2 {
-  @include heading.styles((
-    level: 2,
-  ));
-}
-
-h3 {
-  @include heading.styles((
-    level: 3,
-  ));
-}
-
-h4 {
-  @include heading.styles((
-    level: 4,
-  ));
-}
-
-h5 {
-  @include heading.styles((
-    level: 5,
-  ));
-}
-
-h6 {
-  @include heading.styles((
-    level: 6,
-  ));
-}
-
-hr {
-  @include horizontal-rule.styles;
-}
-
-[aria-live="polite"][aria-busy="true"]:empty {
-  @include inline-loading.styles;
-}
-
-q {
-  @include inline-quotation.styles;
-}
-
-ins {
-  @include inserted-text.styles;
-}
-
-em, i {
-  @include italic-text.styles;
-}
-
-kbd {
-  @include keyboard-input.styles;
-}
-
-label {
-  @include label.styles;
-}
-
-mark {
-  @include marked-text.styles;
-}
-
-label:has(input[type="number"]) {
-  @include number-input.styles;
-}
-
-ol {
-  @include ordered-list.styles;
-}
-
-p {
-  @include paragraph.styles;
-}
-
-pre {
-  @include preformatted.styles;
-}
-
-label:has(input[type="radio"]) {
-  @include radio-button.styles;
-}
-
-label:has(input[type="range"]) {
-  @include range-input.styles;
-}
-
-label:has(input[type="search"]) {
-  @include search-input.styles;
-}
-
-label:has(select) {
-  @include select.styles;
-}
-
-nav:has(+ main) {
-  @include side-navigation.styles;
-}
-
-small {
-  @include small-text.styles;
-}
-
-table {
-  @include table.styles;
-}
-
-textarea {
-  @include text-area.styles;
-}
-
-label:has(input[type="text"]) {
-  @include text-input.styles;
-}
-
-[data-tile] {
-  @include tile.styles;
-}
-
-label:has(input[type="time"]) {
-  @include time-input.styles;
-}
-
-button[role="switch"] {
-  @include toggle.styles;
-}
-
-ul {
-  @include unordered-list.styles;
-}
+@include abbreviation.styles;
+@include anchor.styles;
+@include block-quotation.styles;
+@include bold-text.styles;
+@include button.styles;
+@include button.styles((
+  selector: 'button[type="submit"]',
+  kind: 'primary',
+));
+@include checkbox.styles;
+@include code.styles;
+@include data-list.styles;
+@include date-input.styles;
+@include date-time-input.styles;
+@include deleted-text.styles;
+@include description-list.styles;
+@include details.styles;
+@include dialog.styles;
+@include fieldset.styles;
+@include file-input.styles;
+@include header-navigation.styles;
+@include heading-level-1.styles;
+@include heading-level-2.styles;
+@include heading-level-3.styles;
+@include heading-level-4.styles;
+@include heading-level-5.styles;
+@include heading-level-6.styles;
+@include horizontal-rule.styles;
+@include inline-loading.styles;
+@include inline-quotation.styles;
+@include inserted-text.styles;
+@include italic-text.styles;
+@include keyboard-input.styles;
+@include label.styles;
+@include marked-text.styles;
+@include number-input.styles;
+@include ordered-list.styles;
+@include paragraph.styles;
+@include preformatted.styles;
+@include radio-button.styles;
+@include range-input.styles;
+@include search-input.styles;
+@include select.styles;
+@include side-navigation.styles;
+@include small-text.styles;
+@include table.styles;
+@include text-area.styles;
+@include text-input.styles;
+@include tile.styles;
+@include time-input.styles;
+@include toggle.styles;
+@include unordered-list.styles;

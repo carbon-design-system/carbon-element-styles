@@ -6,12 +6,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'nav:has(+ main)',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'nav:has(+ main)',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     padding-block: layout.$density--padding;

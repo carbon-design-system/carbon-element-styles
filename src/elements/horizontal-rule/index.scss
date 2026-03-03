@@ -4,13 +4,15 @@
 
 @use '../../layout';
 
-$default-config: (
+$config: () !default;
+
+$-default-config: (
   selector: 'hr',
   kind: 'subtle',
-) !default;
+);
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     border: none;

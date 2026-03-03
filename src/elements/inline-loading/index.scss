@@ -8,15 +8,17 @@
 @use '../../config';
 @use '../../layout';
 
+$config: () !default;
+
 $-size: 1rem;
 $-stroke-width: 0.125rem;
 
-$default-config: (
+$-default-config: (
   selector: '[aria-live="polite"][aria-busy="true"]:empty',
-) !default;
+);
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
 

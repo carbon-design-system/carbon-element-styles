@@ -5,12 +5,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'code',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'code',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     @include layout.mode--code;

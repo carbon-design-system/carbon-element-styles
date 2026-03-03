@@ -9,12 +9,14 @@
 @use '../../layout';
 @use '../../utilities/icons';
 
-$default-config: (
-  selector: 'label:has(input[type="checkbox"])',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'label:has(input[type="checkbox"])',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     @include label.styles((

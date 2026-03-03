@@ -5,15 +5,17 @@
 
 @use '../../layout';
 
-$default-config: (
+$config: () !default;
+
+$-default-config: (
   emit-readonly: true,
   emit-disabled: true,
   emit-invalid: true,
   emit-focus: true,
 );
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   @include layout.mode--body-compact;
   position: relative;

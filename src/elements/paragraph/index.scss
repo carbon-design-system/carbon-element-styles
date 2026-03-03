@@ -2,12 +2,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'p',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'p',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     @include layout.mode--body;

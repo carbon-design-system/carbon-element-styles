@@ -11,12 +11,14 @@
 @use '../../layout';
 @use '../../utilities/icons';
 
-$default-config: (
-  selector: 'dialog',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'dialog',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     position: relative;

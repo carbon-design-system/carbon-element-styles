@@ -5,12 +5,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'mark',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'mark',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     padding-inline: spacing.$spacing-01;

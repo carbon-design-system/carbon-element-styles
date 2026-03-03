@@ -6,12 +6,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'body > header:first-child',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'body > header:first-child',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     position: fixed;

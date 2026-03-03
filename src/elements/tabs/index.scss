@@ -6,13 +6,15 @@
 
 @use '../../layout';
 
-$default-config: (
+$config: () !default;
+
+$-default-config: (
   selector: '[role="tablist"]',
   kind: 'line',
-) !default;
+);
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     display: flex;

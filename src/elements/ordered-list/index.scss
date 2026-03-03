@@ -2,12 +2,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'ol',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'ol',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     list-style-type: decimal;

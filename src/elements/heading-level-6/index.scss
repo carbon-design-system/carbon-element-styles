@@ -4,12 +4,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'h6',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'h6',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     @include heading.styles;

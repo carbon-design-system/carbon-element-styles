@@ -11,6 +11,8 @@
 @use '../../layout';
 @use '../../utilities/icons';
 
+$config: () !default;
+
 // finding the last part of the passed selector by slicing
 // it from the last space character that is not within brackets
 @function -get-nesting-selector($selector) {
@@ -36,12 +38,12 @@
   @return $selector;
 }
 
-$default-config: (
+$-default-config: (
   selector: '[data-tile]',
-) !default;
+);
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     // inspecting "&" returns "(selector, )"

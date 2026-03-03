@@ -9,17 +9,19 @@
 
 @use '../../layout';
 
+$config: () !default;
+
 $-block-size: 1.5rem;
 $-inline-size: 3rem;
 $-knob-spacing: 0.1875rem;
 $-knob-size: calc($-block-size - $-knob-spacing * 2);
 
-$default-config: (
+$-default-config: (
   selector: 'label:has(button[role="switch"])',
-) !default;
+);
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     @include label.styles((

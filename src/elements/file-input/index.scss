@@ -9,12 +9,14 @@
 
 @use '../../layout';
 
-$default-config: (
-  selector: 'label:has(input[type="file"])',
-) !default;
+$config: () !default;
 
-@mixin styles($config: ()) {
-  $props: map.deep-merge($default-config, $config);
+$-default-config: (
+  selector: 'label:has(input[type="file"])',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
     @include layout.mode--heading-compact;
