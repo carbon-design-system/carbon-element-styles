@@ -22,7 +22,7 @@
   }
 }
 
-@each $size in ('xs', 'sm', 'md', 'lg') {
+@each $size in ('xs', 'sm', 'md', 'lg', 'xl') {
   #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-size="#{$size}"] {
     @include carbon-html.size($size);
   }

@@ -15,6 +15,7 @@ export const Sizes = {
   Sm: 'sm',
   Md: 'md',
   Lg: 'lg',
+  Xl: 'xl',
 } as const;
 
 export const Densities = {

@@ -1,0 +1,18 @@
+@use '../../scss/docs';
+@use '../../../src/elements/dialog';
+
+@use '../../../src/elements/paragraph';
+
+$name: 'dialog';
+
+@include docs.demo($name, 'default') {
+  dialog {
+    @include dialog.styles;
+  }
+
+  // ↓ for demo only ↓
+
+  p {
+    @include paragraph.styles;
+  }
+};

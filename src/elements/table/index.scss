@@ -28,7 +28,10 @@ $default-config: (
   & th,
   & td {
     block-size: layout.$size--block-size;
+    box-sizing: border-box;
     border-block-end: 0.0625rem solid theme.$border-subtle;
+    padding-block-start: layout.$size--padding-block-start;
+    padding-block-end: layout.$size--padding-block-end;
     padding-inline: layout.$density--padding;
   }
 

@@ -20,7 +20,8 @@ $default-config: (
   border-radius: 0;
   text-align: start;
   block-size: layout.$size--block-size;
-  padding-block: 0;
+  padding-block-start: layout.$size--padding-block-start;
+  padding-block-end: layout.$size--padding-block-end;
   padding-inline-start: layout.$density--padding;
   padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
   cursor: pointer;

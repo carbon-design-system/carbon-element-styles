@@ -2,11 +2,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const iconIds = [
   'arrow--right',
-  'checkmark',
-  'chevron--down',
-  'checkbox',
   'checkbox--checked--filled',
   'checkbox--indeterminate--filled',
+  'checkbox',
+  'checkmark',
+  'chevron--down',
+  'close',
 ];
 
 let scss = `@mixin -icon($size: 1rem) {

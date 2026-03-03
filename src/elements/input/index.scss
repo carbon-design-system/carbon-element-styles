@@ -22,6 +22,8 @@ $default-config: (
   border: none;
   border-radius: 0;
   block-size: layout.$size--block-size;
+  padding-block-start: layout.$size--padding-block-start;
+  padding-block-end: layout.$size--padding-block-end;
   padding-inline: layout.$density--padding;
   background-color: theme.$field;
   border-block-end: 0.0625rem solid theme.$border-strong;

@@ -16,8 +16,10 @@ $default-config: (
 
   & textarea {
     @include input.styles;
-    padding: layout.$density--padding;
-    min-block-size: calc(layout.$density--padding * 2 + layout.$size--block-size);
+    padding-inline: layout.$density--padding;
+    padding-block-start: layout.$size--padding-block-start;
+    padding-block-end: layout.$size--padding-block-end;
+    min-block-size: calc(layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end);
     box-sizing: border-box;
   }
 }

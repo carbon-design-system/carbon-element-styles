@@ -31,15 +31,16 @@ $default-config: (
     border: none;
     box-shadow: none;
     border-radius: 0;
-    display: flex;
     inline-size: 100%;
     text-align: start;
-    align-items: center;
+    display: block;
     box-sizing: border-box;
     color: theme.$text-secondary;
     background-color: transparent;
     text-decoration: none;
     block-size: layout.$size--block-size;
+    padding-block-start: layout.$size--padding-block-start;
+    padding-block-end: layout.$size--padding-block-end;
     padding-inline: layout.$density--padding;
     cursor: pointer;
     transition-property: color, background-color;

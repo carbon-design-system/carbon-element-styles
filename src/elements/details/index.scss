@@ -25,9 +25,11 @@ $default-config: (
   & summary {
     @include layout.mode--body-compact;
     block-size: layout.$size--block-size;
-    display: flex;
-    align-items: center;
+    box-sizing: border-box;
     cursor: pointer;
+    display: flex;
+    padding-block-start: layout.$size--padding-block-start;
+    padding-block-end: layout.$size--padding-block-end;
     margin-inline-start: calc((layout.$density--padding + 1rem + layout.$density--padding) * -1);
     padding-inline-start: layout.$density--padding;
     margin-inline-end: calc(layout.$density--padding * -1);

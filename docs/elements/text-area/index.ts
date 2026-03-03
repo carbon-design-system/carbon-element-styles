@@ -15,21 +15,21 @@ const html = /* html */`
 
 <label>
   Read only
-  <textarea readonly>Lorem ipsum</textarea>
+  <textarea readonly>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.</textarea>
 </label>
 
 <br />
 
 <label>
   Disabled
-  <textarea disabled>Lorem ipsum</textarea>
+  <textarea disabled>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.</textarea>
 </label>
 
 <br />
 
 <label>
   Invalid
-  <textarea aria-invalid="true">Lorem ipsum</textarea>
+  <textarea aria-invalid="true">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.</textarea>
 </label>
 `;
 

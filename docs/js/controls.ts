@@ -104,6 +104,10 @@ export function render() {
         value: Sizes.Lg,
         label: 'LG',
       },
+      {
+        value: Sizes.Xl,
+        label: 'XL',
+      },
     ]);
 
     const densities = buildSelect('density', 'Density', densityIcon, [

@@ -42,7 +42,7 @@ $default-config: (
     content: '';
     @include icons.chevron--down;
     position: absolute;
-    inset-block-end: calc((layout.$size--block-size - 1rem) * 0.5);
+    inset-block-end: layout.$size--padding-block-end;
     inset-inline-end: layout.$density--padding;
     pointer-events: none;
   }
