@@ -4,7 +4,17 @@
 $name: 'horizontal-rule';
 
 @include docs.demo($name, 'default') {
-  hr {
-    @include horizontal-rule.styles;
-  }
+  @include horizontal-rule.styles;
+};
+
+@include docs.demo($name, 'subtle') {
+  @include horizontal-rule.styles((
+    kind: 'subtle',
+  ));
+};
+
+@include docs.demo($name, 'strong') {
+  @include horizontal-rule.styles((
+    kind: 'strong',
+  ));
 };

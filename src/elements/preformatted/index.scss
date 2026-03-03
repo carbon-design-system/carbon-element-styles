@@ -5,18 +5,20 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'pre',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include layout.mode--code;
-  white-space: pre;
-  margin-block: layout.$mode--margin-block;
-  padding: layout.$density--padding;
-  background-color: theme.$layer;
-  inline-size: 100%;
-  overflow-x: auto;
-  box-sizing: border-box;
+  #{map.get($props, 'selector')} {
+    @include layout.mode--code;
+    white-space: pre;
+    margin-block: layout.$mode--margin-block;
+    padding: layout.$density--padding;
+    background-color: theme.$layer;
+    inline-size: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
 }

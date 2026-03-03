@@ -12,44 +12,47 @@ $-size: 1rem;
 $-stroke-width: 0.125rem;
 
 $default-config: (
-
-);
+  selector: '[aria-live="polite"][aria-busy="true"]:empty',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  display: flex;
-  align-items: center;
-  column-gap: spacing.$spacing-03;
+  #{map.get($props, 'selector')} {
 
-  &::before {
-    content: '';
-    display: inline-block;
-    block-size: calc($-size - $-stroke-width * 2);
-    inline-size: calc($-size - $-stroke-width * 2);
-    border-radius: 50%;
-    border: $-stroke-width solid theme.$layer-accent;
-    border-block-end-color: theme.$border-interactive;
-    border-inline-end-color: theme.$border-interactive;
-    animation-name: #{carbon-config.$prefix}--#{config.$prefix}--inline-loading--spinner;
-    animation-duration: motion.$duration-slow-02;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
+    display: flex;
+    align-items: center;
+    column-gap: spacing.$spacing-03;
 
-  &::after {
-    @include layout.mode--body-compact;
-    content: 'Loading';
-    color: theme.$text-secondary;
-  }
-
-  @keyframes #{carbon-config.$prefix}--#{config.$prefix}--inline-loading--spinner {
-    0% {
-      rotate: 0;
+    &::before {
+      content: '';
+      display: inline-block;
+      block-size: calc($-size - $-stroke-width * 2);
+      inline-size: calc($-size - $-stroke-width * 2);
+      border-radius: 50%;
+      border: $-stroke-width solid theme.$layer-accent;
+      border-block-end-color: theme.$border-interactive;
+      border-inline-end-color: theme.$border-interactive;
+      animation-name: #{carbon-config.$prefix}--#{config.$prefix}--inline-loading--spinner;
+      animation-duration: motion.$duration-slow-02;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
     }
 
-    100% {
-      rotate: 360deg;
+    &::after {
+      @include layout.mode--body-compact;
+      content: 'Loading';
+      color: theme.$text-secondary;
+    }
+
+    @keyframes #{carbon-config.$prefix}--#{config.$prefix}--inline-loading--spinner {
+      0% {
+        rotate: 0;
+      }
+
+      100% {
+        rotate: 360deg;
+      }
     }
   }
 }

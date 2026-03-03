@@ -6,44 +6,46 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'blockquote',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  margin-block: layout.$mode--margin-block;
-  margin-inline: spacing.$spacing-08;
-  max-inline-size: 50ch;
+  #{map.get($props, 'selector')} {
+    margin-block: layout.$mode--margin-block;
+    margin-inline: spacing.$spacing-08;
+    max-inline-size: 50ch;
 
-  @include layout.mode--quotation;
-
-  & p {
     @include layout.mode--quotation;
-    quotes: auto;
-  }
 
-  & p::before {
-    content: open-quote;
-    margin-inline-start: -1.1ch;
-  }
+    & p {
+      @include layout.mode--quotation;
+      quotes: auto;
+    }
 
-  & p::after {
-    content: close-quote;
-  }
+    & p::before {
+      content: open-quote;
+      margin-inline-start: -1.1ch;
+    }
 
-  & p {
-    margin-block: 0;
-  }
+    & p::after {
+      content: close-quote;
+    }
 
-  & + cite {
-    @include layout.mode--body-compact;
-    margin-inline-start: spacing.$spacing-08;
-    font-style: italic;
-  }
+    & p {
+      margin-block: 0;
+    }
 
-  & + cite::before {
-    content: '—';
-    margin-inline-end: spacing.$spacing-02;
+    & + cite {
+      @include layout.mode--body-compact;
+      margin-inline-start: spacing.$spacing-08;
+      font-style: italic;
+    }
+
+    & + cite::before {
+      content: '—';
+      margin-inline-end: spacing.$spacing-02;
+    }
   }
 }

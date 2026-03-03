@@ -3,12 +3,14 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'q',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  quotes: auto;
-  font-style: italic;
+  #{map.get($props, 'selector')} {
+    quotes: auto;
+    font-style: italic;
+  }
 }

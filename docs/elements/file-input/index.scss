@@ -4,7 +4,5 @@
 $name: 'file-input';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="file"]) {
-    @include file-input.styles;
-  }
+  @include file-input.styles;
 };

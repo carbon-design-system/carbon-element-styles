@@ -4,7 +4,5 @@
 $name: 'details';
 
 @include docs.demo($name, 'default') {
-  details {
-    @include details.styles;
-  }
+  @include details.styles;
 };

@@ -6,14 +6,16 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'del',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  padding-inline: spacing.$spacing-01;
-  background-color: tag-tokens.$tag-background-red;
-  color: tag-tokens.$tag-color-red;
-  text-decoration: line-through;
+  #{map.get($props, 'selector')} {
+    padding-inline: spacing.$spacing-01;
+    background-color: tag-tokens.$tag-background-red;
+    color: tag-tokens.$tag-color-red;
+    text-decoration: line-through;
+  }
 }

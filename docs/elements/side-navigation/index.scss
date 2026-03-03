@@ -4,7 +4,7 @@
 $name: 'side-navigation';
 
 @include docs.demo($name, 'default') {
-  nav {
-    @include side-navigation.styles;
-  }
+  @include side-navigation.styles((
+    selector: '& nav',
+  ));
 };

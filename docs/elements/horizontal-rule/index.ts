@@ -15,4 +15,14 @@ export const demos: Demo[] = [
     name: 'Default',
     html,
   },
+  {
+    id: 'subtle',
+    name: 'Subtle',
+    html,
+  },
+  {
+    id: 'strong',
+    name: 'Strong',
+    html,
+  },
 ];

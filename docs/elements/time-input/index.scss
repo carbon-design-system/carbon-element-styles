@@ -4,23 +4,17 @@
 $name: 'time-input';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="time"]) {
-    @include time-input.styles;
-  }
+  @include time-input.styles;
 };
 
 @include docs.demo($name, 'block') {
-  label:has(input[type="time"]) {
-    @include time-input.styles((
-      axis: 'block',
-    ));
-  }
+  @include time-input.styles((
+    axis: 'block',
+  ));
 };
 
 @include docs.demo($name, 'inline') {
-  label:has(input[type="time"]) {
-    @include time-input.styles((
-      axis: 'inline',
-    ));
-  }
+  @include time-input.styles((
+    axis: 'inline',
+  ));
 };

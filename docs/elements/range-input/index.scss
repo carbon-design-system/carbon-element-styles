@@ -4,23 +4,17 @@
 $name: 'range-input';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="range"]) {
-    @include range-input.styles;
-  }
+  @include range-input.styles;
 };
 
 @include docs.demo($name, 'block') {
-  label:has(input[type="range"]) {
-    @include range-input.styles((
-      axis: 'block',
-    ));
-  }
+  @include range-input.styles((
+    axis: 'block',
+  ));
 };
 
 @include docs.demo($name, 'inline') {
-  label:has(input[type="range"]) {
-    @include range-input.styles((
-      axis: 'inline',
-    ));
-  }
+  @include range-input.styles((
+    axis: 'inline',
+  ));
 };

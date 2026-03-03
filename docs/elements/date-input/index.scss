@@ -4,23 +4,17 @@
 $name: 'date-input';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="date"]) {
-    @include date-input.styles;
-  }
+  @include date-input.styles;
 };
 
 @include docs.demo($name, 'block') {
-  label:has(input[type="date"]) {
-    @include date-input.styles((
-      axis: 'block',
-    ));
-  }
+  @include date-input.styles((
+    axis: 'block',
+  ));
 };
 
 @include docs.demo($name, 'inline') {
-  label:has(input[type="date"]) {
-    @include date-input.styles((
-      axis: 'inline',
-    ));
-  }
+  @include date-input.styles((
+    axis: 'inline',
+  ));
 };

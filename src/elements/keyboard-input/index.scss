@@ -6,15 +6,17 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'kbd',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include layout.mode--code;
-  background-color: transparent;
-  outline: 0.0625rem solid theme.$border-subtle;
-  border-radius: 0.125rem;
-  padding-inline: spacing.$spacing-02;
+  #{map.get($props, 'selector')} {
+    @include layout.mode--code;
+    background-color: transparent;
+    outline: 0.0625rem solid theme.$border-subtle;
+    border-radius: 0.125rem;
+    padding-inline: spacing.$spacing-02;
+  }
 }

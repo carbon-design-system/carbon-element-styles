@@ -4,7 +4,5 @@
 $name: 'radio-button';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="radio"]) {
-    @include radio-button.styles;
-  }
+  @include radio-button.styles;
 };

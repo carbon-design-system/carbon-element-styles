@@ -4,23 +4,17 @@
 $name: 'tabs';
 
 @include docs.demo($name, 'default') {
-  [role="tablist"] {
-    @include tabs.styles;
-  }
+  @include tabs.styles;
 };
 
 @include docs.demo($name, 'line') {
-  [role="tablist"] {
-    @include tabs.styles((
-      kind: 'line',
-    ));
-  }
+  @include tabs.styles((
+    kind: 'line',
+  ));
 };
 
 @include docs.demo($name, 'contained') {
-  [role="tablist"] {
-    @include tabs.styles((
-      kind: 'contained',
-    ));
-  }
+  @include tabs.styles((
+    kind: 'contained',
+  ));
 };

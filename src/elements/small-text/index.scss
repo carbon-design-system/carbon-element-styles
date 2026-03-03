@@ -5,13 +5,15 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'small',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include layout.mode--helper-text;
-  display: inline-block;
-  color: theme.$text-helper;
+  #{map.get($props, 'selector')} {
+    @include layout.mode--helper-text;
+    display: inline-block;
+    color: theme.$text-helper;
+  }
 }

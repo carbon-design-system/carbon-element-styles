@@ -4,23 +4,17 @@
 $name: 'text-input';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="text"]) {
-    @include text-input.styles;
-  }
+  @include text-input.styles;
 };
 
 @include docs.demo($name, 'block') {
-  label:has(input[type="text"]) {
-    @include text-input.styles((
-      axis: 'block',
-    ));
-  }
+  @include text-input.styles((
+    axis: 'block',
+  ));
 };
 
 @include docs.demo($name, 'inline') {
-  label:has(input[type="text"]) {
-    @include text-input.styles((
-      axis: 'inline',
-    ));
-  }
+  @include text-input.styles((
+    axis: 'inline',
+  ));
 };

@@ -6,13 +6,8 @@
 $name: 'dialog';
 
 @include docs.demo($name, 'default') {
-  dialog {
-    @include dialog.styles;
-  }
+  @include dialog.styles;
 
-  // ↓ for demo only ↓
-
-  p {
-    @include paragraph.styles;
-  }
+  // --- ↓ for demo only ↓ ---
+  @include paragraph.styles;
 };

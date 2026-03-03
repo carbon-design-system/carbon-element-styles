@@ -4,7 +4,5 @@
 $name: 'bold-text';
 
 @include docs.demo($name, 'default') {
-  strong, b {
-    @include bold-text.styles;
-  }
+  @include bold-text.styles;
 };

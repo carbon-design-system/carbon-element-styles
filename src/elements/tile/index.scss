@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use 'sass:string';
-@use 'sass:selector';
 @use 'sass:list';
 
 @use '@carbon/styles/scss/theme';
@@ -38,80 +37,82 @@
 }
 
 $default-config: (
-
-);
+  selector: '[data-tile]',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  // inspecting "&" returns "(selector, )"
-  $nesting-selector: -get-nesting-selector(string.slice(meta.inspect(&), 2, -3));
+  #{map.get($props, 'selector')} {
+    // inspecting "&" returns "(selector, )"
+    $nesting-selector: -get-nesting-selector(string.slice(meta.inspect(&), 2, -3));
 
-  @include layer-tokens.emit-layer-tokens(2);
-  background-color: theme.$layer-background;
-  padding: layout.$density--padding;
-  box-sizing: border-box;
+    @include layer-tokens.emit-layer-tokens(2);
+    background-color: theme.$layer-background;
+    padding: layout.$density--padding;
+    box-sizing: border-box;
 
-  & #{$nesting-selector} {
-    @include layer-tokens.emit-layer-tokens(3);
-  }
-
-  & #{$nesting-selector} #{$nesting-selector} {
-    background-color: theme.$layer;
-  }
-
-  &:is(a) {
-    position: relative;
-    display: block;
-    color: theme.$text-primary;
-    text-decoration: none;
-    padding-inline-end: spacing.$spacing-09;
-    transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
-
-    &:hover {
-      background-color: theme.$layer-hover-01;
+    & #{$nesting-selector} {
+      @include layer-tokens.emit-layer-tokens(3);
     }
 
-    &:active {
-      background-color: theme.$layer-active-01;
+    & #{$nesting-selector} #{$nesting-selector} {
+      background-color: theme.$layer;
     }
 
-    &:focus {
-      @include focus-outline.focus-outline('outline');
+    &:is(a) {
+      position: relative;
+      display: block;
+      color: theme.$text-primary;
+      text-decoration: none;
+      padding-inline-end: spacing.$spacing-09;
+      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+      &:hover {
+        background-color: theme.$layer-hover-01;
+      }
+
+      &:active {
+        background-color: theme.$layer-active-01;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+
+      &::after {
+        @include icons.arrow--right;
+        content: '';
+        position: absolute;
+        color: theme.$link-primary;
+        inset-block-end: layout.$density--padding;
+        inset-inline-end: layout.$density--padding;
+        transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      }
+
+      &:hover::after {
+        color: theme.$icon-primary;
+      }
     }
 
-    &::after {
-      @include icons.arrow--right;
-      content: '';
-      position: absolute;
-      color: theme.$link-primary;
-      inset-block-end: layout.$density--padding;
-      inset-inline-end: layout.$density--padding;
-      transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    & #{$nesting-selector}:is(a) {
+      &:hover {
+        background-color: theme.$layer-hover-02;
+      }
+
+      &:active {
+        background-color: theme.$layer-active-02;
+      }
     }
 
-    &:hover::after {
-      color: theme.$icon-primary;
-    }
-  }
+    & #{$nesting-selector} #{$nesting-selector}:is(a) {
+      &:hover {
+        background-color: theme.$layer-hover-03;
+      }
 
-  & #{$nesting-selector}:is(a) {
-    &:hover {
-      background-color: theme.$layer-hover-02;
-    }
-
-    &:active {
-      background-color: theme.$layer-active-02;
-    }
-  }
-
-  & #{$nesting-selector} #{$nesting-selector}:is(a) {
-    &:hover {
-      background-color: theme.$layer-hover-03;
-    }
-
-    &:active {
-      background-color: theme.$layer-active-03;
+      &:active {
+        background-color: theme.$layer-active-03;
+      }
     }
   }
 }

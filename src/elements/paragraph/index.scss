@@ -3,14 +3,16 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'p',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include layout.mode--body;
-  max-inline-size: layout.$mode--max-inline-size;
-  margin-block: layout.$mode--margin-block;
-  text-wrap: pretty;
+  #{map.get($props, 'selector')} {
+    @include layout.mode--body;
+    max-inline-size: layout.$mode--max-inline-size;
+    margin-block: layout.$mode--margin-block;
+    text-wrap: pretty;
+  }
 }

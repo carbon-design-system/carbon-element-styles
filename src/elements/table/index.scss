@@ -6,44 +6,47 @@
 @use '../../layout';
 
 $default-config: (
+  selector: 'table',
   kind: 'data-table',
-);
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  border-spacing: 0;
-  inline-size: 100%;
-  margin-block: layout.$mode--margin-block;
-
-  & th {
-    @include layout.mode--heading-compact;
-    text-align: start;
-  }
-
-  & td {
-    @include layout.mode--body-compact;
-  }
-
-  & th,
-  & td {
-    block-size: layout.$size--block-size;
-    box-sizing: border-box;
-    border-block-end: 0.0625rem solid theme.$border-subtle;
-    padding-block-start: layout.$size--padding-block-start;
-    padding-block-end: layout.$size--padding-block-end;
-    padding-inline: layout.$density--padding;
-  }
-
-  @if map.get($props, 'kind') == 'data-table' {
-    background-color: theme.$layer;
+  #{map.get($props, 'selector')} {
+    border-spacing: 0;
+    inline-size: 100%;
+    margin-block: layout.$mode--margin-block;
 
     & th {
-      background-color: theme.$layer-accent;
+      @include layout.mode--heading-compact;
+      text-align: start;
     }
 
-    & tr:hover {
-      background-color: theme.$layer-hover;
+    & td {
+      @include layout.mode--body-compact;
+    }
+
+    & th,
+    & td {
+      block-size: layout.$size--block-size;
+      box-sizing: border-box;
+      border-block-end: 0.0625rem solid theme.$border-subtle;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline: layout.$density--padding;
+    }
+
+    @if map.get($props, 'kind') == 'data-table' {
+      background-color: theme.$layer;
+
+      & th {
+        background-color: theme.$layer-accent;
+      }
+
+      & tr:hover {
+        background-color: theme.$layer-hover;
+      }
     }
   }
 }

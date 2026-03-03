@@ -4,23 +4,17 @@
 $name: 'search-input';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="search"]) {
-    @include search-input.styles;
-  }
+  @include search-input.styles;
 };
 
 @include docs.demo($name, 'block') {
-  label:has(input[type="search"]) {
-    @include search-input.styles((
-      axis: 'block',
-    ));
-  }
+  @include search-input.styles((
+    axis: 'block',
+  ));
 };
 
 @include docs.demo($name, 'inline') {
-  label:has(input[type="search"]) {
-    @include search-input.styles((
-      axis: 'inline',
-    ));
-  }
+  @include search-input.styles((
+    axis: 'inline',
+  ));
 };

@@ -4,7 +4,7 @@
 $name: 'header-navigation';
 
 @include docs.demo($name, 'default') {
-  header {
-    @include header-navigation.styles;
-  }
+  @include header-navigation.styles((
+    selector: '& header',
+  ));
 };

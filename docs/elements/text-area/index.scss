@@ -4,7 +4,5 @@
 $name: 'text-area';
 
 @include docs.demo($name, 'default') {
-  label:has(textarea) {
-    @include text-area.styles;
-  }
+  @include text-area.styles;
 };

@@ -3,59 +3,63 @@
 @use '@carbon/styles/scss/theme';
 
 @use '../label';
-@use '../input';
+@use '../_input';
 
 @use '../../layout';
 @use '../../utilities/icons';
 
 $default-config: (
+  selector: 'label:has(select)',
   axis: 'block',
-);
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include label.styles((
-    axis: map.get($props, 'axis'),
-  ));
-
-  position: relative;
-
-  & select {
-    @include input.styles((
-      emit-readonly: false,
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: map.get($props, 'axis'),
     ));
 
-    padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
-    cursor: pointer;
+    position: relative;
 
-    &:enabled:hover {
-      background-color: theme.$field-hover;
+    & select {
+      @include input.styles((
+        emit-readonly: false,
+      ));
+
+      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+      cursor: pointer;
+
+      &:enabled:hover {
+        background-color: theme.$field-hover;
+      }
+
+      &:enabled:active {
+        background-color: theme.$layer-active;
+      }
     }
 
-    &:enabled:active {
-      background-color: theme.$layer-active;
+    &::after {
+      content: '';
+      @include icons.chevron--down;
+      position: absolute;
+      inset-block-end: layout.$size--padding-block-end;
+      inset-inline-end: layout.$density--padding;
+      pointer-events: none;
     }
-  }
 
-  &::after {
-    content: '';
-    @include icons.chevron--down;
-    position: absolute;
-    inset-block-end: layout.$size--padding-block-end;
-    inset-inline-end: layout.$density--padding;
-    pointer-events: none;
-  }
+    &:has(select:disabled)::after {
+      color: theme.$text-disabled;
+    }
 
-  &:has(select:disabled)::after {
-    color: theme.$text-disabled;
-  }
-
-  @if map.get($props, 'axis') == 'inline' {
-    & select:enabled,
-    & select:disabled {
-      background-color: transparent;
-      border-block-end: none;
+    @if map.get($props, 'axis') == 'inline' {
+      & select:enabled,
+      & select:disabled {
+        background-color: transparent;
+        border-block-end: none;
+      }
     }
   }
 }

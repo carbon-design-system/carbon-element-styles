@@ -5,13 +5,15 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'abbr[title]',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  text-decoration: none;
-  cursor: help;
-  border-block-end: 0.0625rem dotted theme.$border-strong;
+  #{map.get($props, 'selector')} {
+    text-decoration: none;
+    cursor: help;
+    border-block-end: 0.0625rem dotted theme.$border-strong;
+  }
 }

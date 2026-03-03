@@ -6,21 +6,23 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'a',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  color: theme.$link-primary;
-  text-decoration: underline;
-  transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+  #{map.get($props, 'selector')} {
+    color: theme.$link-primary;
+    text-decoration: underline;
+    transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
-  &:hover {
-    color: theme.$link-primary-hover;
-  }
+    &:hover {
+      color: theme.$link-primary-hover;
+    }
 
-  &:focus {
-    @include focus-outline.focus-outline('outline');
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
   }
 }

@@ -15,76 +15,80 @@ $-knob-spacing: 0.1875rem;
 $-knob-size: calc($-block-size - $-knob-spacing * 2);
 
 $default-config: (
-
-);
+  selector: 'label:has(button[role="switch"])',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include label.styles;
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+    ));
 
-  inline-size: max-content;
+    inline-size: max-content;
 
-  & button[role="switch"] {
-    position: relative;
-    appearance: none;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    block-size: $-block-size;
-    inline-size: $-inline-size;
-    border-radius: calc($-block-size * 0.5);
-    background-color: theme.$toggle-off;
-    transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
-    cursor: pointer;
+    & button[role="switch"] {
+      position: relative;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      block-size: $-block-size;
+      inline-size: $-inline-size;
+      border-radius: calc($-block-size * 0.5);
+      background-color: theme.$toggle-off;
+      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      cursor: pointer;
 
-    &:disabled,
-    &[aria-checked="true"]:disabled {
-      background-color: carbon-button.$button-disabled;
-      cursor: not-allowed;
+      &:disabled,
+      &[aria-checked="true"]:disabled {
+        background-color: carbon-button.$button-disabled;
+        cursor: not-allowed;
 
-      &::before {
-        background-color: theme.$icon-on-color-disabled;
+        &::before {
+          background-color: theme.$icon-on-color-disabled;
+        }
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+        outline-offset: spacing.$spacing-01;
       }
     }
 
-    &:focus {
-      @include focus-outline.focus-outline('outline');
-      outline-offset: spacing.$spacing-01;
+    & button[role="switch"] > span {
+      @include layout.mode--body-compact;
+      position: absolute;
+      inset-inline-end: calc(spacing.$spacing-03 * -1);
+      inset-block-start: calc(($-block-size - 1lh) * 0.5);
+      translate: 100% 0;
     }
-  }
 
-  & button[role="switch"] > span {
-    @include layout.mode--body-compact;
-    position: absolute;
-    inset-inline-end: calc(spacing.$spacing-03 * -1);
-    inset-block-start: calc(($-block-size - 1lh) * 0.5);
-    translate: 100% 0;
-  }
+    & button[role="switch"] > span[aria-hidden="true"] {
+      display: none;
+    }
 
-  & button[role="switch"] > span[aria-hidden="true"] {
-    display: none;
-  }
+    & button[role="switch"][aria-checked="true"] {
+      background-color: theme.$support-success;
+    }
 
-  & button[role="switch"][aria-checked="true"] {
-    background-color: theme.$support-success;
-  }
+    & button[role="switch"]::before {
+      content: '';
+      display: block;
+      position: absolute;
+      block-size: $-knob-size;
+      inline-size: $-knob-size;
+      border-radius: 50%;
+      background-color: theme.$icon-on-color;
+      inset-inline-start: $-knob-spacing;
+      inset-block-start: $-knob-spacing;
+      transition: translate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    }
 
-  & button[role="switch"]::before {
-    content: '';
-    display: block;
-    position: absolute;
-    block-size: $-knob-size;
-    inline-size: $-knob-size;
-    border-radius: 50%;
-    background-color: theme.$icon-on-color;
-    inset-inline-start: $-knob-spacing;
-    inset-block-start: $-knob-spacing;
-    transition: translate layout.$mode--transition-duration layout.$mode--transition-timing-function;
-  }
-
-  & button[role="switch"][aria-checked="true"]::before {
-    translate: calc($-inline-size - $-knob-size - $-knob-spacing * 2) 0;
+    & button[role="switch"][aria-checked="true"]::before {
+      translate: calc($-inline-size - $-knob-size - $-knob-spacing * 2) 0;
+    }
   }
 }

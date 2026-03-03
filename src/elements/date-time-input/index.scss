@@ -1,22 +1,26 @@
 @use 'sass:map';
 
 @use '../label';
-@use '../input';
+@use '../_input';
 
 @use '../../layout';
 
 $default-config: (
+  selector: 'label:has(input[type="datetime-local"])',
   axis: 'block',
-);
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include label.styles((
-    axis: map.get($props, 'axis'),
-  ));
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: map.get($props, 'axis'),
+    ));
 
-  & input[type="datetime-local"] {
-    @include input.styles;
+    & input[type="datetime-local"] {
+      @include input.styles;
+    }
   }
 }

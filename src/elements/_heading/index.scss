@@ -1,0 +1,14 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  margin-block-end: spacing.$spacing-03;
+  margin-block-start: 1em;
+}

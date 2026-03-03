@@ -5,14 +5,24 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'hr',
+  kind: 'subtle',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  border: none;
-  block-size: 0.0625rem;
-  background-color: theme.$border-subtle;
-  margin-block: layout.$mode--margin-block;
+  #{map.get($props, 'selector')} {
+    border: none;
+    block-size: 0.0625rem;
+    margin-block: layout.$mode--margin-block;
+
+    @if map.get($props, 'kind') == 'subtle' {
+      background-color: theme.$border-subtle;
+    }
+
+    @if map.get($props, 'kind') == 'strong' {
+      background-color: theme.$border-strong;
+    }
+  }
 }

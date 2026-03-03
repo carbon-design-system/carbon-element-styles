@@ -4,7 +4,5 @@
 $name: 'fieldset';
 
 @include docs.demo($name, 'default') {
-  fieldset {
-    @include fieldset.styles;
-  }
+  @include fieldset.styles;
 };

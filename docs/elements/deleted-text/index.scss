@@ -4,7 +4,5 @@
 $name: 'deleted-text';
 
 @include docs.demo($name, 'default') {
-  del {
-    @include deleted-text.styles;
-  }
+  @include deleted-text.styles;
 };

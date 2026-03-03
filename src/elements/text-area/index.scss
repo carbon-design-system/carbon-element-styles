@@ -1,25 +1,29 @@
 @use 'sass:map';
 
 @use '../label';
-@use '../input';
+@use '../_input';
 
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'label:has(textarea)',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include label.styles;
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+    ));
 
-  & textarea {
-    @include input.styles;
-    padding-inline: layout.$density--padding;
-    padding-block-start: layout.$size--padding-block-start;
-    padding-block-end: layout.$size--padding-block-end;
-    min-block-size: calc(layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end);
-    box-sizing: border-box;
+    & textarea {
+      @include input.styles;
+      padding-inline: layout.$density--padding;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      min-block-size: calc(layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end);
+      box-sizing: border-box;
+    }
   }
 }

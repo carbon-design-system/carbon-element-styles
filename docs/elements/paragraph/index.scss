@@ -4,7 +4,5 @@
 $name: 'paragraph';
 
 @include docs.demo($name, 'default') {
-  p {
-    @include paragraph.styles;
-  }
+  @include paragraph.styles;
 };

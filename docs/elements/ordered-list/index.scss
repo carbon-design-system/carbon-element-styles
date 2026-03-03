@@ -4,7 +4,5 @@
 $name: 'ordered-list';
 
 @include docs.demo($name, 'default') {
-  ol {
-    @include ordered-list.styles;
-  }
+  @include ordered-list.styles;
 };

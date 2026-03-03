@@ -4,7 +4,5 @@
 $name: 'italic-text';
 
 @include docs.demo($name, 'default') {
-  em, i {
-    @include italic-text.styles;
-  }
+  @include italic-text.styles;
 };

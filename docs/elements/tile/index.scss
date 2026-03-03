@@ -7,17 +7,9 @@
 $name: 'tile';
 
 @include docs.demo($name, 'default') {
-  [data-tile] {
-    @include tile.styles;
-  }
+  @include tile.styles;
 
   // ↓ for demo only ↓
-
-  label:has(input[type="text"]) {
-    @include text-input.styles;
-  }
-
-  p {
-    @include paragraph.styles;
-  }
+  @include text-input.styles;
+  @include paragraph.styles;
 };

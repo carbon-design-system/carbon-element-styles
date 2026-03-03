@@ -4,7 +4,5 @@
 $name: 'inserted-text';
 
 @include docs.demo($name, 'default') {
-  ins {
-    @include inserted-text.styles;
-  }
+  @include inserted-text.styles;
 };

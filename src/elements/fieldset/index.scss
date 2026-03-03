@@ -7,19 +7,23 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'fieldset',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  border: none;
-  padding: 0;
-  margin-block: layout.$mode--margin-block;
-
-  & legend {
-    @include label.styles;
+  #{map.get($props, 'selector')} {
+    border: none;
     padding: 0;
-    margin-block-end: spacing.$spacing-03;
+    margin-block: layout.$mode--margin-block;
+
+    & legend {
+      @include label.styles((
+        selector: '&',
+      ));
+      padding: 0;
+      margin-block-end: spacing.$spacing-03;
+    }
   }
 }

@@ -7,77 +7,79 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'nav:has(+ main)',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  padding-block: layout.$density--padding;
-  inline-size: 16rem;
-  background-color: theme.$layer-background;
-  border-inline-end: 0.0625rem solid theme.$border-subtle;
+  #{map.get($props, 'selector')} {
+    padding-block: layout.$density--padding;
+    inline-size: 16rem;
+    background-color: theme.$layer-background;
+    border-inline-end: 0.0625rem solid theme.$border-subtle;
 
-  & ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+    & ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-  & li > button[aria-expanded],
-  & li > a {
-    @include layout.mode--heading;
-    appearance: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    inline-size: 100%;
-    text-align: start;
-    display: block;
-    box-sizing: border-box;
-    color: theme.$text-secondary;
-    background-color: transparent;
-    text-decoration: none;
-    block-size: layout.$size--block-size;
-    padding-block-start: layout.$size--padding-block-start;
-    padding-block-end: layout.$size--padding-block-end;
-    padding-inline: layout.$density--padding;
-    cursor: pointer;
-    transition-property: color, background-color;
-    transition-duration: layout.$mode--transition-duration;
-    transition-timing-function: layout.$mode--transition-timing-function;
+    & li > button[aria-expanded],
+    & li > a {
+      @include layout.mode--heading;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      inline-size: 100%;
+      text-align: start;
+      display: block;
+      box-sizing: border-box;
+      color: theme.$text-secondary;
+      background-color: transparent;
+      text-decoration: none;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline: layout.$density--padding;
+      cursor: pointer;
+      transition-property: color, background-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
 
-    &:hover {
-      background-color: theme.$layer-hover;
+      &:hover {
+        background-color: theme.$layer-hover;
+        color: theme.$text-primary;
+      }
+
+      &:active {
+        background-color: theme.$layer-active;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    & li > button[aria-expanded] + ul a {
+      @include layout.mode--body;
+      padding-inline-start: calc(layout.$density--padding * 2);
+    }
+
+    & li > button[aria-expanded="false"]:has(+ ul a[aria-current="page"]),
+    & li > a[aria-current="page"] {
+      background-color: theme.$layer-selected;
+      box-shadow: inset 0.25rem 0 0 0 theme.$border-interactive;
       color: theme.$text-primary;
+
+      &:hover {
+        background-color: theme.$layer-selected-hover;
+      }
     }
 
-    &:active {
-      background-color: theme.$layer-active;
+    & li > button[aria-expanded="false"] + ul {
+      display: none;
     }
-
-    &:focus {
-      @include focus-outline.focus-outline('outline');
-    }
-  }
-
-  & li > button[aria-expanded] + ul a {
-    @include layout.mode--body;
-    padding-inline-start: calc(layout.$density--padding * 2);
-  }
-
-  & li > button[aria-expanded="false"]:has(+ ul a[aria-current="page"]),
-  & li > a[aria-current="page"] {
-    background-color: theme.$layer-selected;
-    box-shadow: inset 0.25rem 0 0 0 theme.$border-interactive;
-    color: theme.$text-primary;
-
-    &:hover {
-      background-color: theme.$layer-selected-hover;
-    }
-  }
-
-  & li > button[aria-expanded="false"] + ul {
-    display: none;
   }
 }

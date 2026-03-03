@@ -4,7 +4,5 @@
 $name: 'keyboard-input';
 
 @include docs.demo($name, 'default') {
-  kbd {
-    @include keyboard-input.styles;
-  }
+  @include keyboard-input.styles;
 };

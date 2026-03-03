@@ -4,7 +4,5 @@
 $name: 'marked-text';
 
 @include docs.demo($name, 'default') {
-  mark {
-    @include marked-text.styles;
-  }
+  @include marked-text.styles;
 };

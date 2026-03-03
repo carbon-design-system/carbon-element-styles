@@ -4,23 +4,17 @@
 $name: 'select';
 
 @include docs.demo($name, 'default') {
-  label:has(select) {
-    @include select.styles;
-  }
+  @include select.styles;
 };
 
 @include docs.demo($name, 'block') {
-  label:has(select) {
-    @include select.styles((
-      axis: 'block',
-    ));
-  }
+  @include select.styles((
+    axis: 'block',
+  ));
 };
 
 @include docs.demo($name, 'inline') {
-  label:has(select) {
-    @include select.styles((
-      axis: 'inline',
-    ));
-  }
+  @include select.styles((
+    axis: 'inline',
+  ));
 };

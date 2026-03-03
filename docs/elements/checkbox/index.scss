@@ -4,7 +4,5 @@
 $name: 'checkbox';
 
 @include docs.demo($name, 'default') {
-  label:has(input[type="checkbox"]) {
-    @include checkbox.styles;
-  }
+  @include checkbox.styles;
 };

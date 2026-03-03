@@ -6,29 +6,32 @@
 @use '../../layout';
 
 $default-config: (
+  selector: 'label',
   axis: 'block',
-);
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  display: flex;
-  gap: spacing.$spacing-03;
-  color: theme.$text-secondary;
+  #{map.get($props, 'selector')} {
+    display: flex;
+    gap: spacing.$spacing-03;
+    color: theme.$text-secondary;
 
-  &:has([disabled]) {
-    color: theme.$text-disabled;
-  }
+    &:has([disabled]) {
+      color: theme.$text-disabled;
+    }
 
-  @if map.get($props, 'axis') == 'block' {
-    @include layout.mode--label;
-    flex-direction: column;
-  }
+    @if map.get($props, 'axis') == 'block' {
+      @include layout.mode--label;
+      flex-direction: column;
+    }
 
-  @if map.get($props, 'axis') == 'inline' {
-    @include layout.mode--body-compact;
-    flex-direction: row;
-    align-items: center;
-    inline-size: fit-content;
+    @if map.get($props, 'axis') == 'inline' {
+      @include layout.mode--body-compact;
+      flex-direction: row;
+      align-items: center;
+      inline-size: fit-content;
+    }
   }
 }

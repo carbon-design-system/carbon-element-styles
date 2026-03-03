@@ -7,98 +7,101 @@
 @use '../../layout';
 
 $default-config: (
+  selector: '[role="tablist"]',
   kind: 'line',
-);
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  display: flex;
-  flex-direction: row;
+  #{map.get($props, 'selector')} {
+    display: flex;
+    flex-direction: row;
 
-  & button[role="tab"] {
-    @include layout.mode--body-compact;
-    appearance: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    background: none;
-    color: theme.$text-secondary;
-    block-size: layout.$size--block-size;
-    padding-inline: layout.$density--padding;
-    cursor: pointer;
-    transition-property: color, background-color, border-color;
-    transition-duration: layout.$mode--transition-duration;
-    transition-timing-function: layout.$mode--transition-timing-function;
+    & button[role="tab"] {
+      @include layout.mode--body-compact;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      background: none;
+      color: theme.$text-secondary;
+      block-size: layout.$size--block-size;
+      padding-inline: layout.$density--padding;
+      cursor: pointer;
+      transition-property: color, background-color, border-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
 
-    &:enabled:hover {
+      &:enabled:hover {
+        color: theme.$text-primary;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    & button[role="tab"][aria-selected="true"] {
+      @include layout.mode--heading-compact;
       color: theme.$text-primary;
     }
 
-    &:focus {
-      @include focus-outline.focus-outline('outline');
+    & ~ [role="tabpanel"] {
+      @include layout.mode--body;
+      padding: layout.$density--padding;
     }
 
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
+    @if map.get($props, 'kind') == 'line' {
+      & button[role="tab"] {
+        border-block-end: 0.125rem solid theme.$border-subtle;
+        margin-inline-end: 0.0625rem;
 
-  & button[role="tab"][aria-selected="true"] {
-    @include layout.mode--heading-compact;
-    color: theme.$text-primary;
-  }
+        &:enabled:hover:not([aria-selected="true"]) {
+          border-block-end-color: theme.$border-strong;
+        }
 
-  & ~ [role="tabpanel"] {
-    @include layout.mode--body;
-    padding: layout.$density--padding;
-  }
+        &[aria-selected="true"] {
+          border-block-end-color: theme.$border-interactive;
+        }
 
-  @if map.get($props, 'kind') == 'line' {
-    & button[role="tab"] {
-      border-block-end: 0.125rem solid theme.$border-subtle;
-      margin-inline-end: 0.0625rem;
-
-      &:enabled:hover:not([aria-selected="true"]) {
-        border-block-end-color: theme.$border-strong;
-      }
-
-      &[aria-selected="true"] {
-        border-block-end-color: theme.$border-interactive;
-      }
-
-      &:disabled {
-        color: theme.$text-disabled;
+        &:disabled {
+          color: theme.$text-disabled;
+        }
       }
     }
-  }
 
-  @if map.get($props, 'kind') == 'contained' {
-    & button[role="tab"] {
-      background-color: theme.$layer-accent;
-      border-block-start: 0.125rem solid transparent;
+    @if map.get($props, 'kind') == 'contained' {
+      & button[role="tab"] {
+        background-color: theme.$layer-accent;
+        border-block-start: 0.125rem solid transparent;
 
-      &:not(:last-of-type, [aria-selected="true"], :has(+ [aria-selected="true"])) {
-        border-inline-end: 0.0625rem solid theme.$border-strong;
+        &:not(:last-of-type, [aria-selected="true"], :has(+ [aria-selected="true"])) {
+          border-inline-end: 0.0625rem solid theme.$border-strong;
+        }
+
+        &:enabled:hover:not([aria-selected="true"]) {
+          background-color: theme.$layer-accent-hover;
+        }
+
+        &[aria-selected="true"] {
+          border-block-start: 0.125rem solid theme.$border-interactive;
+          background-color: theme.$layer;
+        }
+
+        &:disabled {
+          background-color: carbon-button.$button-disabled;
+          color: theme.$text-on-color-disabled;
+        }
       }
 
-      &:enabled:hover:not([aria-selected="true"]) {
-        background-color: theme.$layer-accent-hover;
-      }
-
-      &[aria-selected="true"] {
-        border-block-start: 0.125rem solid theme.$border-interactive;
+      & ~ [role="tabpanel"] {
         background-color: theme.$layer;
       }
-
-      &:disabled {
-        background-color: carbon-button.$button-disabled;
-        color: theme.$text-on-color-disabled;
-      }
-    }
-
-    & ~ [role="tabpanel"] {
-      background-color: theme.$layer;
     }
   }
 }

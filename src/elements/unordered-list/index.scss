@@ -3,22 +3,24 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'ul',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  list-style-type: '—';
-  padding: 0;
+  #{map.get($props, 'selector')} {
+    list-style-type: '—';
+    padding: 0;
 
-  & li {
-    max-inline-size: layout.$mode--max-inline-size;
-    margin-inline-start: layout.$density--padding;
-    padding-inline-start: layout.$density--padding;
-  }
+    & li {
+      max-inline-size: layout.$mode--max-inline-size;
+      margin-inline-start: layout.$density--padding;
+      padding-inline-start: layout.$density--padding;
+    }
 
-  & li p {
-    margin-block: 0;
+    & li p {
+      margin-block: 0;
+    }
   }
 }

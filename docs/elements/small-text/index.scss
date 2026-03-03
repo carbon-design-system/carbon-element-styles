@@ -4,7 +4,5 @@
 $name: 'small-text';
 
 @include docs.demo($name, 'default') {
-  small {
-    @include small-text.styles;
-  }
+  @include small-text.styles;
 };

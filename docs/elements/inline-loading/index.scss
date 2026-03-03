@@ -4,7 +4,5 @@
 $name: 'inline-loading';
 
 @include docs.demo($name, 'default') {
-  [aria-live="polite"][aria-busy="true"]:empty {
-    @include inline-loading.styles;
-  }
+  @include inline-loading.styles;
 };

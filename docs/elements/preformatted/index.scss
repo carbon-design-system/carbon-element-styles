@@ -4,7 +4,5 @@
 $name: 'preformatted';
 
 @include docs.demo($name, 'default') {
-  pre {
-    @include preformatted.styles;
-  }
+  @include preformatted.styles;
 };

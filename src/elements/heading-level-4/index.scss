@@ -1,0 +1,18 @@
+@use 'sass:map';
+
+@use '../_heading';
+
+@use '../../layout';
+
+$default-config: (
+  selector: 'h4',
+) !default;
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include heading.styles;
+    @include layout.mode--heading-level-4;
+  }
+}

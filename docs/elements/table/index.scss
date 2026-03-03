@@ -4,23 +4,17 @@
 $name: 'table';
 
 @include docs.demo($name, 'default') {
-  table {
-    @include table.styles;
-  }
+  @include table.styles;
 };
 
 @include docs.demo($name, 'data-table') {
-  table {
-    @include table.styles((
-      kind: 'data-table',
-    ));
-  }
+  @include table.styles((
+    kind: 'data-table',
+  ));
 };
 
 @include docs.demo($name, 'structured-list') {
-  table {
-    @include table.styles((
-      kind: 'structured-list',
-    ));
-  }
+  @include table.styles((
+    kind: 'structured-list',
+  ));
 };

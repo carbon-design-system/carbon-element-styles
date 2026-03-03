@@ -10,51 +10,54 @@
 @use '../../layout';
 
 $default-config: (
-
-);
+  selector: 'label:has(input[type="file"])',
+) !default;
 
 @mixin styles($config: ()) {
   $props: map.deep-merge($default-config, $config);
 
-  @include layout.mode--heading-compact;
-  display: flex;
-  flex-direction: column;
-  row-gap: spacing.$spacing-03;
+  #{map.get($props, 'selector')} {
+    @include layout.mode--heading-compact;
+    display: flex;
+    flex-direction: column;
+    row-gap: spacing.$spacing-03;
 
-  & input[type="file"]:focus {
-    outline: none;
-    box-shadow: none;
-  }
-
-  & input[type="file"]:focus::file-selector-button {
-    outline: 0.125rem solid theme.$focus;
-    outline-offset: -0.125rem;
-    box-shadow: inset 0 0 0 0.1875rem theme.$layer-background;
-  }
-
-  & input[type="file"]::file-selector-button {
-    @include button.styles((
-      kind: 'primary',
-    ));
-
-    &:hover {
-      background-color: carbon-button.$button-primary-hover;
+    & input[type="file"]:focus {
+      outline: none;
+      box-shadow: none;
     }
 
-    &:active {
-      background-color: carbon-button.$button-primary-active;
+    & input[type="file"]:focus::file-selector-button {
+      outline: 0.125rem solid theme.$focus;
+      outline-offset: -0.125rem;
+      box-shadow: inset 0 0 0 0.1875rem theme.$layer-background;
     }
-  }
 
-  &:has([disabled]) {
-    color: theme.$text-disabled;
-  }
+    & input[type="file"]::file-selector-button {
+      @include button.styles((
+        selector: '&',
+        kind: 'primary',
+      ));
 
-  & input[type="file"]:disabled::file-selector-button,
-  & input[type="file"]:disabled::file-selector-button:hover,
-  & input[type="file"]:disabled::file-selector-button:active {
-    cursor: not-allowed;
-    background-color: carbon-button.$button-disabled;
-    color: theme.$text-on-color-disabled;
+      &:hover {
+        background-color: carbon-button.$button-primary-hover;
+      }
+
+      &:active {
+        background-color: carbon-button.$button-primary-active;
+      }
+    }
+
+    &:has([disabled]) {
+      color: theme.$text-disabled;
+    }
+
+    & input[type="file"]:disabled::file-selector-button,
+    & input[type="file"]:disabled::file-selector-button:hover,
+    & input[type="file"]:disabled::file-selector-button:active {
+      cursor: not-allowed;
+      background-color: carbon-button.$button-disabled;
+      color: theme.$text-on-color-disabled;
+    }
   }
 }

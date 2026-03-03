@@ -4,7 +4,5 @@
 $name: 'toggle';
 
 @include docs.demo($name, 'default') {
-  label:has(button[role="switch"]) {
-    @include toggle.styles;
-  }
+  @include toggle.styles;
 };
