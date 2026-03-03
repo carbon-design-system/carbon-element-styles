@@ -1,0 +1,23 @@
+@use 'sass:map';
+
+@use '../label';
+@use '../input';
+
+@use '../../layout';
+
+$default-config: (
+
+);
+
+@mixin styles($config: ()) {
+  $props: map.deep-merge($default-config, $config);
+
+  @include label.styles;
+
+  & textarea {
+    @include input.styles;
+    padding: layout.$density--padding;
+    min-block-size: calc(layout.$density--padding * 2 + layout.$size--block-size);
+    box-sizing: border-box;
+  }
+}

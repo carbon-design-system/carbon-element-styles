@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/text-area';
+
+$name: 'text-area';
+
+@include docs.demo($name, 'default') {
+  label:has(textarea) {
+    @include text-area.styles;
+  }
+};

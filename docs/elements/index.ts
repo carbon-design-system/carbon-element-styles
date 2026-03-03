@@ -34,6 +34,7 @@ export * as select from './select';
 export * as sideNavigation from './side-navigation';
 export * as smallText from './small-text';
 export * as table from './table';
+export * as textArea from './text-area';
 export * as textInput from './text-input';
 export * as timeInput from './time-input';
 export * as toggle from './toggle';
