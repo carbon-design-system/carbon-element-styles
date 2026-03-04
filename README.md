@@ -92,6 +92,38 @@ npm run build:prebuilts
 
 The compiled and minfied CSS will be saved to `/dist/prebuilts` and can be copied to your project.
 
+## Emit Carbon tokens
+
+`@carbon/html` relies on the tokens defined by `@carbon/styles`. Therefore, it's not meant to be used standalone but in a container that has emitted a Carbon theme.
+
+**Important**: in order for button styles to work, you must emit the Carbon's component tokens for buttons. If you're using `@carbon/styles` that's likely already the case. For convenience, this library also provides an `emit-carbon-tokens` mixin which includes the necessary component tokens.
+
+```scss
+@use '@carbon/html' as carbon-html;
+
+:root {
+  @include carbon-html.emit-carbon-tokens('white');
+}
+```
+
+To also generate CSS custom properties of all available colors, use the `emit-carbon-colors` mixin:
+
+```scss
+@use '@carbon/html' as carbon-html;
+
+:root {
+  @include carbon-html.emit-carbon-colors;
+}
+
+/**
+ * ↪ :root {
+ *     --cds-black-100: #000000;
+ *     --cds-blue-10: #edf5ff;
+ *     --cds-blue-20: #d0e2ff;
+ *   }
+ */
+```
+
 ## Configure layout options
 
 All elements are built on contextual layout tokens that define properties like size and density. You can specify these layout tokens for individual parts of your page.
