@@ -92,6 +92,129 @@ npm run build:prebuilts
 
 The compiled and minfied CSS will be saved to `/dist/prebuilts` and can be copied to your project.
 
+## Configure layout options
+
+All elements are built on contextual layout tokens that define properties like size and density. You can specify these layout tokens for individual parts of your page.
+
+You always need to emit all layout groups. To do that simply with the default values, use the following mixin:
+
+```scss
+@use '@carbon/html/layout';
+
+:root {
+  @include layout.emit-layout-tokens;
+}
+```
+
+### Density
+
+Controls the density of elements, mostly through inline padding.
+
+#### Supported values
+
+- `condensed`
+- `normal` (default)
+
+#### Emitted tokens
+
+- `$density--padding`
+
+#### Example
+
+```scss
+@use '@carbon/html/layout';
+
+:root {
+  @include layout.density('condensed');
+}
+
+.callout {
+  padding: layout.$density--padding;
+}
+```
+
+### Mode
+
+Controls the overall visual impression through font sizes and spacings.
+
+#### Supported values
+
+- `productive` (default)
+- `expressive`
+
+#### Emitted tokens
+
+- `$mode--max-inline-size`
+- `$mode--margin-block`
+- `$mode--transition-duration`
+- `$mode--transition-timing-function`
+
+#### Available mixins
+
+- `mode--body`
+- `mode--body-compact`
+- `mode--heading`
+- `mode--heading-compact`
+- `mode--label`
+- `mode--helper-text`
+- `mode--code`
+- `mode--quotation`
+- `mode--heading-level-1`
+- `mode--heading-level-2`
+- `mode--heading-level-3`
+- `mode--heading-level-4`
+- `mode--heading-level-5`
+- `mode--heading-level-6`
+
+#### Example
+
+```scss
+@use '@carbon/html/layout';
+
+:root {
+  @include layout.mode('expressive');
+}
+
+.callout {
+  margin-block: layout.$mode--margin-block;
+}
+
+.callout header {
+  @include layout.mode--heading-compact;
+}
+```
+
+### Size
+
+Controls the height of elements.
+
+#### Supported values
+
+- `xs`
+- `sm`
+- `md` (default)
+- `lg`
+- `xl`
+
+#### Emitted tokens
+
+- `$size--block-size`
+- `$size--padding-block-start`
+- `$size--padding-block-end`
+
+#### Example
+
+```scss
+@use '@carbon/html/layout';
+
+:root {
+  @include layout.size('lg');
+}
+
+.callout header {
+  block-size: layout.$size--block-size;
+}
+```
 
 ## License
 
