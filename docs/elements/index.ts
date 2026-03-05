@@ -1,4 +1,5 @@
 export * as abbreviation from './abbreviation';
+export * as address from './address';
 export * as anchor from './anchor';
 export * as blockQuotation from './block-quotation';
 export * as boldText from './bold-text';

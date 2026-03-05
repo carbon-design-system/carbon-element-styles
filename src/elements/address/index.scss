@@ -1,0 +1,21 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'address',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include layout.mode--helper-text;
+    color: theme.$text-secondary;
+    font-style: normal;
+  }
+}

@@ -1,0 +1,8 @@
+@use '../../scss/docs';
+@use '../../../src/elements/address';
+
+$name: 'address';
+
+@include docs.demo($name, 'default') {
+  @include address.styles;
+};
