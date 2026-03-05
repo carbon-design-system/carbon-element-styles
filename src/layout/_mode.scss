@@ -159,19 +159,27 @@ $-modes: (
       ),
       heading-level-1: (
         name: 'fluid-display-02',
-        style: type.$fluid-display-02,
+        style: map.merge(type.$fluid-display-02, (
+          font-family: type.font-family('sans'),
+        )),
       ),
       heading-level-2: (
         name: 'fluid-display-01',
-        style: type.$fluid-display-01,
+        style: map.merge(type.$fluid-display-01, (
+          font-family: type.font-family('sans'),
+        )),
       ),
       heading-level-3: (
         name: 'fluid-heading-05',
-        style: type.$fluid-heading-04,
+        style: map.merge(type.$fluid-heading-04, (
+          font-family: type.font-family('sans'),
+        )),
       ),
       heading-level-4: (
         name: 'fluid-heading-04',
-        style: type.$fluid-heading-03,
+        style: map.merge(type.$fluid-heading-03, (
+          font-family: type.font-family('sans'),
+        )),
       ),
       heading-level-5: (
         name: 'heading-03',

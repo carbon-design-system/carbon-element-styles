@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/body';
+
+$name: 'body';
+
+@include docs.demo($name, 'default') {
+  @include body.styles((
+    selector: '& .body',
+  ));
+};

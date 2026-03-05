@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/main';
+
+$name: 'main';
+
+@include docs.demo($name, 'default') {
+  @include main.styles((
+    selector: '& .main',
+  ));
+};

@@ -4,8 +4,10 @@
 @use '../layout';
 
 @use '../elements/abbreviation';
+@use '../elements/address';
 @use '../elements/anchor';
 @use '../elements/block-quotation';
+@use '../elements/body';
 @use '../elements/bold-text';
 @use '../elements/button';
 @use '../elements/checkbox';
@@ -19,6 +21,7 @@
 @use '../elements/dialog';
 @use '../elements/fieldset';
 @use '../elements/file-input';
+@use '../elements/footer';
 @use '../elements/header-navigation';
 @use '../elements/heading-level-1';
 @use '../elements/heading-level-2';
@@ -33,6 +36,7 @@
 @use '../elements/italic-text';
 @use '../elements/keyboard-input';
 @use '../elements/label';
+@use '../elements/main';
 @use '../elements/marked-text';
 @use '../elements/number-input';
 @use '../elements/ordered-list';
@@ -71,8 +75,10 @@
 }
 
 @include abbreviation.styles;
+@include address.styles;
 @include anchor.styles;
 @include block-quotation.styles;
+@include body.styles;
 @include bold-text.styles;
 @include button.styles;
 @include button.styles((
@@ -90,6 +96,7 @@
 @include dialog.styles;
 @include fieldset.styles;
 @include file-input.styles;
+@include footer.styles;
 @include header-navigation.styles;
 @include heading-level-1.styles;
 @include heading-level-2.styles;
@@ -104,6 +111,7 @@
 @include italic-text.styles;
 @include keyboard-input.styles;
 @include label.styles;
+@include main.styles;
 @include marked-text.styles;
 @include number-input.styles;
 @include ordered-list.styles;

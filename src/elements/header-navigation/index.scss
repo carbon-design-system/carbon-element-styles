@@ -16,10 +16,10 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-    position: fixed;
-    z-index: 99999;
+    position: sticky;
     inset-block-start: 0;
-    inset-inline: 0;
+    z-index: 9999;
+    inline-size: 100%;
     block-size: layout.$size--block-size;
     background-color: theme.$layer-background;
     border-block-end: 0.0625rem solid theme.$border-subtle;
@@ -43,6 +43,8 @@ $-default-config: (
 
     & > nav ul li {
       @include layout.mode--body;
+      padding: 0;
+      margin: 0;
       block-size: 100%;
     }
 
@@ -107,6 +109,10 @@ $-default-config: (
       position: absolute;
       inset-block: spacing.$spacing-04;
       background-color: theme.$border-subtle;
+    }
+
+    & + nav {
+      inset-block-start: layout.$size--block-size;
     }
   }
 }

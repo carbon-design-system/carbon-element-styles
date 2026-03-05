@@ -1,0 +1,10 @@
+@use '../../scss/docs';
+@use '../../../src/elements/footer';
+
+$name: 'footer';
+
+@include docs.demo($name, 'default') {
+  @include footer.styles((
+    selector: '& footer',
+  ));
+};

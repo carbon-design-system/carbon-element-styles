@@ -20,11 +20,21 @@ $-default-config: (
     inline-size: 16rem;
     background-color: theme.$layer-background;
     border-inline-end: 0.0625rem solid theme.$border-subtle;
+    position: fixed;
+    inset-inline-start: 0;
+    inset-block: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
 
     & ul {
       margin: 0;
       padding: 0;
       list-style: none;
+    }
+
+    & li {
+      margin: 0;
+      padding: 0;
     }
 
     & li > button[aria-expanded],
@@ -46,6 +56,9 @@ $-default-config: (
       padding-block-end: layout.$size--padding-block-end;
       padding-inline: layout.$density--padding;
       cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
       transition-property: color, background-color;
       transition-duration: layout.$mode--transition-duration;
       transition-timing-function: layout.$mode--transition-timing-function;
@@ -82,6 +95,11 @@ $-default-config: (
 
     & li > button[aria-expanded="false"] + ul {
       display: none;
+    }
+
+    & + main,
+    & + main + footer {
+      margin-inline-start: 16rem;
     }
   }
 }

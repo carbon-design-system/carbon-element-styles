@@ -6,6 +6,8 @@
 
 @use '../../src/layout';
 
+@use '../../src/elements/body';
+@use '../../src/elements/main';
 @use '../../src/elements/header-navigation';
 @use '../../src/elements/preformatted';
 @use '../../src/elements/select';
@@ -21,32 +23,26 @@
   }
 }
 
+@include body.styles;
+@include main.styles;
 @include header-navigation.styles;
 @include side-navigation.styles;
 @include preformatted.styles;
 
-body > header {
+body > header,
+body > nav {
   @include layout.size('lg');
 }
 
-body > header + nav {
+body > header + nav ul {
   @include layout.size('sm');
-  position: fixed;
-  inset-inline-start: 0;
-  inset-block-start: 3rem;
-  inset-block-end: 0;
-  overflow-y: auto;
 }
 
 main {
-  position: fixed;
-  inset-block-start: 3rem;
-  inset-inline-start: calc(16rem + 0.0625rem);
-  inset-block-end: 0;
-  inset-inline-end: 0;
-  margin: 0 !important;
   display: grid;
   grid-template-rows: 1fr 0 20rem;
+  padding: 0;
+  block-size: calc(100vb - 3rem - 0.0625rem);
 }
 
 #controls {
@@ -72,7 +68,6 @@ main {
   overflow: auto;
   padding: 2rem;
   translate: 0 0;
-  background-color: theme.$background;
 }
 
 #fade {
