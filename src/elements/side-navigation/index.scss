@@ -5,6 +5,7 @@
 @use '@carbon/styles/scss/utilities/focus-outline';
 
 @use '../../layout';
+@use '../../utilities/icons';
 
 $config: () !default;
 
@@ -40,6 +41,7 @@ $-default-config: (
     & li > button[aria-expanded],
     & li > a {
       @include layout.mode--heading;
+      position: relative;
       appearance: none;
       border: none;
       box-shadow: none;
@@ -75,6 +77,24 @@ $-default-config: (
       &:focus {
         @include focus-outline.focus-outline('outline');
       }
+    }
+
+    & li > button[aria-expanded] {
+      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+    }
+
+    & li > button[aria-expanded]::after {
+      content: '';
+      @include icons.chevron--down;
+      display: block;
+      position: absolute;
+      inset-inline-end: layout.$density--padding;
+      inset-block-start: layout.$size--padding-block-start;
+      transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    }
+
+    & li > button[aria-expanded="true"]::after {
+      rotate: 180deg;
     }
 
     & li > button[aria-expanded] + ul a {

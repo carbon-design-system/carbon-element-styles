@@ -55,7 +55,8 @@ $-default-config: (
       outline-offset: calc(0.0625rem + 0.125rem);
     }
 
-    & input[type="range"]:disabled::-webkit-slider-thumb {
+    & input[type="range"]:disabled::-webkit-slider-thumb,
+    & input[type="range"]::-webkit-slider-runnable-track {
       background-color: theme.$border-disabled;
       cursor: not-allowed;
     }

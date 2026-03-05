@@ -85,7 +85,7 @@ export function get(): DemoEnvironmentOptions {
   return {
     element: isValidElement(element) ? element : elementExports.button.meta.id,
     demo: demo ?? 'default',
-    mode: isValidMode(mode) ? mode : Modes.Expressive,
+    mode: isValidMode(mode) ? mode : Modes.Productive,
     size: isValidSize(size) ? size : Sizes.Md,
     density: isValidDensity(density) ? density : Densities.Normal,
     theme: isValidTheme(theme) ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? Themes.Gray100 : Themes.White),

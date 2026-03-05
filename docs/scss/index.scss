@@ -55,7 +55,6 @@ main {
 }
 
 #controls label:has(select) {
-  @include layout.size('sm');
   @include layout.density('condensed');
   @include select.styles((
     selector: '&',
