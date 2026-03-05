@@ -7,6 +7,7 @@ export const meta = {
 
 const html = /* html */`
 <table>
+  <caption>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</caption>
   <thead>
     <tr>
       <th>Column 1</th>
@@ -31,6 +32,13 @@ const html = /* html */`
       <td>Row 3</td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td>Footer 1</td>
+      <td>Footer 2</td>
+      <td>Footer 3</td>
+    </tr>
+  </tfoot>
 </table>
 `;
 

@@ -23,10 +23,12 @@ $-default-config: (
     & th {
       @include layout.mode--heading-compact;
       text-align: start;
+      color: theme.$text-primary;
     }
 
     & td {
       @include layout.mode--body-compact;
+      color: theme.$text-secondary;
     }
 
     & th,
@@ -39,6 +41,23 @@ $-default-config: (
       padding-inline: layout.$density--padding;
     }
 
+    & tbody:has(+ tfoot) tr:last-child th,
+    & tbody:has(+ tfoot) tr:last-child td,
+    & tfoot th,
+    & tfoot td {
+      border-block-end: 0;
+    }
+
+    & tfoot td {
+      color: theme.$text-primary;
+    }
+
+    & caption {
+      text-align: start;
+      @include layout.mode--helper-text;
+      padding: layout.$density--padding;
+    }
+
     @if map.get($props, 'kind') == 'data-table' {
       background-color: theme.$layer;
 
@@ -48,6 +67,29 @@ $-default-config: (
 
       & tr:hover {
         background-color: theme.$layer-hover;
+      }
+
+      & tfoot th,
+      & tfoot td {
+        border-block-start: 0.0625rem solid theme.$border-strong;
+      }
+
+      & caption {
+        background-color: theme.$layer;
+        color: theme.$text-secondary;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'structured-list' {
+      & tfoot th,
+      & tfoot td {
+        border-block-start: 0.0625rem solid theme.$border-subtle;
+      }
+
+      & caption {
+        caption-side: bottom;
+        color: theme.$text-helper;
+        max-inline-size: layout.$mode--max-inline-size;
       }
     }
   }
