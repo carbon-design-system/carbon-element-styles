@@ -1,5 +1,7 @@
 import type { Demo, Meta } from '../../js/_types';
 
+import beeIcon from '@carbon/icons/svg/32/bee.svg?raw';
+
 export const meta = {
   id: 'button',
   name: 'Button',
@@ -11,6 +13,30 @@ const html = /* html */`
 <br /><br />
 
 <button type="button" disabled>Button (disabled)</button>
+
+<br /><br />
+
+<button type="button">
+  <span>Button</span> ${beeIcon}
+</button>
+
+<br /><br />
+
+<button type="button" disabled>
+  <span>Button (disabled)</span> ${beeIcon}
+</button>
+
+<br /><br />
+
+<button type="button">
+  ${beeIcon}
+</button>
+
+<br /><br />
+
+<button type="button" disabled>
+  ${beeIcon}
+</button>
 `;
 
 export const demos: Demo[] = [

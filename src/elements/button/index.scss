@@ -44,6 +44,27 @@ $-default-config: (
       cursor: not-allowed;
     }
 
+    & > svg {
+      fill: currentColor;
+      block-size: 1rem;
+      inline-size: 1rem;
+      translate: 0 0.125rem;
+    }
+
+    &:has(> svg:not(:only-child)) {
+      padding-inline-end: layout.$density--padding;
+
+      & > svg {
+        margin-inline-start: layout.$density--padding;
+      }
+    }
+
+    &:has(> svg:only-child) {
+      padding-inline: unset;
+      aspect-ratio: 1;
+      text-align: center;
+    }
+
     @if map.get($props, 'kind') == 'primary' {
       background-color: carbon-button.$button-primary;
       color: theme.$text-on-color;
@@ -123,6 +144,10 @@ $-default-config: (
       &:disabled {
         color: theme.$text-disabled;
       }
+
+      &:has(> svg:not(:only-child)) > svg {
+        margin-inline-start: spacing.$spacing-03;
+      }
     }
 
     @if map.get($props, 'kind') == 'danger--primary' {
@@ -189,6 +214,10 @@ $-default-config: (
 
       &:disabled {
         color: theme.$text-disabled;
+      }
+
+      &:has(> svg:not(:only-child)) > svg {
+        margin-inline-start: spacing.$spacing-03;
       }
     }
   }
