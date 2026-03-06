@@ -46,4 +46,5 @@ export * as textInput from './text-input';
 export * as tile from './tile';
 export * as timeInput from './time-input';
 export * as toggle from './toggle';
+export * as tooltip from './tooltip';
 export * as unorderedList from './unordered-list';

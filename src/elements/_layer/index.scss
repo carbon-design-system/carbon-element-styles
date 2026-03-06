@@ -5,19 +5,20 @@
 @use '@carbon/styles/scss/utilities/custom-property';
 
 @use '../../layout';
+@use '../../utilities/tokens';
 
 $config: () !default;
 
 $-default-config: ();
 
 @mixin -on-layer($n, $is-initial: false) {
-  @container style(#{custom-property.get-name('layer-level')}: #{$n}) {
+  @container style(#{tokens.get-name('layer-level')}: #{$n}) {
     @content;
   }
 
   @if $is-initial {
     // if custom property doesn't exist
-    @container style(#{custom-property.get-name('layer-level')}: unset) {
+    @container style(#{tokens.get-name('layer-level')}: unset) {
       @content;
     }
   }
@@ -31,13 +32,13 @@ $-default-config: ();
 
   @include -on-layer('01', true) {
     background-color: theme.$layer-background;
-    @include custom-property.declaration('layer-level', '02');
+    @include tokens.set('layer-level', '02');
     @include layer-tokens.emit-layer-tokens(2);
   }
 
   @include -on-layer('02') {
     background-color: theme.$layer-background;
-    @include custom-property.declaration('layer-level', '03');
+    @include tokens.set('layer-level', '03');
     @include layer-tokens.emit-layer-tokens(3);
   }
 

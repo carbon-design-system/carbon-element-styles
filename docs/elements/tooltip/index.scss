@@ -1,0 +1,8 @@
+@use '../../scss/docs';
+@use '../../../src/elements/tooltip';
+
+$name: 'tooltip';
+
+@include docs.demo($name, 'default') {
+  @include tooltip.styles;
+};

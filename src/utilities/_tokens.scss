@@ -9,3 +9,7 @@
 @function get($name, $fallback: false) {
   @return custom-property.get-var('#{config.$prefix}--#{$name}', $fallback);
 }
+
+@function get-name($name) {
+  @return custom-property.get-name('#{config.$prefix}--#{$name}');
+}
