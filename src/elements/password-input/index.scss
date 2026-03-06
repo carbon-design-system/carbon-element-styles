@@ -1,0 +1,28 @@
+@use 'sass:map';
+
+@use '../label';
+@use '../_input';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(input[type="password"])',
+  axis: 'block',
+);
+
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: map.get($props, 'axis'),
+    ));
+
+    & input[type="password"] {
+      @include input.styles;
+    }
+  }
+}

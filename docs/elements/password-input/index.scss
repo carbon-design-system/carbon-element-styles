@@ -1,0 +1,20 @@
+@use '../../scss/docs';
+@use '../../../src/elements/password-input';
+
+$name: 'password-input';
+
+@include docs.demo($name, 'default') {
+  @include password-input.styles;
+};
+
+@include docs.demo($name, 'block') {
+  @include password-input.styles((
+    axis: 'block',
+  ));
+};
+
+@include docs.demo($name, 'inline') {
+  @include password-input.styles((
+    axis: 'inline',
+  ));
+};

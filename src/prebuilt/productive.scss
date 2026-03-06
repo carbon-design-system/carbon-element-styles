@@ -46,6 +46,7 @@
 @use '../elements/number-input';
 @use '../elements/ordered-list';
 @use '../elements/paragraph';
+@use '../elements/password-input';
 @use '../elements/popover';
 @use '../elements/preformatted';
 @use '../elements/radio-button';
@@ -123,6 +124,7 @@
 @include number-input.styles;
 @include ordered-list.styles;
 @include paragraph.styles;
+@include password-input.styles;
 @include popover.styles;
 @include preformatted.styles;
 @include radio-button.styles;

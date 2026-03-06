@@ -31,6 +31,7 @@ export * as markedText from './marked-text';
 export * as numberInput from './number-input';
 export * as orderedList from './ordered-list';
 export * as paragraph from './paragraph';
+export * as passwordInput from './password-input';
 export * as popover from './popover';
 export * as preformatted from './preformatted';
 export * as radioButton from './radio-button';
