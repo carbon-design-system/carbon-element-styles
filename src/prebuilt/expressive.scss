@@ -1,3 +1,8 @@
+@use '@carbon/styles/scss/config' with (
+  $use-akamai-cdn: true,
+);
+@use '@carbon/styles/scss/fonts';
+
 @use '@carbon/styles/scss/theme';
 
 @use '../utilities/carbon';
@@ -41,6 +46,7 @@
 @use '../elements/number-input';
 @use '../elements/ordered-list';
 @use '../elements/paragraph';
+@use '../elements/popover';
 @use '../elements/preformatted';
 @use '../elements/radio-button';
 @use '../elements/range-input';
@@ -118,6 +124,7 @@
 @include number-input.styles;
 @include ordered-list.styles;
 @include paragraph.styles;
+@include popover.styles;
 @include preformatted.styles;
 @include radio-button.styles;
 @include range-input.styles;

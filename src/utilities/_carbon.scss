@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/components/button/tokens' as carbon-button;
 @use '@carbon/styles/scss/components/tag/tokens' as carbon-tag;
 @use '@carbon/styles/scss/utilities/custom-property';
+@use '@carbon/styles/scss/layer/layer-tokens';
 
 $-themes: (
   'white': carbon-themes.$white,
@@ -52,6 +53,9 @@ $-component-token-groups: (
   } @else {
     @error '#{$theme-name} not found';
   }
+
+  // @include custom-property.declaration('layer-level', '01');
+  @include layer-tokens.emit-layer-tokens(1);
 
   @each $breakpoint in map.keys(grid.$grid-breakpoints) {
     @include breakpoint.breakpoint-up($breakpoint) {

@@ -1,42 +1,15 @@
 @use 'sass:map';
-@use 'sass:meta';
-@use 'sass:string';
-@use 'sass:list';
 
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/layer/layer-tokens';
+
+@use '../_layer';
 
 @use '../../layout';
 @use '../../utilities/icons';
 
 $config: () !default;
-
-// finding the last part of the passed selector by slicing
-// it from the last space character that is not within brackets
-@function -get-nesting-selector($selector) {
-  $last-space-index: 0;
-  $bracket-depth: 0;
-
-  @for $i from 1 through string.length($selector) {
-    $char: string.slice($selector, $i, $i);
-
-    @if $char == '[' {
-      $bracket-depth: $bracket-depth + 1;
-    } @else if $char == ']' {
-      $bracket-depth: $bracket-depth - 1;
-    } @else if $char == ' ' and $bracket-depth == 0 {
-      $last-space-index: $i;
-    }
-  }
-
-  @if $last-space-index > 0 {
-    @return string.slice($selector, $last-space-index + 1);
-  }
-
-  @return $selector;
-}
 
 $-default-config: (
   selector: '[data-tile]',
@@ -46,21 +19,9 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-    // inspecting "&" returns "(selector, )"
-    $nesting-selector: -get-nesting-selector(string.slice(meta.inspect(&), 2, -3));
-
-    @include layer-tokens.emit-layer-tokens(2);
-    background-color: theme.$layer-background;
+    @include layer.styles;
     padding: layout.$density--padding;
     box-sizing: border-box;
-
-    & #{$nesting-selector} {
-      @include layer-tokens.emit-layer-tokens(3);
-    }
-
-    & #{$nesting-selector} #{$nesting-selector} {
-      background-color: theme.$layer;
-    }
 
     &:is(a) {
       position: relative;
@@ -71,11 +32,11 @@ $-default-config: (
       transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
       &:hover {
-        background-color: theme.$layer-hover-01;
+        @include layer.layer-background-hover;
       }
 
       &:active {
-        background-color: theme.$layer-active-01;
+        @include layer.layer-background-active;
       }
 
       &:focus {
@@ -94,26 +55,6 @@ $-default-config: (
 
       &:hover::after {
         color: theme.$icon-primary;
-      }
-    }
-
-    & #{$nesting-selector}:is(a) {
-      &:hover {
-        background-color: theme.$layer-hover-02;
-      }
-
-      &:active {
-        background-color: theme.$layer-active-02;
-      }
-    }
-
-    & #{$nesting-selector} #{$nesting-selector}:is(a) {
-      &:hover {
-        background-color: theme.$layer-hover-03;
-      }
-
-      &:active {
-        background-color: theme.$layer-active-03;
       }
     }
   }

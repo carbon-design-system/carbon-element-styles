@@ -17,12 +17,6 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/visually-hidden';
 
-@each $theme in ('white', 'g10', 'g90', 'g100') {
-  :root[data-cdsh-theme="#{$theme}"] {
-    @include carbon-html.emit-carbon-tokens($theme);
-  }
-}
-
 @include body.styles;
 @include main.styles;
 @include header-navigation.styles;

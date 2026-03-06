@@ -1,0 +1,35 @@
+@use '../../scss/docs';
+@use '../../../src/elements/popover';
+
+@use '../../../src/elements/text-input';
+@use '../../../src/elements/tile';
+
+$name: 'popover';
+
+@include docs.demo($name, 'default') {
+  @include popover.styles;
+
+  // ↓ for demo only ↓
+  @include text-input.styles;
+  @include tile.styles;
+};
+
+@include docs.demo($name, 'with-caret') {
+  @include popover.styles((
+    caret: true,
+  ));
+
+  // ↓ for demo only ↓
+  @include text-input.styles;
+  @include tile.styles;
+};
+
+@include docs.demo($name, 'without-caret') {
+  @include popover.styles((
+    caret: false,
+  ));
+
+  // ↓ for demo only ↓
+  @include text-input.styles;
+  @include tile.styles;
+};
