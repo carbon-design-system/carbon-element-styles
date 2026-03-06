@@ -78,4 +78,16 @@ export const demos: Demo[] = [
     html,
     setup,
   },
+  {
+    id: 'content-switcher',
+    name: 'Content switcher',
+    html,
+    setup,
+  },
+  {
+    id: 'content-switcher--low-contrast',
+    name: 'Content switcher (low contrast)',
+    html,
+    setup,
+  },
 ];

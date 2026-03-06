@@ -18,3 +18,15 @@ $name: 'tabs';
     kind: 'contained',
   ));
 };
+
+@include docs.demo($name, 'content-switcher') {
+  @include tabs.styles((
+    kind: 'content-switcher',
+  ));
+};
+
+@include docs.demo($name, 'content-switcher--low-contrast') {
+  @include tabs.styles((
+    kind: 'content-switcher--low-contrast',
+  ));
+};

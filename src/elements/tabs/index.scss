@@ -1,8 +1,10 @@
 @use 'sass:map';
 
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+@use '@carbon/styles/scss/components/content-switcher/tokens' as carbon-content-switcher;
 
 @use '../../layout';
 
@@ -22,6 +24,7 @@ $-default-config: (
 
     & button[role="tab"] {
       @include layout.mode--body-compact;
+      position: relative;
       appearance: none;
       border: none;
       box-shadow: none;
@@ -35,7 +38,7 @@ $-default-config: (
       transition-duration: layout.$mode--transition-duration;
       transition-timing-function: layout.$mode--transition-timing-function;
 
-      &:enabled:hover {
+      &:enabled:hover:not([aria-selected="true"]) {
         color: theme.$text-primary;
       }
 
@@ -46,11 +49,6 @@ $-default-config: (
       &:disabled {
         cursor: not-allowed;
       }
-    }
-
-    & button[role="tab"][aria-selected="true"] {
-      @include layout.mode--heading-compact;
-      color: theme.$text-primary;
     }
 
     & ~ [role="tabpanel"] {
@@ -68,6 +66,8 @@ $-default-config: (
         }
 
         &[aria-selected="true"] {
+          @include layout.mode--heading-compact;
+          color: theme.$text-primary;
           border-block-end-color: theme.$border-interactive;
         }
 
@@ -91,6 +91,8 @@ $-default-config: (
         }
 
         &[aria-selected="true"] {
+          @include layout.mode--heading-compact;
+          color: theme.$text-primary;
           border-block-start: 0.125rem solid theme.$border-interactive;
           background-color: theme.$layer;
         }
@@ -103,6 +105,98 @@ $-default-config: (
 
       & ~ [role="tabpanel"] {
         background-color: theme.$layer;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'content-switcher' or map.get($props, 'kind') == 'content-switcher--low-contrast' {
+      & {
+        box-shadow: 0 0 0 0.0625rem theme.$border-inverse;
+        border-radius: 0.25rem;
+        display: inline-grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+      }
+
+      & button[role="tab"] {
+        text-align: start;
+
+        &:first-child {
+          border-start-start-radius: inherit;
+          border-end-start-radius: inherit;
+        }
+
+        &:last-child {
+          border-start-end-radius: inherit;
+          border-end-end-radius: inherit;
+        }
+
+        &:enabled:hover:not([aria-selected="true"]) {
+          background-color: theme.$layer-hover;
+        }
+
+        &:enabled:active:not([aria-selected="true"]) {
+          background-color: theme.$layer-active;
+        }
+
+        &[aria-selected="true"] {
+          z-index: 1;
+          border-radius: inherit;
+          color: theme.$text-inverse;
+          background-color: theme.$border-inverse;
+        }
+
+        &:focus {
+          box-shadow: inset 0 0 0 0.1875rem theme.$background;
+        }
+
+        &:disabled {
+          color: theme.$text-disabled;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          inset-inline-end: 0;
+          block-size: 1lh;
+          inset-block: calc(50% - 0.5lh);
+          inline-size: 0.0625rem;
+          background-color: theme.$border-subtle;
+        }
+
+        &[aria-selected="true"]::after,
+        &:last-child::after,
+        &:has(+ [aria-selected="true"])::after,
+        &:hover::after,
+        &:has(+ :hover)::after,
+        &:focus::after {
+          visibility: hidden;
+        }
+      }
+    }
+
+    @if map.get($props, 'kind') == 'content-switcher--low-contrast' {
+      & {
+        background-color: carbon-content-switcher.$content-switcher-background;
+        box-shadow: 0 0 0 0.0625rem theme.$border-strong;
+      }
+
+      & button[role="tab"] {
+        &:enabled:hover:not([aria-selected="true"]),
+        &:enabled:active:not([aria-selected="true"]) {
+          background-color: carbon-content-switcher.$content-switcher-background-hover;
+        }
+
+        &[aria-selected="true"] {
+          @include layout.mode--heading-compact;
+          background-color: carbon-content-switcher.$content-switcher-selected;
+          color: theme.$text-primary;
+          box-shadow: 0 0 0 0.0625rem theme.$border-inverse;
+        }
+
+        &::after {
+          background-color: theme.$border-strong;
+        }
       }
     }
   }
