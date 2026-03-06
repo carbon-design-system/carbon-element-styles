@@ -1,0 +1,8 @@
+@use '../../scss/docs';
+@use '../../../src/elements/menu';
+
+$name: 'menu';
+
+@include docs.demo($name, 'default') {
+  @include menu.styles;
+};

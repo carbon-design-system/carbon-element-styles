@@ -28,6 +28,7 @@ export * as keyboardInput from './keyboard-input';
 export * as label from './label';
 export * as main from './main';
 export * as markedText from './marked-text';
+export * as menu from './menu';
 export * as numberInput from './number-input';
 export * as orderedList from './ordered-list';
 export * as paragraph from './paragraph';
