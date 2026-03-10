@@ -1,0 +1,8 @@
+@use '../../scss/docs';
+@use '../../../src/elements/tree-view';
+
+$name: 'tree-view';
+
+@include docs.demo($name, 'default') {
+  @include tree-view.styles;
+};

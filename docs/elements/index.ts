@@ -50,4 +50,5 @@ export * as tile from './tile';
 export * as timeInput from './time-input';
 export * as toggle from './toggle';
 export * as tooltip from './tooltip';
+export * as treeView from './tree-view';
 export * as unorderedList from './unordered-list';

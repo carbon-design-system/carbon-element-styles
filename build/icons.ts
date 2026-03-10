@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const iconIds = [
   'arrow--right',
+  'caret--down',
   'checkbox--checked--filled',
   'checkbox--indeterminate--filled',
   'checkbox',
