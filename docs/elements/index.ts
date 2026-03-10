@@ -35,6 +35,7 @@ export * as paragraph from './paragraph';
 export * as passwordInput from './password-input';
 export * as popover from './popover';
 export * as preformatted from './preformatted';
+export * as progressBar from './progress-bar';
 export * as radioButton from './radio-button';
 export * as rangeInput from './range-input';
 export * as seaerchInput from './search-input';

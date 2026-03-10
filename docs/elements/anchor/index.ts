@@ -6,7 +6,7 @@ export const meta = {
 } as const satisfies Meta;
 
 const html = /* html */`
-<a href="#">Lorem ipsum</a>
+<a href="https://ibm.com">IBM.com</a>
 `;
 
 export const demos: Demo[] = [

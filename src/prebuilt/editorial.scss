@@ -11,6 +11,7 @@
 @use '../elements/abbreviation';
 @use '../elements/anchor';
 @use '../elements/block-quotation';
+@use '../elements/body';
 @use '../elements/bold-text';
 @use '../elements/code';
 @use '../elements/deleted-text';
@@ -27,6 +28,7 @@
 @use '../elements/inserted-text';
 @use '../elements/italic-text';
 @use '../elements/keyboard-input';
+@use '../elements/main';
 @use '../elements/marked-text';
 @use '../elements/ordered-list';
 @use '../elements/paragraph';
@@ -58,6 +60,7 @@
 @include abbreviation.styles;
 @include anchor.styles;
 @include block-quotation.styles;
+@include body.styles;
 @include bold-text.styles;
 @include code.styles;
 @include deleted-text.styles;
@@ -74,6 +77,7 @@
 @include inserted-text.styles;
 @include italic-text.styles;
 @include keyboard-input.styles;
+@include main.styles;
 @include marked-text.styles;
 @include ordered-list.styles;
 @include paragraph.styles;

@@ -6,7 +6,7 @@ export const meta = {
 } as const satisfies Meta;
 
 const html = /* html */`
-Lorem ipsum <code>dolor sit</code> amet.
+Generate a set of prebuilt stylesheet by running <code>npm run build:prebuilts</code> in your terminal.
 `;
 
 export const demos: Demo[] = [

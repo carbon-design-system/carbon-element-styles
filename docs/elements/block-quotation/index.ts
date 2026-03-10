@@ -8,11 +8,11 @@ export const meta = {
 const html = /* html */`
 <blockquote>
   <p>
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.
+    Without aesthetic, design is either the humdrum repetition of familiar clichés or a wild scramble for novelty. Without aesthetic, the computer is but a mindless speed machine, producing effects without substance, form without relevant content, or content without meaningful form.
   </p>
 </blockquote>
 <cite>
-  Firstname Lastname
+  Paul Rand
 </cite>
 `;
 
