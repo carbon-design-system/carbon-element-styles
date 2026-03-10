@@ -120,6 +120,7 @@ To also generate CSS custom properties of all available colors, use the `emit-ca
  *     --cds-black-100: #000000;
  *     --cds-blue-10: #edf5ff;
  *     --cds-blue-20: #d0e2ff;
+ *     …
  *   }
  */
 ```
@@ -137,6 +138,9 @@ You always need to emit all layout groups. To do that simply with the default va
   @include layout.emit-layout-tokens;
 }
 ```
+
+<details>
+<summary>Density</summary>
 
 ### Density
 
@@ -164,6 +168,11 @@ Controls the density of elements, mostly through inline padding.
   padding: layout.$density--padding;
 }
 ```
+
+</details>
+
+<details>
+<summary>Mode</summary>
 
 ### Mode
 
@@ -216,6 +225,11 @@ Controls the overall visual impression through font sizes and spacings.
 }
 ```
 
+</details>
+
+<details>
+<summary>Size</summary>
+
 ### Size
 
 Controls the height of elements.
@@ -247,6 +261,25 @@ Controls the height of elements.
   block-size: layout.$size--block-size;
 }
 ```
+
+</details>
+
+## Guiding principles
+
+### 1. Platform proximity
+
+The goal of this library is to provide opinionated styles for native HTML elements and ARIA patterns. Several components from the core Carbon libraries are intentionally missing from this project due to a lack of matching native counterparts. The intent is to not rely on class names or special attributes.
+
+However, there is one exception to this: the tile element. Tiles are one of the most fundamental and widely used components in Carbon. The default selector for tile styles is `[data-tile]`.
+
+
+### 2. Logical layouts
+
+Layout decisions that should be consistent across multiple elements are not the responsibility of those elements. Rather, their parent layout (page or zone) should control aspects like the size, density, and overall apperance.
+
+### 3. Feature foresight
+
+Not every element in this library is fully compatible with all major browsers yet. This project intentionally uses some of the latest features available to some browsers in order to validate whether they are suitable to support current and upcoming concepts of the Carbon Design System.
 
 ## License
 
