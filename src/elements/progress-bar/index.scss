@@ -11,13 +11,13 @@
 
 $config: () !default;
 
-$-indeterminate-ratio: 0.25;
-
 $-default-config: (
   selector: 'label:has(progress)',
   axis: 'block',
   thickness: 'thick',
 );
+
+$-indeterminate-ratio: 0.25;
 
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
