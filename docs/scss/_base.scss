@@ -4,20 +4,20 @@
 @use '@carbon/styles/scss/fonts';
 @use '@carbon/styles/scss/theme';
 
-@use '../../src' as carbon-html;
+@use '../../src' as element-styles;
 
 :root {
-  @include carbon-html.emit-carbon-colors;
+  @include element-styles.emit-carbon-colors;
 
-  @include carbon-html.emit-carbon-tokens('white');
+  @include element-styles.emit-carbon-tokens('white');
   color-scheme: light;
 
   @media (prefers-color-scheme: dark) {
-    @include carbon-html.emit-carbon-tokens('g100');
+    @include element-styles.emit-carbon-tokens('g100');
     color-scheme: dark;
   }
 
-  @include carbon-html.emit-layout-tokens;
+  @include element-styles.emit-layout-tokens;
 }
 
 html {

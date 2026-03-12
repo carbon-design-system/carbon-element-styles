@@ -1,5 +1,5 @@
 {
-  "name": "carbon-html",
+  "name": "@carbon/element-styles",
   "private": true,
   "type": "module",
   "version": "0.1.0",
@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon-html.git"
+    "url": "https://github.com/carbon-design-system/carbon-element-styles.git"
   },
   "scripts": {
     "dev": "vite docs",

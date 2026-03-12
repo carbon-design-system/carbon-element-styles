@@ -1,1 +1,1 @@
-export const prefix = 'cds-html';
+export const prefix = 'cds-es';

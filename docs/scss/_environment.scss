@@ -1,4 +1,4 @@
-@use '../../src' as carbon-html;
+@use '../../src' as element-styles;
 
 @use '@carbon/styles/scss/config' as carbon-config;
 
@@ -6,7 +6,7 @@
 
 @each $theme in ('white', 'g10', 'g90', 'g100') {
   :root:has([data-#{carbon-config.$prefix}-#{config.$prefix}-theme="#{$theme}"]) {
-    @include carbon-html.emit-carbon-tokens($theme);
+    @include element-styles.emit-carbon-tokens($theme);
 
     @if $theme == 'white' or $theme == 'g10' {
       color-scheme: light;
@@ -18,18 +18,18 @@
 
 @each $mode in ('productive', 'expressive') {
   #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-mode="#{$mode}"] {
-    @include carbon-html.mode($mode);
+    @include element-styles.mode($mode);
   }
 }
 
 @each $size in ('xs', 'sm', 'md', 'lg', 'xl') {
   #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-size="#{$size}"] {
-    @include carbon-html.size($size);
+    @include element-styles.size($size);
   }
 }
 
 @each $density in ('condensed', 'normal') {
   #demo[data-#{carbon-config.$prefix}-#{config.$prefix}-density="#{$density}"] {
-    @include carbon-html.density($density);
+    @include element-styles.density($density);
   }
 }
