@@ -14,4 +14,5 @@ $-default-config: ();
   margin-block-end: spacing.$spacing-03;
   margin-block-start: 1em;
   max-inline-size: min(layout.$mode--max-inline-size, 75%);
+  text-wrap: balance;
 }
