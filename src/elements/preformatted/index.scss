@@ -22,5 +22,12 @@ $-default-config: (
     inline-size: 100%;
     overflow-x: auto;
     box-sizing: border-box;
+
+    & code {
+      box-shadow: none;
+      border-radius: 0;
+      padding-inline: 0;
+      background-color: transparent;
+    }
   }
 }
