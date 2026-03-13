@@ -24,6 +24,7 @@ $-default-config: (
     background-color: theme.$background-inverse;
     color: theme.$text-inverse;
     justify-self: anchor-center;
+    inset-inline: unset;
 
     &::before {
       inset-inline-start: 50%;
