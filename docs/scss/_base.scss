@@ -16,8 +16,6 @@
     @include element-styles.emit-carbon-tokens('g100');
     color-scheme: dark;
   }
-
-  @include element-styles.emit-layout-tokens;
 }
 
 html {

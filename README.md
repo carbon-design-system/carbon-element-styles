@@ -1,9 +1,9 @@
-# @carbon/element-styles
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/banner-dark.svg">
   <img alt="" src="./docs/assets/banner-light.svg">
 </picture>
+
+# @carbon/element-styles
 
 `@carbon/element-styles` is an experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names. There is no 1:1 parity between Carbon element styles and the core React and Web Component implementations of the Carbon Design System. It's use case is targeted more towards simple web pages and editorial content such as styling markdown documents.
 
@@ -133,16 +133,6 @@ To also generate CSS custom properties of all available colors, use the `emit-ca
 ## Configure layout options
 
 All elements are built on contextual layout tokens that define properties like size and density. You can specify these layout tokens for individual parts of your page.
-
-You always need to emit all layout groups. To do that simply with the default values, use the following mixin:
-
-```scss
-@use '@carbon/element-styles/layout';
-
-:root {
-  @include layout.emit-layout-tokens;
-}
-```
 
 <details>
 <summary>Density</summary>

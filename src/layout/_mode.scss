@@ -244,14 +244,20 @@ $-type-properties: (
   }
 }
 
-$mode--max-inline-size: tokens.get('mode--max-inline-size', map.get($-modes, $-default-mode, 'constants', 'max-inline-size'));
-$mode--margin-block: tokens.get('mode--margin-block', map.get($-modes, $-default-mode, 'constants', 'margin-block'));
-$mode--transition-duration: tokens.get('mode--transition-duration', map.get($-modes, $-default-mode, 'constants', 'transition-duration'));
-$mode--transition-timing-function: tokens.get('mode--transition-timing-function', map.get($-modes, $-default-mode, 'constants', 'transition-timing-function'));
+$-default-constants: map.get($-modes, $-default-mode, 'constants');
+
+$mode--max-inline-size: tokens.get('mode--max-inline-size', map.get($-default-constants, 'max-inline-size'));
+$mode--margin-block: tokens.get('mode--margin-block', map.get($-default-constants, 'margin-block'));
+$mode--transition-duration: tokens.get('mode--transition-duration', map.get($-default-constants, 'transition-duration'));
+$mode--transition-timing-function: tokens.get('mode--transition-timing-function', map.get($-default-constants, 'transition-timing-function'));
 
 @mixin -type-style($name) {
+  $type-style: map.get($-modes, $-default-mode, 'type-styles', $name, 'style');
+
   @each $property in $-type-properties {
-    #{$property}: tokens.get('mode--#{$name}-#{$property}');
+    $fallback-value: map.get($type-style, $property);
+
+    #{$property}: tokens.get('mode--#{$name}-#{$property}', $fallback-value);
   }
 }
 

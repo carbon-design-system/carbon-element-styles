@@ -1,14 +1,3 @@
-@use './density';
 @forward './density';
-
-@use './mode';
 @forward './mode';
-
-@use './size';
 @forward './size';
-
-@mixin emit-layout-tokens() {
-  @include density.density;
-  @include mode.mode;
-  @include size.size;
-}
