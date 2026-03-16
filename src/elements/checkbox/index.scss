@@ -24,11 +24,11 @@ $-default-config: (
       axis: 'inline',
     ));
 
-    flex-direction: row-reverse;
     justify-content: start;
     cursor: pointer;
 
     & input[type="checkbox"] {
+      grid-column: 1;
       position: relative;
       appearance: none;
       border: none;
