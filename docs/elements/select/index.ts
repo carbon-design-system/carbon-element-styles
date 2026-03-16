@@ -25,6 +25,17 @@ const html = /* html */`
     <option>Option 3</option>
   </select>
 </label>
+
+<br />
+
+<label>
+  Invalid
+  <select aria-invalid="true">
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+  </select>
+</label>
 `;
 
 export const demos: Demo[] = [

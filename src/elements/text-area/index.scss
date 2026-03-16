@@ -1,7 +1,6 @@
 @use 'sass:map';
 
-@use '../label';
-@use '../_input';
+@use '../_labelled-input';
 
 @use '../../layout';
 
@@ -15,17 +14,20 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-    @include label.styles((
-      selector: '&',
+    @include labelled-input.styles((
+      label: (
+        selector: '&',
+        axis: 'block',
+      ),
+      input: (
+        selector: 'textarea',
+      ),
+      input-invalid-slot: 'after',
     ));
 
     & textarea {
-      @include input.styles;
-      padding-inline: layout.$density--padding;
-      padding-block-start: layout.$size--padding-block-start;
-      padding-block-end: layout.$size--padding-block-end;
       min-block-size: calc(layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end);
-      box-sizing: border-box;
+      resize: vertical;
     }
   }
 }

@@ -1,20 +1,20 @@
 @use '../../scss/docs';
-@use '../../../src/elements/data-list';
+@use '../../../src/elements/combo-box';
 
-$name: 'data-list';
+$name: 'combo-box';
 
 @include docs.demo($name, 'default') {
-  @include data-list.styles;
+  @include combo-box.styles;
 };
 
 @include docs.demo($name, 'block') {
-  @include data-list.styles((
+  @include combo-box.styles((
     axis: 'block',
   ));
 };
 
 @include docs.demo($name, 'inline') {
-  @include data-list.styles((
+  @include combo-box.styles((
     axis: 'inline',
   ));
 };

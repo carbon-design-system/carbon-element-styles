@@ -34,6 +34,11 @@ $-default-config: (
   transition-duration: layout.$mode--transition-duration;
   transition-timing-function: layout.$mode--transition-timing-function;
 
+  &::placeholder {
+    font: inherit;
+    color: theme.$text-placeholder;
+  }
+
   @if map.get($props, 'emit-readonly') {
     &:read-only {
       background-color: transparent;
@@ -53,6 +58,7 @@ $-default-config: (
   @if map.get($props, 'emit-invalid') {
     &:invalid,
     &[aria-invalid="true"] {
+      outline-offset: -0.125rem;
       outline: 0.125rem solid theme.$support-error;
       border-block-end-color: transparent;
     }

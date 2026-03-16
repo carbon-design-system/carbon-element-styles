@@ -16,7 +16,7 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-    display: flex;
+    display: grid;
     gap: spacing.$spacing-03;
     color: theme.$text-secondary;
 
@@ -26,12 +26,14 @@ $-default-config: (
 
     @if map.get($props, 'axis') == 'block' {
       @include layout.mode--label;
-      flex-direction: column;
+      // flex-direction: column;
+      grid-auto-flow: row;
     }
 
     @if map.get($props, 'axis') == 'inline' {
       @include layout.mode--body-compact;
-      flex-direction: row;
+      // flex-direction: row;
+      grid-auto-flow: column;
       align-items: center;
       inline-size: fit-content;
     }

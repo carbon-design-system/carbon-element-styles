@@ -27,6 +27,7 @@ $-default-config: (
       display: block;
       appearance: none;
       background-color: transparent;
+      block-size: 1.25rem;
     }
 
     & input[type="range"]::-webkit-slider-thumb {

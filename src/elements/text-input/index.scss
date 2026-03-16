@@ -1,7 +1,6 @@
 @use 'sass:map';
 
-@use '../label';
-@use '../_input';
+@use '../_labelled-input';
 
 @use '../../layout';
 
@@ -16,13 +15,15 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-    @include label.styles((
-      selector: '&',
-      axis: map.get($props, 'axis'),
+    @include labelled-input.styles((
+      label: (
+        selector: '&',
+        axis: map.get($props, 'axis'),
+      ),
+      input: (
+        selector: 'input[type="text"]',
+      ),
+      input-invalid-slot: 'after',
     ));
-
-    & input[type="text"] {
-      @include input.styles;
-    }
   }
 }

@@ -4,13 +4,12 @@
 
 @use '../_labelled-input';
 
-@use '../../layout';
 @use '../../utilities/icons';
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'label:has(select)',
+  selector: 'label:has(input[type="text"][list])',
   axis: 'block',
 );
 
@@ -24,7 +23,7 @@ $-default-config: (
         axis: map.get($props, 'axis'),
       ),
       input: (
-        selector: 'select',
+        selector: 'input[type="text"][list]',
         emit-readonly: false,
       ),
       fixed-input-trailing-slots: 1,
@@ -37,9 +36,7 @@ $-default-config: (
       }
     }
 
-    & select {
-      cursor: pointer;
-
+    & input[type="text"][list] {
       &:enabled:hover {
         background-color: theme.$field-hover;
       }

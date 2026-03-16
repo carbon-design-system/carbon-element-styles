@@ -1,12 +1,12 @@
 import type { Demo, Meta } from '../../js/_types';
 
 export const meta = {
-  id: 'data-list',
-  name: 'Data list',
+  id: 'combo-box',
+  name: 'Combo box',
 } as const satisfies Meta;
 
 const html = /* html */`
-<datalist id="datalist-demo">
+<datalist id="combo-box-demo">
   <option>Option 1</option>
   <option>Option 2</option>
   <option>Option 3</option>
@@ -14,14 +14,21 @@ const html = /* html */`
 
 <label>
   Enabled
-  <input list="datalist-demo"/>
+  <input type="text" list="combo-box-demo" placeholder="yay" />
 </label>
 
 <br />
 
 <label>
   Disabled
-  <input list="datalist-demo" disabled />
+  <input type="text" list="combo-box-demo" disabled />
+</label>
+
+<br />
+
+<label>
+  Invalid
+  <input type="text" list="combo-box-demo" aria-invalid="true" />
 </label>
 `;
 
