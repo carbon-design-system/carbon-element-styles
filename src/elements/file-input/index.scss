@@ -5,8 +5,6 @@
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/components/button/tokens' as carbon-button;
 
-@use '../button';
-
 @use '../../layout';
 
 $config: () !default;
@@ -36,10 +34,21 @@ $-default-config: (
     }
 
     & input[type="file"]::file-selector-button {
-      @include button.styles((
-        selector: '&',
-        kind: 'primary',
-      ));
+      @include layout.mode--body-compact;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      text-align: start;
+      background-color: carbon-button.$button-primary;
+      color: theme.$text-on-color;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline-start: layout.$density--padding;
+      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+      cursor: pointer;
+      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
       &:hover {
         background-color: carbon-button.$button-primary-hover;

@@ -17,13 +17,13 @@ $-default-config: (
     margin-inline-start: layout.$density--padding;
 
     & li {
-      @include layout.mode--body;
+      @include layout.mode--body-compact;
       max-inline-size: layout.$mode--max-inline-size;
       margin-inline-start: layout.$density--padding;
     }
 
     & li p {
-      @include layout.mode--body;
+      @include layout.mode--body-compact;
       margin-block: 0;
     }
 

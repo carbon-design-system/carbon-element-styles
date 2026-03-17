@@ -42,7 +42,7 @@ $-default-config: (
     }
 
     & > nav ul li {
-      @include layout.mode--body;
+      @include layout.mode--body-compact;
       padding: 0;
       margin: 0;
       block-size: 100%;
@@ -79,7 +79,7 @@ $-default-config: (
     }
 
     & > nav a:first-child {
-      @include layout.mode--body;
+      @include layout.mode--body-compact;
       color: theme.$text-primary;
       text-decoration: none;
       padding-inline: layout.$density--padding;

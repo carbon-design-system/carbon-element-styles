@@ -98,7 +98,7 @@ $-default-config: (
     }
 
     & li > button[aria-expanded] + ul a {
-      @include layout.mode--body;
+      @include layout.mode--body-compact;
       padding-inline-start: calc(layout.$density--padding * 2);
     }
 
