@@ -17,7 +17,7 @@
     "deploy:docs": "gh-pages -d docs/dist -f --dotfiles"
   },
   "peerDependencies": {
-    "@carbon/styles": "^1.101.0"
+    "@carbon/styles": "^1.102.0"
   },
   "devDependencies": {
     "@carbon/icons": "^11.76.0",
