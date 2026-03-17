@@ -12,6 +12,18 @@ import deleteIcon from '@carbon/icons/svg/32/trash-can.svg?raw';
 export const meta = {
   id: 'menu',
   name: 'Menu',
+  reference: {
+    label: 'menu role',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'ul[role="menu"]',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -98,6 +110,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

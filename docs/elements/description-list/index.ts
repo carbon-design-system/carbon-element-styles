@@ -3,6 +3,18 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'description-list',
   name: 'Description list',
+  reference: {
+    label: '<dl>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'dl',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -22,6 +34,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

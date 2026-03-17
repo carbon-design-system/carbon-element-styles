@@ -3,6 +3,23 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'popover',
   name: 'Popover',
+  reference: {
+    label: 'Popover API',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: '[popover]',
+    },
+    {
+      key: 'caret',
+      type: 'boolean',
+      default: 'true',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -49,16 +66,28 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
   {
     id: 'with-caret',
     name: 'With caret',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      caret: 'true',
+    },
   },
   {
     id: 'without-caret',
     name: 'Without caret',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      caret: 'false',
+    },
   },
 ];

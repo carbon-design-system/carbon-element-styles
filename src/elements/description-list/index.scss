@@ -24,6 +24,7 @@ $-default-config: (
     }
 
     & dd {
+      @include layout.mode--body;
       max-inline-size: layout.$mode--max-inline-size;
       margin-inline-start: 0;
     }

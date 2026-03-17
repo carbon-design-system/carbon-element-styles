@@ -83,7 +83,7 @@ export function get(): DemoEnvironmentOptions {
   const theme = url.searchParams.get('theme');
 
   return {
-    element: isValidElement(element) ? element : elementExports.button.meta.id,
+    element: isValidElement(element) ? element : elementExports.abbreviation.meta.id,
     demo: demo ?? 'default',
     mode: isValidMode(mode) ? mode : Modes.Productive,
     size: isValidSize(size) ? size : Sizes.Md,

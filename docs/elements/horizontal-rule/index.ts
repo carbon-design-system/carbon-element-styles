@@ -3,6 +3,23 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'horizontal-rule',
   name: 'Horizontal rule',
+  reference: {
+    label: '<hr>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'hr',
+    },
+    {
+      key: 'kind',
+      type: `| 'subtle'\n| 'strong'`,
+      default: `'subtle'`,
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -13,16 +30,28 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
   {
     id: 'subtle',
     name: 'Subtle',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'subtle'`,
+    },
   },
   {
     id: 'strong',
     name: 'Strong',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'strong'`,
+    },
   },
 ];

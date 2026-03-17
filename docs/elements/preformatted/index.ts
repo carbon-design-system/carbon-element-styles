@@ -3,6 +3,18 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'preformatted',
   name: 'Preformatted',
+  reference: {
+    label: '<pre>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'pre',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -27,6 +39,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

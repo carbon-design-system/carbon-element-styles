@@ -3,20 +3,34 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'bold-text',
   name: 'Bold text',
+  reference: {
+    label: '<b>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/b',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'b, strong',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
-<strong>Strong importance</strong>
+<b>Bold</b>
 
 <br /><br />
 
-<b>Bold</b>
+<strong>Strong importance</strong>
 `;
 
 export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

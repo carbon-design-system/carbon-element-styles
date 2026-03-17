@@ -5,7 +5,7 @@
 $config: () !default;
 
 $-default-config: (
-  selector: 'em, i',
+  selector: 'i, em',
 );
 
 @mixin styles($config: $config) {

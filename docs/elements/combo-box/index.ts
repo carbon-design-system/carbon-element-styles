@@ -3,6 +3,23 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'combo-box',
   name: 'Combo box',
+  reference: {
+    label: '<datalist> (textual)',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist#textual_types',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'label:has(input[type="text"][list])',
+    },
+    {
+      key: 'axis',
+      type: `| 'block'\n| 'inline'`,
+      default: `'block'`,
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -36,16 +53,28 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
   {
     id: 'block',
     name: 'Block',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      axis: `'block'`,
+    },
   },
   {
     id: 'inline',
     name: 'Inline',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      axis: `'inline'`,
+    },
   },
 ];

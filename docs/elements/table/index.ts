@@ -3,6 +3,23 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'table',
   name: 'Table',
+  reference: {
+    label: '<table>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'table',
+    },
+    {
+      key: 'kind',
+      type: `| 'data-table'\n| 'structured-list'`,
+      default: `'data-table'`,
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -46,16 +63,28 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
   {
     id: 'data-table',
     name: 'Data table',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'data-table'`,
+    },
   },
   {
     id: 'structured-list',
     name: 'Structured list',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'structured-list'`,
+    },
   },
 ];

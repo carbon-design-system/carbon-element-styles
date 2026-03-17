@@ -3,6 +3,17 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'tile',
   name: 'Tile',
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: '[data-tile]',
+    },
+  ],
+  notes: [
+    'Tiles are the only non-native elements and require a custom class name or attribute to be targeted.',
+    'Tiles that are anchors will render as clickable tiles.',
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -73,6 +84,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

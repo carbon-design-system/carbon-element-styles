@@ -18,7 +18,12 @@
 @use '../elements/file-input';
 @use '../elements/footer';
 @use '../elements/header-navigation';
-@use '../elements/heading';
+@use '../elements/heading-level-1';
+@use '../elements/heading-level-2';
+@use '../elements/heading-level-3';
+@use '../elements/heading-level-4';
+@use '../elements/heading-level-5';
+@use '../elements/heading-level-6';
 @use '../elements/horizontal-rule';
 @use '../elements/inline-loading';
 @use '../elements/inline-quotation';

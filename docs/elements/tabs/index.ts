@@ -3,6 +3,26 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'tabs',
   name: 'Tabs',
+  reference: {
+    label: 'tablist role',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tablist_role',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: '[role="tablist"]',
+    },
+    {
+      key: 'kind',
+      type: `| 'line'\n| 'contained'\n| 'content-switcher'\n| 'content-switcher--low-contrast'`,
+      default: `'line'`,
+    },
+  ],
+  notes: [
+    'Succeeding elements with [role="tabpanel"] will automatically be targeted to apply appropriate styling.'
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -63,31 +83,53 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
     setup,
   },
   {
     id: 'line',
     name: 'Line',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'line'`,
+    },
     setup,
   },
   {
     id: 'contained',
     name: 'Contained',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'contained'`,
+    },
     setup,
   },
   {
     id: 'content-switcher',
     name: 'Content switcher',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'content-switcher'`,
+    },
     setup,
   },
   {
     id: 'content-switcher--low-contrast',
     name: 'Content switcher (low contrast)',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'content-switcher--low-contrast'`,
+    },
     setup,
   },
 ];

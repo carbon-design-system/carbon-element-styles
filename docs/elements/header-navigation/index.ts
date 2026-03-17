@@ -3,6 +3,18 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'header-navigation',
   name: 'Header navigation',
+  reference: {
+    label: '<header>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'body > header:first-child',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -36,6 +48,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

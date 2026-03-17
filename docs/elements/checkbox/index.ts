@@ -3,6 +3,18 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'checkbox',
   name: 'Checkbox',
+  reference: {
+    label: '<input type="checkbox">',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'label:has(input[type="checkbox"])',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -41,7 +53,9 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
     setup: (frame: HTMLElement) => {
       Array.from(frame.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'))
         .slice(-2)

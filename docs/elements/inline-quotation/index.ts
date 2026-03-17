@@ -3,6 +3,21 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'inline-quotation',
   name: 'Inline quotation',
+  reference: {
+    label: '<q>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'q',
+    },
+  ],
+  notes: [
+    'Appropriate quotation marks are added automatically.'
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -13,6 +28,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

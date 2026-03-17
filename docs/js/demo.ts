@@ -1,40 +1,98 @@
-import * as sass from 'sass';
+import type { Demo, Meta } from './_types';
 
+import * as elements from '../elements';
 import { get as getEnvironment } from './environment';
 
-import type { Demo } from './_types';
+export function render() {
+  const element = Object.values(elements).find((e) => e.meta.id === getEnvironment().element);
+  const demo = element?.demos.find((d) => d.id === getEnvironment().demo);
 
-export async function render() {
-  const container = document.getElementById('demo');
-  const codeHtml = document.getElementById('code__html')?.querySelector('code');
-  const codeScss = document.getElementById('code__scss')?.querySelector('code');
+  if (element && demo) {
+    renderDemo(demo);
+    renderDocs(element.meta, demo);
+    renderCode(demo);
+  }
+}
 
-  const elementId = getEnvironment().element;
-  const demoId = getEnvironment().demo;
+function renderDemo(demo: Demo) {
+  const frame = document.getElementById('demo');
 
-  if (container && codeHtml && codeScss && elementId && demoId) {
-    const element = await import(`../elements/${elementId}/index.ts`);
-    const styles = await import(`../elements/${elementId}/index.scss?raw`);
-    const demo = (element.demos as Demo[]).find((d) => d.id === demoId);
+  if (frame) {
+    frame.innerHTML = demo.html.raw;
+    demo.setup?.(frame);
+  }
+}
 
-    if (demo && styles) {
-      container.innerHTML = demo.html;
-      codeHtml.innerText = demo.html;
+function renderDocs(element: Meta, demo: Demo) {
+  const frame = document.getElementById('docs__overview');
 
-      const styleLines = styles.default.split('\n') as string[];
-      const styleStartLine = styleLines.findIndex((l) => l.startsWith('@include docs.demo') && l.endsWith(`'${demo.id}') {`));
-      const styleEndLine = styleLines.slice(styleStartLine + 1).findIndex((l) => l.startsWith('}'));
+  const heading = frame?.querySelector('h1');
+  const list = frame?.querySelector('ul');
+  const code = frame?.querySelector('code');
+  const table = frame?.querySelector('tbody');
 
-      const styleIndentation = styleLines[styleStartLine + 1].length - styleLines[styleStartLine + 1].trimStart().length;
+  if (heading) {
+    heading.innerText = element.name;
+  }
 
-      const mixin = styleLines
-        .slice(styleStartLine + 1, styleStartLine + styleEndLine + 1)
-        .map((l) => l.slice(styleIndentation))
+  if (list) {
+    const listItems = [];
+
+    if (element.reference) {
+      const reference = document.createElement('li');
+      const referenceLink = document.createElement('a');
+      referenceLink.innerText = `${element.reference.label} on ${element.reference.source}`;
+      referenceLink.setAttribute('href', element.reference.url);
+      referenceLink.setAttribute('target', '_blank');
+      referenceLink.setAttribute('rel', 'noreferrer');
+      reference.appendChild(referenceLink);
+      listItems.push(reference);
+    }
+
+    element.notes?.forEach((note) => {
+      const li = document.createElement('li');
+      li.innerText = note;
+      listItems.push(li);
+    });
+
+    list.replaceChildren(...listItems);
+  }
+
+  if (code) {
+    if (!demo.config) {
+      code.innerText = `@include ${element.id}.styles;`;
+    } else {
+      const scssMapEntries = Object.entries(demo.config)
+        .map(([key, value]) => `  ${key}: ${value},`)
         .join('\n');
 
-      codeScss.innerText = `\n${mixin}`;
-
-      demo.setup?.(container);
+      code.innerText = `@include ${element.id}.styles((\n${scssMapEntries}\n));`;
     }
+  }
+
+  if (table) {
+    table.replaceChildren(...element.config.map((c) => {
+      const row = document.createElement('tr');
+
+      row.append(...[c.key, c.type, c.default].map((value) => {
+        const cell = document.createElement('td');
+
+        const code = document.createElement('code');
+        code.innerText = value;
+        cell.appendChild(code);
+
+        return cell;
+      }));
+
+      return row;
+    }));
+  }
+}
+
+function renderCode(demo: Demo) {
+  const frame = document.getElementById('docs__code')?.querySelector('code');
+
+  if (frame) {
+    frame.innerText = (demo.html.presentation ?? demo.html.raw).slice(1);
   }
 }

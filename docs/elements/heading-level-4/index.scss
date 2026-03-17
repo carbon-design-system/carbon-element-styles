@@ -1,0 +1,8 @@
+@use '../../scss/docs';
+@use '../../../src/elements/heading-level-4';
+
+$name: 'heading-level-4';
+
+@include docs.demo($name, 'default') {
+  @include heading-level-4.styles;
+};

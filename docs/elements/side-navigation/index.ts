@@ -3,6 +3,18 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'side-navigation',
   name: 'Side navigation',
+  reference: {
+    label: '<nav>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'nav',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -48,6 +60,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

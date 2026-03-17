@@ -9,6 +9,18 @@ import radarChartIcon from '@carbon/icons/svg/32/chart--radar.svg?raw';
 export const meta = {
   id: 'tree-view',
   name: 'Tree view',
+  reference: {
+    label: 'tree role',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tree_role',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'ul[role="tree"]',
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -187,6 +199,8 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
 ];

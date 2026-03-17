@@ -3,6 +3,8 @@
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
 
+@use '../_layer';
+
 @use '../../layout';
 
 $config: () !default;
@@ -29,6 +31,7 @@ $-default-config: (
     & td {
       @include layout.mode--body-compact;
       color: theme.$text-secondary;
+      vertical-align: top;
     }
 
     & th,
@@ -61,12 +64,17 @@ $-default-config: (
     @if map.get($props, 'kind') == 'data-table' {
       background-color: theme.$layer;
 
+      & tbody tr,
+      & tfoot tr {
+        @include layer.styles;
+      }
+
       & th {
         background-color: theme.$layer-accent;
       }
 
       & tr:hover {
-        background-color: theme.$layer-hover;
+        @include layer.layer-background-hover;
       }
 
       & tfoot th,

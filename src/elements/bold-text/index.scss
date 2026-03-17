@@ -5,7 +5,7 @@
 $config: () !default;
 
 $-default-config: (
-  selector: 'strong, b',
+  selector: 'b, strong',
 );
 
 @mixin styles($config: $config) {

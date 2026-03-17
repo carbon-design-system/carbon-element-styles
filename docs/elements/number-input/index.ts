@@ -3,6 +3,23 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'number-input',
   name: 'Number input',
+  reference: {
+    label: '<input type="number">',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'label:has(input[type="number"])',
+    },
+    {
+      key: 'axis',
+      type: `| 'block'\n| 'inline'`,
+      default: `'block'`,
+    },
+  ],
 } as const satisfies Meta;
 
 const html = /* html */`
@@ -37,16 +54,28 @@ export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: html,
+    },
   },
   {
     id: 'block',
     name: 'Block',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      axis: `'block'`,
+    },
   },
   {
     id: 'inline',
     name: 'Inline',
-    html,
+    html: {
+      raw: html,
+    },
+    config: {
+      axis: `'inline'`,
+    },
   },
 ];

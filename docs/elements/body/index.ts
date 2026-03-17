@@ -3,18 +3,39 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'body',
   name: 'Body',
+  reference: {
+    label: '<body>',
+    source: 'MDN',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body',
+  },
+  config: [
+    {
+      key: 'selector',
+      type: 'selector',
+      default: 'body',
+    },
+  ],
 } as const satisfies Meta;
 
-const html = /* html */`
+const rawHtml = /* html */`
 <div class="body">
   Body
 </div>
+`;
+
+const presentationHtml = /* html */`
+<body>
+  Body
+</body>
 `;
 
 export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
-    html,
+    html: {
+      raw: rawHtml,
+      presentation: presentationHtml,
+    },
   },
 ];

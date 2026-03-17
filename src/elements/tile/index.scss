@@ -29,6 +29,7 @@ $-default-config: (
       color: theme.$text-primary;
       text-decoration: none;
       padding-inline-end: spacing.$spacing-09;
+      border: 0.0625rem solid theme.$border-tile;
       transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
       &:hover {
