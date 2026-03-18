@@ -16,7 +16,7 @@ export const meta = {
     },
     {
       key: 'kind',
-      type: `| 'data-table'\n| 'structured-list'`,
+      type: `| 'data-table'\n| 'structured-list'\n| 'structured-list--flush'`,
       default: `'data-table'`,
     },
   ],
@@ -85,6 +85,16 @@ export const demos: Demo[] = [
     },
     config: {
       kind: `'structured-list'`,
+    },
+  },
+  {
+    id: 'structured-list--flush',
+    name: 'Structured list (flush)',
+    html: {
+      raw: html,
+    },
+    config: {
+      kind: `'structured-list--flush'`,
     },
   },
 ];

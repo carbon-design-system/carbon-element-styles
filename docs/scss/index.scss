@@ -93,7 +93,7 @@ main {
   ));
   @include unordered-list.styles;
   @include table.styles((
-    kind: 'structured-list',
+    kind: 'structured-list--flush',
   ));
 }
 

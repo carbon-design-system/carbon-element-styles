@@ -18,3 +18,9 @@ $name: 'table';
     kind: 'structured-list',
   ));
 };
+
+@include docs.demo($name, 'structured-list--flush') {
+  @include table.styles((
+    kind: 'structured-list--flush',
+  ));
+};

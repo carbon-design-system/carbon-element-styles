@@ -88,7 +88,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'structured-list' {
+    @if map.get($props, 'kind') == 'structured-list' or map.get($props, 'kind') == 'structured-list--flush' {
       & tfoot th,
       & tfoot td {
         border-block-start: 0.0625rem solid theme.$border-subtle;
@@ -98,6 +98,22 @@ $-default-config: (
         caption-side: bottom;
         color: theme.$text-helper;
         max-inline-size: layout.$mode--max-inline-size;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'structured-list--flush' {
+      & th:first-child,
+      & td:first-child {
+        padding-inline-start: 0;
+      }
+
+      & th:last-child,
+      & td:last-child {
+        padding-inline-end: 0;
+      }
+
+      & caption {
+        padding-inline: 0;
       }
     }
   }
