@@ -1,28 +1,25 @@
-import { prefix } from './config';
-import {
-  get as getEnvironment,
-  RequestRenderEvent,
-} from './environment';
+import { RequestRenderEvent } from './environment';
 
-import { render as renderMenu } from './menu';
-import { render as renderDemo } from './demo';
-import { render as renderControls } from './controls';
+import * as menu from './ui/menu';
+import * as demo from './ui/demo';
+import * as controls from './ui/controls';
+import * as docs from './ui/docs';
 
-function render() {
-  const container = document.getElementById('demo');
-
-  if (container) {
-    for (const [key, value] of Object.entries(getEnvironment())) {
-      container.setAttribute(`data-${prefix}-${key}`, value);
-    }
-
-    renderMenu();
-    renderDemo();
-    renderControls();
-  }
+function setup() {
+  menu.setup();
+  demo.setup();
+  controls.setup();
+  docs.setup();
 }
 
-window.addEventListener(RequestRenderEvent, render);
-window.addEventListener('popstate', render);
+function update() {
+  menu.update();
+  demo.update();
+  controls.update();
+  docs.update();
+}
 
-render();
+window.addEventListener(RequestRenderEvent, update);
+window.addEventListener('popstate', update);
+
+setup();

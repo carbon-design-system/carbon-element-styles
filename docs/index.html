@@ -14,7 +14,37 @@
         </a>
       </nav>
 
-      <div id="controls"></div>
+      <div id="controls">
+        <label>
+          <select aria-label="Theme" data-control-id="theme">
+            <option value="white">White</option>
+            <option value="g10">Gray 10</option>
+            <option value="g90">Gray 90</option>
+            <option value="g100">Gray 100</option>
+          </select>
+        </label>
+        <label>
+          <select aria-label="Mode" data-control-id="mode">
+            <option value="productive">Productive</option>
+            <option value="expressive">Expressive</option>
+          </select>
+        </label>
+        <label>
+          <select aria-label="Size" data-control-id="size">
+            <option value="xs">XS</option>
+            <option value="sm">SM</option>
+            <option value="md">MD</option>
+            <option value="lg">LG</option>
+            <option value="xl">XL</option>
+          </select>
+        </label>
+        <label>
+          <select aria-label="Density" data-control-id="density">
+            <option value="condensed">Condensed</option>
+            <option value="normal">Normal</option>
+          </select>
+        </label>
+      </div>
     </header>
 
     <nav>
@@ -25,10 +55,17 @@
       <div id="demo"></div>
       <div id="fade"></div>
       <div id="docs">
-        <div id="docs__overview">
+        <div role="tablist">
+          <button role="tab" type="submit" id="docs__tab--overview" aria-controls="docs__tabpanel--overview" aria-selected="false">Overview</button>
+          <button role="tab" type="submit" id="docs__tab--config" aria-controls="docs__tabpanel--config" aria-selected="false">Configuration</button>
+          <button role="tab" type="submit" id="docs__tab--html" aria-controls="docs__tabpanel--html" aria-selected="false">HTML</button>
+          <button role="tab" type="submit" id="docs__tab--scss" aria-controls="docs__tabpanel--scss" aria-selected="false">SCSS</button>
+        </div>
+        <div role="tabpanel" id="docs__tabpanel--overview" aria-labelledby="docs__tab--overview" hidden>
           <h1></h1>
           <ul></ul>
-<pre><code></code></pre>
+        </div>
+        <div role="tabpanel" id="docs__tabpanel--config" aria-labelledby="docs__tab--config" hidden>
           <table>
             <thead>
               <tr>
@@ -40,7 +77,10 @@
             <tbody></tbody>
           </table>
         </div>
-        <div id="docs__code">
+        <div role="tabpanel" id="docs__tabpanel--html" aria-labelledby="docs__tab--html" hidden>
+<pre><code></code></pre>
+        </div>
+        <div role="tabpanel" id="docs__tabpanel--scss" aria-labelledby="docs__tab--scss" hidden>
 <pre><code></code></pre>
         </div>
       </div>
