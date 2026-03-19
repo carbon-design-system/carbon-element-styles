@@ -49,7 +49,11 @@ export function setup() {
         }
 
         button.addEventListener('click', () => {
-          list.querySelector('a')?.click();
+          if (button.getAttribute('aria-expanded') == 'false') {
+            list.querySelector('a')?.click();
+          } else {
+            button.setAttribute('aria-expanded', 'false');
+          }
         });
 
         return menuItem;
@@ -65,20 +69,14 @@ export function update() {
     demo: demoId,
   } = getEnvironment();
 
-  for (const menuItem of (target?.querySelectorAll<HTMLElement>('li:has(> button)') ?? [])) {
-    const button = menuItem.querySelector('button');
-    const isCurrentMenuItem = elementId === button?.dataset.elementId;
+  for (const activeItem of (target?.querySelectorAll<HTMLElement>('[aria-current="page"]') ?? []))  {
+    activeItem.removeAttribute('aria-current');
+  }
 
-    button?.setAttribute('aria-expanded', isCurrentMenuItem ? 'true' : 'false');
+  const activeMenuItem = target?.querySelector(`li:has(button[data-element-id="${elementId}"])`);
 
-    for (const listItem of (menuItem.querySelectorAll<HTMLElement>('li > a') ?? [])) {
-      const isCurrentListItem = demoId === listItem.dataset.demoId;
-
-      if (isCurrentListItem && isCurrentMenuItem) {
-        listItem.setAttribute('aria-current', 'page');
-      } else {
-        listItem.removeAttribute('aria-current');
-      }
-    }
+  if (activeMenuItem) {
+    activeMenuItem.querySelector('button')?.setAttribute('aria-expanded', 'true');
+    activeMenuItem.querySelector(`a[data-demo-id="${demoId}"]`)?.setAttribute('aria-current', 'page');
   }
 }
