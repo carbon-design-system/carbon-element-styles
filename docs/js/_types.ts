@@ -1,11 +1,10 @@
 export type Meta = {
   id: string;
   name: string;
-  reference?: {
+  references: {
     label: string;
-    source: string;
     url: string;
-  };
+  }[];
   config: {
     key: string;
     type: string;

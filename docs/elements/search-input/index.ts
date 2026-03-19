@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'search-input',
   name: 'Search input',
-  reference: {
-    label: '<input type="search">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search',
-  },
+  references: [
+    {
+      label: '<input type="search">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search',
+    },
+    {
+      label: 'Search',
+      url: 'https://carbondesignsystem.com/components/search/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

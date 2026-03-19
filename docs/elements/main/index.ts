@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'main',
   name: 'Main',
-  reference: {
-    label: '<main>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main',
-  },
+  references: [
+    {
+      label: '<main>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main',
+    },
+  ],
   config: [
     {
       key: 'selector',

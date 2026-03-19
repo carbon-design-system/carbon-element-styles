@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'inline-quotation',
   name: 'Inline quotation',
-  reference: {
-    label: '<q>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q',
-  },
+  references: [
+    {
+      label: '<q>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q',
+    },
+  ],
   config: [
     {
       key: 'selector',

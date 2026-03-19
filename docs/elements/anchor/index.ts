@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'anchor',
   name: 'Anchor',
-  reference: {
-    label: '<a>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a',
-  },
+  references: [
+    {
+      label: '<a>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a',
+    },
+    {
+      label: 'Link',
+      url: 'https://carbondesignsystem.com/components/link/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -1,5 +1,7 @@
 @use 'sass:map';
 
+@use '@carbon/styles/scss/spacing';
+
 @use '../../layout';
 
 $config: () !default;
@@ -19,7 +21,7 @@ $-default-config: (
     & li {
       @include layout.mode--body-compact;
       max-inline-size: layout.$mode--max-inline-size;
-      margin-inline-start: layout.$density--padding;
+      margin-inline-start: spacing.$spacing-03;
     }
 
     & li p {

@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'block-quotation',
   name: 'Block quotation',
-  reference: {
-    label: '<blockquote>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote',
-  },
+  references: [
+    {
+      label: '<blockquote>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote',
+    },
+    {
+      label: '<cite>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite',
+    },
+  ],
   config: [
     {
       key: 'selector',

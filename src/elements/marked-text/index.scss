@@ -1,7 +1,8 @@
 @use 'sass:map';
 
 @use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/theme';
 
 @use '../../layout';
 
@@ -16,7 +17,7 @@ $-default-config: (
 
   #{map.get($props, 'selector')} {
     padding-inline: spacing.$spacing-01;
-    background-color: tag-tokens.$tag-background-gray;
-    color: tag-tokens.$tag-color-gray;
+    background-color: colors.$yellow-20;
+    color: colors.$black;
   }
 }

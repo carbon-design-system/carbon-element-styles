@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'heading-level-4',
   name: 'Heading level 4',
-  reference: {
-    label: '<h1>–<h6>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements',
-  },
+  references: [
+    {
+      label: '<h1>–<h6>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements',
+    },
+    {
+      label: 'Type sets',
+      url: 'https://carbondesignsystem.com/elements/typography/type-sets/',
+    },
+  ],
   config: [
     {
       key: 'selector',

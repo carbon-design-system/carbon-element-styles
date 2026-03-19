@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'range-input',
   name: 'Range input',
-  reference: {
-    label: '<input type="range">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range',
-  },
+  references: [
+    {
+      label: '<input type="range">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range',
+    },
+    {
+      label: 'Slider',
+      url: 'https://carbondesignsystem.com/components/slider/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

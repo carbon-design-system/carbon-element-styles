@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'file-input',
   name: 'File input',
-  reference: {
-    label: '<input type="file">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file',
-  },
+  references: [
+    {
+      label: '<input type="file">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file',
+    },
+    {
+      label: 'File uploader',
+      url: 'https://carbondesignsystem.com/components/file-uploader/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

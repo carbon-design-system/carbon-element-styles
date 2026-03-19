@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'details',
   name: 'Details',
-  reference: {
-    label: '<details>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details',
-  },
+  references: [
+    {
+      label: '<details>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details',
+    },
+    {
+      label: 'Accordion',
+      url: 'https://carbondesignsystem.com/components/accordion/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

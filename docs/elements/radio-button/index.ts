@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'radio-button',
   name: 'Radio button',
-  reference: {
-    label: '<input type="radio">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio',
-  },
+  references: [
+    {
+      label: '<input type="radio">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio',
+    },
+    {
+      label: 'Radio button',
+      url: 'https://carbondesignsystem.com/components/radio-button/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

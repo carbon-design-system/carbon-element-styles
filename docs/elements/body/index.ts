@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'body',
   name: 'Body',
-  reference: {
-    label: '<body>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body',
-  },
+  references: [
+    {
+      label: '<body>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body',
+    },
+  ],
   config: [
     {
       key: 'selector',

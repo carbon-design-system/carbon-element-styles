@@ -12,11 +12,16 @@ import deleteIcon from '@carbon/icons/svg/32/trash-can.svg?raw';
 export const meta = {
   id: 'menu',
   name: 'Menu',
-  reference: {
-    label: 'menu role',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role',
-  },
+  references: [
+    {
+      label: 'menu role',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/menu_role',
+    },
+    {
+      label: 'Menu',
+      url: 'https://carbondesignsystem.com/components/menu/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

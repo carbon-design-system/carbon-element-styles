@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'dialog',
   name: 'Dialog',
-  reference: {
-    label: '<dialog>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog',
-  },
+  references: [
+    {
+      label: '<dialog>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog',
+    },
+    {
+      label: 'Modal',
+      url: 'https://carbondesignsystem.com/components/modal/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

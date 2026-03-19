@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'progress-bar',
   name: 'Progress bar',
-  reference: {
-    label: '<progress>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress',
-  },
+  references: [
+    {
+      label: '<progress>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress',
+    },
+    {
+      label: 'Progress bar',
+      url: 'https://carbondesignsystem.com/components/progress-bar/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'header-navigation',
   name: 'Header navigation',
-  reference: {
-    label: '<header>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header',
-  },
+  references: [
+    {
+      label: '<header>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header',
+    },
+    {
+      label: 'UI shell header',
+      url: 'https://carbondesignsystem.com/components/UI-shell-header/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

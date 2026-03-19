@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'checkbox',
   name: 'Checkbox',
-  reference: {
-    label: '<input type="checkbox">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox',
-  },
+  references: [
+    {
+      label: '<input type="checkbox">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox',
+    },
+    {
+      label: 'Checkbox',
+      url: 'https://carbondesignsystem.com/components/checkbox/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

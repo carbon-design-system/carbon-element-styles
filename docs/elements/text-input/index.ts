@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'text-input',
   name: 'Text input',
-  reference: {
-    label: '<input type="text">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/text',
-  },
+  references: [
+    {
+      label: '<input type="text">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/text',
+    },
+    {
+      label: 'Text input',
+      url: 'https://carbondesignsystem.com/components/text-input/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

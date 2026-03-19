@@ -26,9 +26,5 @@ $-default-config: (
     &:focus {
       @include focus-outline.focus-outline('outline');
     }
-
-    &:visited {
-      color: theme.$link-visited;
-    }
   }
 }

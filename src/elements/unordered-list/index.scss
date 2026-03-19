@@ -1,5 +1,7 @@
 @use 'sass:map';
 
+@use '@carbon/styles/scss/spacing';
+
 @use '../../layout';
 
 $config: () !default;
@@ -12,14 +14,18 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-    list-style-type: '—';
+    list-style-type: '–';
     padding: 0;
 
     & li {
       @include layout.mode--body-compact;
       max-inline-size: layout.$mode--max-inline-size;
       margin-inline-start: layout.$density--padding;
-      padding-inline-start: layout.$density--padding;
+      padding-inline-start: spacing.$spacing-03;
+    }
+
+    & li li {
+      list-style-type: '▪';
     }
 
     & li p {

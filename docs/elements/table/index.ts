@@ -3,11 +3,20 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'table',
   name: 'Table',
-  reference: {
-    label: '<table>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table',
-  },
+  references: [
+    {
+      label: '<table>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table',
+    },
+    {
+      label: 'Data table',
+      url: 'https://carbondesignsystem.com/components/data-table/usage/',
+    },
+    {
+      label: 'Structured list',
+      url: 'https://carbondesignsystem.com/components/structured-list/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

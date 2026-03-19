@@ -3,11 +3,16 @@ import type { Meta, Demo } from '../../js/_types';
 export const meta = {
   id: 'abbreviation',
   name: 'Abbreviation',
-  reference: {
-    label: '<abbr>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/abbr',
-  },
+  references: [
+    {
+      label: '<abbr>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/abbr',
+    },
+    {
+      label: 'Definition tooltip',
+      url: 'https://carbondesignsystem.com/components/tooltip/style/#definition-tooltip-structure',
+    },
+  ],
   config: [
     {
       key: 'selector',

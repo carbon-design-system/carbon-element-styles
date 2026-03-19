@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'marked-text',
   name: 'Marked text',
-  reference: {
-    label: '<mark>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark',
-  },
+  references: [
+    {
+      label: '<mark>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark',
+    },
+    {
+      label: 'Text highlighter',
+      url: 'https://labs.carbondesignsystem.com/?path=/docs/react_components-texthighlighter--overview',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'bold-text',
   name: 'Bold text',
-  reference: {
-    label: '<b>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/b',
-  },
+  references: [
+    {
+      label: '<b>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/b',
+    },
+  ],
   config: [
     {
       key: 'selector',

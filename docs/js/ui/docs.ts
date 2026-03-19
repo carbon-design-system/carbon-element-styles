@@ -48,26 +48,36 @@ function updateOverview(element: Meta) {
   const panel = document.getElementById('docs__tabpanel--overview');
 
   const heading = panel?.querySelector('h1');
-  const unorderedList = panel?.querySelector('ul');
+  const [
+    referencesList,
+    notesList,
+  ] = Array.from(panel?.querySelectorAll('ul') ?? []);
 
   if (heading) {
     heading.innerText = element.name;
   }
 
-  if (unorderedList) {
+  if (referencesList) {
     const listItems: HTMLLIElement[] = [];
 
-    if (element.reference) {
+    for (const reference of (element.references ?? [])) {
       const listItem = document.createElement('li');
 
       const anchor = document.createElement('a');
-      anchor.innerText = `${element.reference.label} on ${element.reference.source}`;
-      anchor.setAttribute('href', element.reference.url);
+      anchor.innerText = `${reference.label} (${new URL(reference.url).hostname})`;
+      anchor.setAttribute('href', reference.url);
+      anchor.setAttribute('target', '_blank');
       anchor.setAttribute('rel', 'noreferrer');
 
       listItem.appendChild(anchor);
       listItems.push(listItem);
     }
+
+    referencesList.replaceChildren(...listItems);
+  }
+
+  if (notesList) {
+    const listItems: HTMLLIElement[] = [];
 
     for (const note of (element.notes ?? [])) {
       const listItem = document.createElement('li');
@@ -75,7 +85,13 @@ function updateOverview(element: Meta) {
       listItems.push(listItem);
     }
 
-    unorderedList.replaceChildren(...listItems);
+    notesList.replaceChildren(...listItems);
+
+    const parentSection = notesList.closest('section');
+
+    if (parentSection) {
+      parentSection.hidden = notesList.childElementCount === 0;
+    }
   }
 }
 

@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'unordered-list',
   name: 'Unordered list',
-  reference: {
-    label: '<ul>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul',
-  },
+  references: [
+    {
+      label: '<ul>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul',
+    },
+    {
+      label: 'Unordered list',
+      url: 'https://carbondesignsystem.com/components/list/usage/#unordered-list',
+    },
+  ],
   config: [
     {
       key: 'selector',

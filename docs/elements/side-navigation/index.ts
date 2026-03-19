@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'side-navigation',
   name: 'Side navigation',
-  reference: {
-    label: '<nav>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav',
-  },
+  references: [
+    {
+      label: '<nav>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav',
+    },
+    {
+      label: 'Ui shell left panel',
+      url: 'https://carbondesignsystem.com/components/UI-shell-left-panel/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

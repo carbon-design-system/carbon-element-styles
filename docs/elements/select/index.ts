@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'select',
   name: 'Select',
-  reference: {
-    label: '<select>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select',
-  },
+  references: [
+    {
+      label: '<select>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select',
+    },
+    {
+      label: 'Select',
+      url: 'https://carbondesignsystem.com/components/select/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

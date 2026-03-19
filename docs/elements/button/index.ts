@@ -5,11 +5,16 @@ import beeIcon from '@carbon/icons/svg/32/bee.svg?raw';
 export const meta = {
   id: 'button',
   name: 'Button',
-  reference: {
-    label: '<button>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button',
-  },
+  references: [
+    {
+      label: '<button>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button',
+    },
+    {
+      label: '<button>',
+      url: 'https://carbondesignsystem.com/components/button/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

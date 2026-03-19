@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'code',
   name: 'Code',
-  reference: {
-    label: '<code>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code',
-  },
+  references: [
+    {
+      label: '<code>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code',
+    },
+    {
+      label: 'Inline code snippet',
+      url: 'https://carbondesignsystem.com/components/code-snippet/usage/#inline',
+    },
+  ],
   config: [
     {
       key: 'selector',

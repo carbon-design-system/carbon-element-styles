@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'horizontal-rule',
   name: 'Horizontal rule',
-  reference: {
-    label: '<hr>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr',
-  },
+  references: [
+    {
+      label: '<hr>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr',
+    },
+  ],
   config: [
     {
       key: 'selector',

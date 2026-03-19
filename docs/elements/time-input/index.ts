@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'time-input',
   name: 'Time input',
-  reference: {
-    label: '<input type="time">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/time',
-  },
+  references: [
+    {
+      label: '<input type="time">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/time',
+    },
+    {
+      label: 'Date picker',
+      url: 'https://carbondesignsystem.com/components/date-picker/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'paragraph',
   name: 'Paragraph',
-  reference: {
-    label: '<p>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p',
-  },
+  references: [
+    {
+      label: '<p>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p',
+    },
+    {
+      label: 'Type basics',
+      url: 'https://ibm.com/design/language/typography/type-basics',
+    },
+  ],
   config: [
     {
       key: 'selector',

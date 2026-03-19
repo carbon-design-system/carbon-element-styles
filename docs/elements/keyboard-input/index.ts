@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'keyboard-input',
   name: 'Keyboard input',
-  reference: {
-    label: '<kbd>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd',
-  },
+  references: [
+    {
+      label: '<kbd>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'deleted-text',
   name: 'Deleted text',
-  reference: {
-    label: '<del>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/del',
-  },
+  references: [
+    {
+      label: '<del>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/del',
+    },
+    {
+      label: 'Text highlighter',
+      url: 'https://labs.carbondesignsystem.com/?path=/docs/react_components-texthighlighter--overview',
+    },
+  ],
   config: [
     {
       key: 'selector',

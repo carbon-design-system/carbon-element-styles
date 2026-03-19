@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'footer',
   name: 'Page footer',
-  reference: {
-    label: '<footer>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer',
-  },
+  references: [
+    {
+      label: '<footer>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer',
+    },
+  ],
   config: [
     {
       key: 'selector',

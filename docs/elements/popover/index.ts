@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'popover',
   name: 'Popover',
-  reference: {
-    label: 'Popover API',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API',
-  },
+  references: [
+    {
+      label: 'Popover API',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API',
+    },
+    {
+      label: 'Popover',
+      url: 'https://carbondesignsystem.com/components/popover/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'password-input',
   name: 'Password input',
-  reference: {
-    label: '<input type="password">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password',
-  },
+  references: [
+    {
+      label: '<input type="password">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password',
+    },
+    {
+      label: 'Text input',
+      url: 'https://carbondesignsystem.com/components/text-input/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

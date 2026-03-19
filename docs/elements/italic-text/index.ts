@@ -3,11 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'italic-text',
   name: 'Italic text',
-  reference: {
-    label: '<i>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/i',
-  },
+  references: [
+    {
+      label: '<i>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/i',
+    },
+  ],
   config: [
     {
       key: 'selector',

@@ -3,11 +3,20 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'tabs',
   name: 'Tabs',
-  reference: {
-    label: 'tablist role',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tablist_role',
-  },
+  references: [
+    {
+      label: 'tablist role',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tablist_role',
+    },
+    {
+      label: 'Tabs',
+      url: 'https://carbondesignsystem.com/components/tabs/usage/',
+    },
+    {
+      label: 'Content switcher',
+      url: 'https://carbondesignsystem.com/components/content-switcher/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

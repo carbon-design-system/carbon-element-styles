@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'fieldset',
   name: 'Fieldset',
-  reference: {
-    label: '<fieldset>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset',
-  },
+  references: [
+    {
+      label: '<fieldset>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset',
+    },
+    {
+      label: 'Form',
+      url: 'https://carbondesignsystem.com/components/form/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

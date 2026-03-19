@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'text-area',
   name: 'Text area',
-  reference: {
-    label: '<textarea>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea',
-  },
+  references: [
+    {
+      label: '<textarea>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea',
+    },
+    {
+      label: 'Text area',
+      url: 'https://carbondesignsystem.com/components/text-input/usage/#text-area',
+    },
+  ],
   config: [
     {
       key: 'selector',

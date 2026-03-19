@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'combo-box',
   name: 'Combo box',
-  reference: {
-    label: '<datalist> (textual)',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist#textual_types',
-  },
+  references: [
+    {
+      label: '<datalist> (textual)',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist#textual_types',
+    },
+    {
+      label: 'Combo box',
+      url: 'https://carbondesignsystem.com/components/dropdown/usage/#combo-box',
+    },
+  ],
   config: [
     {
       key: 'selector',

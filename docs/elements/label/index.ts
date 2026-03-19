@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'label',
   name: 'Label',
-  reference: {
-    label: '<label>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label',
-  },
+  references: [
+    {
+      label: '<label>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label',
+    },
+    {
+      label: 'Form',
+      url: 'https://carbondesignsystem.com/components/form/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

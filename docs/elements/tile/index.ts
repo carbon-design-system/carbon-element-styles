@@ -3,6 +3,12 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'tile',
   name: 'Tile',
+  references: [
+    {
+      label: 'Tile',
+      url: 'https://carbondesignsystem.com/components/tile/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

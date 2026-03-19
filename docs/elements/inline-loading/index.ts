@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'inline-loading',
   name: 'Inline loading',
-  reference: {
-    label: 'aria-busy',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-busy',
-  },
+  references: [
+    {
+      label: 'aria-busy',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-busy',
+    },
+    {
+      label: 'Inline loading',
+      url: 'https://carbondesignsystem.com/components/inline-loading/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

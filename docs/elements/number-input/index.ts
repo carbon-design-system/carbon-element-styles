@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'number-input',
   name: 'Number input',
-  reference: {
-    label: '<input type="number">',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number',
-  },
+  references: [
+    {
+      label: '<input type="number">',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number',
+    },
+    {
+      label: 'Number input',
+      url: 'https://carbondesignsystem.com/components/number-input/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

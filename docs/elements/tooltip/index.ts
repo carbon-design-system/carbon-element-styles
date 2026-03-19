@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'tooltip',
   name: 'Tooltip',
-  reference: {
-    label: '"hint" popover',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#using_hint_popover_state',
-  },
+  references: [
+    {
+      label: '"hint" popover',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#using_hint_popover_state',
+    },
+    {
+      label: 'Tooltip',
+      url: 'https://carbondesignsystem.com/components/tooltip/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

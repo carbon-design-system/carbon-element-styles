@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'toggle',
   name: 'Toggle',
-  reference: {
-    label: 'switch role',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/switch_role',
-  },
+  references: [
+    {
+      label: 'switch role',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/switch_role',
+    },
+    {
+      label: 'Toggle',
+      url: 'https://carbondesignsystem.com/components/toggle/usage/',
+    },
+  ],
   config: [
     {
       key: 'selector',

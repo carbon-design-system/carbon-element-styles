@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'preformatted',
   name: 'Preformatted',
-  reference: {
-    label: '<pre>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre',
-  },
+  references: [
+    {
+      label: '<pre>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre',
+    },
+    {
+      label: 'Multi-line code snippet',
+      url: 'https://carbondesignsystem.com/components/code-snippet/usage/#multi-line',
+    },
+  ],
   config: [
     {
       key: 'selector',

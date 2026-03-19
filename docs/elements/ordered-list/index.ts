@@ -3,11 +3,16 @@ import type { Demo, Meta } from '../../js/_types';
 export const meta = {
   id: 'ordered-list',
   name: 'Ordered list',
-  reference: {
-    label: '<ol>',
-    source: 'MDN',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol',
-  },
+  references: [
+    {
+      label: '<ol>',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol',
+    },
+    {
+      label: 'Ordered list',
+      url: 'https://carbondesignsystem.com/components/list/usage/#ordered-list',
+    },
+  ],
   config: [
     {
       key: 'selector',
