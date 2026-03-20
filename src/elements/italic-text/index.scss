@@ -8,6 +8,9 @@ $-default-config: (
   selector: 'i, em',
 );
 
+/// @group italic-text
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['i, em']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

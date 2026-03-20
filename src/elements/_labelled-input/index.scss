@@ -28,6 +28,20 @@ $-default-config: (
   input-invalid-slot: false, // after | before
 );
 
+/// @group _labelled-input
+/// @param {Map} config [()]
+/// @param {Map} config.label [()]
+/// @param {Selector} config.label.selector [label]
+/// @param {'block' | 'inline'} config.label.axis ['block]
+/// @param {Map} config.input [()]
+/// @param {Selector} config.input.selector [input]
+/// @param {Bool} config.input.emit-readonly [true]
+/// @param {Bool} config.input.emit-disabled [true]
+/// @param {Bool} config.input.emit-invalid [true]
+/// @param {Bool} config.input.emit-focus [true]
+/// @param {0 | 1 | 2} config.fixed-input-leading-slots [0] - How many fixed leading slots should be reserved
+/// @param {0 | 1 | 2} config.fixed-input-trailing-slots [0] - How many fixed trailing slots should be reserved
+/// @param {false | 'before' | 'after'} config.input-invalid-slot [false] - Which pseudo element should render the dynamic invalid slot. `false` if it shouldn't be rendered at all.
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

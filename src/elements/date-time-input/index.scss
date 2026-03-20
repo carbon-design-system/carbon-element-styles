@@ -11,6 +11,10 @@ $-default-config: (
   axis: 'block',
 );
 
+/// @group date-time-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="datetime-local"])']
+/// @param {'block' | 'inline'} config.axis ['block']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

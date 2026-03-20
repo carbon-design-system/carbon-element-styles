@@ -14,6 +14,10 @@ $-default-config: (
   kind: 'secondary',
 );
 
+/// @group button
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['button']
+/// @param {'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger--primary' | 'danger--tertiary' | 'danger--ghost'} config.kind ['secondary']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

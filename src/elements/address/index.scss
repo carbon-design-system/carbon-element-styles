@@ -10,6 +10,9 @@ $-default-config: (
   selector: 'address',
 );
 
+/// @group address
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['address']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

@@ -11,6 +11,10 @@ $-default-config: (
   axis: 'block',
 );
 
+/// @group text-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="text"])']
+/// @param {'block' | 'axis'} config.axis ['block']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

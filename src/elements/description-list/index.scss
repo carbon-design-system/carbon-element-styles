@@ -10,6 +10,9 @@ $-default-config: (
   selector: 'dl',
 );
 
+/// @group description-list
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['dl']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

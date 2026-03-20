@@ -20,6 +20,9 @@ $-inline-size: 3rem;
 $-knob-spacing: 0.1875rem;
 $-knob-size: calc($-block-size - $-knob-spacing * 2);
 
+/// @group toggle
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(button[role="switch"])']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

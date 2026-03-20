@@ -11,6 +11,9 @@ $config: () !default;
 
 $-default-config: ();
 
+/// @group _layer
+/// @param {'01' | '02' | '03'} n - The layer level
+/// @param {Bool} is-initial [false] - If this level should be treated as the intial, meaning it'll be used as a fallback if no matching css custom property is found
 @mixin -on-layer($n, $is-initial: false) {
   @container style(#{tokens.get-name('layer-level')}: #{$n}) {
     @content;
@@ -24,6 +27,8 @@ $-default-config: ();
   }
 }
 
+/// @group _layer
+/// @param {Map} config [()]
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

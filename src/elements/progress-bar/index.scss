@@ -19,6 +19,11 @@ $-default-config: (
 
 $-indeterminate-ratio: 0.25;
 
+/// @group progress-bar
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['progress']
+/// @param {'block' | 'axis'} config.axis ['block']
+/// @param {'thick' | 'thin'} config.thickness ['thick']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

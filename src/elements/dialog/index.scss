@@ -17,6 +17,9 @@ $-default-config: (
   selector: 'dialog',
 );
 
+/// @group dialog
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['dialog']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

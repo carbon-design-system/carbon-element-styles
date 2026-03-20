@@ -12,6 +12,9 @@ $-default-config: (
   selector: '[popover="hint"]',
 );
 
+/// @group tooltip
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[popover="hint"]']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

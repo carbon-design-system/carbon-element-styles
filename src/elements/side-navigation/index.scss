@@ -13,6 +13,9 @@ $-default-config: (
   selector: 'nav:has(+ main)',
 );
 
+/// @group side-navigation
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['nav:has(+ main)']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

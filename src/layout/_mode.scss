@@ -207,6 +207,11 @@ $-type-properties: (
   'letter-spacing',
 );
 
+/// Emits every property of a type style definition as css custom properties
+/// @group layout--mode
+/// @param {String} type-style - The type style name that the css custom properties should use (e.g. 'body-compact')
+/// @param {String} name - The Carbon type style name that should be used to generate fallbacks (e.g. 'body-compact-01')
+/// @param {Map} style - All type properties to emit. Must include all of: ('font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing')
 @mixin -emit-type-properties($type-style, $name, $style) {
   @each $property in $-type-properties {
     $fallback-value: map.get($style, $property);
@@ -223,6 +228,8 @@ $-type-properties: (
   }
 }
 
+/// @group layout--mode
+/// @param {'productive' | 'expressive'} mode ['productive']
 @mixin mode($mode: $-default-mode) {
   @each $constant, $value in map.get($-modes, $mode, 'constants') {
     @include tokens.set('mode--#{$constant}', $value);
@@ -251,6 +258,9 @@ $mode--margin-block: tokens.get('mode--margin-block', map.get($-default-constant
 $mode--transition-duration: tokens.get('mode--transition-duration', map.get($-default-constants, 'transition-duration'));
 $mode--transition-timing-function: tokens.get('mode--transition-timing-function', map.get($-default-constants, 'transition-timing-function'));
 
+/// Defines all type properties for a given type style
+/// @group layout--mode
+/// @param {String} name
 @mixin -type-style($name) {
   $type-style: map.get($-modes, $-default-mode, 'type-styles', $name, 'style');
 
@@ -261,58 +271,72 @@ $mode--transition-timing-function: tokens.get('mode--transition-timing-function'
   }
 }
 
+/// @group layout--mode
 @mixin mode--body {
   @include -type-style('body');
 }
 
+/// @group layout--mode
 @mixin mode--body-compact {
   @include -type-style('body-compact');
 }
 
+/// @group layout--mode
 @mixin mode--heading {
   @include -type-style('heading');
 }
 
+/// @group layout--mode
 @mixin mode--heading-compact {
   @include -type-style('heading-compact');
 }
 
+/// @group layout--mode
 @mixin mode--label {
   @include -type-style('label');
 }
 
+/// @group layout--mode
 @mixin mode--helper-text {
   @include -type-style('helper-text');
 }
 
+/// @group layout--mode
 @mixin mode--code {
   @include -type-style('code');
 }
 
+/// @group layout--mode
 @mixin mode--quotation {
   @include -type-style('quotation');
 }
 
+/// @group layout--mode
 @mixin mode--heading-level-1 {
   @include -type-style('heading-level-1');
 }
 
+/// @group layout--mode
 @mixin mode--heading-level-2 {
   @include -type-style('heading-level-2');
 }
 
+/// @group layout--mode
 @mixin mode--heading-level-3 {
   @include -type-style('heading-level-3');
 }
 
+/// @group layout--mode
 @mixin mode--heading-level-4 {
   @include -type-style('heading-level-4');
 }
 
+/// @group layout--mode
 @mixin mode--heading-level-5 {
   @include -type-style('heading-level-5');
 }
 
+/// @group layout--mode
 @mixin mode--heading-level-6 {
   @include -type-style('heading-level-6');
 }

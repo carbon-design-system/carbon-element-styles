@@ -12,6 +12,10 @@ $-default-config: (
   axis: 'block',
 );
 
+/// @group label
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label']
+/// @param {'block' | 'axis'} config.axis ['block']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

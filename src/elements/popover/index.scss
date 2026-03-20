@@ -16,6 +16,10 @@ $-default-config: (
   caret: true,
 );
 
+/// @group popover
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[popover]']
+/// @param {Bool} config.caret [true]
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

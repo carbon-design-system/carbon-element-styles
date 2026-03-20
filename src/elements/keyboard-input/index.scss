@@ -11,6 +11,9 @@ $-default-config: (
   selector: 'kbd',
 );
 
+/// @group keyboard-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['kbd']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

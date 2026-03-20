@@ -10,6 +10,9 @@ $-default-config: (
   selector: 'small',
 );
 
+/// @group small-text
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['small']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

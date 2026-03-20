@@ -15,6 +15,10 @@ $-default-config: (
   kind: 'line',
 );
 
+/// @group tabs
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[role="tablist"]']
+/// @param {'line' | 'contained' | 'content-swither | 'content-switcher--low-contrast'} config.kind ['line']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

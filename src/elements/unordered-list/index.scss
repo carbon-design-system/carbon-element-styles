@@ -10,6 +10,9 @@ $-default-config: (
   selector: 'ul',
 );
 
+/// @group unordered-list
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['ul']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

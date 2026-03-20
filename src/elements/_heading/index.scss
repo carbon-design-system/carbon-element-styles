@@ -8,6 +8,8 @@ $config: () !default;
 
 $-default-config: ();
 
+/// @group _heading
+/// @param {Map} config [()]
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

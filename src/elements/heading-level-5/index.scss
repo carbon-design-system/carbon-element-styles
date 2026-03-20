@@ -10,6 +10,9 @@ $-default-config: (
   selector: 'h5',
 );
 
+/// @group heading-level-5
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['h5']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

@@ -17,6 +17,9 @@ $-default-config: (
 $-size: 1rem;
 $-stroke-width: 0.125rem;
 
+/// @group inline-loading
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[aria-live="polite"][aria-busy="true"]:empty']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

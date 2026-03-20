@@ -11,6 +11,9 @@ $-default-config: (
   selector: 'main + footer',
 );
 
+/// @group footer
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['main + footer']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

@@ -26,6 +26,9 @@ $-component-token-groups: (
   carbon-content-switcher.$content-switcher-tokens,
 );
 
+/// Emits all style and necessary component tokens for a given Carbon theme as css custom properties
+/// @group layout--mode
+/// @param {'white' | 'g10' | 'g90' | 'g100'} theme-name ['white']
 @mixin emit-carbon-tokens($theme-name: 'white') {
   $theme: map.get($-themes, $theme-name);
 
@@ -75,6 +78,8 @@ $-component-token-groups: (
   }
 }
 
+/// Emits all colors in the IDL color palette as css custom properties
+/// @group layout--mode
 @mixin emit-carbon-colors() {
   @each $palette, $values in colors.$colors {
     @each $shade, $value in $values {

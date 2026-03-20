@@ -14,6 +14,12 @@ $-default-config: (
   emit-focus: true,
 );
 
+/// @group _input
+/// @param {Map} config [()]
+/// @param {Bool} config.emit-readonly [true]
+/// @param {Bool} config.emit-disabled [true]
+/// @param {Bool} config.emit-invalid [true]
+/// @param {Bool} config.emit-focus [true]
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

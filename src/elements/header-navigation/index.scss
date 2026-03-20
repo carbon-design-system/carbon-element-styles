@@ -12,6 +12,9 @@ $-default-config: (
   selector: 'body > header:first-child',
 );
 
+/// @group header-navigation
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['body > header:first-child']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

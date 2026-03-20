@@ -11,6 +11,9 @@ $-default-config: (
   selector: 'del',
 );
 
+/// @group deleted-text
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['del']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

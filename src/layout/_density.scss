@@ -11,6 +11,8 @@ $-densities: (
 
 $-default-density: 'normal';
 
+/// @group layout--density
+/// @param {'condensed' | 'normal'} density ['normal']
 @mixin density($density: $-default-density) {
   @include tokens.set('density--padding', map.get($-densities, $density));
 }

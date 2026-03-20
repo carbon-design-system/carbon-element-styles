@@ -11,6 +11,10 @@ $-default-config: (
   kind: 'subtle',
 );
 
+/// @group horizontal-rule
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['hr']
+/// @param {'subtle' | 'strong'} config.kind ['subtle']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

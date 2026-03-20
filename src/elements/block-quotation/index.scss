@@ -11,6 +11,9 @@ $-default-config: (
   selector: 'blockquote',
 );
 
+/// @group block-quotation
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['blockquote']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

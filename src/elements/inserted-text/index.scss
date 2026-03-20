@@ -11,6 +11,9 @@ $-default-config: (
   selector: 'ins',
 );
 
+/// @group inserted-text
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['ins']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 

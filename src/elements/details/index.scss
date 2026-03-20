@@ -10,14 +10,15 @@ $config: () !default;
 
 $-default-config: (
   selector: 'details',
-  axis: 'block',
 );
 
+/// @group details
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['details']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
-
     border-block-start: 0.0625rem solid theme.$border-subtle;
     box-sizing: border-box;
     padding-inline-start: calc(layout.$density--padding + 1rem + layout.$density--padding);
