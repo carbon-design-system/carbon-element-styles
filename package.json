@@ -11,6 +11,7 @@
   },
   "scripts": {
     "dev": "vite docs",
+    "build": "npm run build:icons && npm run build:prebuilts && npm run build:docs",
     "build:icons": "node build/icons.ts",
     "build:prebuilts": "sass -I node_modules --no-source-map --style=compressed src/prebuilt:dist/prebuilt",
     "build:docs": "vite build docs",

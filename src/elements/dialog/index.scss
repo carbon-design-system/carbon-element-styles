@@ -3,6 +3,7 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/breakpoint';
+@use '@carbon/styles/scss/motion';
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/layer/layer-tokens';
 
@@ -175,6 +176,29 @@ $-default-config: (
       display: block;
       inset: 0;
       content: '';
+    }
+
+    // entry animation
+    &[open]:modal {
+      translate: 0 0;
+      opacity: 1;
+      transition-property: opacity, translate;
+      transition-duration: motion.$duration-moderate-02;
+      transition-timing-function: layout.$mode--transition-timing-function;
+
+      @starting-style {
+        opacity: 0;
+        translate: 0 -1.5rem;
+      }
+    }
+
+    &[open]:modal::backdrop {
+      opacity: 1;
+      transition: inherit;
+
+      @starting-style {
+        opacity: 0;
+      }
     }
   }
 }
