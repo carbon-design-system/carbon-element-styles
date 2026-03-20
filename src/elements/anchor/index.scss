@@ -1,6 +1,7 @@
 @use 'sass:map';
 
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/utilities/focus-outline';
 
 @use '../../layout';
@@ -18,6 +19,9 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
+    display: inline-flex;
+    align-items: center;
+    column-gap: spacing.$spacing-03;
     color: theme.$link-primary;
     text-decoration: underline;
     transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
@@ -28,6 +32,12 @@ $-default-config: (
 
     &:focus {
       @include focus-outline.focus-outline('outline');
+    }
+
+    & svg {
+      fill: currentColor;
+      block-size: 1rem;
+      inline-size: 1rem;
     }
   }
 }

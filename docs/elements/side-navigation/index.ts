@@ -9,7 +9,7 @@ export const meta = {
       url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav',
     },
     {
-      label: 'Ui shell left panel',
+      label: 'UI shell left panel',
       url: 'https://carbondesignsystem.com/components/UI-shell-left-panel/usage/',
     },
   ],

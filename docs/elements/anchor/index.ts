@@ -1,5 +1,7 @@
 import type { Demo, Meta } from '../../js/_types';
 
+import launchIcon from '@carbon/icons/svg/32/launch.svg?raw';
+
 export const meta = {
   id: 'anchor',
   name: 'Anchor',
@@ -24,6 +26,10 @@ export const meta = {
 
 const html = /* html */`
 <a href="https://ibm.com">IBM.com</a>
+
+<br /><br />
+
+<a href="https://ibm.com">IBM.com ${launchIcon}</a>
 `;
 
 export const demos: Demo[] = [

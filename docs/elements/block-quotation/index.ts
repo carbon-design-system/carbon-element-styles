@@ -12,6 +12,10 @@ export const meta = {
       label: '<cite>',
       url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite',
     },
+    {
+      label: 'Type sets',
+      url: 'https://carbondesignsystem.com/elements/typography/type-sets/',
+    },
   ],
   config: [
     {

@@ -11,7 +11,7 @@ export const meta = {
       url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button',
     },
     {
-      label: '<button>',
+      label: 'Button',
       url: 'https://carbondesignsystem.com/components/button/usage/',
     },
   ],
