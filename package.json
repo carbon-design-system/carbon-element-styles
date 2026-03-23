@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "version": "0.1.0",
-  "author": "Jan Hassel <jan.hassel@ibm.com>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
