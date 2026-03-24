@@ -66,4 +66,4 @@ jobs:
           TAG=$(echo "${{ steps.parse_version.outputs.version }}" | grep -q '-' && echo "next" || echo "latest")
           npm publish --provenance --tag $TAG
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
