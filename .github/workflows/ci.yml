@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - develop # TODO: remove
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: |
+          npm i
+      - name: Build project
+        run: |
+          npm run build
