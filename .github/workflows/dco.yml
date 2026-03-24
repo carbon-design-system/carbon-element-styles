@@ -1,4 +1,4 @@
-name: 'DCO Assistant'
+name: DCO Assistant
 
 on:
   issue_comment:

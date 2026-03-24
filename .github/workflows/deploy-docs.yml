@@ -1,9 +1,7 @@
-name: 'Deploy documentation'
+name: Deploy documentation
 
 on:
   push:
-    branches: # TODO: remove
-      - develop
     tags:
       # Matches tags that have the shape `vX.Y.Z`. Reference:
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches

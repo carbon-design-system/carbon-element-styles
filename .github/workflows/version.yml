@@ -1,0 +1,73 @@
+name: Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        required: true
+        description: Specify the type of release
+        type: choice
+        default: prerelease
+        options:
+          - prerelease
+          - prepatch
+          - patch
+          - preminor
+          - minor
+          - premajor
+          - major
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+      - name: Create version
+        id: create_version
+        run: |
+          TAG_NAME=$(npm version ${{ github.event.inputs.type }} --preid rc --no-git-tag-version)
+          echo "tag_name=$TAG_NAME" >> "$GITHUB_OUTPUT"
+      - name: Configure git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+      - name: Create branch
+        id: create_branch
+        run: |
+          BRANCH_NAME="release/${{ steps.create_version.outputs.tag_name }}"
+          echo "branch_name=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+          git checkout -b $BRANCH_NAME
+          git push --set-upstream origin $BRANCH_NAME
+      - name: Commit changes
+        id: commit_changes
+        run: |
+          COMMIT_MESSAGE="chore(release): ${{ steps.create_version.outputs.tag_name }}"
+          echo "commit_message=$COMMIT_MESSAGE" >> "$GITHUB_OUTPUT"
+          git add .
+          git commit -m "$COMMIT_MESSAGE"
+          git push
+      - name: Create pull request
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            await github.rest.pulls.create({
+                owner,
+                repo,
+                title: '${{ steps.commit_changes.outputs.commit_message }}',
+                head: '${{ steps.create_branch.outputs.branch_name }}',
+                base: 'main',
+              });

@@ -3,7 +3,6 @@ name: ci
 on:
   push:
     branches:
-      - develop # TODO: remove
       - main
   pull_request:
     branches:

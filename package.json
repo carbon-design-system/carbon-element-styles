@@ -1,20 +1,32 @@
 {
   "name": "@carbon/element-styles",
-  "private": true,
-  "type": "module",
+  "description": "An experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names.",
   "version": "0.1.0",
   "license": "Apache-2.0",
+  "type": "module",
+  "sass": "src/index.scss",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon-element-styles.git"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "dev": "vite docs",
     "build": "npm run build:icons && npm run build:prebuilts && npm run build:docs",
     "build:icons": "node tasks/build-icons.ts",
     "build:prebuilts": "node tasks/build-prebuilts.ts",
-    "build:docs": "vite build docs",
-    "deploy:docs": "gh-pages -d docs/dist -f --dotfiles"
+    "build:docs": "vite build docs"
   },
   "peerDependencies": {
     "@carbon/styles": "^1.102.0"
