@@ -1,7 +1,7 @@
 {
   "name": "@carbon/element-styles",
   "description": "An experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names.",
-  "version": "0.1.0",
+  "version": "0.2.0-rc.0",
   "license": "Apache-2.0",
   "type": "module",
   "sass": "src/index.scss",
