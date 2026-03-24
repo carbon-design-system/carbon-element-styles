@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import themeIcon from '@carbon/icons/svg/32/color-palette.svg?raw';
 import modeIcon from '@carbon/icons/svg/32/scale.svg?raw';
 import sizeIcon from '@carbon/icons/svg/32/fit-to-height.svg?raw';
