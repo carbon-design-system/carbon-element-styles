@@ -96,14 +96,11 @@ $-default-config: (
       block-size: 100%;
       display: inline-flex;
       align-items: center;
+      column-gap: spacing.$spacing-02;
 
       &:focus {
         @include focus-outline.focus-outline('outline');
       }
-    }
-
-    & > nav a:first-child b {
-      margin-inline-start: spacing.$spacing-02;
     }
 
     & > nav a:first-child + ul {

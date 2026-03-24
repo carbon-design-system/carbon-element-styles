@@ -1,0 +1,49 @@
+name: 'Deploy documentation'
+
+on:
+  push:
+    branches: # TODO: remove
+      - develop
+    tags:
+      # Matches tags that have the shape `vX.Y.Z`. Reference:
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+      # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
+      - '!v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Build documentation
+        run: |
+          npm run build:docs
+      - name: Upload as pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/dist
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub pages
+        id: deployment
+        uses: actions/deploy-pages@v4

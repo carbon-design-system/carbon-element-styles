@@ -22,7 +22,7 @@ jobs:
           node-version-file: '.nvmrc'
       - name: Install dependencies
         run: |
-          npm i
+          npm ci
       - name: Build project
         run: |
           npm run build

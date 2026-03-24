@@ -7,12 +7,14 @@
 
 import { RequestRenderEvent } from './environment';
 
+import * as header from './ui/header';
 import * as menu from './ui/menu';
 import * as demo from './ui/demo';
 import * as controls from './ui/controls';
 import * as docs from './ui/docs';
 
 function setup() {
+  header.setup();
   menu.setup();
   demo.setup();
   controls.setup();
@@ -20,6 +22,7 @@ function setup() {
 }
 
 function update() {
+  header.update();
   menu.update();
   demo.update();
   controls.update();

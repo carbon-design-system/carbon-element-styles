@@ -51,6 +51,10 @@ main {
   block-size: calc(100vb - 3rem - 0.0625rem);
 }
 
+.version {
+  color: theme.$text-helper;
+}
+
 #controls {
   inline-size: 100%;
   display: flex;
