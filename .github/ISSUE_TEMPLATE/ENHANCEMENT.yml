@@ -1,0 +1,59 @@
+name: Feature request or enhancement 💡
+description: Suggest an idea for this project.
+labels: 'type/enhancement'
+body:
+  - type: markdown
+    attributes:
+      value: '## Welcome!'
+  - type: markdown
+    attributes:
+      value:
+        Use this template if you want to request a new feature, or a change to
+        an existing feature. If you are reporting a bug or problem, please use
+        the bug template instead.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description:
+        'Provide a clear and concise description of what the problem this new
+        feature is trying to solve. (For example, I find it frustrating
+        when...). Be sure to attach screenshots or videos to illustrate the
+        problem.'
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: The solution
+      description:
+        'Provide a clear and concise description of what you would like to
+        happen instead. Be sure to attach screenshots or videos to illustrate
+        the solution if possible. Design specs are highly encouraged.'
+    validations:
+      required: true
+  - type: textarea
+    id: user-research
+    attributes:
+      label: Examples
+      description:
+        Provide sample content, references, or audits of solutions solving the same problem in other applications/websites.
+  - type: input
+    id: application
+    attributes:
+      label: Application/product
+      description: What application and/or product do you work on?
+  - type: input
+    id: resources
+    attributes:
+      label: Available extra resources
+      description: 'What resources do you have to assist this effort?'
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: Please confirm the following
+      options:
+        - label:
+            I agree to follow this project’s [Code of Conduct](https://github.com/carbon-design-system/.github/blob/main/.github/CODE_OF_CONDUCT.md)
+          required: true
