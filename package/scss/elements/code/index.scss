@@ -1,0 +1,34 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'code',
+);
+
+/// @group code
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['code']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include layout.mode--code;
+    background-color: theme.$layer;
+    padding-inline: spacing.$spacing-01;
+    border-radius: 0.0625rem;
+    box-shadow: 0 0 0 0.125rem theme.$layer;
+  }
+}

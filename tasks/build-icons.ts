@@ -71,7 +71,7 @@ async function buildIcon(id: string) {
 }
 
 async function writeScss() {
-  const path = await import.meta.resolve?.(`../src/utilities/_icons.scss`);
+  const path = await import.meta.resolve?.(`../scss/utilities/_icons.scss`);
 
   if (path) {
     try {

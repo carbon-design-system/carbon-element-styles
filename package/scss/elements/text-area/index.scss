@@ -1,0 +1,43 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '../_labelled-input';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(textarea)',
+);
+
+/// @group text-area
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(textarea)']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include labelled-input.styles((
+      label: (
+        selector: '&',
+        axis: 'block',
+      ),
+      input: (
+        selector: 'textarea',
+      ),
+      input-invalid-slot: 'after',
+    ));
+
+    & textarea {
+      min-block-size: calc(layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end);
+      resize: vertical;
+    }
+  }
+}

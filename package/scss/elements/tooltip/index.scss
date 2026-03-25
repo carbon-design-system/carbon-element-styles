@@ -1,0 +1,44 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../popover';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: '[popover="hint"]',
+);
+
+/// @group tooltip
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[popover="hint"]']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include popover.styles((
+      selector: '&',
+      caret: true,
+    ));
+
+    background-color: theme.$background-inverse;
+    color: theme.$text-inverse;
+    justify-self: anchor-center;
+    inset-inline: unset;
+
+    &::before {
+      inset-inline-start: 50%;
+      translate: -50% 0;
+    }
+  }
+}

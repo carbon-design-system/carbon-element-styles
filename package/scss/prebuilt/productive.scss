@@ -1,0 +1,153 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' with (
+  $use-akamai-cdn: true,
+);
+@use '@carbon/styles/scss/fonts';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../utilities/carbon';
+@use '../layout';
+
+@use '../elements/abbreviation';
+@use '../elements/address';
+@use '../elements/anchor';
+@use '../elements/block-quotation';
+@use '../elements/body';
+@use '../elements/bold-text';
+@use '../elements/button';
+@use '../elements/checkbox';
+@use '../elements/code';
+@use '../elements/combo-box';
+@use '../elements/date-input';
+@use '../elements/date-time-input';
+@use '../elements/deleted-text';
+@use '../elements/description-list';
+@use '../elements/details';
+@use '../elements/dialog';
+@use '../elements/fieldset';
+@use '../elements/file-input';
+@use '../elements/footer';
+@use '../elements/header-navigation';
+@use '../elements/heading-level-1';
+@use '../elements/heading-level-2';
+@use '../elements/heading-level-3';
+@use '../elements/heading-level-4';
+@use '../elements/heading-level-5';
+@use '../elements/heading-level-6';
+@use '../elements/horizontal-rule';
+@use '../elements/inline-loading';
+@use '../elements/inline-quotation';
+@use '../elements/inserted-text';
+@use '../elements/italic-text';
+@use '../elements/keyboard-input';
+@use '../elements/label';
+@use '../elements/main';
+@use '../elements/marked-text';
+@use '../elements/menu';
+@use '../elements/number-input';
+@use '../elements/ordered-list';
+@use '../elements/paragraph';
+@use '../elements/password-input';
+@use '../elements/popover';
+@use '../elements/preformatted';
+@use '../elements/progress-bar';
+@use '../elements/radio-button';
+@use '../elements/range-input';
+@use '../elements/search-input';
+@use '../elements/select';
+@use '../elements/side-navigation';
+@use '../elements/small-text';
+@use '../elements/table';
+@use '../elements/text-area';
+@use '../elements/text-input';
+@use '../elements/tile';
+@use '../elements/time-input';
+@use '../elements/toggle';
+@use '../elements/tooltip';
+@use '../elements/tree-view';
+@use '../elements/unordered-list';
+
+:root {
+  @include carbon.emit-carbon-colors;
+
+  @include carbon.emit-carbon-tokens('g10');
+  color-scheme: light;
+
+  @media (prefers-color-scheme: dark) {
+    @include carbon.emit-carbon-tokens('g100');
+    color-scheme: dark;
+  }
+
+  @include layout.density('normal');
+  @include layout.mode('productive');
+  @include layout.size('md');
+
+  background-color: theme.$background;
+}
+
+@include abbreviation.styles;
+@include address.styles;
+@include anchor.styles;
+@include block-quotation.styles;
+@include body.styles;
+@include bold-text.styles;
+@include button.styles;
+@include button.styles((
+  selector: 'button[type="submit"]',
+  kind: 'primary',
+));
+@include checkbox.styles;
+@include code.styles;
+@include combo-box.styles;
+@include date-input.styles;
+@include date-time-input.styles;
+@include deleted-text.styles;
+@include description-list.styles;
+@include details.styles;
+@include dialog.styles;
+@include fieldset.styles;
+@include file-input.styles;
+@include footer.styles;
+@include header-navigation.styles;
+@include heading-level-1.styles;
+@include heading-level-2.styles;
+@include heading-level-3.styles;
+@include heading-level-4.styles;
+@include heading-level-5.styles;
+@include heading-level-6.styles;
+@include horizontal-rule.styles;
+@include inline-loading.styles;
+@include inline-quotation.styles;
+@include inserted-text.styles;
+@include italic-text.styles;
+@include keyboard-input.styles;
+@include label.styles;
+@include main.styles;
+@include marked-text.styles;
+@include number-input.styles;
+@include ordered-list.styles;
+@include paragraph.styles;
+@include password-input.styles;
+@include popover.styles;
+@include preformatted.styles;
+@include radio-button.styles;
+@include range-input.styles;
+@include search-input.styles;
+@include select.styles;
+@include side-navigation.styles;
+@include small-text.styles;
+@include table.styles;
+@include text-area.styles;
+@include text-input.styles;
+@include tile.styles;
+@include time-input.styles;
+@include toggle.styles;
+@include tooltip.styles;
+@include unordered-list.styles;

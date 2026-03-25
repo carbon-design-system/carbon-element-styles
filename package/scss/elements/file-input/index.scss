@@ -1,0 +1,84 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(input[type="file"])',
+);
+
+/// @group file-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="file"])']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include layout.mode--heading-compact;
+    display: flex;
+    flex-direction: column;
+    row-gap: spacing.$spacing-03;
+
+    & input[type="file"]:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    & input[type="file"]:focus::file-selector-button {
+      outline: 0.125rem solid theme.$focus;
+      outline-offset: -0.125rem;
+      box-shadow: inset 0 0 0 0.1875rem theme.$layer-background;
+    }
+
+    & input[type="file"]::file-selector-button {
+      @include layout.mode--body-compact;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      text-align: start;
+      background-color: carbon-button.$button-primary;
+      color: theme.$text-on-color;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline-start: layout.$density--padding;
+      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+      cursor: pointer;
+      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+      &:hover {
+        background-color: carbon-button.$button-primary-hover;
+      }
+
+      &:active {
+        background-color: carbon-button.$button-primary-active;
+      }
+    }
+
+    &:has([disabled]) {
+      color: theme.$text-disabled;
+    }
+
+    & input[type="file"]:disabled::file-selector-button,
+    & input[type="file"]:disabled::file-selector-button:hover,
+    & input[type="file"]:disabled::file-selector-button:active {
+      cursor: not-allowed;
+      background-color: carbon-button.$button-disabled;
+      color: theme.$text-on-color-disabled;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'a',
+);
+
+/// @group anchor
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['a']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    display: inline-flex;
+    align-items: center;
+    column-gap: spacing.$spacing-03;
+    color: theme.$link-primary;
+    text-decoration: underline;
+    transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+    &:hover {
+      color: theme.$link-primary-hover;
+    }
+
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+
+    & svg {
+      fill: currentColor;
+      block-size: 1rem;
+      inline-size: 1rem;
+    }
+  }
+}

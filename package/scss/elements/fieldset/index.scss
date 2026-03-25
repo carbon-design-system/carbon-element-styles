@@ -1,0 +1,41 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../label';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'fieldset',
+);
+
+/// @group fieldset
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['fieldset']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    border: none;
+    padding: 0;
+    margin-block: layout.$mode--margin-block;
+
+    & legend {
+      @include label.styles((
+        selector: '&',
+      ));
+      padding: 0;
+      margin-block-end: spacing.$spacing-03;
+    }
+  }
+}

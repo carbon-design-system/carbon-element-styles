@@ -6,10 +6,10 @@
  */
 
 @use '../../scss/docs';
-@use '../../../src/elements/popover';
+@use '../../../scss/elements/popover';
 
-@use '../../../src/elements/text-input';
-@use '../../../src/elements/tile';
+@use '../../../scss/elements/text-input';
+@use '../../../scss/elements/tile';
 
 $name: 'popover';
 

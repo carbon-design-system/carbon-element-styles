@@ -1,0 +1,71 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../_labelled-input';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(select)',
+  axis: 'block',
+);
+
+/// @group select
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(select)']
+/// @param {'block' | 'axis'} config.axis ['block']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include labelled-input.styles((
+      label: (
+        selector: '&',
+        axis: map.get($props, 'axis'),
+      ),
+      input: (
+        selector: 'select',
+        emit-readonly: false,
+      ),
+      fixed-input-trailing-slots: 1,
+      input-invalid-slot: 'after',
+    ));
+
+    &::before {
+      @include labelled-input.input-trailing-slot {
+        @include icons.chevron--down;
+      }
+    }
+
+    & select {
+      cursor: pointer;
+
+      &:enabled:hover {
+        background-color: theme.$field-hover;
+      }
+
+      &:enabled:active {
+        background-color: theme.$layer-active;
+      }
+
+      @if map.get($props, 'axis') == 'inline' {
+        &:enabled,
+        &:disabled {
+          background-color: transparent;
+          border-block-end: none;
+        }
+      }
+    }
+  }
+}

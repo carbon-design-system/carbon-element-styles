@@ -1,0 +1,35 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/utilities/custom-property';
+
+@use '../config';
+
+/// Sets a css custom property
+/// @group tokens
+/// @param {String} name
+/// @param {String} value
+@mixin set($name, $value) {
+  @include custom-property.declaration('#{config.$prefix}--#{$name}', $value);
+}
+
+/// Gets a css custom property value
+/// @group tokens
+/// @param {String} name
+/// @param {Bool} fallback [false] - Optionally provide a fallback value if the css custom property isn't set.
+/// @return {String} - The css custom property accessor (`var(--…)`)
+@function get($name, $fallback: false) {
+  @return custom-property.get-var('#{config.$prefix}--#{$name}', $fallback);
+}
+
+/// Gets a css custom property name
+/// @group tokens
+/// @param {String} name
+/// @return {String} - The css custom property name (`--…`)
+@function get-name($name) {
+  @return custom-property.get-name('#{config.$prefix}--#{$name}');
+}

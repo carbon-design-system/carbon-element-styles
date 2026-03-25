@@ -6,10 +6,10 @@
  */
 
 @use '../../scss/docs';
-@use '../../../src/elements/tile';
+@use '../../../scss/elements/tile';
 
-@use '../../../src/elements/text-input';
-@use '../../../src/elements/paragraph';
+@use '../../../scss/elements/text-input';
+@use '../../../scss/elements/paragraph';
 
 $name: 'tile';
 

@@ -1,0 +1,70 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/motion';
+
+@use '../../config';
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: '[aria-live="polite"][aria-busy="true"]:empty',
+);
+
+$-size: 1rem;
+$-stroke-width: 0.125rem;
+
+/// @group inline-loading
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[aria-live="polite"][aria-busy="true"]:empty']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+
+    display: flex;
+    align-items: center;
+    column-gap: spacing.$spacing-03;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      block-size: calc($-size - $-stroke-width * 2);
+      inline-size: calc($-size - $-stroke-width * 2);
+      border-radius: 50%;
+      border: $-stroke-width solid theme.$layer-accent;
+      border-block-end-color: theme.$border-interactive;
+      border-inline-end-color: theme.$border-interactive;
+      animation-name: #{carbon-config.$prefix}--#{config.$prefix}--inline-loading--spinner;
+      animation-duration: motion.$duration-slow-02;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    &::after {
+      @include layout.mode--body-compact;
+      content: 'Loading';
+      color: theme.$text-secondary;
+    }
+
+    @keyframes #{carbon-config.$prefix}--#{config.$prefix}--inline-loading--spinner {
+      0% {
+        rotate: 0;
+      }
+
+      100% {
+        rotate: 360deg;
+      }
+    }
+  }
+}

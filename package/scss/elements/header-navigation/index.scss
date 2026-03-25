@@ -1,0 +1,125 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'body > header:first-child',
+);
+
+/// @group header-navigation
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['body > header:first-child']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 9999;
+    inline-size: 100%;
+    block-size: layout.$size--block-size;
+    background-color: theme.$layer-background;
+    border-block-end: 0.0625rem solid theme.$border-subtle;
+    align-items: center;
+    display: flex;
+
+    & > nav {
+      flex-shrink: 0;
+      display: flex;
+      block-size: 100%;
+    }
+
+    & > nav ul {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      block-size: 100%;
+      display: flex;
+    }
+
+    & > nav ul li {
+      @include layout.mode--body-compact;
+      padding: 0;
+      margin: 0;
+      block-size: 100%;
+    }
+
+    & > nav ul li a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: theme.$text-secondary;
+      block-size: 100%;
+      padding-inline: layout.$density--padding;
+      transition-property: color, background-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
+
+      &:hover {
+        background-color: theme.$layer-hover;
+        color: theme.$text-primary;
+      }
+
+      &:active {
+        background-color: theme.$layer-hover;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    & > nav ul li a[aria-current="page"] {
+      color: theme.$text-primary;
+      box-shadow: inset 0 -0.25rem 0 0 theme.$border-interactive;
+    }
+
+    & > nav a:first-child {
+      @include layout.mode--body-compact;
+      color: theme.$text-primary;
+      text-decoration: none;
+      padding-inline: layout.$density--padding;
+      block-size: 100%;
+      display: inline-flex;
+      align-items: center;
+      column-gap: spacing.$spacing-02;
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    & > nav a:first-child + ul {
+      margin-inline-start: layout.$density--padding;
+      padding-inline-start: layout.$density--padding;
+    }
+
+    & > nav a:first-child + ul::before {
+      content: '';
+      display: block;
+      inline-size: 0.0625rem;
+      inset-inline-start: -0.0625rem;
+      position: absolute;
+      inset-block: spacing.$spacing-04;
+      background-color: theme.$border-subtle;
+    }
+
+    & + nav {
+      inset-block-start: layout.$size--block-size;
+    }
+  }
+}

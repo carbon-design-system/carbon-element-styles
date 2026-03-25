@@ -1,0 +1,143 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../label';
+@use '../_input';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  label: (
+    selector: 'label',
+    axis: 'block',
+  ),
+  input: (
+    selector: 'input',
+    emit-readonly: true,
+    emit-disabled: true,
+    emit-invalid: true,
+    emit-focus: true,
+  ),
+  fixed-input-leading-slots: 0,
+  fixed-input-trailing-slots: 0,
+  input-invalid-slot: false, // after | before
+);
+
+/// @group _labelled-input
+/// @param {Map} config [()]
+/// @param {Map} config.label [()]
+/// @param {Selector} config.label.selector [label]
+/// @param {'block' | 'inline'} config.label.axis ['block]
+/// @param {Map} config.input [()]
+/// @param {Selector} config.input.selector [input]
+/// @param {Bool} config.input.emit-readonly [true]
+/// @param {Bool} config.input.emit-disabled [true]
+/// @param {Bool} config.input.emit-invalid [true]
+/// @param {Bool} config.input.emit-focus [true]
+/// @param {0 | 1 | 2} config.fixed-input-leading-slots [0] - How many fixed leading slots should be reserved
+/// @param {0 | 1 | 2} config.fixed-input-trailing-slots [0] - How many fixed trailing slots should be reserved
+/// @param {false | 'before' | 'after'} config.input-invalid-slot [false] - Which pseudo element should render the dynamic invalid slot. `false` if it shouldn't be rendered at all.
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'label', 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: map.get($props, 'label', 'axis'),
+    ));
+
+    position: relative;
+
+    #{map.get($props, 'input', 'selector')} {
+      @include input.styles((
+        selector: '&',
+        emit-readonly: map.get($props, 'input', 'emit-readonly'),
+        emit-disabled: map.get($props, 'input', 'emit-disabled'),
+        emit-invalid: map.get($props, 'input', 'emit-invalid'),
+        emit-focus: map.get($props, 'input', 'emit-focus'),
+      ));
+
+      padding-inline-start: -get-slot-space(map.get($props, 'fixed-input-leading-slots'));
+      padding-inline-end: -get-slot-space(map.get($props, 'fixed-input-trailing-slots'));
+    }
+
+    &::before,
+    &::after {
+      z-index: 9999;
+      position: absolute;
+      pointer-events: none;
+      inset-block-start: calc(layout.$size--padding-block-start - ((1rem - 1lh) * 0.5));
+
+      @if map.get($props, 'label', 'axis') == 'block' {
+        grid-row: 2;
+      } @else {
+        grid-column: 2;
+      }
+    }
+
+    @if map.get($props, 'input-invalid-slot') and map.get($props, 'input', 'emit-invalid') {
+      &:has(#{map.get($props, 'input', 'selector')}:invalid),
+      &:has(#{map.get($props, 'input', 'selector')}[aria-invalid="true"]) {
+        &::#{map.get($props, 'input-invalid-slot')} {
+          @include input-trailing-slot(map.get($props, 'fixed-input-trailing-slots') + 1) {
+            @include icons.warning--filled;
+            color: theme.$support-error;
+          }
+        }
+
+        #{map.get($props, 'input', 'selector')} {
+          padding-inline-end: -get-slot-space(map.get($props, 'fixed-input-trailing-slots') + 1);
+        }
+      }
+    }
+  }
+}
+
+@function -get-slot-offset($index: 1) {
+  @return calc((spacing.$spacing-03 + 1rem) * ($index - 1) + layout.$density--padding);
+}
+
+@function -get-slot-space($count: 0) {
+  $additional-inline-padding: 0rem;
+
+  @if $count > 0 {
+    $additional-inline-padding: layout.$density--padding;
+  }
+
+  /*
+      regular inline padding
+    + number of slots
+    + number of gaps between slots
+    + inline padding if has any slots
+  */
+  @return calc(
+      layout.$density--padding
+    + $count * 1rem
+    + max(($count - 1) * spacing.$spacing-03, 0rem)
+    + $additional-inline-padding
+  );
+}
+
+@mixin input-leading-slot($index: 1) {
+  content: '';
+  inset-inline-start: -get-slot-offset($index);
+  @content;
+}
+
+@mixin input-trailing-slot($index: 1) {
+  content: '';
+  inset-inline-end: -get-slot-offset($index);
+  @content;
+}

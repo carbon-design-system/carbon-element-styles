@@ -1,0 +1,27 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../utilities/tokens';
+
+$-densities: (
+  condensed: spacing.$spacing-03,
+  normal: spacing.$spacing-05,
+);
+
+$-default-density: 'normal';
+
+/// @group layout--density
+/// @param {'condensed' | 'normal'} density ['normal']
+@mixin density($density: $-default-density) {
+  @include tokens.set('density--padding', map.get($-densities, $density));
+}
+
+$density--padding: tokens.get('density--padding', map.get($-densities, $-default-density));

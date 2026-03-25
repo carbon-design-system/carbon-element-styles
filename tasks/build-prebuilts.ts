@@ -13,7 +13,7 @@ import { compile } from 'sass';
 import * as log from './utilities/log.ts';
 import { getBanner } from './utilities/get-banner.ts';
 
-const sourceDir = new URL('../src/prebuilt', import.meta.url);
+const sourceDir = new URL('../scss/prebuilt', import.meta.url);
 const targetDir = new URL('../dist/prebuilt', import.meta.url);
 
 await mkdir(targetDir, {

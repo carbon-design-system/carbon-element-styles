@@ -1,0 +1,85 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'details',
+);
+
+/// @group details
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['details']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    border-block-start: 0.0625rem solid theme.$border-subtle;
+    box-sizing: border-box;
+    padding-inline-start: calc(layout.$density--padding + 1rem + layout.$density--padding);
+    padding-inline-end: layout.$density--padding;
+
+    &:last-of-type {
+      border-block-end: 0.0625rem solid theme.$border-subtle;
+    }
+
+    & summary {
+      @include layout.mode--body-compact;
+      block-size: layout.$size--block-size;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: flex;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      margin-inline-start: calc((layout.$density--padding + 1rem + layout.$density--padding) * -1);
+      padding-inline-start: layout.$density--padding;
+      margin-inline-end: calc(layout.$density--padding * -1);
+      padding-inline-end: layout.$density--padding;
+
+      &:hover {
+        background-color: theme.$layer-hover;
+      }
+
+      &:active {
+        background-color: theme.$layer-active;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    & summary::before {
+      content: '';
+      @include icons.chevron--down;
+      translate: 0 calc((1lh - 1rem) * 0.5);
+      display: inline-block;
+      margin-inline-end: layout.$density--padding;
+      transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    }
+
+    &[open] {
+      padding-block-end: layout.$density--padding;
+    }
+
+    &[open] summary {
+      margin-block-end: layout.$density--padding;
+    }
+
+    &[open] summary::before {
+      rotate: 180deg;
+    }
+  }
+}

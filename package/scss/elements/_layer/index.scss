@@ -1,0 +1,78 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/layer/layer-tokens';
+@use '@carbon/styles/scss/utilities/custom-property';
+
+@use '../../layout';
+@use '../../utilities/tokens';
+
+$config: () !default;
+
+$-default-config: ();
+
+/// @group _layer
+/// @param {'01' | '02' | '03'} n - The layer level
+/// @param {Bool} is-initial [false] - If this level should be treated as the intial, meaning it'll be used as a fallback if no matching css custom property is found
+@mixin -on-layer($n, $is-initial: false) {
+  @container style(#{tokens.get-name('layer-level')}: #{$n}) {
+    @content;
+  }
+
+  @if $is-initial {
+    // if custom property doesn't exist
+    @container style(#{tokens.get-name('layer-level')}: unset) {
+      @content;
+    }
+  }
+}
+
+/// @group _layer
+/// @param {Map} config [()]
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  // fallback for browers without container style query support
+  background-color: theme.$layer;
+
+  @include -on-layer('01', true) {
+    background-color: theme.$layer-background;
+    @include tokens.set('layer-level', '02');
+    @include layer-tokens.emit-layer-tokens(2);
+  }
+
+  @include -on-layer('02') {
+    background-color: theme.$layer-background;
+    @include tokens.set('layer-level', '03');
+    @include layer-tokens.emit-layer-tokens(3);
+  }
+
+  @include -on-layer('03') {
+    background-color: theme.$layer;
+  }
+}
+
+@mixin layer-background-hover {
+  // fallback for browers without container style query support
+  background-color: theme.$layer-hover;
+
+  @include -on-layer('01') { background-color: theme.$layer-hover-01; }
+  @include -on-layer('02') { background-color: theme.$layer-hover-02; }
+  @include -on-layer('03') { background-color: theme.$layer-hover-03; }
+}
+
+@mixin layer-background-active {
+  // fallback for browers without container style query support
+  background-color: theme.$layer-active;
+
+  @include -on-layer('01') { background-color: theme.$layer-active-01; }
+  @include -on-layer('02') { background-color: theme.$layer-active-02; }
+  @include -on-layer('03') { background-color: theme.$layer-active-03; }
+}

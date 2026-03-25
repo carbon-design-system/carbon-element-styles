@@ -1,0 +1,47 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '../_labelled-input';
+
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(input[type="date"])',
+  axis: 'block',
+);
+
+/// @group date-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="date"])']
+/// @param {'block' | 'inline'} config.axis ['block']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include labelled-input.styles((
+      label: (
+        selector: '&',
+        axis: map.get($props, 'axis'),
+      ),
+      input: (
+        selector: 'input[type="date"]',
+      ),
+      fixed-input-trailing-slots: 1,
+      input-invalid-slot: 'after',
+    ));
+
+    &::before {
+      @include labelled-input.input-trailing-slot {
+        @include icons.calendar;
+      }
+    }
+  }
+}

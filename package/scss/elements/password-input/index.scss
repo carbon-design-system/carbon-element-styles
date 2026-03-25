@@ -1,0 +1,38 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '../_labelled-input';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(input[type="password"])',
+  axis: 'block',
+);
+
+/// @group password-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="password"])']
+/// @param {'block' | 'axis'} config.axis ['block']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include labelled-input.styles((
+      label: (
+        selector: '&',
+        axis: map.get($props, 'axis'),
+      ),
+      input: (
+        selector: 'input[type="password"]',
+      ),
+      input-invalid-slot: 'after',
+    ));
+  }
+}

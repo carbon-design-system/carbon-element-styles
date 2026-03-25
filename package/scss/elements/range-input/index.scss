@@ -1,0 +1,76 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../label';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(input[type="range"])',
+  axis: 'block',
+);
+
+/// @group range-input
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="range"])']
+/// @param {'block' | 'axis'} config.axis ['block']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: map.get($props, 'axis'),
+    ));
+
+    & input[type="range"] {
+      display: block;
+      appearance: none;
+      background-color: transparent;
+      block-size: 1.25rem;
+    }
+
+    & input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      block-size: 0.875rem;
+      inline-size: 0.875rem;
+      border-radius: 50%;
+      background-color: theme.$layer-selected-inverse;
+      translate: 0 calc(-50% + 0.125rem * 0.5);
+      cursor: pointer;
+    }
+
+    & input[type="range"]::-webkit-slider-runnable-track {
+      height: 0.125rem;
+      background-color: theme.$border-subtle;
+      cursor: pointer;
+    }
+
+    & input[type="range"]:focus {
+      outline: none;
+    }
+
+    & input[type="range"]:focus::-webkit-slider-thumb {
+      background-color: theme.$border-interactive;
+      outline: 0.125rem solid theme.$border-interactive;
+      outline-offset: calc(0.0625rem + 0.125rem);
+    }
+
+    & input[type="range"]:disabled::-webkit-slider-thumb,
+    & input[type="range"]::-webkit-slider-runnable-track {
+      background-color: theme.$border-disabled;
+      cursor: not-allowed;
+    }
+  }
+}

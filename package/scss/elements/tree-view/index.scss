@@ -1,0 +1,127 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+@use 'sass:string';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'ul[role="tree"]',
+);
+
+/// @group tree-view
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['ul[role="tree"]']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    background-color: theme.$layer;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & li[role="treeitem"] > :is(span, a) {
+      @include layout.mode--body-compact;
+      color: theme.$text-secondary;
+      display: flex;
+      flex-direction: row;
+      column-gap: spacing.$spacing-03;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline-end: layout.$density--padding;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition-property: color, background-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
+
+      &:hover {
+        background-color: theme.$layer-hover;
+        color: theme.$text-primary;
+      }
+
+      &:active {
+        background-color: theme.$layer-active;
+      }
+
+      & > svg {
+        fill: currentColor;
+        block-size: 1rem;
+        inline-size: 1rem;
+        translate: 0 0.0625rem;
+      }
+    }
+
+    & li[role="treeitem"]:focus {
+      outline: none;
+
+      & > :is(span, a) {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    & li[role="treeitem"][aria-selected="true"] > :is(span, a) {
+      color: theme.$text-primary;
+      background-color: theme.$layer-selected;
+    }
+
+    & li[role="treeitem"][aria-current] > :is(span, a) {
+      box-shadow: inset 0.25rem 0 0 0 theme.$border-interactive;
+    }
+
+    & li[role="treeitem"][aria-disabled="true"] > :is(span, a) {
+      color: theme.$text-disabled;
+      cursor: not-allowed;
+
+      &:hover, &:active {
+        background-color: transparent;
+      }
+    }
+
+    & li[role="treeitem"] > ul[role="group"] {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    & li[role="treeitem"][aria-expanded="false"] > ul[role="group"] {
+      display: none;
+    }
+
+    & li[role="treeitem"][aria-expanded="false"] > :is(span, a)::before {
+      rotate: -90deg;
+    }
+
+    &:has([aria-expanded]) li[role="treeitem"] > :is(span, a)::before {
+      content: '';
+      display: block;
+      inline-size: 1rem;
+      translate: 0 0.0625rem;
+      transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    }
+
+    & li[role="treeitem"][aria-expanded] > :is(span, a)::before {
+      @include icons.caret--down;
+    }
+
+    @for $i from 1 through 16 {
+      & li[role="treeitem"][aria-level="#{$i}"] > :is(span, a) {
+        padding-inline-start: calc(layout.$density--padding * $i);
+      }
+    }
+  }
+}

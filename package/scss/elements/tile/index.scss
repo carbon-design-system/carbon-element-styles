@@ -1,0 +1,72 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../_layer';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: '[data-tile]',
+);
+
+/// @group tile
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[data-tile]']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include layer.styles;
+    padding: layout.$density--padding;
+    box-sizing: border-box;
+
+    &:is(a) {
+      position: relative;
+      display: block;
+      color: theme.$text-primary;
+      text-decoration: none;
+      padding-inline-end: spacing.$spacing-09;
+      border: 0.0625rem solid theme.$border-tile;
+      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+      &:hover {
+        @include layer.layer-background-hover;
+      }
+
+      &:active {
+        @include layer.layer-background-active;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+
+      &::after {
+        @include icons.arrow--right;
+        content: '';
+        position: absolute;
+        color: theme.$link-primary;
+        inset-block-end: layout.$density--padding;
+        inset-inline-end: layout.$density--padding;
+        transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      }
+
+      &:hover::after {
+        color: theme.$icon-primary;
+      }
+    }
+  }
+}

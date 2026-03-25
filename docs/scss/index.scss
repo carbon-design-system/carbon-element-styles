@@ -9,23 +9,23 @@
 @use './elements';
 @use './environment';
 
-@use '../../src/layout';
+@use '../../scss/layout';
 
-@use '../../src/elements/_layer';
+@use '../../scss/elements/_layer';
 
-@use '../../src/elements/anchor';
-@use '../../src/elements/body';
-@use '../../src/elements/code';
-@use '../../src/elements/header-navigation';
-@use '../../src/elements/heading-level-5';
-@use '../../src/elements/label';
-@use '../../src/elements/main';
-@use '../../src/elements/preformatted';
-@use '../../src/elements/select';
-@use '../../src/elements/side-navigation';
-@use '../../src/elements/table';
-@use '../../src/elements/tabs';
-@use '../../src/elements/unordered-list';
+@use '../../scss/elements/anchor';
+@use '../../scss/elements/body';
+@use '../../scss/elements/code';
+@use '../../scss/elements/header-navigation';
+@use '../../scss/elements/heading-level-5';
+@use '../../scss/elements/label';
+@use '../../scss/elements/main';
+@use '../../scss/elements/preformatted';
+@use '../../scss/elements/select';
+@use '../../scss/elements/side-navigation';
+@use '../../scss/elements/table';
+@use '../../scss/elements/tabs';
+@use '../../scss/elements/unordered-list';
 
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';

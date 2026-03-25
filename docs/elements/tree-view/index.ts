@@ -133,7 +133,7 @@ const html = /* html */`
   <li role="treeitem" aria-selected="false" aria-expanded="true" tabindex="0" aria-level="1">
     <span>
       ${folderIcon}
-      src
+      scss
     </span>
     <ul role="group">
       <li role="treeitem" aria-selected="false" aria-expanded="false" tabindex="0" aria-level="2">

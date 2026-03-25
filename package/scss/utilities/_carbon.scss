@@ -1,0 +1,96 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:meta';
+@use 'sass:map';
+
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes' as carbon-themes;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/breakpoint';
+@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+@use '@carbon/styles/scss/components/tag/tokens' as carbon-tag;
+@use '@carbon/styles/scss/components/content-switcher/tokens' as carbon-content-switcher;
+@use '@carbon/styles/scss/utilities/custom-property';
+@use '@carbon/styles/scss/layer/layer-tokens';
+
+$-themes: (
+  'white': carbon-themes.$white,
+  'g10': carbon-themes.$g10,
+  'g90': carbon-themes.$g90,
+  'g100': carbon-themes.$g100,
+);
+
+$-component-token-groups: (
+  carbon-button.$button-tokens,
+  carbon-tag.$tag-tokens,
+  carbon-content-switcher.$content-switcher-tokens,
+);
+
+/// Emits all style and necessary component tokens for a given Carbon theme as css custom properties
+/// @group layout--mode
+/// @param {'white' | 'g10' | 'g90' | 'g100'} theme-name ['white']
+@mixin emit-carbon-tokens($theme-name: 'white') {
+  $theme: map.get($-themes, $theme-name);
+
+  @if $theme {
+    $tokens: $theme;
+
+    // derived from https://github.com/carbon-design-system/carbon/blob/a60a4d3071663b240c3122d8bc2c3558c788346f/packages/styles/scss/_zone.scss#L79-L99
+    @each $group in $-component-token-groups {
+      @each $key, $value in $group {
+        @if meta.type-of($value) == map {
+          $theme-values: map.get($value, values);
+
+          @each $theme-value in $theme-values {
+            $value: map.get($theme-value, value);
+
+            @if theme.matches(map.get($theme-value, theme), $theme) and meta.type-of($value) == color {
+              $tokens: map.set($tokens, $key, $value);
+            }
+          }
+        } @else if meta.type-of($value) == color {
+          $tokens: map.set($tokens, $key, $value);
+        }
+      }
+    }
+
+    @include theme.theme($tokens);
+  } @else {
+    @error '#{$theme-name} not found';
+  }
+
+  @include layer-tokens.emit-layer-tokens(1);
+
+  @each $breakpoint in map.keys(grid.$grid-breakpoints) {
+    @include breakpoint.breakpoint-up($breakpoint) {
+      @each $type-name, $type-styles in type.$tokens {
+        @if map.has-key($type-styles, 'breakpoints') {
+          $type-properties: map.get($type-styles, 'breakpoints', $breakpoint);
+
+          @if $type-properties != null {
+            @each $property, $value in $type-properties {
+              @include custom-property.declaration('#{$type-name}-#{$property}', $value);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Emits all colors in the IDL color palette as css custom properties
+/// @group layout--mode
+@mixin emit-carbon-colors() {
+  @each $palette, $values in colors.$colors {
+    @each $shade, $value in $values {
+      @include custom-property.declaration('#{$palette}-#{$shade}', $value);
+    }
+  }
+}

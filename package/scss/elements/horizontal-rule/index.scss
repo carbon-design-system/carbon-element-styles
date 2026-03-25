@@ -1,0 +1,41 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'hr',
+  kind: 'subtle',
+);
+
+/// @group horizontal-rule
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['hr']
+/// @param {'subtle' | 'strong'} config.kind ['subtle']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    border: none;
+    block-size: 0.0625rem;
+    margin-block: layout.$mode--margin-block;
+
+    @if map.get($props, 'kind') == 'subtle' {
+      background-color: theme.$border-subtle;
+    }
+
+    @if map.get($props, 'kind') == 'strong' {
+      background-color: theme.$border-strong;
+    }
+  }
+}

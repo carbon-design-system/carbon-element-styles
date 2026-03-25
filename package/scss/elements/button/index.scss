@@ -1,0 +1,235 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+@use 'sass:string';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'button',
+  kind: 'secondary',
+);
+
+/// @group button
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['button']
+/// @param {'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger--primary' | 'danger--tertiary' | 'danger--ghost'} config.kind ['secondary']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include layout.mode--body-compact;
+    appearance: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    text-align: start;
+    block-size: layout.$size--block-size;
+    padding-block-start: layout.$size--padding-block-start;
+    padding-block-end: layout.$size--padding-block-end;
+    padding-inline-start: layout.$density--padding;
+    padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-duration: layout.$mode--transition-duration;
+    transition-timing-function: layout.$mode--transition-timing-function;
+
+    &:focus {
+      outline: 0.125rem solid theme.$focus;
+      outline-offset: -0.125rem;
+      box-shadow: inset 0 0 0 0.1875rem theme.$layer-background;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    & > svg {
+      fill: currentColor;
+      block-size: 1rem;
+      inline-size: 1rem;
+      translate: 0 0.125rem;
+    }
+
+    &:has(> svg:not(:only-child)) {
+      padding-inline-end: layout.$density--padding;
+
+      & > svg {
+        margin-inline-start: layout.$density--padding;
+      }
+    }
+
+    &:has(> svg:only-child) {
+      padding-inline: unset;
+      aspect-ratio: 1;
+      text-align: center;
+    }
+
+    @if map.get($props, 'kind') == 'primary' {
+      background-color: carbon-button.$button-primary;
+      color: theme.$text-on-color;
+
+      &:hover {
+        background-color: carbon-button.$button-primary-hover;
+      }
+
+      &:active {
+        background-color: carbon-button.$button-primary-active;
+      }
+
+      &:disabled {
+        background-color: carbon-button.$button-disabled;
+        color: theme.$text-on-color-disabled;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'secondary' {
+      background-color: carbon-button.$button-secondary;
+      color: theme.$text-on-color;
+
+      &:enabled:hover {
+        background-color: carbon-button.$button-secondary-hover;
+      }
+
+      &:enabled:active {
+        background-color: carbon-button.$button-secondary-active;
+      }
+
+      &:disabled {
+        background-color: carbon-button.$button-disabled;
+        color: theme.$text-on-color-disabled;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'tertiary' {
+      background-color: transparent;
+      color: carbon-button.$button-tertiary;
+      outline: 0.0625rem solid carbon-button.$button-tertiary;
+      outline-offset: -0.0625rem;
+
+      &:focus {
+        color: theme.$text-inverse;
+        background-color: carbon-button.$button-tertiary;
+      }
+
+      &:enabled:hover {
+        color: theme.$text-inverse;
+        background-color: carbon-button.$button-tertiary-hover;
+      }
+
+      &:enabled:active {
+        background-color: carbon-button.$button-tertiary-active;
+      }
+
+      &:disabled {
+        outline-color: carbon-button.$button-disabled;
+        color: theme.$text-disabled;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'ghost' {
+      background-color: transparent;
+      color: theme.$link-primary;
+      padding-inline-end: layout.$density--padding;
+
+      &:enabled:hover {
+        color: theme.$link-primary-hover;
+        background-color: theme.$layer-hover;
+      }
+
+      &:enabled:active {
+        background-color: theme.$layer-active;
+      }
+
+      &:disabled {
+        color: theme.$text-disabled;
+      }
+
+      &:has(> svg:not(:only-child)) > svg {
+        margin-inline-start: spacing.$spacing-03;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'danger--primary' {
+      background-color: carbon-button.$button-danger-primary;
+      color: theme.$text-on-color;
+
+      &:enabled:hover {
+        background-color: carbon-button.$button-danger-hover;
+      }
+
+      &:enabled:active {
+        background-color: carbon-button.$button-danger-active;
+      }
+
+      &:disabled {
+        background-color: carbon-button.$button-disabled;
+        color: theme.$text-on-color-disabled;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'danger--tertiary' {
+      background-color: transparent;
+      color: carbon-button.$button-danger-secondary;
+      outline: 0.0625rem solid carbon-button.$button-danger-secondary;
+      outline-offset: -0.0625rem;
+
+      &:focus {
+        color: theme.$text-on-color;
+        background-color: carbon-button.$button-danger-primary;
+      }
+
+      &:enabled:hover {
+        color: theme.$text-on-color;
+        background-color: carbon-button.$button-danger-hover;
+        outline-color: carbon-button.$button-danger-hover;
+      }
+
+      &:enabled:active {
+        background-color: carbon-button.$button-danger-active;
+        outline-color: carbon-button.$button-danger-active;
+      }
+
+      &:disabled {
+        outline-color: carbon-button.$button-disabled;
+        color: theme.$text-disabled;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'danger--ghost' {
+      background-color: transparent;
+      color: carbon-button.$button-danger-secondary;
+      padding-inline-end: layout.$density--padding;
+
+      &:enabled:hover {
+        color: theme.$text-on-color;
+        background-color: carbon-button.$button-danger-hover;
+        outline-color: carbon-button.$button-danger-hover;
+      }
+
+      &:enabled:active {
+        background-color: carbon-button.$button-danger-active;
+        outline-color: carbon-button.$button-danger-active;
+      }
+
+      &:disabled {
+        color: theme.$text-disabled;
+      }
+
+      &:has(> svg:not(:only-child)) > svg {
+        margin-inline-start: spacing.$spacing-03;
+      }
+    }
+  }
+}

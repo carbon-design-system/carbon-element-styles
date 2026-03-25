@@ -1,0 +1,46 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'ul',
+);
+
+/// @group unordered-list
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['ul']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    list-style-type: '–';
+    padding: 0;
+
+    & li {
+      @include layout.mode--body-compact;
+      max-inline-size: layout.$mode--max-inline-size;
+      margin-inline-start: layout.$density--padding;
+      padding-inline-start: spacing.$spacing-03;
+    }
+
+    & li li {
+      list-style-type: '▪';
+    }
+
+    & li p {
+      @include layout.mode--body-compact;
+      margin-block: 0;
+    }
+  }
+}

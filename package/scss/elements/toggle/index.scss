@@ -1,0 +1,106 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+
+@use '../label';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(button[role="switch"])',
+);
+
+$-block-size: 1.5rem;
+$-inline-size: 3rem;
+$-knob-spacing: 0.1875rem;
+$-knob-size: calc($-block-size - $-knob-spacing * 2);
+
+/// @group toggle
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(button[role="switch"])']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+    ));
+
+    inline-size: max-content;
+
+    & button[role="switch"] {
+      position: relative;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      block-size: $-block-size;
+      inline-size: $-inline-size;
+      border-radius: calc($-block-size * 0.5);
+      background-color: theme.$toggle-off;
+      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      cursor: pointer;
+
+      &:disabled,
+      &[aria-checked="true"]:disabled {
+        background-color: carbon-button.$button-disabled;
+        cursor: not-allowed;
+
+        &::before {
+          background-color: theme.$icon-on-color-disabled;
+        }
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+        outline-offset: spacing.$spacing-01;
+      }
+    }
+
+    & button[role="switch"] > span {
+      @include layout.mode--body-compact;
+      position: absolute;
+      inset-inline-end: calc(spacing.$spacing-03 * -1);
+      inset-block-start: calc(($-block-size - 1lh) * 0.5);
+      translate: 100% 0;
+    }
+
+    & button[role="switch"] > span[aria-hidden="true"] {
+      display: none;
+    }
+
+    & button[role="switch"][aria-checked="true"] {
+      background-color: theme.$support-success;
+    }
+
+    & button[role="switch"]::before {
+      content: '';
+      display: block;
+      position: absolute;
+      block-size: $-knob-size;
+      inline-size: $-knob-size;
+      border-radius: 50%;
+      background-color: theme.$icon-on-color;
+      inset-inline-start: $-knob-spacing;
+      inset-block-start: $-knob-spacing;
+      transition: translate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    }
+
+    & button[role="switch"][aria-checked="true"]::before {
+      translate: calc($-inline-size - $-knob-size - $-knob-spacing * 2) 0;
+    }
+  }
+}

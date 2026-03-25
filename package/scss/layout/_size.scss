@@ -1,0 +1,54 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '../utilities/tokens';
+
+$-sizes: (
+  xs: 1.5rem,
+  sm: 2rem,
+  md: 2.5rem,
+  lg: 3rem,
+  xl: 4rem,
+);
+
+$-default-size: 'md';
+
+/// @group layout--size
+/// @param {Length} block-size
+/// @return {Length} The appropriate padding-block-start for an element with the given block-size
+@function -get-padding-block-start($block-size) {
+  $centering-threshold: map.get($-sizes, 'lg');
+
+  @return calc((min($block-size, $centering-threshold) - 1lh) * 0.5);
+}
+
+/// @group layout--size
+/// @param {Length} block-size
+/// @return {Length} The appropriate padding-block-end for an element with the given block-size
+@function -get-padding-block-end($block-size) {
+  $padding-block-start: -get-padding-block-start($block-size);
+
+  @return calc($block-size - 1lh - $padding-block-start);
+}
+
+/// @group layout--size
+/// @param {'xs' | 'sm' | 'md' | 'lg' | 'xl'} size ['md']
+@mixin size($size: $-default-size) {
+  $block-size: map.get($-sizes, $size);
+
+  @include tokens.set('size--block-size', $block-size);
+  @include tokens.set('size--padding-block-start', -get-padding-block-start($block-size));
+  @include tokens.set('size--padding-block-end', -get-padding-block-end($block-size));
+}
+
+$-default-block-size: map.get($-sizes, $-default-size);
+
+$size--block-size: tokens.get('size--block-size', $-default-block-size);
+$size--padding-block-start: tokens.get('size--padding-block-start', -get-padding-block-start($-default-block-size));
+$size--padding-block-end: tokens.get('size--padding-block-end', -get-padding-block-end($-default-block-size));

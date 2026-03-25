@@ -1,0 +1,33 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/components/tag/tokens' as tag-tokens;
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'del',
+);
+
+/// @group deleted-text
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['del']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    padding-inline: spacing.$spacing-01;
+    background-color: tag-tokens.$tag-background-red;
+    color: tag-tokens.$tag-color-red;
+    text-decoration: line-through;
+  }
+}

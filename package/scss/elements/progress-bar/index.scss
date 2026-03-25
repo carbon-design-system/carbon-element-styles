@@ -1,0 +1,86 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/motion';
+
+@use '../label';
+
+@use '../../config';
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(progress)',
+  axis: 'block',
+  thickness: 'thick',
+);
+
+$-indeterminate-ratio: 0.25;
+
+/// @group progress-bar
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['progress']
+/// @param {'block' | 'axis'} config.axis ['block']
+/// @param {'thick' | 'thin'} config.thickness ['thick']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: map.get($props, 'axis'),
+    ));
+
+    & progress {
+      appearance: none;
+
+      @if map.get($props, 'thickness') == 'thick' {
+        block-size: 0.5rem;
+      }
+
+      @if map.get($props, 'thickness') == 'thin' {
+        block-size: 0.25rem;
+      }
+    }
+
+    & progress::-webkit-progress-bar {
+      background-color: theme.$layer;
+      block-size: inherit;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    & progress::-webkit-progress-value {
+      background-color: theme.$interactive;
+    }
+
+    & progress:not([value])::-webkit-progress-value {
+      inline-size: calc(100% * $-indeterminate-ratio);
+      animation-name: #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate;
+      animation-duration: calc(motion.$duration-slow-02 * 2);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate {
+      0% {
+        translate: -100% 0;
+      }
+
+      100% {
+        translate: calc(100% / $-indeterminate-ratio) 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../label';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label:has(input[type="checkbox"])',
+);
+
+/// @group checkbox
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(input[type="checkbox"])']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include label.styles((
+      selector: '&',
+      axis: 'inline',
+    ));
+
+    justify-content: start;
+    cursor: pointer;
+
+    & input[type="checkbox"] {
+      grid-column: 1;
+      position: relative;
+      appearance: none;
+      border: none;
+      block-size: 1rem;
+      inline-size: 1rem;
+      color: theme.$icon-primary;
+      border-radius: 0.125rem;
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+        outline-offset: 0.125rem;
+      }
+
+      &:disabled {
+        color: theme.$icon-disabled;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        @include icons.checkbox;
+        scale: 1.25;
+      }
+
+      &:checked::before {
+        @include icons.checkbox--checked--filled;
+      }
+
+      &:indeterminate::before {
+        @include icons.checkbox--indeterminate--filled;
+      }
+    }
+  }
+}

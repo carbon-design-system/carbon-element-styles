@@ -1,0 +1,141 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'nav:has(+ main)',
+);
+
+/// @group side-navigation
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['nav:has(+ main)']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    padding-block: layout.$density--padding;
+    inline-size: 16rem;
+    background-color: theme.$layer-background;
+    border-inline-end: 0.0625rem solid theme.$border-subtle;
+    position: fixed;
+    inset-inline-start: 0;
+    inset-block: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    & ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    & li {
+      margin: 0;
+      padding: 0;
+    }
+
+    & li > button[aria-expanded],
+    & li > a {
+      @include layout.mode--heading-compact;
+      position: relative;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      inline-size: 100%;
+      text-align: start;
+      display: block;
+      box-sizing: border-box;
+      color: theme.$text-secondary;
+      background-color: transparent;
+      text-decoration: none;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline: layout.$density--padding;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition-property: color, background-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
+
+      &:hover {
+        background-color: theme.$layer-hover;
+        color: theme.$text-primary;
+      }
+
+      &:active {
+        background-color: theme.$layer-active;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    & li > button[aria-expanded] {
+      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+    }
+
+    & li > button[aria-expanded]::after {
+      content: '';
+      @include icons.chevron--down;
+      display: block;
+      position: absolute;
+      inset-inline-end: layout.$density--padding;
+      inset-block-start: layout.$size--padding-block-start;
+      transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    }
+
+    & li > button[aria-expanded="true"]::after {
+      rotate: 180deg;
+    }
+
+    & li > button[aria-expanded] + ul a {
+      @include layout.mode--body-compact;
+      padding-inline-start: calc(layout.$density--padding * 2);
+    }
+
+    & li > button[aria-expanded]:has(+ ul a[aria-current="page"]) {
+      color: theme.$text-primary;
+    }
+
+    & li > button[aria-expanded="false"]:has(+ ul a[aria-current="page"]),
+    & li > button[aria-expanded] + ul a[aria-current="page"],
+    & li > a[aria-current="page"] {
+      @include layout.mode--heading-compact;
+      background-color: theme.$layer-selected;
+      box-shadow: inset 0.25rem 0 0 0 theme.$border-interactive;
+      color: theme.$text-primary;
+
+      &:hover {
+        background-color: theme.$layer-selected-hover;
+      }
+    }
+
+    & li > button[aria-expanded="false"] + ul {
+      display: none;
+    }
+
+    & + main,
+    & + main + footer {
+      margin-inline-start: 16rem;
+    }
+  }
+}

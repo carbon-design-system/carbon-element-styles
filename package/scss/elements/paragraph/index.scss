@@ -1,0 +1,30 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'p',
+);
+
+/// @group paragraph
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['p']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include layout.mode--body;
+    max-inline-size: layout.$mode--max-inline-size;
+    margin-block: layout.$mode--margin-block;
+    text-wrap: pretty;
+  }
+}

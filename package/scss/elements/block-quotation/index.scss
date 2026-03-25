@@ -1,0 +1,63 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'blockquote',
+);
+
+/// @group block-quotation
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['blockquote']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    margin-block: layout.$mode--margin-block;
+    margin-inline: spacing.$spacing-08;
+    max-inline-size: 50ch;
+
+    @include layout.mode--quotation;
+
+    & p {
+      @include layout.mode--quotation;
+      quotes: auto;
+    }
+
+    & p::before {
+      content: open-quote;
+      margin-inline-start: -1.1ch;
+    }
+
+    & p::after {
+      content: close-quote;
+    }
+
+    & p {
+      margin-block: 0;
+    }
+
+    & + cite {
+      @include layout.mode--body-compact;
+      margin-inline-start: spacing.$spacing-08;
+      font-style: italic;
+    }
+
+    & + cite::before {
+      content: '—';
+      margin-inline-end: spacing.$spacing-02;
+    }
+  }
+}

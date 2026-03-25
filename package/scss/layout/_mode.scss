@@ -1,0 +1,349 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/motion';
+@use '@carbon/styles/scss/breakpoint';
+@use '@carbon/styles/scss/utilities/custom-property';
+
+@use '../utilities/tokens';
+
+$-modes: (
+  'productive': (
+    constants: (
+      max-inline-size: 75ch,
+      margin-block: spacing.$spacing-05,
+      transition-duration: motion.$duration-fast-02,
+      transition-timing-function: motion.motion('standard', 'productive'),
+    ),
+    type-styles: (
+      body: (
+        name: 'body-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      body-compact: (
+        name: 'body-compact-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading: (
+        name: 'heading-01',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-compact: (
+        name: 'heading-compact-01',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      label: (
+        name: 'label-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      helper-text: (
+        name: 'helper-text-01',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      code: (
+        name: 'code-01',
+        style: map.merge(type.$code-01, (
+          font-family: type.font-family('mono'),
+        )),
+      ),
+      quotation: (
+        name: 'quotation',
+        style: map.merge(type.$body-02, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-1: (
+        name: 'heading-07',
+        style: map.merge(type.$heading-07, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-2: (
+        name: 'heading-06',
+        style: map.merge(type.$heading-06, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-3: (
+        name: 'heading-05',
+        style: map.merge(type.$heading-05, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-4: (
+        name: 'heading-04',
+        style: map.merge(type.$heading-04, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-5: (
+        name: 'heading-03',
+        style: map.merge(type.$heading-03, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-6: (
+        name: 'heading-02',
+        style: map.merge(type.$heading-02, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+    ),
+  ),
+  'expressive': (
+    constants: (
+      max-inline-size: 60ch,
+      margin-block: spacing.$spacing-07,
+      transition-duration: motion.$duration-moderate-01,
+      transition-timing-function: motion.motion('standard', 'expressive'),
+    ),
+    type-styles: (
+      body: (
+        name: 'body-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      body-compact: (
+        name: 'body-compact-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading: (
+        name: 'heading-02',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-compact: (
+        name: 'heading-compact-02',
+        style: map.merge(type.$heading-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      label: (
+        name: 'label-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      helper-text: (
+        name: 'helper-text-02',
+        style: map.merge(type.$body-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      code: (
+        name: 'code-02',
+        style: map.merge(type.$code-02, (
+          font-family: type.font-family('mono'),
+        )),
+      ),
+      quotation: (
+        name: 'quotation',
+        style: type.$quotation-01,
+      ),
+      heading-level-1: (
+        name: 'fluid-display-02',
+        style: map.merge(type.$fluid-display-02, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-2: (
+        name: 'fluid-display-01',
+        style: map.merge(type.$fluid-display-01, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-3: (
+        name: 'fluid-heading-05',
+        style: map.merge(type.$fluid-heading-04, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-4: (
+        name: 'fluid-heading-04',
+        style: map.merge(type.$fluid-heading-03, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-5: (
+        name: 'heading-03',
+        style: map.merge(type.$heading-03, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-6: (
+        name: 'heading-02',
+        style: map.merge(type.$heading-02, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+    ),
+  ),
+);
+
+$-default-mode: 'productive';
+
+$-type-properties: (
+  'font-family',
+  'font-size',
+  'font-weight',
+  'line-height',
+  'letter-spacing',
+);
+
+/// Emits every property of a type style definition as css custom properties
+/// @group layout--mode
+/// @param {String} type-style - The type style name that the css custom properties should use (e.g. 'body-compact')
+/// @param {String} name - The Carbon type style name that should be used to generate fallbacks (e.g. 'body-compact-01')
+/// @param {Map} style - All type properties to emit. Must include all of: ('font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing')
+@mixin -emit-type-properties($type-style, $name, $style) {
+  @each $property in $-type-properties {
+    $fallback-value: map.get($style, $property);
+
+    @if $fallback-value {
+      @include tokens.set(
+        'mode--#{$type-style}-#{$property}',
+        custom-property.get-var(
+          '#{$name}-#{$property}',
+          $fallback-value,
+        ),
+      );
+    }
+  }
+}
+
+/// @group layout--mode
+/// @param {'productive' | 'expressive'} mode ['productive']
+@mixin mode($mode: $-default-mode) {
+  @each $constant, $value in map.get($-modes, $mode, 'constants') {
+    @include tokens.set('mode--#{$constant}', $value);
+  }
+
+  @each $type-style, $mapped-type-style in map.get($-modes, $mode, 'type-styles') {
+    $name: map.get($mapped-type-style, 'name');
+    $style: map.get($mapped-type-style, 'style');
+
+    @include -emit-type-properties($type-style, $name, $style);
+
+    @if map.has-key($style, 'breakpoints') {
+      @each $breakpoint, $overrides in map.get($style, 'breakpoints') {
+        @include breakpoint.breakpoint-up($breakpoint) {
+          @include -emit-type-properties($type-style, $name, $overrides);
+        }
+      }
+    }
+  }
+}
+
+$-default-constants: map.get($-modes, $-default-mode, 'constants');
+
+$mode--max-inline-size: tokens.get('mode--max-inline-size', map.get($-default-constants, 'max-inline-size'));
+$mode--margin-block: tokens.get('mode--margin-block', map.get($-default-constants, 'margin-block'));
+$mode--transition-duration: tokens.get('mode--transition-duration', map.get($-default-constants, 'transition-duration'));
+$mode--transition-timing-function: tokens.get('mode--transition-timing-function', map.get($-default-constants, 'transition-timing-function'));
+
+/// Defines all type properties for a given type style
+/// @group layout--mode
+/// @param {String} name
+@mixin -type-style($name) {
+  $type-style: map.get($-modes, $-default-mode, 'type-styles', $name, 'style');
+
+  @each $property in $-type-properties {
+    $fallback-value: map.get($type-style, $property);
+
+    #{$property}: tokens.get('mode--#{$name}-#{$property}', $fallback-value);
+  }
+}
+
+/// @group layout--mode
+@mixin mode--body {
+  @include -type-style('body');
+}
+
+/// @group layout--mode
+@mixin mode--body-compact {
+  @include -type-style('body-compact');
+}
+
+/// @group layout--mode
+@mixin mode--heading {
+  @include -type-style('heading');
+}
+
+/// @group layout--mode
+@mixin mode--heading-compact {
+  @include -type-style('heading-compact');
+}
+
+/// @group layout--mode
+@mixin mode--label {
+  @include -type-style('label');
+}
+
+/// @group layout--mode
+@mixin mode--helper-text {
+  @include -type-style('helper-text');
+}
+
+/// @group layout--mode
+@mixin mode--code {
+  @include -type-style('code');
+}
+
+/// @group layout--mode
+@mixin mode--quotation {
+  @include -type-style('quotation');
+}
+
+/// @group layout--mode
+@mixin mode--heading-level-1 {
+  @include -type-style('heading-level-1');
+}
+
+/// @group layout--mode
+@mixin mode--heading-level-2 {
+  @include -type-style('heading-level-2');
+}
+
+/// @group layout--mode
+@mixin mode--heading-level-3 {
+  @include -type-style('heading-level-3');
+}
+
+/// @group layout--mode
+@mixin mode--heading-level-4 {
+  @include -type-style('heading-level-4');
+}
+
+/// @group layout--mode
+@mixin mode--heading-level-5 {
+  @include -type-style('heading-level-5');
+}
+
+/// @group layout--mode
+@mixin mode--heading-level-6 {
+  @include -type-style('heading-level-6');
+}

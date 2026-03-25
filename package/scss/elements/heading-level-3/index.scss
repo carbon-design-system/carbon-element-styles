@@ -1,0 +1,30 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '../_heading';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'h3',
+);
+
+/// @group heading-level-3
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['h3']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include heading.styles;
+    @include layout.mode--heading-level-3;
+  }
+}

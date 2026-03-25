@@ -1,0 +1,71 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/box-shadow';
+
+@use '../_layer';
+
+@use '../../layout';
+@use '../../utilities/tokens';
+
+$config: () !default;
+
+$-default-config: (
+  selector: '[popover]',
+  caret: true,
+);
+
+/// @group popover
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[popover]']
+/// @param {Bool} config.caret [true]
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  $-caret-size: 0rem;
+  @if map.get($props, 'caret') {
+    $-caret-size: 0.75rem;
+  }
+
+  #{map.get($props, 'selector')} {
+    @include layer.styles;
+    @include box-shadow.box-shadow;
+    @include layout.mode--body;
+    position: absolute;
+    inset: unset;
+    margin: 0;
+    inset-block-start: calc(anchor(end) + spacing.$spacing-02 + ($-caret-size * 0.5));
+    inset-inline-start: calc(anchor(start) + spacing.$spacing-02);
+    border: none;
+    border-radius: 0.125rem;
+    padding: layout.$density--padding;
+    overflow: visible;
+
+    &::before {
+      @include box-shadow.box-shadow;
+      content: '';
+      position: absolute;
+      display: block;
+      block-size: $-caret-size;
+      inline-size: $-caret-size;
+      rotate: -45deg;
+      background-color: inherit;
+      inset-block-start: calc($-caret-size * -0.5);
+      inset-inline-start: layout.$density--padding;
+      clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% 100%,
+        0% 0%,
+      );
+    }
+  }
+}

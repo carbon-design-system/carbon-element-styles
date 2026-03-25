@@ -1,0 +1,106 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/box-shadow';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+@use '../../utilities/icons';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'ul[role="menu"]',
+);
+
+/// @group menu
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['ul[role="menu"]']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    @include box-shadow.box-shadow;
+    background-color: theme.$layer;
+    list-style: none;
+    margin: 0;
+    padding-inline: 0;
+    padding-block: spacing.$spacing-02;
+    inline-size: 14rem;
+
+    & li[role="menuitem"],
+    & li[role="menuitemcheckbox"],
+    & li[role="menuitemradio"] {
+      @include layout.mode--body-compact;
+      display: flex;
+      column-gap: spacing.$spacing-03;
+      color: theme.$text-secondary;
+      padding-inline: layout.$density--padding;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &:hover {
+        background-color: theme.$layer-hover;
+        color: theme.$text-primary;
+      }
+
+      &:active {
+        background-color: theme.$layer-active;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+
+    &:has(li[aria-checked]) {
+      & li[role="menuitem"]::before,
+      & li[role="menuitemcheckbox"]::before,
+      & li[role="menuitemradio"]::before {
+        content: '';
+        display: block;
+        inline-size: 1rem;
+        translate: 0 0.0625rem;
+      }
+    }
+
+    & li[role="menuitemcheckbox"][aria-checked="true"]::before,
+    & li[role="menuitemradio"][aria-checked="true"]::before {
+      @include icons.checkmark;
+    }
+
+    & li > svg {
+      fill: currentColor;
+      block-size: 1rem;
+      inline-size: 1rem;
+      translate: 0 0.0625rem;
+    }
+
+    &:has(li > svg) li:not(:has(> svg)):is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]) {
+      column-gap: calc(spacing.$spacing-03 + 1rem + spacing.$spacing-03);
+    }
+
+    & li[role="separator"] {
+      block-size: 0.0625rem;
+      background-color: theme.$border-subtle;
+      margin-block: spacing.$spacing-02;
+    }
+
+    & ul[role="group"] {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

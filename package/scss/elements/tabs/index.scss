@@ -1,0 +1,214 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+@use '@carbon/styles/scss/components/content-switcher/tokens' as carbon-content-switcher;
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: '[role="tablist"]',
+  kind: 'line',
+);
+
+/// @group tabs
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['[role="tablist"]']
+/// @param {'line' | 'contained' | 'content-swither | 'content-switcher--low-contrast'} config.kind ['line']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    display: flex;
+    flex-direction: row;
+
+    & button[role="tab"] {
+      @include layout.mode--body-compact;
+      position: relative;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      background: none;
+      color: theme.$text-secondary;
+      block-size: layout.$size--block-size;
+      padding-inline: layout.$density--padding;
+      cursor: pointer;
+      transition-property: color, background-color, border-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
+
+      &:enabled:hover:not([aria-selected="true"]) {
+        color: theme.$text-primary;
+      }
+
+      &:focus {
+        @include focus-outline.focus-outline('outline');
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    & ~ [role="tabpanel"] {
+      @include layout.mode--body;
+      padding: layout.$density--padding;
+    }
+
+    @if map.get($props, 'kind') == 'line' {
+      & button[role="tab"] {
+        border-block-end: 0.125rem solid theme.$border-subtle;
+        margin-inline-end: 0.0625rem;
+
+        &:enabled:hover:not([aria-selected="true"]) {
+          border-block-end-color: theme.$border-strong;
+        }
+
+        &[aria-selected="true"] {
+          @include layout.mode--heading-compact;
+          color: theme.$text-primary;
+          border-block-end-color: theme.$border-interactive;
+        }
+
+        &:disabled {
+          color: theme.$text-disabled;
+        }
+      }
+    }
+
+    @if map.get($props, 'kind') == 'contained' {
+      & button[role="tab"] {
+        background-color: theme.$layer-accent;
+        border-block-start: 0.125rem solid transparent;
+
+        &:not(:last-of-type, [aria-selected="true"], :has(+ [aria-selected="true"])) {
+          border-inline-end: 0.0625rem solid theme.$border-strong;
+        }
+
+        &:enabled:hover:not([aria-selected="true"]) {
+          background-color: theme.$layer-accent-hover;
+        }
+
+        &[aria-selected="true"] {
+          @include layout.mode--heading-compact;
+          color: theme.$text-primary;
+          border-block-start: 0.125rem solid theme.$border-interactive;
+          background-color: theme.$layer;
+        }
+
+        &:disabled {
+          background-color: carbon-button.$button-disabled;
+          color: theme.$text-on-color-disabled;
+        }
+      }
+
+      & ~ [role="tabpanel"] {
+        background-color: theme.$layer;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'content-switcher' or map.get($props, 'kind') == 'content-switcher--low-contrast' {
+      & {
+        box-shadow: 0 0 0 0.0625rem theme.$border-inverse;
+        border-radius: 0.25rem;
+        display: inline-grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+      }
+
+      & button[role="tab"] {
+        text-align: start;
+
+        &:first-child {
+          border-start-start-radius: inherit;
+          border-end-start-radius: inherit;
+        }
+
+        &:last-child {
+          border-start-end-radius: inherit;
+          border-end-end-radius: inherit;
+        }
+
+        &:enabled:hover:not([aria-selected="true"]) {
+          background-color: theme.$layer-hover;
+        }
+
+        &:enabled:active:not([aria-selected="true"]) {
+          background-color: theme.$layer-active;
+        }
+
+        &[aria-selected="true"] {
+          z-index: 1;
+          border-radius: inherit;
+          color: theme.$text-inverse;
+          background-color: theme.$border-inverse;
+        }
+
+        &:focus {
+          box-shadow: inset 0 0 0 0.1875rem theme.$background;
+        }
+
+        &:disabled {
+          color: theme.$text-disabled;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          inset-inline-end: 0;
+          block-size: 1lh;
+          inset-block: calc(50% - 0.5lh);
+          inline-size: 0.0625rem;
+          background-color: theme.$border-subtle;
+        }
+
+        &[aria-selected="true"]::after,
+        &:last-child::after,
+        &:has(+ [aria-selected="true"])::after,
+        &:hover::after,
+        &:has(+ :hover)::after,
+        &:focus::after {
+          visibility: hidden;
+        }
+      }
+    }
+
+    @if map.get($props, 'kind') == 'content-switcher--low-contrast' {
+      & {
+        background-color: carbon-content-switcher.$content-switcher-background;
+        box-shadow: 0 0 0 0.0625rem theme.$border-strong;
+      }
+
+      & button[role="tab"] {
+        &:enabled:hover:not([aria-selected="true"]),
+        &:enabled:active:not([aria-selected="true"]) {
+          background-color: carbon-content-switcher.$content-switcher-background-hover;
+        }
+
+        &[aria-selected="true"] {
+          @include layout.mode--heading-compact;
+          background-color: carbon-content-switcher.$content-switcher-selected;
+          color: theme.$text-primary;
+          box-shadow: 0 0 0 0.0625rem theme.$border-inverse;
+        }
+
+        &::after {
+          background-color: theme.$border-strong;
+        }
+      }
+    }
+  }
+}

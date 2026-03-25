@@ -6,9 +6,9 @@
  */
 
 @use '../../scss/docs';
-@use '../../../src/elements/dialog';
+@use '../../../scss/elements/dialog';
 
-@use '../../../src/elements/paragraph';
+@use '../../../scss/elements/paragraph';
 
 $name: 'dialog';
 

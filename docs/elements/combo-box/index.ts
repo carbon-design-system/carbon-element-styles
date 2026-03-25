@@ -43,7 +43,7 @@ const html = /* html */`
 
 <label>
   Enabled
-  <input type="text" list="combo-box-demo" placeholder="yay" />
+  <input type="text" list="combo-box-demo" />
 </label>
 
 <br />

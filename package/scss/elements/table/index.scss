@@ -1,0 +1,131 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../_layer';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'table',
+  kind: 'data-table',
+);
+
+/// @group table
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['table']
+/// @param {'data-table' | 'structured-list' | 'structured-list--flush'} config.kind ['data-table']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    border-spacing: 0;
+    inline-size: 100%;
+    margin-block: layout.$mode--margin-block;
+
+    & th {
+      @include layout.mode--heading-compact;
+      text-align: start;
+      color: theme.$text-primary;
+    }
+
+    & td {
+      @include layout.mode--body-compact;
+      color: theme.$text-secondary;
+      vertical-align: top;
+    }
+
+    & th,
+    & td {
+      block-size: layout.$size--block-size;
+      box-sizing: border-box;
+      border-block-end: 0.0625rem solid theme.$border-subtle;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline: layout.$density--padding;
+    }
+
+    & tbody:has(+ tfoot) tr:last-child th,
+    & tbody:has(+ tfoot) tr:last-child td,
+    & tfoot th,
+    & tfoot td {
+      border-block-end: 0;
+    }
+
+    & tfoot td {
+      color: theme.$text-primary;
+    }
+
+    & caption {
+      text-align: start;
+      @include layout.mode--helper-text;
+      padding: layout.$density--padding;
+    }
+
+    @if map.get($props, 'kind') == 'data-table' {
+      background-color: theme.$layer;
+
+      & tbody tr,
+      & tfoot tr {
+        @include layer.styles;
+      }
+
+      & th {
+        background-color: theme.$layer-accent;
+      }
+
+      & tr:hover {
+        @include layer.layer-background-hover;
+      }
+
+      & tfoot th,
+      & tfoot td {
+        border-block-start: 0.0625rem solid theme.$border-strong;
+      }
+
+      & caption {
+        background-color: theme.$layer;
+        color: theme.$text-secondary;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'structured-list' or map.get($props, 'kind') == 'structured-list--flush' {
+      & tfoot th,
+      & tfoot td {
+        border-block-start: 0.0625rem solid theme.$border-subtle;
+      }
+
+      & caption {
+        caption-side: bottom;
+        color: theme.$text-helper;
+        max-inline-size: layout.$mode--max-inline-size;
+      }
+    }
+
+    @if map.get($props, 'kind') == 'structured-list--flush' {
+      & th:first-child,
+      & td:first-child {
+        padding-inline-start: 0;
+      }
+
+      & th:last-child,
+      & td:last-child {
+        padding-inline-end: 0;
+      }
+
+      & caption {
+        padding-inline: 0;
+      }
+    }
+  }
+}

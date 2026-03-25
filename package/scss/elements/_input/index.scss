@@ -1,0 +1,92 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  emit-readonly: true,
+  emit-disabled: true,
+  emit-invalid: true,
+  emit-focus: true,
+);
+
+/// @group _input
+/// @param {Map} config [()]
+/// @param {Bool} config.emit-readonly [true]
+/// @param {Bool} config.emit-disabled [true]
+/// @param {Bool} config.emit-invalid [true]
+/// @param {Bool} config.emit-focus [true]
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  @include layout.mode--body-compact;
+  position: relative;
+  appearance: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  block-size: layout.$size--block-size;
+  padding-block-start: layout.$size--padding-block-start;
+  padding-block-end: layout.$size--padding-block-end;
+  padding-inline: layout.$density--padding;
+  background-color: theme.$field;
+  border-block-end: 0.0625rem solid theme.$border-strong;
+  box-sizing: border-box;
+  transition-property: color, background-color;
+  transition-duration: layout.$mode--transition-duration;
+  transition-timing-function: layout.$mode--transition-timing-function;
+
+  &::placeholder {
+    font: inherit;
+    color: theme.$text-placeholder;
+  }
+
+  @if map.get($props, 'emit-readonly') {
+    &:read-only {
+      background-color: transparent;
+      border-block-end-color: theme.$border-subtle;
+    }
+  }
+
+  @if map.get($props, 'emit-disabled') {
+    &:disabled {
+      color: theme.$text-disabled;
+      background-color: theme.$layer;
+      border-block-end-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+
+  @if map.get($props, 'emit-invalid') {
+    &:invalid,
+    &[aria-invalid="true"] {
+      outline-offset: -0.125rem;
+      outline: 0.125rem solid theme.$support-error;
+      border-block-end-color: transparent;
+    }
+  }
+
+  @if map.get($props, 'emit-focus') {
+    &:focus {
+      @include focus-outline.focus-outline('outline');
+    }
+
+    @if map.get($props, 'emit-invalid') {
+      &:focus:invalid,
+      &:focus[aria-invalid="true"] {
+        @include focus-outline.focus-outline('outline');
+      }
+    }
+  }
+}

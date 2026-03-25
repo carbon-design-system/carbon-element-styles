@@ -1,0 +1,52 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+@use '../../layout';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'label',
+  axis: 'block',
+);
+
+/// @group label
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label']
+/// @param {'block' | 'axis'} config.axis ['block']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    display: grid;
+    gap: spacing.$spacing-03;
+    color: theme.$text-secondary;
+
+    &:has([disabled]) {
+      color: theme.$text-disabled;
+    }
+
+    @if map.get($props, 'axis') == 'block' {
+      @include layout.mode--label;
+      // flex-direction: column;
+      grid-auto-flow: row;
+    }
+
+    @if map.get($props, 'axis') == 'inline' {
+      @include layout.mode--body-compact;
+      // flex-direction: row;
+      grid-auto-flow: column;
+      align-items: center;
+      inline-size: fit-content;
+    }
+  }
+}
