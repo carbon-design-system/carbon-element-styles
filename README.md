@@ -95,7 +95,7 @@ To compile the prebuilts, run the following command in this repository:
 npm run build:prebuilts
 ```
 
-The compiled and minfied CSS will be saved to `/dist/prebuilts` and can be copied to your project.
+The compiled and minfied CSS will be saved to `/css/prebuilts` and can be copied to your project.
 
 ## Emit Carbon tokens
 

@@ -14,7 +14,7 @@ import * as log from './utilities/log.ts';
 import { getBanner } from './utilities/get-banner.ts';
 
 const sourceDir = new URL('../scss/prebuilt', import.meta.url);
-const targetDir = new URL('../dist/prebuilt', import.meta.url);
+const targetDir = new URL('../css/prebuilt', import.meta.url);
 
 await mkdir(targetDir, {
   recursive: true,

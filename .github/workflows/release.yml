@@ -30,6 +30,9 @@ jobs:
       - name: Build project
         run: |
           npm run build
+      - name: Package prebuilts
+        run: |
+          tar -czf prebuilts.tar.gz -C css/prebuilt .
       - name: Configure git
         run: |
           git config user.name "${{ github.actor }}"
@@ -50,16 +53,26 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const fs = require('fs');
+
             const { owner, repo } = context.repo;
             const version = '${{ steps.parse_version.outputs.VERSION }}';
 
-            await github.rest.repos.createRelease({
+            const release = await github.rest.repos.createRelease({
               owner,
               repo,
               tag_name: version,
               name: version,
               prerelease: version.includes('-'),
               generate_release_notes: true,
+            });
+
+            await github.rest.repos.uploadReleaseAsset({
+              owner,
+              repo,
+              release_id: release.data.id,
+              name: 'prebuilts.tar.gz',
+              data: fs.readFileSync('./prebuilts.tar.gz'),
             });
       - name: Create npm release
         run: |
