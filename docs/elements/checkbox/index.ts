@@ -68,7 +68,7 @@ export const demos: Demo[] = [
     html: {
       raw: html,
     },
-    setup: (frame: HTMLElement) => {
+    setup: (frame) => {
       Array.from(frame.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'))
         .slice(-2)
         .forEach((checkbox) => {

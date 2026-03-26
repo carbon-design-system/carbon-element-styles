@@ -30,12 +30,12 @@ export const meta = {
 } as const satisfies Meta;
 
 const html = /* html */`
-<button onclick="this.nextElementSibling?.showModal?.()">
+<button commandfor="dialog--single" command="show-modal">
   Open single-button dialog
 </button>
 
-<dialog>
-  <form method="dialog" onsubmit="this.closest('dialog')?.close()">
+<dialog id="dialog--single">
+  <form method="dialog">
     <header>
       Dialog
     </header>
@@ -52,12 +52,12 @@ const html = /* html */`
 
 <br /><br />
 
-<button onclick="this.nextElementSibling?.showModal?.()">
+<button commandfor="dialog--two" command="show-modal">
   Open two-button dialog
 </button>
 
-<dialog>
-  <form method="dialog" onsubmit="this.closest('dialog')?.close()">
+<dialog id="dialog--two">
+  <form method="dialog">
     <header>
       Dialog
     </header>
@@ -67,7 +67,7 @@ const html = /* html */`
     </div>
 
     <footer>
-      <button type="button" onclick="this.closest('dialog')?.close()">Cancel</button>
+      <button type="button" commandfor="dialog--two" command="close">Cancel</button>
       <button type="submit">Ok</button>
     </footer>
   </form>
@@ -75,12 +75,12 @@ const html = /* html */`
 
 <br /><br />
 
-<button onclick="this.nextElementSibling?.showModal?.()">
+<button commandfor="dialog--three" command="show-modal">
   Open three-button dialog
 </button>
 
-<dialog>
-  <form method="dialog" onsubmit="this.closest('dialog')?.close()">
+<dialog id="dialog--three">
+  <form method="dialog">
     <header>
       Dialog
     </header>
@@ -90,7 +90,7 @@ const html = /* html */`
     </div>
 
     <footer>
-      <button type="button" onclick="this.closest('dialog')?.close()">Cancel</button>
+      <button type="button" commandfor="dialog--three" command="close">Cancel</button>
       <button type="button">Previous</button>
       <button type="submit">Next</button>
     </footer>
@@ -99,14 +99,14 @@ const html = /* html */`
 
 <br /><br />
 
-<button onclick="this.nextElementSibling?.showModal?.()">
+<button commandfor="dialog--passive" command="show-modal">
   Open passive dialog
 </button>
 
-<dialog>
+<dialog id="dialog--passive">
   <header>
     Dialog
-    <button type="button" onclick="this.closest('dialog')?.close()" aria-label="Close"></button>
+    <button type="button" commandfor="dialog--passive" command="close" aria-label="Close"></button>
   </header>
 
   <div>
