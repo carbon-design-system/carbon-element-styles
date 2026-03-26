@@ -1,6 +1,7 @@
 name: Deploy documentation
 
 on:
+  workflow_dispatch:
   push:
     tags:
       # Matches tags that have the shape `vX.Y.Z`. Reference:
