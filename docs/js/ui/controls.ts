@@ -25,14 +25,6 @@ export function setup() {
     density: densityIcon,
   };
 
-  for (const [key, value] of Object.entries(getEnvironment())) {
-    const select = target?.querySelector<HTMLSelectElement>(`select[data-control-id="${key}"]`);
-
-    if (select) {
-      select.value = value;
-    }
-  }
-
   for (const select of (target?.querySelectorAll('select') ?? [])) {
     const icon = icons[select.dataset.controlId];
 
@@ -57,8 +49,16 @@ export function setup() {
       });
     });
   }
+
+  update();
 }
 
 export function update() {
+  for (const [key, value] of Object.entries(getEnvironment())) {
+    const select = target?.querySelector<HTMLSelectElement>(`select[data-control-id="${key}"]`);
 
+    if (select) {
+      select.value = value;
+    }
+  }
 }
