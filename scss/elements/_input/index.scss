@@ -41,6 +41,7 @@ $-default-config: (
   padding-block-end: layout.$size--padding-block-end;
   padding-inline: layout.$density--padding;
   background-color: theme.$field;
+  color: theme.$text-primary;
   border-block-end: 0.0625rem solid theme.$border-strong;
   box-sizing: border-box;
   transition-property: color, background-color;
