@@ -43,5 +43,9 @@ $-default-config: (
         @include icons.time;
       }
     }
+
+    & ::-webkit-date-and-time-value {
+      text-align: start;
+    }
   }
 }
