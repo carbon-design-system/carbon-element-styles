@@ -1,0 +1,117 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../scss/layout';
+
+@use '../../../scss/elements/_layer';
+
+@use '../../../scss/elements/anchor';
+@use '../../../scss/elements/code';
+@use '../../../scss/elements/heading-level-5';
+@use '../../../scss/elements/label';
+@use '../../../scss/elements/preformatted';
+@use '../../../scss/elements/table';
+@use '../../../scss/elements/tabs';
+@use '../../../scss/elements/unordered-list';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+
+#docs {
+  border-block-start: 0.0625rem solid theme.$border-subtle;
+  background-color: theme.$layer;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  overflow: hidden;
+
+  @include tabs.styles;
+  @include heading-level-5.styles((
+    selector: 'h1',
+  ));
+  @include label.styles((
+    selector: 'h2',
+  ));
+  @include anchor.styles;
+  @include unordered-list.styles;
+  @include table.styles((
+    kind: 'structured-list--flush',
+  ));
+  @include preformatted.styles;
+  @include code.styles;
+}
+
+#docs [role="tabpanel"] {
+  position: relative;
+}
+
+#docs [role="tabpanel"] > div {
+  position: absolute;
+  inset: 0;
+  padding: spacing.$spacing-05;
+  overflow-y: auto;
+}
+
+#docs [role="tabpanel"] > div *:first-child {
+  margin-block-start: 0;
+}
+
+#docs table {
+  @include layer.styles;
+}
+
+#docs td code {
+  padding-inline: 0;
+}
+
+#docs pre {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+#docs [role="tabpanel"]::before,
+#docs [role="tabpanel"]::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: 1.5rem;
+  z-index: 1;
+}
+
+#docs [role="tabpanel"]::before {
+  inset-block-start: 0;
+  background-image: linear-gradient(
+    0deg,
+    transparent,
+    theme.$layer,
+  );
+}
+
+#docs [role="tabpanel"]::after {
+  inset-block-end: 0;
+  background-image: linear-gradient(
+    transparent,
+    theme.$layer,
+  );
+}
+
+#docs [role="tablist"] {
+  border-block-end: 0.0625rem solid theme.$border-subtle;
+}
+
+#docs__tabpanel--overview .overview > section {
+  margin-block-end: spacing.$spacing-05;
+}
+
+#docs__tabpanel--overview .overview h2 {
+  margin-block-start: 0;
+  margin-block-end: spacing.$spacing-01;
+}
+
+#docs__tabpanel--overview .overview ul {
+  margin-block: 0;
+}

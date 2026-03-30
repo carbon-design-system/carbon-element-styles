@@ -88,7 +88,7 @@ $-default-config: (
       box-shadow: inset 0 -0.25rem 0 0 theme.$border-interactive;
     }
 
-    & > nav a:first-child {
+    & > nav a {
       @include layout.mode--body-compact;
       color: theme.$text-primary;
       text-decoration: none;
@@ -103,12 +103,12 @@ $-default-config: (
       }
     }
 
-    & > nav a:first-child + ul {
+    & > nav a + ul {
       margin-inline-start: layout.$density--padding;
       padding-inline-start: layout.$density--padding;
     }
 
-    & > nav a:first-child + ul::before {
+    & > nav a + ul::before {
       content: '';
       display: block;
       inline-size: 0.0625rem;

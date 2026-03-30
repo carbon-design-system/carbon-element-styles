@@ -1,0 +1,28 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../scss/layout';
+
+@use '@carbon/styles/scss/theme';
+
+#demo {
+  @include layout.mode--body;
+  overflow: auto;
+  padding: 2rem;
+  translate: 0 0;
+}
+
+#fade {
+  block-size: 1.5rem;
+  background-image: linear-gradient(
+    transparent,
+    theme.$layer-background,
+  );
+  opacity: 0.5;
+  translate: 0 -100%;
+  pointer-events: none;
+}

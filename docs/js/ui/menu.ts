@@ -11,7 +11,7 @@ import {
 } from '../environment';
 import * as elements from '../../elements';
 
-const target = document.querySelector('body > nav > ul');
+const target = document.querySelector('#menu > ul');
 
 export function setup() {
   target?.replaceChildren(...(

@@ -1,0 +1,71 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../scss/layout';
+
+@use '../../../scss/elements/select';
+
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/breakpoint';
+
+#controls {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: layout.$density--padding;
+  padding-inline-end: layout.$density--padding;
+}
+
+#controls label:has(select) {
+  @include layout.density('condensed');
+  @include select.styles((
+    selector: '&',
+    axis: 'inline',
+  ));
+}
+
+@include breakpoint.breakpoint-down('lg') {
+  #controls {
+    inline-size: 16rem;
+    position: fixed;
+    flex-direction: column;
+    background-color: theme.$layer-background;
+    align-items: start;
+    justify-content: start;
+    inset-inline-end: 0;
+    inset-block-start: calc(layout.$size--block-size + 0.0625rem);
+    inset-block-end: 0;
+    padding-inline: 0;
+    padding-block-start: layout.$density--padding;
+    border-inline-start: 0.0625rem solid theme.$border-subtle;
+    transition: translate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+  }
+
+  #controls label:has(select) {
+    @include layout.density('normal');
+    @include layout.size('sm');
+    inline-size: 100%;
+    grid-template-columns: min-content 1fr;
+    transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+    &:hover {
+      background-color: theme.$layer-hover;
+    }
+
+    & select:enabled:hover {
+      background-color: transparent;
+    }
+
+    & > svg {
+      padding-inline-start: layout.$density--padding;
+    }
+  }
+
+  body:has(> header > button:last-child[aria-expanded="false"]) #controls {
+    translate: 100% 0;
+  }
+}

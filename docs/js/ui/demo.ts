@@ -22,6 +22,7 @@ export function update() {
 
   if (target && demo) {
     target.innerHTML = demo.html.raw;
+    demo.setup?.(target);
 
     for (const [key, value] of Object.entries(getEnvironment())) {
       target.setAttribute(`data-${prefix}-${key}`, value);
