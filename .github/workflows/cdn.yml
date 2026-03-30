@@ -49,7 +49,7 @@ jobs:
           upload() {
             local DEST=$1
             echo "Uploading to $DEST"
-            aws s3 sync css/prebuilt \
+            aws s3 sync css \
               s3://${{ secrets.COMMON_COS_BUCKET }}/$DEST \
               --acl public-read \
               --follow-symlinks \
