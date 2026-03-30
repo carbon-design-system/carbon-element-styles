@@ -159,6 +159,10 @@ $-default-config: (
       &:has(> svg:not(:only-child)) > svg {
         margin-inline-start: spacing.$spacing-03;
       }
+
+      &:enabled > svg:only-child {
+        color: theme.$icon-primary;
+      }
     }
 
     @if map.get($props, 'kind') == 'danger--primary' {
