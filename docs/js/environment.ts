@@ -9,6 +9,7 @@ import { prefix } from './config';
 import * as elementExports from '../elements';
 
 export const RequestRenderEvent = `${prefix}:request-render`;
+export const EnvironmentChangeEvent = `${prefix}:environment-change`;
 
 export const Elements = Object.values(elementExports).map((e) => e.meta.id);
 
@@ -57,6 +58,7 @@ export function set(environment: Partial<DemoEnvironmentOptions>) {
   window.history.pushState(null, '', url.href);
 
   window.dispatchEvent(new Event(RequestRenderEvent));
+  window.dispatchEvent(new Event(EnvironmentChangeEvent));
 }
 
 function isValidElement(id: string | null): id is DemoEnvironmentOptions['element'] {

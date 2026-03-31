@@ -160,8 +160,12 @@ $-default-config: (
         margin-inline-start: spacing.$spacing-03;
       }
 
-      &:enabled > svg:only-child {
+      & > svg:only-child {
         color: theme.$icon-primary;
+      }
+
+      &:disabled > svg:only-child {
+        color: theme.$icon-disabled;
       }
     }
 

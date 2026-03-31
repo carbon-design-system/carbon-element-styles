@@ -1,0 +1,47 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' ;
+
+@use '../../../scss/layout';
+
+:host {
+  position: relative;
+}
+
+:host > div {
+  position: absolute;
+  inset: 0;
+  padding: layout.$density--padding;
+  overflow-y: auto;
+}
+
+:host::before,
+:host::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: 1.5rem;
+  z-index: 1;
+}
+
+:host::before {
+  inset-block-start: 0;
+  background-image: linear-gradient(
+    0deg,
+    transparent,
+    theme.$layer,
+  );
+}
+
+:host::after {
+  inset-block-end: 0;
+  background-image: linear-gradient(
+    transparent,
+    theme.$layer,
+  );
+}

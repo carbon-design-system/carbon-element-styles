@@ -15,106 +15,72 @@ LICENSE file in the root directory of this source tree.
   </head>
   <body>
     <header>
+      <docs-panel-toggle-button
+        id="menu-toggle-button"
+        label="navigation"
+        auto-close-on-environment-change="true"
+      ></docs-panel-toggle-button>
       <nav>
         <a href="#">
           Carbon
           <b>element styles</b>
-          <span class="version"></span>
+          <span id="version"></span>
         </a>
       </nav>
 
       <div></div>
 
       <div id="controls">
-        <label>
-          <select aria-label="Theme" data-control-id="theme">
-            <option value="white">White</option>
-            <option value="g10">Gray 10</option>
-            <option value="g90">Gray 90</option>
-            <option value="g100">Gray 100</option>
-          </select>
-        </label>
-        <label>
-          <select aria-label="Mode" data-control-id="mode">
-            <option value="productive">Productive</option>
-            <option value="expressive">Expressive</option>
-          </select>
-        </label>
-        <label>
-          <select aria-label="Size" data-control-id="size">
-            <option value="xs">XS</option>
-            <option value="sm">SM</option>
-            <option value="md">MD</option>
-            <option value="lg">LG</option>
-            <option value="xl">XL</option>
-          </select>
-        </label>
-        <label>
-          <select aria-label="Density" data-control-id="density">
-            <option value="condensed">Condensed</option>
-            <option value="normal">Normal</option>
-          </select>
-        </label>
+        <docs-control label="Theme" key="theme">
+          <docs-control-option label="White" value="white"></docs-control-option>
+          <docs-control-option label="Gray 10" value="g10"></docs-control-option>
+          <docs-control-option label="Gray 90" value="g90"></docs-control-option>
+          <docs-control-option label="Gray 100" value="g100"></docs-control-option>
+        </docs-control>
+        <docs-control label="Mode" key="mode">
+          <docs-control-option label="Productive" value="productive"></docs-control-option>
+          <docs-control-option label="Expressive" value="expressive"></docs-control-option>
+        </docs-control>
+        <docs-control label="Size" key="size">
+          <docs-control-option label="XS" value="xs"></docs-control-option>
+          <docs-control-option label="SM" value="sm"></docs-control-option>
+          <docs-control-option label="MD" value="md"></docs-control-option>
+          <docs-control-option label="LG" value="lg"></docs-control-option>
+          <docs-control-option label="XL" value="xl"></docs-control-option>
+        </docs-control>
+        <docs-control label="Density" key="density">
+          <docs-control-option label="Condensed" value="condensed"></docs-control-option>
+          <docs-control-option label="Normal" value="normal"></docs-control-option>
+        </docs-control>
       </div>
+
+      <docs-panel-toggle-button
+        id="controls-toggle-button"
+        label="controls"
+      ></docs-panel-toggle-button>
     </header>
 
-    <nav id="menu">
-      <ul></ul>
-    </nav>
+    <docs-menu id="menu"></docs-menu>
 
     <main>
-      <div id="demo"></div>
+      <docs-demo></docs-demo>
       <div id="fade"></div>
-      <div id="docs">
-        <div role="tablist">
-          <button role="tab" type="submit" id="docs__tab--overview" aria-controls="docs__tabpanel--overview" aria-selected="false">Overview</button>
-          <button role="tab" type="submit" id="docs__tab--config" aria-controls="docs__tabpanel--config" aria-selected="false">Configuration</button>
-          <button role="tab" type="submit" id="docs__tab--html" aria-controls="docs__tabpanel--html" aria-selected="false">HTML</button>
-          <button role="tab" type="submit" id="docs__tab--scss" aria-controls="docs__tabpanel--scss" aria-selected="false">SCSS</button>
-        </div>
-        <div role="tabpanel" id="docs__tabpanel--overview" aria-labelledby="docs__tab--overview" hidden>
-          <div>
-            <h1></h1>
-            <div class="overview">
-              <section>
-                <h2>References</h2>
-                <ul></ul>
-              </section>
-              <section>
-                <h2>Notes</h2>
-                <ul></ul>
-              </section>
-            </div>
-            <ul></ul>
-          </div>
-        </div>
-        <div role="tabpanel" id="docs__tabpanel--config" aria-labelledby="docs__tab--config" hidden>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Option</th>
-                  <th>Type</th>
-                  <th>Default</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-        <div role="tabpanel" id="docs__tabpanel--html" aria-labelledby="docs__tab--html" hidden>
-          <div>
-<pre><code></code></pre>
-          </div>
-        </div>
-        <div role="tabpanel" id="docs__tabpanel--scss" aria-labelledby="docs__tab--scss" hidden>
-          <div>
-<pre><code></code></pre>
-          </div>
-        </div>
-      </div>
+      <docs-tabs>
+        <docs-tab-panel label="Overview">
+          <docs-element-overview></docs-element-overview>
+        </docs-tab-panel>
+        <docs-tab-panel label="Configuration">
+          <docs-api-table></docs-api-table>
+        </docs-tab-panel>
+        <docs-tab-panel label="HTML">
+          <docs-source-code kind="html"></docs-source-code>
+        </docs-tab-panel>
+        <docs-tab-panel label="SCSS">
+          <docs-source-code kind="scss"></docs-source-code>
+        </docs-tab-panel>
+      </docs-tabs>
     </main>
 
-    <script type="module" src="./js"></script>
+    <script type="module" src="./ui"></script>
   </body>
 </html>
