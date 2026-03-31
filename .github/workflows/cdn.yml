@@ -59,7 +59,7 @@ jobs:
         
           # Upload the CDN artifacts to the `latest` tag folder
           # ie. https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/editorial.css
-         TAG=$(echo "${{ steps.package-version.outputs.current-version }}" | grep -q '-' && echo "next" || echo "latest")
+          TAG=$(echo "${{ steps.package-version.outputs.current-version }}" | grep -q '-' && echo "next" || echo "latest")
           upload "common/carbon/element-styles/tag/v0/$TAG"          
 
           # Upload the CDN artifacts to versioned folder
