@@ -17,11 +17,9 @@
   @include element-styles.emit-carbon-colors;
 
   @include element-styles.emit-carbon-tokens('white');
-  color-scheme: light;
 
   @media (prefers-color-scheme: dark) {
     @include element-styles.emit-carbon-tokens('g100');
-    color-scheme: dark;
   }
 }
 

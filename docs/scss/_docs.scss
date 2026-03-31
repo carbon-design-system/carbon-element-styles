@@ -10,7 +10,7 @@
 @use '../../scss/config';
 
 @mixin demo($element, $demo) {
-  [data-#{carbon-config.$prefix}-#{config.$prefix}-element="#{$element}"][data-#{carbon-config.$prefix}-#{config.$prefix}-demo="#{$demo}"] {
+  :host([data-#{carbon-config.$prefix}-#{config.$prefix}-element="#{$element}"][data-#{carbon-config.$prefix}-#{config.$prefix}-demo="#{$demo}"]) {
     @content;
   }
 }

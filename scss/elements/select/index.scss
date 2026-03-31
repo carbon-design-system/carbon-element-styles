@@ -50,7 +50,6 @@ $-default-config: (
 
     & select {
       cursor: pointer;
-      color: inherit;
 
       &:enabled:hover {
         background-color: theme.$field-hover;

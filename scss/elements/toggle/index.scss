@@ -51,6 +51,7 @@ $-knob-size: calc($-block-size - $-knob-spacing * 2);
       inline-size: $-inline-size;
       border-radius: calc($-block-size * 0.5);
       background-color: theme.$toggle-off;
+      color: theme.$text-primary;
       transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
       cursor: pointer;
 
@@ -58,6 +59,7 @@ $-knob-size: calc($-block-size - $-knob-spacing * 2);
       &[aria-checked="true"]:disabled {
         background-color: carbon-button.$button-disabled;
         cursor: not-allowed;
+        color: theme.$text-disabled;
 
         &::before {
           background-color: theme.$icon-on-color-disabled;

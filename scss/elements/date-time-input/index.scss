@@ -43,5 +43,9 @@ $-default-config: (
         @include icons.event--schedule;
       }
     }
+
+    & ::-webkit-date-and-time-value {
+      text-align: start;
+    }
   }
 }
