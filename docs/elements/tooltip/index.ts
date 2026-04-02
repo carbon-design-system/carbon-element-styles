@@ -60,15 +60,15 @@ export const demos: Demo[] = [
     },
     setup: (frame) => {
       for (const button of frame.querySelectorAll('button')) {
-        const tooltip = button?.querySelector<HTMLElement>('[popover="hint"]');
+        const tooltip = button.querySelector<HTMLElement>('[popover="hint"]');
 
-        button?.addEventListener('mouseover', () => {
+        button.addEventListener('mouseover', () => {
           tooltip?.showPopover({
             source: button,
           });
         });
 
-        button?.addEventListener('mouseout', () => {
+        button.addEventListener('mouseout', () => {
           tooltip?.hidePopover();
         });
       }
