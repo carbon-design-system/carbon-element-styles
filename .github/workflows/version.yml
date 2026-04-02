@@ -58,10 +58,16 @@ jobs:
           git add .
           git commit -m "$COMMIT_MESSAGE"
           git push
+      - name: Create GitHub app token
+        id: generate_token
+        uses: actions/create-github-app-token@v3.0.0
+        with:
+          app-id: ${{ secrets.CARBON_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.CARBON_AUTOMATION_APP_PRIVATE_KEY }}
       - name: Create pull request
         uses: actions/github-script@v8
         with:
-          github-token: ${{ secrets.CARBON_BOT_PAT }}
+          github-token: ${{ steps.generate_token.outputs.token }}
           script: |
             const { owner, repo } = context.repo;
             await github.rest.pulls.create({
