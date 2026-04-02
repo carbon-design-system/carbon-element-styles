@@ -7,6 +7,8 @@
 
 import type { Demo, Meta } from '../../js/_types';
 
+import exportIcon from '@carbon/icons/svg/32/export.svg?raw';
+
 export const meta = {
   id: 'tooltip',
   name: 'Tooltip',
@@ -37,6 +39,16 @@ const html = /* html */`
     Tooltip
   </div>
 </button>
+
+<br /><br />
+
+<button>
+  ${exportIcon}
+
+  <div popover="hint">
+    Export
+  </div>
+</button>
 `;
 
 export const demos: Demo[] = [
@@ -47,18 +59,19 @@ export const demos: Demo[] = [
       raw: html,
     },
     setup: (frame) => {
-      const button = frame.querySelector('button');
-      const tooltip = button?.querySelector<HTMLElement>('[popover="hint"]');
+      for (const button of frame.querySelectorAll('button')) {
+        const tooltip = button?.querySelector<HTMLElement>('[popover="hint"]');
 
-      button?.addEventListener('mouseover', () => {
-        tooltip?.showPopover({
-          source: button,
+        button?.addEventListener('mouseover', () => {
+          tooltip?.showPopover({
+            source: button,
+          });
         });
-      });
 
-      button?.addEventListener('mouseout', () => {
-        tooltip?.hidePopover();
-      });
+        button?.addEventListener('mouseout', () => {
+          tooltip?.hidePopover();
+        });
+      }
     },
   },
 ];

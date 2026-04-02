@@ -35,6 +35,7 @@ $-default-config: (
     box-shadow: none;
     border-radius: 0;
     text-align: start;
+    display: flex;
     block-size: layout.$size--block-size;
     padding-block-start: layout.$size--padding-block-start;
     padding-block-end: layout.$size--padding-block-end;
@@ -70,10 +71,15 @@ $-default-config: (
       }
     }
 
-    &:has(> svg:only-child) {
+    &:has(> svg:only-child),
+    &:has(> svg:first-child + [popover="hint"]:last-child) {
       padding-inline: unset;
       aspect-ratio: 1;
-      text-align: center;
+      justify-content: center;
+
+       & > svg {
+        margin-inline: 0;
+       }
     }
 
     @if map.get($props, 'kind') == 'primary' {

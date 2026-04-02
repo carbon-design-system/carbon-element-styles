@@ -8,6 +8,7 @@
 @use '../../scss/docs';
 @use '../../../scss/elements/popover';
 
+@use '../../../scss/elements/button';
 @use '../../../scss/elements/text-input';
 @use '../../../scss/elements/tile';
 
@@ -17,6 +18,7 @@ $name: 'popover';
   @include popover.styles;
 
   // ↓ for demo only ↓
+  @include button.styles;
   @include text-input.styles;
   @include tile.styles;
 };
@@ -27,6 +29,7 @@ $name: 'popover';
   ));
 
   // ↓ for demo only ↓
+  @include button.styles;
   @include text-input.styles;
   @include tile.styles;
 };
@@ -37,6 +40,7 @@ $name: 'popover';
   ));
 
   // ↓ for demo only ↓
+  @include button.styles;
   @include text-input.styles;
   @include tile.styles;
 };

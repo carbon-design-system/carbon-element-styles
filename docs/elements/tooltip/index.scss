@@ -8,8 +8,13 @@
 @use '../../scss/docs';
 @use '../../../scss/elements/tooltip';
 
+@use '../../../scss/elements/button';
+
 $name: 'tooltip';
 
 @include docs.demo($name, 'default') {
   @include tooltip.styles;
+
+  // ↓ for demo only ↓
+  @include button.styles;
 };

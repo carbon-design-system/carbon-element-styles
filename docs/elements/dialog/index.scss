@@ -8,6 +8,7 @@
 @use '../../scss/docs';
 @use '../../../scss/elements/dialog';
 
+@use '../../../scss/elements/button';
 @use '../../../scss/elements/paragraph';
 
 $name: 'dialog';
@@ -16,5 +17,6 @@ $name: 'dialog';
   @include dialog.styles;
 
   // --- ↓ for demo only ↓ ---
+  @include button.styles;
   @include paragraph.styles;
 };

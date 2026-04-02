@@ -30,15 +30,14 @@ export class DocsApiTable extends HTMLElement {
       this.#table.querySelector('tbody')?.replaceChildren(...meta.config.map((c) => {
         const row = document.createElement('tr');
 
-        row.append(...['key', 'type', 'default'].map((key) => {
-          const cell = document.createElement('td');
+        for (const key of ['key', 'type', 'default']) {
+          const cell = row.insertCell();
           const code = document.createElement('code');
 
           code.innerText = c[key as keyof typeof meta.config[0]];
 
           cell.appendChild(code);
-          return cell;
-        }));
+        };
 
         return row;
       }));
@@ -47,15 +46,12 @@ export class DocsApiTable extends HTMLElement {
 
   #createTableHead(): HTMLTableSectionElement {
     const thead = document.createElement('thead');
-    const tr = document.createElement('tr');
+    const row = thead.insertRow();
 
     for (const label of ['Option', 'Type', 'Default']) {
-      const cell = document.createElement('th');
+      const cell = row.insertCell();
       cell.textContent = label;
-      tr.appendChild(cell);
     }
-
-    thead.appendChild(tr);
 
     return thead;
   }
