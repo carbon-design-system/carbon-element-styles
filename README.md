@@ -15,6 +15,21 @@
 npm i @carbon/element-styles
 ```
 
+#### CDN
+
+You can also use any of the [prebuilt stylesheets](#using-prebuilts) via our CDN:
+
+```html
+<!-- specific version (recommended) -->
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/element-styles/version/v[x.y.z]/prebuilt/expressive.css" />
+
+<!-- "latest" tag -->
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/prebuilt/expressive.css" />
+
+<!-- "next" tag -->
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/element-styles/tag/v0/next/prebuilt/expressive.css" />
+```
+
 ### Importing individual elements
 
 To make use of individual elements, import them via `@use` and include their `styles` mixin in your Sass stylesheets:
@@ -83,19 +98,68 @@ Combining these options with custom selectors means you can emit multiple varian
 
 This library offers several prebuilt (opinionated) stylesheets you can use out-of-the-box:
 
-| Name | Path | Usage |
-| :- | :- | :- |
-| Productive | `/scss/prebuilt/productive.scss` | Includes all available elements with their default selectors. Uses a productive style with medium sized elements. Intended for interaction-heavy pages. |
-| Expressive | `/scss/prebuilt/expressive.scss` | Includes all available elements with their default selectors. Uses an expressive style with large sized elements. Intended for content-heavy pages such as marketing or documentation. |
-| Editorial | `/scss/prebuilt/editorial.scss` | Only includes non-interactive elements with their default selectors. Uses an expressive style with large elements. Intended for content-only pages such as blogs and styling raw markdown. |
+#### Productive
 
-To compile the prebuilts, run the following command in this repository:
+Includes all available elements with their default selectors. Uses a productive style with medium sized elements. Intended for interaction-heavy pages.
 
-```console
-npm run build:prebuilts
-```
+<table>
+  <tbody>
+    <tr>
+      <th>SCSS</th>
+      <td><code>/scss/prebuilt/productive.scss</code></td>
+    </tr>
+    <tr>
+      <th>CSS</th>
+      <td><code>/css/prebuilt/productive.css</code></td>
+    </tr>
+    <tr>
+      <th>CDN</th>
+      <td>https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/prebuilt/productive.css</td>
+    </tr>
+  </tbody>
+</table>
 
-The compiled and minfied CSS will be saved to `/css/prebuilts` and can be copied to your project.
+#### Expressive
+
+Includes all available elements with their default selectors. Uses an expressive style with large sized elements. Intended for content-heavy pages such as marketing or documentation.
+
+<table>
+  <tbody>
+    <tr>
+      <th>SCSS</th>
+      <td><code>/scss/prebuilt/expressive.scss</code></td>
+    </tr>
+    <tr>
+      <th>CSS</th>
+      <td><code>/css/prebuilt/expressive.css</code></td>
+    </tr>
+    <tr>
+      <th>CDN</th>
+      <td>https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/prebuilt/expressive.css</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Editorial
+
+Only includes non-interactive elements with their default selectors. Uses an expressive style with large elements. Intended for content-only pages such as blogs and styling raw markdown.
+
+<table>
+  <tbody>
+    <tr>
+      <th>SCSS</th>
+      <td><code>/scss/prebuilt/editorial.scss</code></td>
+    </tr>
+    <tr>
+      <th>CSS</th>
+      <td><code>/css/prebuilt/editorial.css</code></td>
+    </tr>
+    <tr>
+      <th>CDN</th>
+      <td>https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/prebuilt/editorial.css</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Emit Carbon tokens
 
