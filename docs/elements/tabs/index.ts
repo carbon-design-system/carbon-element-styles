@@ -76,7 +76,7 @@ const setup = (frame: HTMLElement) => {
       const targetId = tab.getAttribute('aria-controls');
 
       if (targetId) {
-        const target = document.getElementById(targetId);
+        const target = frame.querySelector(`#${targetId}`);
 
         if (target) {
           frame.querySelectorAll('[role="tab"]').forEach((t) => {
