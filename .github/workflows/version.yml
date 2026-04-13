@@ -65,7 +65,7 @@ jobs:
           app-id: ${{ secrets.CARBON_AUTOMATION_APP_ID }}
           private-key: ${{ secrets.CARBON_AUTOMATION_APP_PRIVATE_KEY }}
       - name: Create pull request
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           github-token: ${{ steps.generate_token.outputs.token }}
           script: |
