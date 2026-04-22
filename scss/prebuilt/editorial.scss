@@ -31,6 +31,7 @@
 @use '../elements/heading-level-5';
 @use '../elements/heading-level-6';
 @use '../elements/horizontal-rule';
+@use '../elements/image';
 @use '../elements/inline-quotation';
 @use '../elements/inserted-text';
 @use '../elements/italic-text';
@@ -80,6 +81,7 @@
 @include heading-level-5.styles;
 @include heading-level-6.styles;
 @include horizontal-rule.styles;
+@include image.styles;
 @include inline-quotation.styles;
 @include inserted-text.styles;
 @include italic-text.styles;

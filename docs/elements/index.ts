@@ -32,6 +32,7 @@ export * as headingLevel4 from './heading-level-4';
 export * as headingLevel5 from './heading-level-5';
 export * as headingLevel6 from './heading-level-6';
 export * as horizontalRule from './horizontal-rule';
+export * as image from './image';
 export * as inlineLoading from './inline-loading';
 export * as inlineQuotation from './inline-quotation';
 export * as insertedText from './inserted-text';

@@ -1,0 +1,25 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:map';
+
+$config: () !default;
+
+$-default-config: (
+  selector: 'img, picture',
+);
+
+/// @group image
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['img, picture']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, 'selector')} {
+    max-inline-size: 100%;
+  }
+}
