@@ -25,6 +25,8 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   #{map.get($props, 'selector')} {
+    @include layout.mode--body;
+    background-color: theme.$background;
     margin: 0;
   }
 }
