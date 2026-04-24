@@ -162,9 +162,7 @@ $-modes: (
       ),
       quotation: (
         name: 'fluid-quotation-01',
-        style: map.merge(type.$fluid-quotation-01, (
-          font-family: type.font-family('serif'),
-        )),
+        style: type.$fluid-quotation-01,
       ),
       heading-level-1: (
         name: 'fluid-heading-06',
