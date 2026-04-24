@@ -32,7 +32,7 @@ $-modes: (
       ),
       body-compact: (
         name: 'body-compact-01',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$body-compact-01, (
           font-family: type.font-family('sans'),
         )),
       ),
@@ -44,19 +44,19 @@ $-modes: (
       ),
       heading-compact: (
         name: 'heading-compact-01',
-        style: map.merge(type.$heading-01, (
+        style: map.merge(type.$heading-compact-01, (
           font-family: type.font-family('sans'),
         )),
       ),
       label: (
         name: 'label-01',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$label-01, (
           font-family: type.font-family('sans'),
         )),
       ),
       helper-text: (
         name: 'helper-text-01',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$helper-text-01, (
           font-family: type.font-family('sans'),
         )),
       ),
@@ -120,37 +120,37 @@ $-modes: (
     type-styles: (
       body: (
         name: 'body-02',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$body-02, (
           font-family: type.font-family('sans'),
         )),
       ),
       body-compact: (
         name: 'body-compact-02',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$body-compact-02, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading: (
         name: 'heading-02',
-        style: map.merge(type.$heading-01, (
+        style: map.merge(type.$heading-02, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading-compact: (
         name: 'heading-compact-02',
-        style: map.merge(type.$heading-01, (
+        style: map.merge(type.$heading-compact-02, (
           font-family: type.font-family('sans'),
         )),
       ),
       label: (
         name: 'label-02',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$label-02, (
           font-family: type.font-family('sans'),
         )),
       ),
       helper-text: (
         name: 'helper-text-02',
-        style: map.merge(type.$body-01, (
+        style: map.merge(type.$helper-text-02, (
           font-family: type.font-family('sans'),
         )),
       ),
@@ -161,8 +161,10 @@ $-modes: (
         )),
       ),
       quotation: (
-        name: 'quotation',
-        style: type.$quotation-01,
+        name: 'fluid-quotation-01',
+        style: map.merge(type.$fluid-quotation-01, (
+          font-family: type.font-family('serif'),
+        )),
       ),
       heading-level-1: (
         name: 'fluid-heading-06',
