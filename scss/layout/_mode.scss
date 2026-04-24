@@ -73,38 +73,38 @@ $-modes: (
         )),
       ),
       heading-level-1: (
-        name: 'heading-07',
-        style: map.merge(type.$heading-07, (
-          font-family: type.font-family('sans'),
-        )),
-      ),
-      heading-level-2: (
         name: 'heading-06',
         style: map.merge(type.$heading-06, (
           font-family: type.font-family('sans'),
         )),
       ),
-      heading-level-3: (
+      heading-level-2: (
         name: 'heading-05',
         style: map.merge(type.$heading-05, (
           font-family: type.font-family('sans'),
         )),
       ),
-      heading-level-4: (
+      heading-level-3: (
         name: 'heading-04',
         style: map.merge(type.$heading-04, (
           font-family: type.font-family('sans'),
         )),
       ),
-      heading-level-5: (
+      heading-level-4: (
         name: 'heading-03',
         style: map.merge(type.$heading-03, (
           font-family: type.font-family('sans'),
         )),
       ),
-      heading-level-6: (
+      heading-level-5: (
         name: 'heading-02',
         style: map.merge(type.$heading-02, (
+          font-family: type.font-family('sans'),
+        )),
+      ),
+      heading-level-6: (
+        name: 'heading-01',
+        style: map.merge(type.$heading-01, (
           font-family: type.font-family('sans'),
         )),
       ),
@@ -165,38 +165,38 @@ $-modes: (
         style: type.$quotation-01,
       ),
       heading-level-1: (
-        name: 'fluid-display-02',
-        style: map.merge(type.$fluid-display-02, (
+        name: 'fluid-heading-06',
+        style: map.merge(type.$fluid-heading-06, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading-level-2: (
-        name: 'fluid-display-01',
-        style: map.merge(type.$fluid-display-01, (
+        name: 'fluid-heading-05',
+        style: map.merge(type.$fluid-heading-05, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading-level-3: (
-        name: 'fluid-heading-05',
+        name: 'fluid-heading-04',
         style: map.merge(type.$fluid-heading-04, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading-level-4: (
-        name: 'fluid-heading-04',
+        name: 'fluid-heading-03',
         style: map.merge(type.$fluid-heading-03, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading-level-5: (
-        name: 'heading-03',
-        style: map.merge(type.$heading-03, (
+        name: 'heading-02',
+        style: map.merge(type.$heading-02, (
           font-family: type.font-family('sans'),
         )),
       ),
       heading-level-6: (
-        name: 'heading-02',
-        style: map.merge(type.$heading-02, (
+        name: 'heading-01',
+        style: map.merge(type.$heading-01, (
           font-family: type.font-family('sans'),
         )),
       ),
