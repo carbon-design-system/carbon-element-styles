@@ -12,7 +12,8 @@
   "files": [
     "index.scss",
     "scss",
-    "css"
+    "css",
+    "telemetry.yml"
   ],
   "keywords": [
     "ibm",
