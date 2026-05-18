@@ -34,6 +34,12 @@
   }
 }
 
+@include breakpoint.breakpoint-down('lg') {
+  body > header {
+    @include element-styles.density('condensed');
+  }
+}
+
 body > header div:empty {
   inline-size: 100%;
 }
