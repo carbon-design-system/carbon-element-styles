@@ -83,7 +83,7 @@ jobs:
       - name: Create npm release
         run: |
           TAG=$(echo "${{ steps.parse_version.outputs.version }}" | grep -q '-' && echo "next" || echo "latest")
-          npm publish -tag $TAG
+          npm publish --tag $TAG
   publish-cdn:
     needs: release
     uses: ./.github/workflows/cdn.yml
