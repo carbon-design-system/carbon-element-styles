@@ -25,7 +25,7 @@ for (const file of await readdir(sourceDir)) {
   log.info(`Building ${name}…`);
 
   try {
-    const { css } = compile(fileURLToPath(new URL(`${sourceDir}/${file}`)), {
+    const { css } = compile(fileURLToPath(new URL(`${sourceDir}/${file}/index.scss`)), {
       style: 'compressed',
       sourceMap: false,
       loadPaths: [

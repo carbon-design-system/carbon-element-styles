@@ -106,7 +106,7 @@ Includes all available elements with their default selectors. Uses a productive 
   <tbody>
     <tr>
       <th>SCSS</th>
-      <td><code>/scss/prebuilt/productive.scss</code></td>
+      <td><code>/scss/prebuilt/productive/index.scss</code></td>
     </tr>
     <tr>
       <th>CSS</th>
@@ -127,7 +127,7 @@ Includes all available elements with their default selectors. Uses an expressive
   <tbody>
     <tr>
       <th>SCSS</th>
-      <td><code>/scss/prebuilt/expressive.scss</code></td>
+      <td><code>/scss/prebuilt/expressive/index.scss</code></td>
     </tr>
     <tr>
       <th>CSS</th>
@@ -148,7 +148,7 @@ Only includes non-interactive elements with their default selectors. Uses an exp
   <tbody>
     <tr>
       <th>SCSS</th>
-      <td><code>/scss/prebuilt/editorial.scss</code></td>
+      <td><code>/scss/prebuilt/editorial/index.scss</code></td>
     </tr>
     <tr>
       <th>CSS</th>
