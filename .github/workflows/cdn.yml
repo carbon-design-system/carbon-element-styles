@@ -3,6 +3,17 @@ name: Publish CDN artifacts to Cloud Object Storage
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      COMMON_COS_BUCKET:
+        required: true
+      COMMON_COS_ACCESS_KEY_ID:
+        required: true
+      COMMON_COS_SECRET_ACCESS_KEY:
+        required: true
+      COMMON_COS_REGION:
+        required: true
+      COMMON_COS_ENDPOINT:
+        required: true
 
 jobs:
   publish-cdn:

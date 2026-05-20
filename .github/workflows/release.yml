@@ -87,6 +87,7 @@ jobs:
   publish-cdn:
     needs: release
     uses: ./.github/workflows/cdn.yml
+    secrets: inherit
   deploy-docs:
     needs: release
     uses: ./.github/workflows/deploy-docs.yml
