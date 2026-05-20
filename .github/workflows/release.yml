@@ -11,7 +11,6 @@ concurrency:
 
 jobs:
   release:
-    name: Release
     if: startsWith(github.event.head_commit.message, 'chore(release):')
     runs-on: ubuntu-latest
     continue-on-error: false
@@ -86,3 +85,9 @@ jobs:
           npm publish --provenance --tag $TAG
         env:
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
+  publish-cdn:
+    needs: release
+    uses: ./.github/workflows/cdn.yml
+  deploy-docs:
+    needs: release
+    uses: ./.github/workflows/deploy-docs.yml
