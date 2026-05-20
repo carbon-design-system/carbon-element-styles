@@ -25,12 +25,6 @@
 @each $theme in ('white', 'g10', 'g90', 'g100') {
   :root:has([data-#{carbon-config.$prefix}-#{config.$prefix}-theme="#{$theme}"]) {
     @include element-styles.emit-carbon-tokens($theme);
-
-    @if $theme == 'white' or $theme == 'g10' {
-      color-scheme: light;
-    } @else {
-      color-scheme: dark;
-    }
   }
 }
 

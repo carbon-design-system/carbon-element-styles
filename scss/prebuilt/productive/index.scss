@@ -21,11 +21,9 @@
   @include carbon.emit-carbon-colors;
 
   @include carbon.emit-carbon-tokens('g10');
-  color-scheme: light;
 
   @media (prefers-color-scheme: dark) {
     @include carbon.emit-carbon-tokens('g100');
-    color-scheme: dark;
   }
 
   @include layout.styles;
