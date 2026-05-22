@@ -8,16 +8,24 @@
 import { parse } from 'marked';
 
 import readme from '../../../README.md?raw';
+import bannerLight from '../../assets/banner-light.svg';
+import bannerDark from '../../assets/banner-dark.svg';
+
 import type { Demo } from '../../js/_types';
 
-const html = /* html */`
-<abbr title="Abbreviation">abbr</abbr>
-`;
+const content = readme
+  // remove same-document links
+  .replaceAll(/\[(.+)\]\(#.+\)/g, '$1')
+  // remove github relative links
+  .replaceAll(/\]\(\.\/(.+)\)/g, '](https://github.com/carbon-design-system/carbon-element-styles/blob/main/$1)')
+  // remove banner srcs
+  .replaceAll('./docs/assets/banner-dark.svg', bannerDark)
+  .replaceAll('./docs/assets/banner-light.svg', bannerLight);
 
 export const meta: Demo = {
   id: 'getting-started',
   name: 'Getting started',
   html: {
-    raw: await parse(readme),
+    raw: await parse(content),
   },
 }
