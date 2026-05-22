@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { parse } from 'marked';
+import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
 
 import readme from '../../../README.md?raw';
 import bannerLight from '../../assets/banner-light.svg';
@@ -22,10 +24,19 @@ const content = readme
   .replaceAll('./docs/assets/banner-dark.svg', bannerDark)
   .replaceAll('./docs/assets/banner-light.svg', bannerLight);
 
+marked.use(
+  markedHighlight({
+    highlight(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    }
+  }),
+);
+
 export const meta: Demo = {
   id: 'getting-started',
   name: 'Getting started',
   html: {
-    raw: await parse(content),
+    raw: await marked.parse(content),
   },
 }

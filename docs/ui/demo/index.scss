@@ -11,8 +11,9 @@
 
 @use '../../../scss/config';
 
-@use '../../../scss/layout';
 @use '../../../scss/prebuilt/editorial/elements' as editorial-elements;
+
+@use '../../scss/syntax-highlighting';
 
 @use '../../elements/abbreviation';
 @use '../../elements/address';
@@ -97,6 +98,8 @@
   @include editorial-elements.styles;
 
   picture, img {
-    max-inline-size: layout.$mode--max-inline-size;
+    max-inline-size: element-styles.$mode--max-inline-size;
   }
+
+  @include syntax-highlighting.styles;
 }

@@ -7,6 +7,8 @@
 
 @use '../../../scss/elements/preformatted';
 
+@use '../../scss/syntax-highlighting';
+
 :host {
   @include preformatted.styles;
 
@@ -14,4 +16,10 @@
     padding: 0;
     margin: 0;
   }
+
+  & code {
+    font: inherit;
+  }
+
+  @include syntax-highlighting.styles;
 }

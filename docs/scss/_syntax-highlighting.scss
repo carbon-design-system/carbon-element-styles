@@ -1,0 +1,207 @@
+@use '@carbon/styles/scss/theme';
+
+@mixin styles {
+  .hljs-keyword {
+    color: theme.$syntax-keyword;
+  }
+
+  .hljs-built_in {
+    color: theme.$syntax-standard;
+  }
+
+  .hljs-type {
+    color: theme.$syntax-type;
+  }
+
+  .hljs-literal {
+    color: theme.$syntax-literal;
+  }
+
+  .hljs-number {
+    color: theme.$syntax-number;
+  }
+
+  .hljs-operator {
+    color: theme.$syntax-operator;
+  }
+
+  .hljs-punctuation {
+    color: theme.$syntax-punctuation;
+  }
+
+  .hljs-property {
+    color: theme.$syntax-property-name;
+  }
+
+  .hljs-regexp {
+    color: theme.$syntax-regexp;
+  }
+
+  .hljs-string {
+    color: theme.$syntax-string;
+  }
+
+  .hljs-char.escape {
+    color: theme.$syntax-escape;
+  }
+
+  .hljs-subst {
+    color: theme.$syntax-special-string;
+  }
+
+  .hljs-symbol {
+    color: theme.$syntax-atom;
+  }
+
+  .hljs-class {
+    color: theme.$syntax-class-name;
+  }
+
+  .hljs-function {
+    color: theme.$syntax-function;
+  }
+
+  .hljs-variable {
+    color: theme.$syntax-variable;
+  }
+
+  .hljs-variable.language {
+    color: theme.$syntax-self;
+  }
+
+  .hljs-variable.constant {
+    color: theme.$syntax-constant;
+  }
+
+  .hljs-title {
+    color: theme.$syntax-name;
+  }
+
+  .hljs-title.class {
+    color: theme.$syntax-class-name;
+  }
+
+  .hljs-title.class.inherited {
+    color: theme.$syntax-type-name;
+  }
+
+  .hljs-title.function {
+    color: theme.$syntax-function;
+  }
+
+  .hljs-title.function.invoke {
+    color: theme.$syntax-function;
+  }
+
+  .hljs-params {
+    color: theme.$syntax-variable-name;
+  }
+
+  .hljs-comment {
+    color: theme.$syntax-comment;
+  }
+
+  .hljs-doctag {
+    color: theme.$syntax-doc-comment;
+  }
+
+  .hljs-meta {
+    color: theme.$syntax-meta;
+  }
+
+  .hljs-meta.prompt {
+    color: theme.$syntax-processing-instruction;
+  }
+
+  .hljs-meta.keyword {
+    color: theme.$syntax-keyword;
+  }
+
+  .hljs-meta.string {
+    color: theme.$syntax-string;
+  }
+
+  .hljs-section {
+    color: theme.$syntax-heading;
+  }
+
+  .hljs-tag {
+    color: theme.$syntax-tag;
+  }
+
+  .hljs-name {
+    color: theme.$syntax-tag-name;
+  }
+
+  .hljs-attr {
+    color: theme.$syntax-attribute-name;
+  }
+
+  .hljs-attribute {
+    color: theme.$syntax-attribute-name;
+  }
+
+  .hljs-bullet {
+    color: theme.$syntax-list;
+  }
+
+  .hljs-code {
+    color: theme.$syntax-monospace;
+  }
+
+  .hljs-emphasis {
+    color: theme.$syntax-emphasis;
+  }
+
+  .hljs-strong {
+    color: theme.$syntax-strong;
+  }
+
+  .hljs-formula {
+    color: theme.$syntax-special;
+  }
+
+  .hljs-link {
+    color: theme.$syntax-link;
+  }
+
+  .hljs-quote {
+    color: theme.$syntax-quote;
+  }
+
+  .hljs-selector-tag {
+    color: theme.$syntax-tag-name;
+  }
+
+  .hljs-selector-id {
+    color: theme.$syntax-attribute-name;
+  }
+
+  .hljs-selector-class {
+    color: theme.$syntax-class-name;
+  }
+
+  .hljs-selector-attr {
+    color: theme.$syntax-attribute-name;
+  }
+
+  .hljs-selector-pseudo {
+    color: theme.$syntax-special;
+  }
+
+  .hljs-template-tag {
+    color: theme.$syntax-tag;
+  }
+
+  .hljs-template-variable {
+    color: theme.$syntax-variable;
+  }
+
+  .hljs-addition {
+    color: theme.$syntax-special;
+  }
+
+  .hljs-deletion {
+    color: theme.$syntax-invalid;
+  }
+}

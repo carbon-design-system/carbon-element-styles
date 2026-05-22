@@ -12,19 +12,16 @@
 
 :host {
   @include tabs.styles;
+  display: grid;
   grid-template-rows: max-content 1fr;
   background-color: theme.$layer;
   border-block-start: 0.0625rem solid theme.$border-subtle;
 
-  &:not([hidden]) {
-    display: grid;
-  }
-
-  &[hidden] {
-    display: none;
-  }
-
   & [role="tablist"] {
     border-block-end: 0.0625rem solid theme.$border-subtle;
   }
+}
+
+:host([hidden]) {
+  display: none;
 }
