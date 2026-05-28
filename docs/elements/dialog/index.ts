@@ -41,6 +41,11 @@ const html = /* html */`
     </header>
 
     <div>
+      <label>
+        Text input
+        <input type="text" />
+      </label>
+
       <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
     </div>
 
@@ -63,6 +68,11 @@ const html = /* html */`
     </header>
 
     <div>
+      <label>
+        Text input
+        <input type="text" />
+      </label>
+
       <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
     </div>
 
@@ -86,6 +96,11 @@ const html = /* html */`
     </header>
 
     <div>
+      <label>
+        Text input
+        <input type="text" />
+      </label>
+
       <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
     </div>
 
@@ -110,7 +125,12 @@ const html = /* html */`
   </header>
 
   <div>
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
+    <label>
+      Text input
+      <input type="text" />
+    </label>
+
+    <p> At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
   </div>
 </dialog>
 `;

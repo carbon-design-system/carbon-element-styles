@@ -16,6 +16,8 @@
 
 @use '../button';
 
+@use '../_layer';
+
 @use '../../layout';
 @use '../../utilities/icons';
 
@@ -38,8 +40,8 @@ $-default-config: (
     &:modal {
       @include layout.size('md');
       @include layout.density('normal');
+      @include layer.styles;
 
-      background-color: theme.$layer;
       color: theme.$text-primary;
       border: none;
       padding-inline: layout.$density--padding;
