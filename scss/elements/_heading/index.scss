@@ -20,8 +20,8 @@ $-default-config: ();
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  margin-block-end: spacing.$spacing-03;
-  margin-block-start: 1em;
+  margin-block-end: layout.$mode--margin-block;
+  margin-block-start: calc(layout.$mode--margin-block + 0.75lh);
   max-inline-size: min(layout.$mode--max-inline-size, 75%);
   text-wrap: balance;
 }
