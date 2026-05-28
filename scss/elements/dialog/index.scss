@@ -78,7 +78,7 @@ $-default-config: (
     }
 
     &:modal header {
-      @include layout.mode--heading-level-5;
+      @include layout.mode--heading-level-4;
       margin-block: layout.$density--padding;
     }
 
