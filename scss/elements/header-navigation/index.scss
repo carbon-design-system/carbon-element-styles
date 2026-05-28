@@ -40,6 +40,7 @@ $-default-config: (
       flex-shrink: 0;
       display: flex;
       block-size: 100%;
+      flex-grow: 1;
     }
 
     & > nav ul {
@@ -49,6 +50,10 @@ $-default-config: (
       list-style: none;
       block-size: 100%;
       display: flex;
+    }
+
+    & > nav ul:first-of-type {
+      flex-grow: 1;
     }
 
     & > nav ul li {
@@ -97,6 +102,8 @@ $-default-config: (
       display: inline-flex;
       align-items: center;
       column-gap: spacing.$spacing-02;
+      flex-shrink: 0;
+      white-space: nowrap;
 
       &:focus {
         @include focus-outline.focus-outline('outline');

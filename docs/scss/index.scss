@@ -34,10 +34,6 @@
   }
 }
 
-body > header div:empty {
-  inline-size: 100%;
-}
-
 #version {
   color: theme.$text-helper;
 }
