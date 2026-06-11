@@ -12,7 +12,7 @@
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/themes' as carbon-themes;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/config' as carbon-config;
 @use '@carbon/styles/scss/breakpoint';
 @use '@carbon/styles/scss/components/button/tokens' as carbon-button;
 @use '@carbon/styles/scss/components/tag/tokens' as carbon-tag;
@@ -68,7 +68,7 @@ $-component-token-groups: (
 
   @include layer-tokens.emit-layer-tokens(1);
 
-  @each $breakpoint in map.keys(grid.$grid-breakpoints) {
+  @each $breakpoint in map.keys(carbon-config.$grid-breakpoints) {
     @include breakpoint.breakpoint-up($breakpoint) {
       @each $type-name, $type-styles in type.$tokens {
         @if map.has-key($type-styles, 'breakpoints') {
