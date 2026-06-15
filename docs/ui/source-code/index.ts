@@ -7,6 +7,8 @@
 
 import styles from './index.scss?inline';
 
+import hljs from 'highlight.js';
+
 import {
   get as getEnvironment,
   EnvironmentChangeEvent,
@@ -29,19 +31,28 @@ export class DocsSourceCode extends HTMLElement {
   }
 
   #renderHtml(meta: Meta, demo: Demo): string {
-    return (demo.html.presentation ?? demo.html.raw).slice(1);
+    return hljs.highlight(
+      (demo.html.presentation ?? demo.html.raw).slice(1),
+      { language: 'html' },
+    ).value;
   }
 
   #renderScss(meta: Meta, demo: Demo): string {
     if (!demo.config) {
-      return `@include ${meta.id}.styles;`;
+      return hljs.highlight(
+        `@include ${meta.id}.styles;`,
+        { language: 'scss' },
+      ).value;
     }
 
     const scssMapEntries = Object.entries(demo.config)
       .map(([key, value]) => `  ${key}: ${value},`)
       .join('\n');
 
-    return `@include ${meta.id}.styles((\n${scssMapEntries}\n));`;
+    return hljs.highlight(
+      `@include ${meta.id}.styles((\n${scssMapEntries}\n));`,
+      { language: 'scss' },
+    ).value;
   }
 
   #updateContent() {
@@ -55,7 +66,7 @@ export class DocsSourceCode extends HTMLElement {
       const renderer = this.#renderers[this.getAttribute('kind') ?? ''];
 
       if (renderer) {
-        this.#code.innerText = renderer(meta, demo);
+        this.#code.innerHTML = renderer(meta, demo);
       }
     }
   }

@@ -6,11 +6,13 @@
  */
 
 import { prefix } from './config';
+import * as pageExports from '../pages';
 import * as elementExports from '../elements';
 
 export const RequestRenderEvent = `${prefix}:request-render`;
 export const EnvironmentChangeEvent = `${prefix}:environment-change`;
 
+export const Pages = Object.values(pageExports).map((e) => e.meta.id);
 export const Elements = Object.values(elementExports).map((e) => e.meta.id);
 
 export const Modes = {
@@ -39,8 +41,9 @@ export const Themes = {
 } as const;
 
 export type DemoEnvironmentOptions = {
-  element: typeof Elements[0];
-  demo: string;
+  page?: typeof Pages[keyof typeof Pages];
+  element?: typeof Elements[0];
+  demo?: string;
   mode: typeof Modes[keyof typeof Modes];
   size: typeof Sizes[keyof typeof Sizes];
   density: typeof Densities[keyof typeof Densities];
@@ -52,13 +55,22 @@ export function set(environment: Partial<DemoEnvironmentOptions>) {
 
   for (const key in environment) {
     const value = environment[key as keyof DemoEnvironmentOptions] as string;
-    url.searchParams.set(key, value);
+
+    if (value) {
+      url.searchParams.set(key, value);
+    } else {
+      url.searchParams.delete(key);
+    }
   }
 
   window.history.pushState(null, '', url.href);
 
   window.dispatchEvent(new Event(RequestRenderEvent));
   window.dispatchEvent(new Event(EnvironmentChangeEvent));
+}
+
+function isValidPage(id: string | null): id is DemoEnvironmentOptions['page'] {
+  return (id !== null && Pages.includes(id as DemoEnvironmentOptions['page']));
 }
 
 function isValidElement(id: string | null): id is DemoEnvironmentOptions['element'] {
@@ -84,6 +96,7 @@ function isValidTheme(id: string | null): id is DemoEnvironmentOptions['theme'] 
 export function get(): DemoEnvironmentOptions {
   const url = new URL(window.location.toString());
 
+  const page = url.searchParams.get('page');
   const element = url.searchParams.get('element');
   const demo = url.searchParams.get('demo');
   const mode = url.searchParams.get('mode');
@@ -92,8 +105,9 @@ export function get(): DemoEnvironmentOptions {
   const theme = url.searchParams.get('theme');
 
   return {
-    element: isValidElement(element) ? element : elementExports.abbreviation.meta.id,
-    demo: demo ?? 'default',
+    page: isValidPage(page) ? page : pageExports.gettingStarted.meta.id,
+    element: isValidElement(element) ? element : undefined,
+    demo: isValidElement(element) ? demo ?? 'default' : undefined,
     mode: isValidMode(mode) ? mode : Modes.Productive,
     size: isValidSize(size) ? size : Sizes.Md,
     density: isValidDensity(density) ? density : Densities.Normal,

@@ -12,6 +12,7 @@ import {
   EnvironmentChangeEvent,
 } from '../../js/environment';
 import * as elements from '../../elements';
+import * as pages from '../../pages';
 
 export class DocsDemo extends HTMLElement {
   #stylesheet: CSSStyleSheet = new CSSStyleSheet();
@@ -23,13 +24,24 @@ export class DocsDemo extends HTMLElement {
   }
 
   #updateDemo() {
-    const demo = Object.values(elements)
-      .find((e) => e.meta.id === getEnvironment().element)?.demos
-      .find((d) => d.id === getEnvironment().demo);
+    if (getEnvironment().element) {
+      const demo = Object.values(elements)
+        .find((e) => e.meta.id === getEnvironment().element)?.demos
+        .find((d) => d.id === getEnvironment().demo);
 
-    if (demo) {
-      this.#frame.innerHTML = demo.html.raw;
-      demo.setup?.(this.#frame);
+      if (demo) {
+        this.dataset.kind = 'element';
+        this.#frame.innerHTML = demo.html.raw;
+        demo.setup?.(this.#frame);
+      }
+    } else if (getEnvironment().page) {
+      const page = Object.values(pages)
+        .find((p) => p.meta.id === getEnvironment().page);
+
+      if (page) {
+        this.dataset.kind = 'page';
+        this.#frame.innerHTML = page.meta.html.raw;
+      }
     }
   }
 

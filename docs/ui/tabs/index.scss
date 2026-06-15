@@ -21,3 +21,7 @@
     border-block-end: 0.0625rem solid theme.$border-subtle;
   }
 }
+
+:host([hidden]) {
+  display: none;
+}

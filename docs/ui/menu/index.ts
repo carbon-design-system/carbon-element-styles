@@ -14,14 +14,21 @@ import {
   EnvironmentChangeEvent,
 } from '../../js/environment';
 
-type Item = { meta: Meta; demos: Demo[] };
+type BaseItem = { meta: Meta };
+type ElementItem = BaseItem & { demos: Demo[] };
 
 export class DocsMenu extends HTMLElement {
   #stylesheet: CSSStyleSheet = new CSSStyleSheet();
   #list: HTMLUListElement = document.createElement('ul');
-  #items: Item[] = [];
+  #staticItems: BaseItem[] = [];
+  #items: ElementItem[] = [];
 
-  set items(items: Item[]) {
+  set staticItems(staticItems: BaseItem[]) {
+    this.#staticItems = staticItems;
+    this.#renderItems();
+  }
+
+  set items(items: ElementItem[]) {
     this.#items = items;
     this.#renderItems();
   }
@@ -49,8 +56,18 @@ export class DocsMenu extends HTMLElement {
     return button;
   }
 
-  #getHref(element: string, demo: string): string {
+  #getPageHref(page: string): string {
     const target = new URL(window.location.toString());
+    target.searchParams.set('page', page);
+    target.searchParams.delete('element');
+    target.searchParams.delete('demo');
+
+    return target.href;
+  }
+
+  #getElementHref(element: string, demo: string): string {
+    const target = new URL(window.location.toString());
+    target.searchParams.delete('page');
     target.searchParams.set('element', element);
     target.searchParams.set('demo', demo);
 
@@ -63,10 +80,11 @@ export class DocsMenu extends HTMLElement {
 
     const anchor = document.createElement('a');
     anchor.textContent = demo.name;
-    anchor.setAttribute('href', this.#getHref(meta.id, demo.id));
+    anchor.setAttribute('href', this.#getElementHref(meta.id, demo.id));
     anchor.addEventListener('click', (e) => {
       e.preventDefault();
       setEnvironment({
+        page: undefined,
         element: meta.id,
         demo: demo.id,
       });
@@ -76,7 +94,27 @@ export class DocsMenu extends HTMLElement {
     return listItem;
   }
 
-  #createMenu(item: Item): HTMLLIElement {
+  #createStaticMenu(item: BaseItem): HTMLLIElement {
+    const listItem = document.createElement('li');
+    listItem.dataset.pageId = item.meta.id;
+
+    const anchor = document.createElement('a');
+    anchor.textContent = item.meta.name;
+    anchor.setAttribute('href', this.#getPageHref(item.meta.id));
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      setEnvironment({
+        page: item.meta.id,
+        element: undefined,
+        demo: undefined,
+      });
+    });
+    listItem.appendChild(anchor);
+
+    return listItem;
+  }
+
+  #createMenu(item: ElementItem): HTMLLIElement {
     const listItem = document.createElement('li');
     listItem.dataset.elementId = item.meta.id;
     listItem.appendChild(this.#createMenuButton(item.meta));
@@ -89,10 +127,26 @@ export class DocsMenu extends HTMLElement {
   }
 
   #renderItems() {
-    this.#list.replaceChildren(...this.#items.map((item) => this.#createMenu(item)));
+    const separator = document.createElement('li');
+    separator.setAttribute('role', 'separator');
+
+    this.#list.replaceChildren(
+      ...this.#staticItems.map((item) => this.#createStaticMenu(item)),
+      separator,
+      ...this.#items.map((item) => this.#createMenu(item)),
+    );
   }
 
   #updateAnchorHrefs() {
+    for (const page of this.#list.querySelectorAll('li[data-page-id]')) {
+      const pageId = (page as HTMLElement).dataset.pageId;
+      const anchor = page.querySelector('a');
+
+      if (pageId && anchor) {
+        anchor.setAttribute('href', this.#getPageHref(pageId));
+      }
+    }
+
     for (const menu of this.#list.querySelectorAll('li[data-element-id]')) {
       const elementId = (menu as HTMLElement).dataset.elementId;
 
@@ -102,25 +156,28 @@ export class DocsMenu extends HTMLElement {
         const anchor = menuItem.querySelector('a');
 
         if (elementId && demoId && anchor) {
-          anchor.setAttribute('href', this.#getHref(elementId, demoId));
+          anchor.setAttribute('href', this.#getElementHref(elementId, demoId));
         }
       }
     }
   }
 
   #updateActiveItem() {
-    const { element, demo } = getEnvironment();
+    const { page, element, demo } = getEnvironment();
 
     for (const activeItem of this.#list.querySelectorAll('a[aria-current="page"]')) {
       activeItem.removeAttribute('aria-current');
     }
 
+    const activePage = this.#list.querySelector(`li[data-page-id="${page}"]`);
     const activeElement = this.#list.querySelector(`li[data-element-id="${element}"]`);
     const activeDemo = activeElement?.querySelector(`li[data-demo-id="${demo}"]`);
 
     if (activeElement && activeDemo) {
       activeElement.querySelector('button')?.setAttribute('aria-expanded', 'true');
       activeDemo.querySelector('a')?.setAttribute('aria-current', 'page');
+    } else if (activePage) {
+      activePage.querySelector('a')?.setAttribute('aria-current', 'page');
     }
   }
 

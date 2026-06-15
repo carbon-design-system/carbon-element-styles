@@ -48,6 +48,13 @@ $-default-config: (
       padding: 0;
     }
 
+    & li[role="separator"] {
+      block-size: 0.0625rem;
+      background-color: theme.$border-subtle;
+      margin-inline: layout.$density--padding;
+      margin-block: spacing.$spacing-03;
+    }
+
     & li > button[aria-expanded],
     & li > a {
       @include layout.mode--heading-compact;

@@ -7,6 +7,11 @@
 
 import styles from './index.scss?inline';
 
+import {
+  get as getEnvironment,
+  EnvironmentChangeEvent,
+} from '../../js/environment';
+
 export class DocsTabs extends HTMLElement {
   #stylesheet: CSSStyleSheet = new CSSStyleSheet();
   #tablist: HTMLDivElement = document.createElement('div');
@@ -67,6 +72,14 @@ export class DocsTabs extends HTMLElement {
 
       const slot = document.createElement('slot');
       this.shadowRoot.appendChild(slot);
+
+      window.addEventListener(EnvironmentChangeEvent, () => {
+        if (getEnvironment().element) {
+          this.hidden = false;
+        } else {
+          this.hidden = true;
+        }
+      });
 
       setTimeout(() => {
         const firstTab = this.#tablist.querySelector<HTMLButtonElement>('button[role="tab"]');

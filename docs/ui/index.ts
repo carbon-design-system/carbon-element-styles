@@ -16,6 +16,7 @@ import { version } from '../../package.json';
 
 import { prefix } from '../js/config';
 import * as elements from '../elements';
+import * as pages from '../pages';
 import {
   get as getEnvironment,
   EnvironmentChangeEvent,
@@ -85,6 +86,9 @@ function setupMenu() {
   const menu = document.getElementById('menu') as DocsMenu;
 
   if (menu) {
+    menu.staticItems = Object.values(pages).map((page) => ({
+      meta: page.meta,
+    }));
     menu.items = Object.values(elements).map((element) => ({
       meta: element.meta,
       demos: element.demos,
