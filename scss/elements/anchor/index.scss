@@ -17,11 +17,13 @@ $config: () !default;
 
 $-default-config: (
   selector: 'a',
+  visited: false,
 );
 
 /// @group anchor
 /// @param {Map} config [()]
 /// @param {Selector} config.selector ['a']
+/// @param {Bool} config.visited [false] - Enable visited link styles using theme.$link-visited
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
@@ -35,6 +37,12 @@ $-default-config: (
 
     &:hover {
       color: theme.$link-primary-hover;
+    }
+
+    @if map.get($props, 'visited') == true {
+      &:visited {
+        color: theme.$link-visited;
+      }
     }
 
     &:focus {

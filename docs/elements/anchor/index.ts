@@ -28,6 +28,11 @@ export const meta = {
       type: 'selector',
       default: 'a',
     },
+    {
+      key: 'visited',
+      type: 'boolean',
+      default: 'false',
+    },
   ],
 } as const satisfies Meta;
 
@@ -39,12 +44,30 @@ const html = /* html */`
 <a href="https://ibm.com">IBM.com ${launchIcon}</a>
 `;
 
+const visitedHtml = /* html */`
+<p>Click the link below to mark it as visited:</p>
+
+<br />
+
+<a href='https://ibm.com'>IBM.com (with visited state enabled)</a>
+`;
+
 export const demos: Demo[] = [
   {
     id: 'default',
     name: 'Default',
     html: {
       raw: html,
+    },
+  },
+  {
+    id: 'visited-color',
+    name: 'Visited color',
+    html: {
+      raw: visitedHtml,
+    },
+    config: {
+      visited: 'true',
     },
   },
 ];
