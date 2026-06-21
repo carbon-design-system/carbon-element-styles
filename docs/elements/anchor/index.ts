@@ -63,6 +63,7 @@ export const demos: Demo[] = [
       raw: visitedHtml,
     },
     config: {
+      selector: '.cds--demo--anchor--visited a',
       visited: 'true',
     },
   },
