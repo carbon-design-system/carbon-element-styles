@@ -57,8 +57,8 @@ export const demos: Demo[] = [
     },
   },
   {
-    id: 'visited-color',
-    name: 'Visited color',
+    id: 'visited',
+    name: 'Visited',
     html: {
       raw: visitedHtml,
     },
