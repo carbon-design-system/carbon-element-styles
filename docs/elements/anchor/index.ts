@@ -45,11 +45,7 @@ const html = /* html */`
 `;
 
 const visitedHtml = /* html */`
-<p>Click the link below to mark it as visited:</p>
-
-<br />
-
-<a href='https://ibm.com'>IBM.com (with visited state enabled)</a>
+<a href='https://ibm.com'>IBM.com (with :visited styles)</a>
 `;
 
 export const demos: Demo[] = [
