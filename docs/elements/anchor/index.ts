@@ -29,9 +29,9 @@ export const meta = {
       default: 'a',
     },
     {
-      key: 'visited',
+      key: 'emit-visited',
       type: 'boolean',
-      default: 'false',
+      default: 'true',
     },
   ],
 } as const satisfies Meta;
@@ -44,8 +44,8 @@ const html = /* html */`
 <a href="https://ibm.com">IBM.com ${launchIcon}</a>
 `;
 
-const visitedHtml = /* html */`
-<a href='https://ibm.com'>IBM.com (with :visited styles)</a>
+const visitedHtml = /* html */ `
+<a href="${window.location.href}">Visited link</a>
 `;
 
 export const demos: Demo[] = [
@@ -63,7 +63,7 @@ export const demos: Demo[] = [
       raw: visitedHtml,
     },
     config: {
-      visited: 'true',
+      'emit-visited': 'true',
     },
   },
 ];
