@@ -17,7 +17,7 @@ $config: () !default;
 
 $-default-config: (
   selector: 'a',
-  visited: true,
+  emit-visited: true,
 );
 
 /// @group anchor

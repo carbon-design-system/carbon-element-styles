@@ -14,10 +14,10 @@ $name: 'anchor';
   @include anchor.styles;
 }
 
-@include docs.demo($name, 'visited') {
+@include docs.demo($name, 'no-visited-styles') {
   @include anchor.styles(
     (
-      visited: true,
+      emit-visited: false,
     )
   );
 }

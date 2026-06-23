@@ -44,10 +44,6 @@ const html = /* html */`
 <a href="https://ibm.com">IBM.com ${launchIcon}</a>
 `;
 
-const visitedHtml = /* html */ `
-<a href="${window.location.href}">Visited link</a>
-`;
-
 export const demos: Demo[] = [
   {
     id: 'default',
@@ -57,13 +53,13 @@ export const demos: Demo[] = [
     },
   },
   {
-    id: 'visited',
-    name: 'Visited',
+    id: 'no-visited-styles',
+    name: 'No visited styles',
     html: {
-      raw: visitedHtml,
+      raw: html,
     },
     config: {
-      'emit-visited': 'true',
+      'emit-visited': 'false',
     },
   },
 ];
