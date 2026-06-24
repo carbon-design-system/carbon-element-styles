@@ -38,10 +38,14 @@ export const meta = {
 
 const html = /* html */`
 <a href="https://ibm.com">IBM.com</a>
+<br />
+<a href="${window.location.href}">Visited link</a>
 
 <br /><br />
 
 <a href="https://ibm.com">IBM.com ${launchIcon}</a>
+<br />
+<a href="${window.location.href}">Visited link${launchIcon}</a>
 `;
 
 export const demos: Demo[] = [
