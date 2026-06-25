@@ -12,4 +12,12 @@ $name: 'anchor';
 
 @include docs.demo($name, 'default') {
   @include anchor.styles;
-};
+}
+
+@include docs.demo($name, 'no-visited-styles') {
+  @include anchor.styles(
+    (
+      emit-visited: false,
+    )
+  );
+}

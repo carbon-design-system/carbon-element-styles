@@ -17,13 +17,16 @@ $config: () !default;
 
 $-default-config: (
   selector: 'a',
+  emit-visited: true,
 );
 
 /// @group anchor
 /// @param {Map} config [()]
 /// @param {Selector} config.selector ['a']
+/// @param {Bool} config.emit-visited [true] - Enable visited link styles using theme.$link-visited
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
+  $emit-visited: map.get($props, 'emit-visited') == true;
 
   #{map.get($props, 'selector')} {
     display: inline-flex;
@@ -31,10 +34,22 @@ $-default-config: (
     column-gap: spacing.$spacing-03;
     color: theme.$link-primary;
     text-decoration: underline;
-    transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    transition: if(
+      sass($emit-visited): none; else: color layout.$mode--transition-duration
+        layout.$mode--transition-timing-function
+    );
 
     &:hover {
       color: theme.$link-primary-hover;
+    }
+
+    @if $emit-visited {
+      &:visited {
+        color: theme.$link-visited;
+      }
+      &:visited svg {
+        fill: theme.$link-visited;
+      }
     }
 
     &:focus {
