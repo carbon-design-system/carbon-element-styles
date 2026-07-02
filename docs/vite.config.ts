@@ -5,9 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import type { UserConfig } from 'vite';
 
+import { carbonIcons } from '../tasks/utilities/vite-carbon-icons';
 import { prependBanner } from '../tasks/utilities/vite-prepend-banner';
 
 export const config: UserConfig = {
@@ -15,7 +17,13 @@ export const config: UserConfig = {
   build: {
     sourcemap: false,
   },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname),
+    },
+  },
   plugins: [
+    carbonIcons,
     prependBanner,
   ],
 };
