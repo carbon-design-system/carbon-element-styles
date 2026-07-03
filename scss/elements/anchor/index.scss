@@ -34,10 +34,14 @@ $-default-config: (
     column-gap: spacing.$spacing-03;
     color: theme.$link-primary;
     text-decoration: underline;
-    transition: if(
-      sass($emit-visited): none; else: color layout.$mode--transition-duration
-        layout.$mode--transition-timing-function
-    );
+    transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+    // TODO: remove when fixed firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=868975
+    @if $emit-visited {
+      @supports (-moz-appearance: none) {
+        transition: none;
+      }
+    }
 
     &:hover {
       color: theme.$link-primary-hover;
