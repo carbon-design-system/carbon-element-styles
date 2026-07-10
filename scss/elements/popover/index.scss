@@ -73,9 +73,11 @@ $-default-config: (
     @if $-alignment-block == 'start' {
       position-area: start center;
       inset-block-end: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
+      inset-block-start: unset;
 
       &::before {
         inset-block-end: calc($-caret-size * -0.5);
+        inset-block-start: unset;
         rotate: 135deg;
       }
     }
@@ -83,9 +85,11 @@ $-default-config: (
     @if $-alignment-block == 'end' {
       position-area: end center;
       inset-block-start: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
+      inset-block-end: unset;
 
       &::before {
         inset-block-start: calc($-caret-size * -0.5);
+        inset-block-end: unset;
         rotate: -45deg;
       }
     }
@@ -116,6 +120,7 @@ $-default-config: (
 
       &::before {
         inset-block-start: -get-caret-offset('center', $-caret-size);
+        inset-block-end: unset;
         inset-inline-end: calc($-caret-size * -0.5);
         rotate: 45deg;
       }
@@ -127,6 +132,7 @@ $-default-config: (
 
       &::before {
         inset-block-start: -get-caret-offset('center', $-caret-size);
+        inset-block-end: unset;
         inset-inline-start: calc($-caret-size * -0.5);
         rotate: -135deg;
       }
