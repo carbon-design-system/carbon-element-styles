@@ -17,11 +17,13 @@ $config: () !default;
 
 $-default-config: (
   selector: '[popover="hint"]',
+  alignment: 'start center',
 );
 
 /// @group tooltip
 /// @param {Map} config [()]
 /// @param {Selector} config.selector ['[popover="hint"]']
+/// @param {'start start' | 'start center' | 'start end' | 'center start' | 'center end' | 'end start' | 'end center' | 'end end'} config.alignment ['start center']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
@@ -29,16 +31,10 @@ $-default-config: (
     @include popover.styles((
       selector: '&',
       caret: true,
+      alignment: map.get($props, 'alignment'),
     ));
 
     background-color: theme.$background-inverse;
     color: theme.$text-inverse;
-    justify-self: anchor-center;
-    inset-inline: unset;
-
-    &::before {
-      inset-inline-start: 50%;
-      translate: -50% 0;
-    }
   }
 }

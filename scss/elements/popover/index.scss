@@ -6,6 +6,8 @@
  */
 
 @use 'sass:map';
+@use 'sass:string';
+@use 'sass:list';
 
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
@@ -21,12 +23,14 @@ $config: () !default;
 $-default-config: (
   selector: '[popover]',
   caret: true,
+  alignment: 'end center',
 );
 
 /// @group popover
 /// @param {Map} config [()]
 /// @param {Selector} config.selector ['[popover]']
 /// @param {Bool} config.caret [true]
+/// @param {'start start' | 'start center' | 'start end' | 'center start' | 'center end' | 'end start' | 'end center' | 'end end'} config.alignment ['end center']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
@@ -39,11 +43,8 @@ $-default-config: (
     @include layer.styles;
     @include box-shadow.box-shadow;
     @include layout.mode--body;
-    position: absolute;
-    inset: unset;
     margin: 0;
-    inset-block-start: calc(anchor(end) + spacing.$spacing-02 + ($-caret-size * 0.5));
-    inset-inline-start: calc(anchor(start) + spacing.$spacing-02);
+    position: fixed;
     border: none;
     border-radius: 0.125rem;
     padding: layout.$density--padding;
@@ -56,10 +57,7 @@ $-default-config: (
       display: block;
       block-size: $-caret-size;
       inline-size: $-caret-size;
-      rotate: -45deg;
       background-color: inherit;
-      inset-block-start: calc($-caret-size * -0.5);
-      inset-inline-start: layout.$density--padding;
       clip-path: polygon(
         0% 0%,
         100% 0%,
@@ -67,5 +65,87 @@ $-default-config: (
         0% 0%,
       );
     }
+
+    $-alignment: string.split(map.get($props, 'alignment'), " ");
+    $-alignment-block: list.nth($-alignment, 1);
+    $-alignment-inline: list.nth($-alignment, 2);
+
+    @if $-alignment-block == 'start' {
+      position-area: start center;
+      inset-block-end: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
+
+      &::before {
+        inset-block-end: calc($-caret-size * -0.5);
+        rotate: 135deg;
+      }
+    }
+
+    @if $-alignment-block == 'end' {
+      position-area: end center;
+      inset-block-start: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
+
+      &::before {
+        inset-block-start: calc($-caret-size * -0.5);
+        rotate: -45deg;
+      }
+    }
+
+    @if $-alignment-block == 'start' or $-alignment-block == 'end' {
+      @if $-alignment-inline == 'start' {
+        translate: calc(-50% + layout.$density--padding + spacing.$spacing-02) 0;
+
+        &::before {
+          inset-inline-start: -get-caret-offset('end', $-caret-size);
+        }
+      } @else if $-alignment-inline == 'end' {
+        translate: calc(50% - layout.$density--padding - spacing.$spacing-02) 0;
+
+        &::before {
+          inset-inline-start: -get-caret-offset('start', $-caret-size);
+        }
+      } @else if $-alignment-inline == 'center' {
+        &::before {
+          inset-inline-start: -get-caret-offset('center', $-caret-size);
+        }
+      }
+    }
+
+    @if map.get($props, 'alignment') == 'center start' {
+      position-area: center start;
+      translate: calc((spacing.$spacing-02 + ($-caret-size * 0.5)) * -1);
+
+      &::before {
+        inset-block-start: -get-caret-offset('center', $-caret-size);
+        inset-inline-end: calc($-caret-size * -0.5);
+        rotate: 45deg;
+      }
+    }
+
+    @if map.get($props, 'alignment') == 'center end' {
+      position-area: center end;
+      translate: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
+
+      &::before {
+        inset-block-start: -get-caret-offset('center', $-caret-size);
+        inset-inline-start: calc($-caret-size * -0.5);
+        rotate: -135deg;
+      }
+    }
   }
+}
+
+@function -get-caret-offset($position, $caret-size: 0rem) {
+  @if ($position == 'start') {
+    @return calc(layout.$density--padding - $caret-size * 0.5 + spacing.$spacing-02);
+  }
+
+  @if ($position == 'center') {
+    @return calc(50% - $caret-size * 0.5);
+  }
+
+  @if ($position == 'end') {
+    @return calc(100% - layout.$density--padding - $caret-size * 0.5 - spacing.$spacing-02);
+  }
+
+  @error '"#{$position}" is not one of "start" | "center" | "end"';
 }

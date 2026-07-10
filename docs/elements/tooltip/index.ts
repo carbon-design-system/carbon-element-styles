@@ -28,6 +28,11 @@ export const meta = {
       type: 'selector',
       default: '[popover="hint"]',
     },
+    {
+      key: 'alignment',
+      type: `| 'start start'\n| 'start center'\n| 'start end'\n| 'center start'\n| 'center end'\n| 'end start'\n| 'end center'\n| 'end end'`,
+      default: 'start center',
+    },
   ],
 } as const satisfies Meta;
 
@@ -51,6 +56,22 @@ const html = /* html */`
 </button>
 `;
 
+function setup(frame: HTMLElement) {
+  for (const button of frame.querySelectorAll('button')) {
+    const tooltip = button.querySelector<HTMLElement>('[popover="hint"]');
+
+    button.addEventListener('mouseover', () => {
+      tooltip?.showPopover({
+        source: button,
+      });
+    });
+
+    button.addEventListener('mouseout', () => {
+      tooltip?.hidePopover();
+    });
+  }
+}
+
 export const demos: Demo[] = [
   {
     id: 'default',
@@ -58,20 +79,94 @@ export const demos: Demo[] = [
     html: {
       raw: html,
     },
-    setup: (frame) => {
-      for (const button of frame.querySelectorAll('button')) {
-        const tooltip = button.querySelector<HTMLElement>('[popover="hint"]');
-
-        button.addEventListener('mouseover', () => {
-          tooltip?.showPopover({
-            source: button,
-          });
-        });
-
-        button.addEventListener('mouseout', () => {
-          tooltip?.hidePopover();
-        });
-      }
+    setup,
+  },
+  {
+    id: 'alignment-start-start',
+    name: 'Alignment: start start',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'start start'`,
+    },
+  },
+  {
+    id: 'alignment-start-center',
+    name: 'Alignment: start center',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'start center'`,
+    },
+  },
+  {
+    id: 'alignment-start-end',
+    name: 'Alignment: start end',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'start end'`,
+    },
+  },
+  {
+    id: 'alignment-center-start',
+    name: 'Alignment: center start',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'center start'`,
+    },
+  },
+  {
+    id: 'alignment-center-end',
+    name: 'Alignment: center end',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'center end'`,
+    },
+  },
+  {
+    id: 'alignment-end-start',
+    name: 'Alignment: end start',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'end start'`,
+    },
+  },
+  {
+    id: 'alignment-end-center',
+    name: 'Alignment: end center',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'end center'`,
+    },
+  },
+  {
+    id: 'alignment-end-end',
+    name: 'Alignment: end end',
+    html: {
+      raw: html,
+    },
+    setup,
+    config: {
+      alignment: `'end end'`,
     },
   },
 ];

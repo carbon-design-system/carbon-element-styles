@@ -31,6 +31,11 @@ export const meta = {
       type: 'boolean',
       default: 'true',
     },
+    {
+      key: 'alignment',
+      type: `| 'start start'\n| 'start center'\n| 'start end'\n| 'center start'\n| 'center end'\n| 'end start'\n| 'end center'\n| 'end end'`,
+      default: 'end center',
+    },
   ],
 } as const satisfies Meta;
 
@@ -100,6 +105,86 @@ export const demos: Demo[] = [
     },
     config: {
       caret: 'false',
+    },
+  },
+  {
+    id: 'alignment-start-start',
+    name: 'Alignment: start start',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'start start'`,
+    },
+  },
+  {
+    id: 'alignment-start-center',
+    name: 'Alignment: start center',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'start center'`,
+    },
+  },
+  {
+    id: 'alignment-start-end',
+    name: 'Alignment: start end',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'start end'`,
+    },
+  },
+  {
+    id: 'alignment-center-start',
+    name: 'Alignment: center start',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'center start'`,
+    },
+  },
+  {
+    id: 'alignment-center-end',
+    name: 'Alignment: center end',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'center end'`,
+    },
+  },
+  {
+    id: 'alignment-end-start',
+    name: 'Alignment: end start',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'end start'`,
+    },
+  },
+  {
+    id: 'alignment-end-center',
+    name: 'Alignment: end center',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'end center'`,
+    },
+  },
+  {
+    id: 'alignment-end-end',
+    name: 'Alignment: end end',
+    html: {
+      raw: html,
+    },
+    config: {
+      alignment: `'end end'`,
     },
   },
 ];

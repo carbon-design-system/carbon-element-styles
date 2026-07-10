@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@use 'sass:string';
+
 @use '../../scss/docs';
 @use '../../../scss/elements/tooltip';
 
@@ -18,3 +20,24 @@ $name: 'tooltip';
   // ↓ for demo only ↓
   @include button.styles;
 };
+
+@each $alignment in (
+  'start start', 'start center', 'start end',
+  'center start', 'center end',
+  'end start', 'end center', 'end end',
+) {
+
+  $id: "alignment";
+  @each $part in string.split($alignment, " ") {
+    $id: "#{$id}-#{$part}";
+  }
+
+  @include docs.demo($name, $id) {
+    @include tooltip.styles((
+      alignment: $alignment,
+    ));
+
+    // ↓ for demo only ↓
+    @include button.styles;
+  };
+}
