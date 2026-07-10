@@ -13,8 +13,8 @@
 @use '@carbon/styles/scss/theme';
 
 @use '../scss/utilities/carbon';
-
 @use '../scss/layout';
+@use '../scss/elements/body';
 
 :root {
   @include carbon.emit-carbon-colors;
@@ -27,7 +27,9 @@
 
   @include layout.density('normal');
   @include layout.mode('productive');
-  @include layout.size('sm');
+  @include layout.size('md');
 
   background-color: theme.$background;
 }
+
+@include body.styles;
