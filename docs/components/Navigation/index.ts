@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './index.scss?inline';
+
+import { Environment } from '@/model/Environment';
 import { NavigationItem } from '@/model/NavigationItem';
 
 type Item = {
@@ -23,6 +26,10 @@ export class CdsEsDocsNavigation extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+
+    const stylesheet = new CSSStyleSheet();
+    stylesheet.replace(styles);
+    this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
   }
 
   #generateAccessor(item: NavigationItem): string | undefined {
@@ -94,6 +101,13 @@ export class CdsEsDocsNavigation extends HTMLElement {
     const button = document.createElement('button');
 
     button.textContent = item.item?.label;
+    button.setAttribute('type', 'button');
+    button.setAttribute('aria-expanded', 'false');
+
+    button.addEventListener('click', () => {
+      const state = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', (!state).toString());
+    });
 
     return button;
   }
@@ -102,6 +116,25 @@ export class CdsEsDocsNavigation extends HTMLElement {
     const anchor = document.createElement('a');
 
     anchor.textContent = item.item.label;
+    anchor.setAttribute('href', Environment.getUrl({
+      path: item.path,
+    }).toString());
+
+    function updateAriaCurrent() {
+      if (item.path === Environment.path) {
+        anchor.setAttribute('aria-current', 'page');
+      } else {
+        anchor.removeAttribute('aria-current');
+      }
+    }
+
+    Environment.addEventListener('change', updateAriaCurrent);
+    updateAriaCurrent();
+
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      Environment.path = item.path;
+    });
 
     return anchor;
   }
@@ -137,7 +170,7 @@ export class CdsEsDocsNavigation extends HTMLElement {
     const separator = document.createElement('li');
     separator.setAttribute('role', 'separator');
 
-    this.#ul.append(
+    this.#ul.replaceChildren(
       ...documentation ?? [],
       separator,
       ...elements ?? [],

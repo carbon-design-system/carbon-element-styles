@@ -1,0 +1,33 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' with (
+  $use-akamai-cdn: true,
+);
+@use '@carbon/styles/scss/fonts';
+
+@use '@carbon/styles/scss/theme';
+
+@use '../scss/utilities/carbon';
+
+@use '../scss/layout';
+
+:root {
+  @include carbon.emit-carbon-colors;
+
+  @include carbon.emit-carbon-tokens('g10');
+
+  @media (prefers-color-scheme: dark) {
+    @include carbon.emit-carbon-tokens('g100');
+  }
+
+  @include layout.density('normal');
+  @include layout.mode('productive');
+  @include layout.size('sm');
+
+  background-color: theme.$background;
+}
