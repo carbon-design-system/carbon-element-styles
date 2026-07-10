@@ -36,5 +36,7 @@ $-default-config: (
 
     background-color: theme.$background-inverse;
     color: theme.$text-inverse;
+    inline-size: max-content;
+    max-inline-size: 20rem;
   }
 }

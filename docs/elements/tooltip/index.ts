@@ -51,7 +51,7 @@ const html = /* html */`
   ${exportIcon}
 
   <div popover="hint">
-    Export
+    Export asset
   </div>
 </button>
 `;
