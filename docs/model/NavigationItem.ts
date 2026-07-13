@@ -9,19 +9,26 @@ export class NavigationItem {
   id: string;
   label: string;
   items?: NavigationItem[];
-  source?: string;
+  content?: () => Promise<{ default: unknown }>;
 
   constructor({
     id,
     label,
     items,
+    content,
   }: {
     id: NavigationItem['id'];
     label: NavigationItem['label'];
     items?: NavigationItem['items'];
+    content?: NavigationItem['content'];
   }) {
     this.id = id;
     this.label = label;
     this.items = items;
+    this.content = content;
+
+    for (const child of this.items ?? []) {
+      child.content ??= content;
+    }
   }
 }

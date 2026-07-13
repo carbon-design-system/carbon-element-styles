@@ -6,36 +6,52 @@
  */
 
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { Plugin } from 'vite';
 
 import * as log from './log';
 
+const suffix = '?carbon-icons';
+const contentDir = resolve(import.meta.dirname, '../../docs/content/');
+
 export const carbonIcons: Plugin = {
   name: 'carbon-icons',
+  enforce: 'pre',
 
-  async transform(code, id) {
-    if (!id.endsWith('.html')) {
+  resolveId(source, importer) {
+    if (!source.endsWith('.html') || !importer) {
       return null;
     }
 
-    const content = code.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
+    const path = resolve(importer, '..', source);
+
+    if (!path.startsWith(contentDir)) {
+      return null;
+    }
+
+    return `${path}${suffix}`;
+  },
+
+  load(id) {
+    if (!id.endsWith(suffix)) {
+      return null;
+    }
+
+    const raw = readFileSync(id.slice(0, -suffix.length), 'utf8');
+
+    const content = raw.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
       try {
         const iconPath = fileURLToPath(import.meta.resolve(`@carbon/icons/svg/32/${name}.svg`));
-        const icon = readFileSync(iconPath);
-
-        return icon.toString();
+        return readFileSync(iconPath, 'utf8');
       } catch(e) {
-        log.error(`Could not find Carbon icon with name '${name}'\n   Requested by '${id}'`, e);
+        log.error(`Could not find Carbon icon with name '${name}'.\n   Requested by '${id}'.`, e);
       }
 
       return original;
     });
 
-    return {
-      code: `export default ${JSON.stringify(content)}`,
-      map: null,
-    };
+    return `export default ${JSON.stringify(content)}`;
   },
 };

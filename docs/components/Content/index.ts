@@ -26,7 +26,8 @@ export class CdsEsDocsContent extends HTMLElement {
 
       if (item) {
         try {
-          const { default: defaultExport } = await import(`${item.source}content.ts`);
+          const { default: defaultExport } = await item.content?.() ?? {};
+
           if (defaultExport instanceof HTMLElement) {
             defaultExport.setAttribute('request-id', item.id);
             this.shadowRoot?.replaceChildren(defaultExport);

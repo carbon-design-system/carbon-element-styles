@@ -10,6 +10,7 @@ import { NavigationItem } from '@/model/NavigationItem';
 export default new NavigationItem({
   id: 'button',
   label: 'Button',
+  content: () => import('./content'),
   items: [
     new NavigationItem({
       id: 'default',
