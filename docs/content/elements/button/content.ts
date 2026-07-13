@@ -5,13 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
 import css from './demo.scss?inline';
 import html from './demo.html';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+
 elementDemoContent.label = 'Button';
+
 elementDemoContent.references = [
   {
     label: '<button>',
@@ -22,7 +24,14 @@ elementDemoContent.references = [
     url: 'https://carbondesignsystem.com/components/button/usage/',
   },
 ];
+
+elementDemoContent.notes = /* md */`
+- Any SVG will be treated as a square icon.
+- When using both text and an icon, the text must be wrapped in some element, such as a \`<span>\`.
+`;
+
 elementDemoContent.css.replace(css);
+
 elementDemoContent.demos.set('default', { html });
 elementDemoContent.demos.set('primary', { html });
 elementDemoContent.demos.set('secondary', { html });

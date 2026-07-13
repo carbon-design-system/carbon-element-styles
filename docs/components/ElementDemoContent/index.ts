@@ -6,6 +6,8 @@
  */
 import styles from './index.scss?inline';
 
+import type { CdsEsDocsElementOverview } from '../ElementOverview';
+
 export class CdsEsDocsElementDemoContent extends HTMLElement {
   static observedAttributes = ['request-id'];
 
@@ -30,7 +32,16 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
   }
 
-  render() {
+  #createTabPanel(label: string, content: HTMLElement): HTMLElement {
+    const tabPanel = document.createElement('cds-es-docs-tab-panel');
+    tabPanel.setAttribute('label', label);
+
+    tabPanel.append(content);
+
+    return tabPanel;
+  }
+
+  #render() {
     const demo = this.demos.get(this.getAttribute('request-id') ?? '');
 
     if (demo) {
@@ -43,25 +54,24 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
 
       const tabs = document.createElement('cds-es-docs-tabs');
 
-      const overviewTabPanel = document.createElement('cds-es-docs-tab-panel');
-      overviewTabPanel.setAttribute('label', 'Overview');
+      const overviewTabPanel = document.createElement('cds-es-docs-element-overview') as CdsEsDocsElementOverview;
+      overviewTabPanel.label = this.label;
+      overviewTabPanel.references = this.references;
+      overviewTabPanel.notes = this.notes;
 
-      const div = document.createElement('div');
-      div.textContent = this.label;
-
-      overviewTabPanel.append(div);
-
-      tabs.append(overviewTabPanel);
+      tabs.append(
+        this.#createTabPanel('Overview', overviewTabPanel),
+      );
 
       this.shadowRoot?.replaceChildren(frame, tabs);
     }
   }
 
   connectedCallback() {
-    this.render();
+    this.#render();
   }
 
   attributeChangedCallback() {
-    this.render();
+    this.#render();
   }
 }

@@ -12,6 +12,12 @@
 
 :host {
   @include editorial-elements.styles;
+  display: block;
+  box-sizing: border-box;
+}
+
+:host(:only-child) {
+  padding: spacing.$spacing-07;
 }
 
 :host picture,
@@ -19,6 +25,6 @@
   max-inline-size: min(100%, layout.$mode--max-inline-size);
 }
 
-:host > article {
-  padding: spacing.$spacing-07;
+:host > :first-child {
+  margin-block-start: 0;
 }

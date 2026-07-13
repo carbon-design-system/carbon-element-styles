@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme' ;
+@use '@carbon/styles/scss/theme';
 
 @use '../../../scss/layout';
+@use '../../../scss/elements/layer';
 
 :host {
+  @include layer.styles;
   position: relative;
 }
 
@@ -34,7 +36,7 @@
   background-image: linear-gradient(
     0deg,
     transparent,
-    theme.$layer,
+    theme.$layer-background,
   );
 }
 
@@ -42,6 +44,6 @@
   inset-block-end: 0;
   background-image: linear-gradient(
     transparent,
-    theme.$layer,
+    theme.$layer-background,
   );
 }

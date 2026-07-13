@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
+import type { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
 import readme from '@/../README.md?raw';
 import bannerLight from '@/assets/banner-light.svg';

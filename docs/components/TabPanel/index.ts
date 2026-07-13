@@ -22,7 +22,8 @@ export class CdsEsDocsTabPanel extends HTMLElement {
     this.hidden = true;
 
     const frame = document.createElement('div');
-    frame.append(...this.children);
+    const slot = document.createElement('slot');
+    frame.append(slot);
 
     this.shadowRoot?.appendChild(frame);
   }

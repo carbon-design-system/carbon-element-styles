@@ -10,6 +10,8 @@ import { marked } from 'marked';
 import styles from './index.scss?inline';
 
 export class CdsEsDocsMarkdownContent extends HTMLElement {
+  #observer = new MutationObserver(() => this.#render());
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -19,12 +21,25 @@ export class CdsEsDocsMarkdownContent extends HTMLElement {
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
   }
 
-  async connectedCallback() {
+  async #render() {
     const html = await marked.parse(this.textContent ?? '');
 
-    const article = document.createElement('article');
-    article.innerHTML = html;
+    if (this.shadowRoot) {
+      this.shadowRoot.innerHTML = html;
+    }
+  }  
 
-    this.shadowRoot?.append(article);
+  async connectedCallback() {
+    this.#observer.observe(this, {
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+
+    await this.#render();
+  }
+
+  disconnectedCallback() {
+    this.#observer.disconnect();
   }
 }

@@ -11,6 +11,7 @@ import { CdsEsDocsContent } from '@/components/Content';
 import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 import { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
+import { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 import { CdsEsDocsHeader } from '@/components/Header';
 import { CdsEsDocsNavigation } from '@/components/Navigation';
 import { CdsEsDocsTabPanel } from '@/components/TabPanel';
@@ -22,6 +23,7 @@ window.customElements.define('cds-es-docs-content', CdsEsDocsContent);
 window.customElements.define('cds-es-docs-element-demo-content', CdsEsDocsElementDemoContent);
 window.customElements.define('cds-es-docs-markdown-content', CdsEsDocsMarkdownContent);
 
+window.customElements.define('cds-es-docs-element-overview', CdsEsDocsElementOverview);
 window.customElements.define('cds-es-docs-header', CdsEsDocsHeader);
 window.customElements.define('cds-es-docs-navigation', CdsEsDocsNavigation);
 window.customElements.define('cds-es-docs-tab-panel', CdsEsDocsTabPanel);
