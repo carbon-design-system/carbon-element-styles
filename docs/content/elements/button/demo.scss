@@ -5,50 +5,50 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../model/Content/ElementDemo' as element-demo;
+@use '../../../components/ElementDemoContent' as element-demo-content;
 @use '../../../../scss/elements/button';
 
-@include element-demo.demo('default') {
+@include element-demo-content.demo('default') {
   @include button.styles;
 };
 
-@include element-demo.demo('primary') {
+@include element-demo-content.demo('primary') {
   @include button.styles((
     kind: 'primary',
   ));
 };
 
-@include element-demo.demo('secondary') {
+@include element-demo-content.demo('secondary') {
   @include button.styles((
     kind: 'secondary',
   ));
 };
 
-@include element-demo.demo('tertiary') {
+@include element-demo-content.demo('tertiary') {
   @include button.styles((
     kind: 'tertiary',
   ));
 };
 
-@include element-demo.demo('ghost') {
+@include element-demo-content.demo('ghost') {
   @include button.styles((
     kind: 'ghost',
   ));
 };
 
-@include element-demo.demo('danger--primary') {
+@include element-demo-content.demo('danger--primary') {
   @include button.styles((
     kind: 'danger--primary',
   ));
 };
 
-@include element-demo.demo('danger--tertiary') {
+@include element-demo-content.demo('danger--tertiary') {
   @include button.styles((
     kind: 'danger--tertiary',
   ));
 };
 
-@include element-demo.demo('danger--ghost') {
+@include element-demo-content.demo('danger--ghost') {
   @include button.styles((
     kind: 'danger--ghost',
   ));

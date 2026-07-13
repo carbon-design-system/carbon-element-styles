@@ -8,9 +8,11 @@
 @use '@carbon/styles/scss/spacing';
 
 @mixin demo($id) {
-  :host [data-demo="#{$id}"] {
-    padding: spacing.$spacing-07;
-
+  :host([request-id="#{$id}"]) > .demo {
     @content;
   }
+}
+
+:host([request-id]) > .demo {
+  padding: spacing.$spacing-07;
 }

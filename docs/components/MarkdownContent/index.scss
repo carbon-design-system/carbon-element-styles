@@ -7,7 +7,7 @@
 
 @use '@carbon/styles/scss/spacing';
 
-@use '../../../' as element-styles;
+@use '../../../scss/layout';
 @use '../../../scss/prebuilt/editorial/elements' as editorial-elements;
 
 :host {
@@ -16,7 +16,7 @@
 
 :host picture,
 :host img {
-  max-inline-size: element-styles.$mode--max-inline-size;
+  max-inline-size: min(100%, layout.$mode--max-inline-size);
 }
 
 :host > article {

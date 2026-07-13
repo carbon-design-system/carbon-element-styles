@@ -9,7 +9,6 @@ import { Inventory } from '@/model/Inventory';
 import styles from './index.scss?inline';
 
 import { Environment } from '@/model/Environment';
-import { Content } from '@/model/Content';
 
 export class CdsEsDocsContent extends HTMLElement {
   constructor() {
@@ -19,7 +18,6 @@ export class CdsEsDocsContent extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
-
   }
 
   async #render() {
@@ -29,14 +27,9 @@ export class CdsEsDocsContent extends HTMLElement {
       if (item) {
         try {
           const { default: defaultExport } = await import(`${item.source}content.ts`);
-
-          if (defaultExport instanceof Content && this.shadowRoot) {
-            const { html, css, } = await defaultExport.render({
-              id: item.id,
-            });
-
-            this.shadowRoot.replaceChildren(html);
-            this.shadowRoot.adoptedStyleSheets = [css];
+          if (defaultExport instanceof HTMLElement) {
+            defaultExport.setAttribute('request-id', item.id);
+            this.shadowRoot?.replaceChildren(defaultExport);
           }
         } catch {}
       }
