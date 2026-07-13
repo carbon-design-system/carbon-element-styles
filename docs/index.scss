@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/config' with (
+@use '@carbon/styles/scss/config' as carbon-config with (
   $use-akamai-cdn: true,
 );
 @use '@carbon/styles/scss/fonts';
@@ -33,3 +33,13 @@
 }
 
 @include body.styles;
+
+cds-es-docs-navigation {
+  inset-block-start: 2.5rem;
+}
+
+main {
+  block-size: calc(100vb - 2.5rem - 0.0625rem);
+  margin-inline-start: 16rem;
+  overflow: auto;
+}

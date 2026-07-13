@@ -1,0 +1,55 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../model/Content/ElementDemo' as element-demo;
+@use '../../../../scss/elements/button';
+
+@include element-demo.demo('default') {
+  @include button.styles;
+};
+
+@include element-demo.demo('primary') {
+  @include button.styles((
+    kind: 'primary',
+  ));
+};
+
+@include element-demo.demo('secondary') {
+  @include button.styles((
+    kind: 'secondary',
+  ));
+};
+
+@include element-demo.demo('tertiary') {
+  @include button.styles((
+    kind: 'tertiary',
+  ));
+};
+
+@include element-demo.demo('ghost') {
+  @include button.styles((
+    kind: 'ghost',
+  ));
+};
+
+@include element-demo.demo('danger--primary') {
+  @include button.styles((
+    kind: 'danger--primary',
+  ));
+};
+
+@include element-demo.demo('danger--tertiary') {
+  @include button.styles((
+    kind: 'danger--tertiary',
+  ));
+};
+
+@include element-demo.demo('danger--ghost') {
+  @include button.styles((
+    kind: 'danger--ghost',
+  ));
+};

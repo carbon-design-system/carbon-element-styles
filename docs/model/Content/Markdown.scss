@@ -1,0 +1,24 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/spacing';
+
+@use '../../../' as element-styles;
+@use '../../../scss/prebuilt/editorial/elements' as editorial-elements;
+
+:host {
+  @include editorial-elements.styles;
+}
+
+:host picture,
+:host img {
+  max-inline-size: element-styles.$mode--max-inline-size;
+}
+
+:host > article {
+  padding: spacing.$spacing-07;
+}

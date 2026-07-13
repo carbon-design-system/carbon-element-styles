@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../scss/layout';
-@use '../../../scss/elements/side-navigation';
+@use '@carbon/styles/scss/spacing';
 
-:host {
-  @include layout.size('sm');
+@mixin demo($id) {
+  :host [data-demo="#{$id}"] {
+    padding: spacing.$spacing-07;
 
-  @include side-navigation.styles((
-    selector: '&',
-  ));
+    @content;
+  }
 }

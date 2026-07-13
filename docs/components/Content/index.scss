@@ -5,13 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../scss/layout';
-@use '../../../scss/elements/side-navigation';
+@use '../../../scss/elements/main';
 
 :host {
-  @include layout.size('sm');
-
-  @include side-navigation.styles((
+  @include main.styles((
     selector: '&',
   ));
 }

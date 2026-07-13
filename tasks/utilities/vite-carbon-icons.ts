@@ -16,7 +16,7 @@ export const carbonIcons: Plugin = {
   name: 'carbon-icons',
 
   async transform(code, id) {
-    if (!id.endsWith('.html?raw')) {
+    if (!id.endsWith('.html')) {
       return null;
     }
 

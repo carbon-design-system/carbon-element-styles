@@ -8,6 +8,7 @@
 import styles from './index.scss?inline';
 
 import { Environment } from '@/model/Environment';
+import { Inventory } from '@/model/Inventory';
 import { NavigationItem } from '@/model/NavigationItem';
 
 type Item = {
@@ -17,9 +18,6 @@ type Item = {
 };
 
 export class CdsEsDocsNavigation extends HTMLElement {
-  #base?: string;
-  #paths = import.meta.glob('../../content/**/nav.ts') as Record<string, () => Promise<{ default: unknown }>>;
-  #content: Map<string, NavigationItem> = new Map();
   #items: Item[] = [];
   #ul: HTMLUListElement = document.createElement('ul');
 
@@ -30,41 +28,6 @@ export class CdsEsDocsNavigation extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
-  }
-
-  #generateAccessor(item: NavigationItem): string | undefined {
-    if (!item.source) {
-      return undefined;
-    }
-
-    const prefix = item.source.slice(this.#base?.length ?? 0);
-
-    return prefix.endsWith(`${item.id}/`)
-      ? prefix.slice(0, -1)
-      : prefix + item.id;
-  }
-
-  async #registerContent(path: string, item: NavigationItem) {
-    item.source = await import.meta.resolve?.(`${path}/..`);
-
-    const accessor = this.#generateAccessor(item);
-    if (accessor) {
-      this.#content.set(accessor, item);
-    }
-
-    for (const child of item.items ?? []) {
-      await this.#registerContent(path, child);
-    }
-  }
-
-  async #parsePaths() {
-    for (const path in this.#paths) {
-      const { default: defaultExport } = await this.#paths[path]();
-
-      if (defaultExport instanceof NavigationItem) {
-        await this.#registerContent(path, defaultExport);
-      }
-    }
   }
 
   #parseItems() {
@@ -78,7 +41,7 @@ export class CdsEsDocsNavigation extends HTMLElement {
 
       const node: Item = {
         path: key,
-        item: this.#content.get(key)!,
+        item: Inventory.content.get(key)!,
         children: [],
       };
 
@@ -94,7 +57,7 @@ export class CdsEsDocsNavigation extends HTMLElement {
       return node;
     };
 
-    this.#content.forEach((_, key) => getOrCreate(key));
+    Inventory.content.forEach((_, key) => getOrCreate(key));
   }
 
   #renderBranchItem(item: Item): HTMLButtonElement {
@@ -178,9 +141,6 @@ export class CdsEsDocsNavigation extends HTMLElement {
   }
 
   async connectedCallback() {
-    this.#base = await import.meta.resolve?.('../../content/');
-    await this.#parsePaths();
-
     this.#parseItems();
     this.#renderMenu();
 
