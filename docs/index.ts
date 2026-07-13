@@ -11,6 +11,7 @@ import { CdsEsDocsContent } from '@/components/Content';
 import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 import { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
+import { CdsEsDocsApiTable } from '@/components/ApiTable';
 import { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 import { CdsEsDocsHeader } from '@/components/Header';
 import { CdsEsDocsNavigation } from '@/components/Navigation';
@@ -23,6 +24,7 @@ window.customElements.define('cds-es-docs-content', CdsEsDocsContent);
 window.customElements.define('cds-es-docs-element-demo-content', CdsEsDocsElementDemoContent);
 window.customElements.define('cds-es-docs-markdown-content', CdsEsDocsMarkdownContent);
 
+window.customElements.define('cds-es-docs-api-table', CdsEsDocsApiTable);
 window.customElements.define('cds-es-docs-element-overview', CdsEsDocsElementOverview);
 window.customElements.define('cds-es-docs-header', CdsEsDocsHeader);
 window.customElements.define('cds-es-docs-navigation', CdsEsDocsNavigation);

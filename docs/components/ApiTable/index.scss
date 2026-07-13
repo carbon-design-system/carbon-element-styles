@@ -1,0 +1,20 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../scss/elements/code';
+@use '../../../scss/elements/table';
+
+:host {
+  @include code.styles;
+  @include table.styles((
+    kind: 'structured-list--flush',
+  ));
+}
+
+:host table {
+  margin-block-start: 0;
+}

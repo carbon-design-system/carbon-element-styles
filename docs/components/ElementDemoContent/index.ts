@@ -6,7 +6,9 @@
  */
 import styles from './index.scss?inline';
 
-import type { CdsEsDocsElementOverview } from '../ElementOverview';
+import type { ScssDoc } from '@/model/ScssDoc';
+import type { CdsEsDocsApiTable } from '@/components/ApiTable';
+import type { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 
 export class CdsEsDocsElementDemoContent extends HTMLElement {
   static observedAttributes = ['request-id'];
@@ -18,6 +20,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
   }[] = [];
   notes?: string;
   css = new CSSStyleSheet();
+  scssDoc?: ScssDoc;
   demos: Map<string, {
     html: string;
     setup?: (frame: HTMLElement) => void;
@@ -59,8 +62,19 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       overviewTabPanel.references = this.references;
       overviewTabPanel.notes = this.notes;
 
+      const apiTabPanel = document.createElement('cds-es-docs-api-table') as CdsEsDocsApiTable;
+
+      for (const entry of this.scssDoc?.parameters.entries() ?? []) {
+        apiTabPanel.insertRow({
+          key: entry[0],
+          type: entry[1].type,
+          default: entry[1].default,
+        });
+      }
+
       tabs.append(
         this.#createTabPanel('Overview', overviewTabPanel),
+        this.#createTabPanel('Configuration', apiTabPanel),
       );
 
       this.shadowRoot?.replaceChildren(frame, tabs);
