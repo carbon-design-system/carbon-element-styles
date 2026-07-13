@@ -13,6 +13,8 @@ import { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
 import { CdsEsDocsHeader } from '@/components/Header';
 import { CdsEsDocsNavigation } from '@/components/Navigation';
+import { CdsEsDocsTabPanel } from '@/components/TabPanel';
+import { CdsEsDocsTabs } from '@/components/Tabs';
 
 await Inventory.load();
 
@@ -22,3 +24,5 @@ window.customElements.define('cds-es-docs-markdown-content', CdsEsDocsMarkdownCo
 
 window.customElements.define('cds-es-docs-header', CdsEsDocsHeader);
 window.customElements.define('cds-es-docs-navigation', CdsEsDocsNavigation);
+window.customElements.define('cds-es-docs-tab-panel', CdsEsDocsTabPanel);
+window.customElements.define('cds-es-docs-tabs', CdsEsDocsTabs);

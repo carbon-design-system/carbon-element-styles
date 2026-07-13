@@ -41,7 +41,19 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       frame.innerHTML = demo.html;
       demo.setup?.(frame);
 
-      this.shadowRoot?.replaceChildren(frame);
+      const tabs = document.createElement('cds-es-docs-tabs');
+
+      const overviewTabPanel = document.createElement('cds-es-docs-tab-panel');
+      overviewTabPanel.setAttribute('label', 'Overview');
+
+      const div = document.createElement('div');
+      div.textContent = this.label;
+
+      overviewTabPanel.append(div);
+
+      tabs.append(overviewTabPanel);
+
+      this.shadowRoot?.replaceChildren(frame, tabs);
     }
   }
 
