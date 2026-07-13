@@ -7,12 +7,15 @@
 import styles from './index.scss?inline';
 
 import type { ScssDoc } from '@/model/ScssDoc';
+
 import type { CdsEsDocsApiTable } from '@/components/ApiTable';
 import type { CdsEsDocsElementOverview } from '@/components/ElementOverview';
+import type { CdsEsDocsSourceCode } from '@/components/SourceCode';
 
 export class CdsEsDocsElementDemoContent extends HTMLElement {
   static observedAttributes = ['request-id'];
 
+  key: string = '';
   label: string = '';
   references: {
     label: string;
@@ -23,6 +26,9 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
   scssDoc?: ScssDoc;
   demos: Map<string, {
     html: string;
+    scssConfig?: {
+      [key: string]: string;
+    },
     setup?: (frame: HTMLElement) => void;
   }> = new Map();
 
@@ -44,6 +50,18 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     return tabPanel;
   }
 
+  #getScssSourceCode(demo: CdsEsDocsElementDemoContent['demos'] extends Map<any, infer I> ? I : never): string {
+    if (!demo.scssConfig) {
+      return `@include ${this.key}.styles;`;
+    }
+
+    const scssMapEntries = Object.entries(demo.scssConfig)
+      .map(([key, value]) => `  ${key}: ${value},`)
+      .join('\n');
+
+    return `@include ${this.key}.styles((\n${scssMapEntries}\n));`;
+  }
+
   #render() {
     const demo = this.demos.get(this.getAttribute('request-id') ?? '');
 
@@ -63,7 +81,6 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       overviewTabPanel.notes = this.notes;
 
       const apiTabPanel = document.createElement('cds-es-docs-api-table') as CdsEsDocsApiTable;
-
       for (const entry of this.scssDoc?.parameters.entries() ?? []) {
         apiTabPanel.insertRow({
           key: entry[0],
@@ -72,9 +89,19 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
         });
       }
 
+      const sourceHtmlTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
+      sourceHtmlTabPanel.setAttribute('kind', 'html');
+      sourceHtmlTabPanel.textContent = demo.html;
+
+      const sourceScssTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
+      sourceScssTabPanel.setAttribute('kind', 'scss');
+      sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);
+
       tabs.append(
         this.#createTabPanel('Overview', overviewTabPanel),
         this.#createTabPanel('Configuration', apiTabPanel),
+        this.#createTabPanel('HTML', sourceHtmlTabPanel),
+        this.#createTabPanel('SCSS', sourceScssTabPanel),
       );
 
       this.shadowRoot?.replaceChildren(frame, tabs);

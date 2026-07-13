@@ -15,6 +15,7 @@ import { CdsEsDocsApiTable } from '@/components/ApiTable';
 import { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 import { CdsEsDocsHeader } from '@/components/Header';
 import { CdsEsDocsNavigation } from '@/components/Navigation';
+import { CdsEsDocsSourceCode } from '@/components/SourceCode';
 import { CdsEsDocsTabPanel } from '@/components/TabPanel';
 import { CdsEsDocsTabs } from '@/components/Tabs';
 
@@ -28,5 +29,6 @@ window.customElements.define('cds-es-docs-api-table', CdsEsDocsApiTable);
 window.customElements.define('cds-es-docs-element-overview', CdsEsDocsElementOverview);
 window.customElements.define('cds-es-docs-header', CdsEsDocsHeader);
 window.customElements.define('cds-es-docs-navigation', CdsEsDocsNavigation);
+window.customElements.define('cds-es-docs-source-code', CdsEsDocsSourceCode);
 window.customElements.define('cds-es-docs-tab-panel', CdsEsDocsTabPanel);
 window.customElements.define('cds-es-docs-tabs', CdsEsDocsTabs);

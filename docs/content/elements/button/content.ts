@@ -13,6 +13,7 @@ import html from './demo.html';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
+elementDemoContent.key = 'button';
 elementDemoContent.label = 'Button';
 
 elementDemoContent.references = [
@@ -35,12 +36,12 @@ elementDemoContent.css.replace(css);
 elementDemoContent.scssDoc = scssDoc;
 
 elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('primary', { html });
-elementDemoContent.demos.set('secondary', { html });
-elementDemoContent.demos.set('tertiary', { html });
-elementDemoContent.demos.set('ghost', { html });
-elementDemoContent.demos.set('danger--primary', { html });
-elementDemoContent.demos.set('danger--tertiary', { html });
-elementDemoContent.demos.set('danger--ghost', { html });
+elementDemoContent.demos.set('primary', { html, scssConfig: { kind: `'primary'` } });
+elementDemoContent.demos.set('secondary', { html, scssConfig: { kind: `'secondary'` } });
+elementDemoContent.demos.set('tertiary', { html, scssConfig: { kind: `'tertiary'` } });
+elementDemoContent.demos.set('ghost', { html, scssConfig: { kind: `'ghost'` } });
+elementDemoContent.demos.set('danger--primary', { html, scssConfig: { kind: `'danger--primary'` } });
+elementDemoContent.demos.set('danger--tertiary', { html, scssConfig: { kind: `'danger--tertiary'` } });
+elementDemoContent.demos.set('danger--ghost', { html, scssConfig: { kind: `'danger--ghost'` } });
 
 export default elementDemoContent;
