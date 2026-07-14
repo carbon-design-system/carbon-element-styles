@@ -25,9 +25,8 @@ export class CdsEsDocsApiTable extends HTMLElement {
   }
 
   clearRows() {
-    for (const row of this.#table.rows) {
-      row.remove();
-    }
+    const [tbody] = this.#table.tBodies;
+    tbody.replaceChildren();
   }
 
   insertRow(data: {
@@ -35,7 +34,8 @@ export class CdsEsDocsApiTable extends HTMLElement {
     type: string;
     default: string;
   }) {
-    const row = this.#table.insertRow();
+    const [tbody] = this.#table.tBodies;
+    const row = tbody.insertRow();
 
     for (const key in data) {
       const cell = row.insertCell();
@@ -58,5 +58,4 @@ export class CdsEsDocsApiTable extends HTMLElement {
 
     return thead;
   }
-
 };
