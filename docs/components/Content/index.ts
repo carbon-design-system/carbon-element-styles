@@ -29,6 +29,7 @@ export class CdsEsDocsContent extends HTMLElement {
           const { default: defaultExport } = await item.content?.() ?? {};
 
           if (defaultExport instanceof HTMLElement) {
+            defaultExport.setAttribute('key', item.key);
             defaultExport.setAttribute('request-id', item.id);
 
             if (this.shadowRoot?.firstChild !== defaultExport) {

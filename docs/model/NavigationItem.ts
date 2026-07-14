@@ -7,6 +7,7 @@
 
 export class NavigationItem {
   id: string;
+  key: string;
   label: string;
   items?: NavigationItem[];
   content?: () => Promise<{ default: unknown }>;
@@ -23,11 +24,13 @@ export class NavigationItem {
     content?: NavigationItem['content'];
   }) {
     this.id = id;
+    this.key = id;
     this.label = label;
     this.items = items;
     this.content = content;
 
     for (const child of this.items ?? []) {
+      child.key = id;
       child.content ??= content;
     }
   }

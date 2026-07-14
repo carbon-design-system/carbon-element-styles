@@ -71,14 +71,14 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
 
   #getScssSourceCode(demo: CdsEsDocsElementDemoContent['demos'] extends Map<any, infer I> ? I : never): string {
     if (!demo.scssConfig) {
-      return `@include ${this.key}.styles;`;
+      return `@include ${this.getAttribute('key')}.styles;`;
     }
 
     const scssMapEntries = Object.entries(demo.scssConfig)
       .map(([key, value]) => `  ${key}: ${value},`)
       .join('\n');
 
-    return `@include ${this.key}.styles((\n${scssMapEntries}\n));`;
+    return `@include ${this.getAttribute('key')}.styles((\n${scssMapEntries}\n));`;
   }
 
   #render() {

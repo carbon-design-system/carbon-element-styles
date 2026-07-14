@@ -23,17 +23,21 @@
   ));
   @include anchor.styles;
   @include unordered-list.styles;
+}
 
-  & h1,
-  & ul {
-    margin-block-start: 0;
-  }
+:host h1,
+:host ul {
+  margin-block-start: 0;
+}
 
-  & h2 {
-    margin-block-end: spacing.$spacing-01;
-  }
+:host h2 {
+  margin-block-end: spacing.$spacing-01;
+}
 
-  & > section:has(ul:empty) {
-    display: none;
-  }
+:host > section:has(ul:empty) {
+  display: none;
+}
+
+:host > section:has(cds-es-docs-markdown-content:empty) {
+  display: none;
 }

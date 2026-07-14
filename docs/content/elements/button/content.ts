@@ -13,7 +13,6 @@ import html from './demo.html';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
-elementDemoContent.key = 'button';
 elementDemoContent.label = 'Button';
 
 elementDemoContent.references = [
