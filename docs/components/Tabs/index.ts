@@ -17,6 +17,13 @@ export class CdsEsDocsTabs extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    this.#tablist.setAttribute('role', 'tablist');
+
+    this.shadowRoot?.appendChild(this.#tablist);
+
+    const slot = document.createElement('slot');
+    this.shadowRoot?.appendChild(slot);
   }
 
   #activateTab(tab: HTMLButtonElement) {
@@ -59,13 +66,7 @@ export class CdsEsDocsTabs extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#tablist.setAttribute('role', 'tablist');
     this.#renderTablist();
-
-    this.shadowRoot?.appendChild(this.#tablist);
-
-    const slot = document.createElement('slot');
-    this.shadowRoot?.appendChild(slot);
 
     setTimeout(() => {
       const firstTab = this.#tablist.querySelector<HTMLButtonElement>('button[role="tab"]');

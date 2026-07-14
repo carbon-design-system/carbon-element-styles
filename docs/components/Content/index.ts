@@ -30,18 +30,24 @@ export class CdsEsDocsContent extends HTMLElement {
 
           if (defaultExport instanceof HTMLElement) {
             defaultExport.setAttribute('request-id', item.id);
-            this.shadowRoot?.replaceChildren(defaultExport);
+
+            if (this.shadowRoot?.firstChild !== defaultExport) {
+              this.shadowRoot?.replaceChildren(defaultExport);
+            }
           }
         } catch {}
       }
     }
   }
 
-  async connectedCallback() {
-    Environment.addEventListener('change', () => {
-      this.#render();
-    });
+  #boundRender = () => this.#render();
 
+  connectedCallback() {
+    Environment.addEventListener('change', this.#boundRender);
     this.#render();
+  }
+
+  disconnectedCallback() {
+    Environment.removeEventListener('change', this.#boundRender);
   }
 }

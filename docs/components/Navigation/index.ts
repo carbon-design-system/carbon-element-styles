@@ -28,6 +28,8 @@ export class CdsEsDocsNavigation extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    this.shadowRoot?.appendChild(this.#ul);
   }
 
   #parseItems() {
@@ -140,10 +142,8 @@ export class CdsEsDocsNavigation extends HTMLElement {
     );
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     this.#parseItems();
     this.#renderMenu();
-
-    this.shadowRoot?.appendChild(this.#ul);
   }
 }

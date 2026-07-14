@@ -15,16 +15,16 @@ export class CdsEsDocsTabPanel extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
-  }
-
-  connectedCallback() {
-    this.setAttribute('role', 'tabpanel');
-    this.hidden = true;
 
     const frame = document.createElement('div');
     const slot = document.createElement('slot');
     frame.append(slot);
 
     this.shadowRoot?.appendChild(frame);
+  }
+
+  connectedCallback() {
+    this.setAttribute('role', 'tabpanel');
+    this.hidden = true;
   }
 };

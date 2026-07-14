@@ -32,6 +32,12 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     setup?: (frame: HTMLElement) => void;
   }> = new Map();
 
+  #frame: HTMLDivElement = document.createElement('div');
+  #elementOverviewTabPanel = document.createElement('cds-es-docs-element-overview') as CdsEsDocsElementOverview;
+  #apiTableTabPanel = document.createElement('cds-es-docs-api-table') as CdsEsDocsApiTable;
+  #sourceHtmlTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
+  #sourceScssTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -39,6 +45,19 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    this.#frame.classList.add('demo');
+
+    const tabs = document.createElement('cds-es-docs-tabs');
+
+    tabs.append(
+      this.#createTabPanel('Overview', this.#elementOverviewTabPanel),
+      this.#createTabPanel('Configuration', this.#apiTableTabPanel),
+      this.#createTabPanel('HTML', this.#sourceHtmlTabPanel),
+      this.#createTabPanel('SCSS', this.#sourceScssTabPanel),
+    );
+
+    this.shadowRoot?.replaceChildren(this.#frame, tabs);
   }
 
   #createTabPanel(label: string, content: HTMLElement): HTMLElement {
@@ -68,43 +87,27 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     if (demo) {
       this.shadowRoot?.adoptedStyleSheets.splice(1, Infinity, this.css);
 
-      const frame = document.createElement('div');
-      frame.classList.add('demo');
-      frame.innerHTML = demo.html;
-      demo.setup?.(frame);
+      this.#frame.innerHTML = demo.html;
+      demo.setup?.(this.#frame);
 
-      const tabs = document.createElement('cds-es-docs-tabs');
+      this.#elementOverviewTabPanel.label = this.label;
+      this.#elementOverviewTabPanel.references = this.references;
+      this.#elementOverviewTabPanel.notes = this.notes;
 
-      const overviewTabPanel = document.createElement('cds-es-docs-element-overview') as CdsEsDocsElementOverview;
-      overviewTabPanel.label = this.label;
-      overviewTabPanel.references = this.references;
-      overviewTabPanel.notes = this.notes;
-
-      const apiTabPanel = document.createElement('cds-es-docs-api-table') as CdsEsDocsApiTable;
+      this.#apiTableTabPanel.clearRows();
       for (const entry of this.scssDoc?.parameters.entries() ?? []) {
-        apiTabPanel.insertRow({
+        this.#apiTableTabPanel.insertRow({
           key: entry[0],
           type: entry[1].type,
           default: entry[1].default,
         });
       }
 
-      const sourceHtmlTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
-      sourceHtmlTabPanel.setAttribute('kind', 'html');
-      sourceHtmlTabPanel.textContent = demo.html;
+      this.#sourceHtmlTabPanel.setAttribute('kind', 'html');
+      this.#sourceHtmlTabPanel.textContent = demo.html;
 
-      const sourceScssTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
-      sourceScssTabPanel.setAttribute('kind', 'scss');
-      sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);
-
-      tabs.append(
-        this.#createTabPanel('Overview', overviewTabPanel),
-        this.#createTabPanel('Configuration', apiTabPanel),
-        this.#createTabPanel('HTML', sourceHtmlTabPanel),
-        this.#createTabPanel('SCSS', sourceScssTabPanel),
-      );
-
-      this.shadowRoot?.replaceChildren(frame, tabs);
+      this.#sourceScssTabPanel.setAttribute('kind', 'scss');
+      this.#sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);
     }
   }
 

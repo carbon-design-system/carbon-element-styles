@@ -21,6 +21,8 @@ export class CdsEsDocsHeader extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    this.shadowRoot?.appendChild(this.#header);
   }
 
   #renderTitle() {
@@ -57,9 +59,7 @@ export class CdsEsDocsHeader extends HTMLElement {
     this.#header.replaceChildren(nav);
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     this.#renderHeader();
-
-    this.shadowRoot?.appendChild(this.#header);
   }
 }

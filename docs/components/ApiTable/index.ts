@@ -17,6 +17,17 @@ export class CdsEsDocsApiTable extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    this.#table.appendChild(this.#createTableHead());
+    this.#table.appendChild(document.createElement('tbody'));
+
+    this.shadowRoot?.appendChild(this.#table);
+  }
+
+  clearRows() {
+    for (const row of this.#table.rows) {
+      row.remove();
+    }
   }
 
   insertRow(data: {
@@ -48,10 +59,4 @@ export class CdsEsDocsApiTable extends HTMLElement {
     return thead;
   }
 
-  connectedCallback() {
-    this.#table.appendChild(this.#createTableHead());
-    this.#table.appendChild(document.createElement('tbody'));
-
-    this.shadowRoot?.appendChild(this.#table);
-  }
 };

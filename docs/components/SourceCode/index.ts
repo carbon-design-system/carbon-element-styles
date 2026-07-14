@@ -8,6 +8,8 @@
 import styles from './index.scss?inline';
 
 export class CdsEsDocsSourceCode extends HTMLElement {
+  #observer = new MutationObserver(() => this.#render());
+
   #code: HTMLElement = document.createElement('code');
 
   #renderers: { [kind: string]: () => string } = {
@@ -22,6 +24,10 @@ export class CdsEsDocsSourceCode extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    const preformatted = document.createElement('pre');
+    preformatted.appendChild(this.#code);
+    this.shadowRoot?.appendChild(preformatted);
   }
 
   #renderHtml(): string {
@@ -41,11 +47,16 @@ export class CdsEsDocsSourceCode extends HTMLElement {
   }
 
   connectedCallback() {
-    const preformatted = document.createElement('pre');
-    preformatted.appendChild(this.#code);
+    this.#observer.observe(this, {
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
 
     this.#render();
+  }
 
-    this.shadowRoot?.appendChild(preformatted);
+  disconnectedCallback() {
+    this.#observer.disconnect();
   }
 };

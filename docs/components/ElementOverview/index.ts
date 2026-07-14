@@ -26,6 +26,26 @@ export class CdsEsDocsElementOverview extends HTMLElement {
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
+
+    const referencesHeading = document.createElement('h2');
+    referencesHeading.textContent = 'References';
+    this.#referencesElement.append(referencesHeading);
+
+    const referencesList = document.createElement('ul');
+    this.#referencesElement.append(referencesList);
+
+    const notesHeading = document.createElement('h2');
+    notesHeading.textContent = 'Notes';
+    this.#notesElement.append(notesHeading);
+
+    const notesContent = document.createElement('cds-es-docs-markdown-content');
+    this.#notesElement.append(notesContent);
+
+    this.shadowRoot?.append(
+      this.#headingElement,
+      this.#referencesElement,
+      this.#notesElement,
+    );
   }
 
   #render() {
@@ -52,26 +72,6 @@ export class CdsEsDocsElementOverview extends HTMLElement {
   }
 
   connectedCallback() {
-    const referencesHeading = document.createElement('h2');
-    referencesHeading.textContent = 'References';
-    this.#referencesElement.append(referencesHeading);
-
-    const referencesList = document.createElement('ul');
-    this.#referencesElement.append(referencesList);
-
-    const notesHeading = document.createElement('h2');
-    notesHeading.textContent = 'Notes';
-    this.#notesElement.append(notesHeading);
-
-    const notesContent = document.createElement('cds-es-docs-markdown-content');
-    this.#notesElement.append(notesContent);
-
     this.#render();
-
-    this.shadowRoot?.append(
-      this.#headingElement,
-      this.#referencesElement,
-      this.#notesElement,
-    );
   }
 };
