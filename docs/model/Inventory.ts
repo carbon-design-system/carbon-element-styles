@@ -8,7 +8,7 @@
 import { NavigationItem } from '@/model/NavigationItem';
 
 export class Inventory {
-  static #paths = import.meta.glob('../content/**/nav.ts') as Record<string, () => Promise<{ default: unknown }>>;
+  static #paths = import.meta.glob('../content/**/index.ts') as Record<string, () => Promise<{ default: unknown }>>;
   static #content: Map<string, NavigationItem> = new Map();
 
   static get content(): ReadonlyMap<string, NavigationItem> {
@@ -38,7 +38,7 @@ export class Inventory {
       if (defaultExport instanceof NavigationItem) {
         const prefix = path
           .replace(/^\.\.\/content\//, '')
-          .replace(/\/nav\.ts$/, '');
+          .replace(/\/index\.ts$/, '');
         this.#registerContent(prefix, defaultExport);
       }
     }
