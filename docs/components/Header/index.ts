@@ -49,11 +49,33 @@ export class CdsEsDocsHeader extends HTMLElement {
     return anchor;
   }
 
+  #createNavigationItem(label: string, href: string) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.textContent = label;
+    a.setAttribute('href', href);
+
+    li.append(a);
+
+    return li;
+  }
+
+  #renderNavigation() {
+    const ul = document.createElement('ul');
+
+    ul.append(
+      this.#createNavigationItem('GitHub', 'https://github.com/carbon-design-system/carbon-element-styles'),
+    );
+
+    return ul;
+  }
+
   #renderHeader() {
     const nav = document.createElement('nav');
 
     nav.append(
       this.#renderTitle(),
+      this.#renderNavigation(),
     );
 
     this.#header.replaceChildren(nav);
