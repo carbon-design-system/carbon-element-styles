@@ -17,13 +17,16 @@ $config: () !default;
 
 $-default-config: (
   selector: 'a',
+  emit-visited: true,
 );
 
 /// @group anchor
 /// @param {Map} config [()]
 /// @param {Selector} config.selector ['a']
+/// @param {Bool} config.emit-visited [true] - Enable visited link styles using theme.$link-visited
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
+  $emit-visited: map.get($props, 'emit-visited') == true;
 
   #{map.get($props, 'selector')} {
     display: inline-flex;
@@ -33,8 +36,24 @@ $-default-config: (
     text-decoration: underline;
     transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
+    // TODO: remove when fixed firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=868975
+    @if $emit-visited {
+      @supports (-moz-appearance: none) {
+        transition: none;
+      }
+    }
+
     &:hover {
       color: theme.$link-primary-hover;
+    }
+
+    @if $emit-visited {
+      &:visited {
+        color: theme.$link-visited;
+      }
+      &:visited svg {
+        fill: theme.$link-visited;
+      }
     }
 
     &:focus {
