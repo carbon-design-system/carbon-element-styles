@@ -38,7 +38,7 @@ function parseScssDoc(source: string): ScssParameter[] | null {
   for (const line of lines) {
     // @param {type} name [default]
     // @param {type} name.key [default]
-    const paramMatch = line.match(/^@param\s+\{([^}]+)\}\s+([\w.]+)\s+\[((?:[^\[\]]|\[[^\]]*\])*)\]/);
+    const paramMatch = line.match(/^@param\s+\{([^}]+)\}\s+([\w.-]+)\s+\[((?:[^\[\]]|\[[^\]]*\])*)\]/);
 
     if (paramMatch) {
       const name = paramMatch[2].trim().replace(/config.?/, '');
