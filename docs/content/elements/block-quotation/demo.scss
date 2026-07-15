@@ -1,0 +1,13 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../components/ElementDemoContent' as element-demo-content;
+@use '../../../../scss/elements/block-quotation';
+
+@include element-demo-content.demo('default') {
+  @include block-quotation.styles;
+};
