@@ -11,9 +11,10 @@ import type { ScssDoc } from '@/model/ScssDoc';
 import type { CdsEsDocsApiTable } from '@/components/ApiTable';
 import type { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 import type { CdsEsDocsSourceCode } from '@/components/SourceCode';
+import type { CdsEsDocsTabs } from '@/components/Tabs';
 
 export class CdsEsDocsElementDemoContent extends HTMLElement {
-  static observedAttributes = ['request-id'];
+  static observedAttributes = ['key', 'request-id'];
 
   key: string = '';
   label: string = '';
@@ -33,6 +34,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
   }> = new Map();
 
   #frame: HTMLDivElement = document.createElement('div');
+  #tabs = document.createElement('cds-es-docs-tabs') as CdsEsDocsTabs;
   #elementOverviewTabPanel = document.createElement('cds-es-docs-element-overview') as CdsEsDocsElementOverview;
   #apiTableTabPanel = document.createElement('cds-es-docs-api-table') as CdsEsDocsApiTable;
   #sourceHtmlTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
@@ -48,16 +50,22 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
 
     this.#frame.classList.add('demo');
 
-    const tabs = document.createElement('cds-es-docs-tabs');
-
-    tabs.append(
+    this.#tabs.append(
       this.#createTabPanel('Overview', this.#elementOverviewTabPanel),
       this.#createTabPanel('Configuration', this.#apiTableTabPanel),
       this.#createTabPanel('HTML', this.#sourceHtmlTabPanel),
       this.#createTabPanel('SCSS', this.#sourceScssTabPanel),
     );
 
-    this.shadowRoot?.replaceChildren(this.#frame, tabs);
+    this.shadowRoot?.replaceChildren(this.#frame, this.#tabs);
+  }
+
+  get activeTabIndex(): number {
+    return this.#tabs.activeTabIndex;
+  }
+
+  set activeTabIndex(index: number) {
+    this.#tabs.activeTabIndex = index;
   }
 
   #createTabPanel(label: string, content: HTMLElement): HTMLElement {

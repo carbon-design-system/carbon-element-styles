@@ -9,6 +9,7 @@ import { Inventory } from '@/model/Inventory';
 import styles from './index.scss?inline';
 
 import { Environment } from '@/model/Environment';
+import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
 export class CdsEsDocsContent extends HTMLElement {
   constructor() {
@@ -36,7 +37,17 @@ export class CdsEsDocsContent extends HTMLElement {
             defaultExport.setAttribute('request-id', item.id);
 
             if (this.shadowRoot?.firstChild !== defaultExport) {
+              const retainedTabIndex = this.shadowRoot?.firstChild instanceof CdsEsDocsElementDemoContent && defaultExport instanceof CdsEsDocsElementDemoContent
+                ? this.shadowRoot.firstChild.activeTabIndex
+                : -1;
+
               this.shadowRoot?.replaceChildren(defaultExport);
+
+              setTimeout(() => {
+                if (retainedTabIndex >= 0) {
+                  (this.shadowRoot?.firstChild as CdsEsDocsElementDemoContent).activeTabIndex = retainedTabIndex;
+                }
+              });
             }
           }
         } catch {}

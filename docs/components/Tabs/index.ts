@@ -26,6 +26,19 @@ export class CdsEsDocsTabs extends HTMLElement {
     this.shadowRoot?.appendChild(slot);
   }
 
+  get activeTabIndex(): number {
+    return Array.from(this.#tablist.querySelectorAll('[role="tab"]'))
+      .findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+  }
+
+  set activeTabIndex(index: number) {
+    const targetTab = this.#tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]')[index];
+
+    if (targetTab) {
+      this.#activateTab(targetTab);
+    }
+  }
+
   #activateTab(tab: HTMLButtonElement) {
     for (const activeTab of (this.shadowRoot?.querySelectorAll('[role="tab"][aria-selected="true"]') ?? [])) {
       activeTab.setAttribute('aria-selected', 'false');
