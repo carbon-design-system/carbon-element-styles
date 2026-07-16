@@ -58,6 +58,7 @@ const html = /* html */`
         </li>
       </ul>
     </li>
+    <li role="separator"></li>
     <li>
       <a href="#">Link</a>
     </li>
