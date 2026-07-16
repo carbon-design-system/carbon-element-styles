@@ -56,3 +56,9 @@ main {
     @include layout.size($size);
   }
 }
+
+@each $density in ('condensed', 'normal') {
+  :root[data-density="#{$density}"] cds-es-docs-content {
+    @include layout.density($density);
+  }
+}

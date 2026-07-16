@@ -10,6 +10,7 @@ type EnvironmentState = {
   theme?: string;
   mode?: string;
   size?: string;
+  density?: string;
 };
 
 export class Environment {
@@ -34,12 +35,16 @@ export class Environment {
   static set size(value: EnvironmentState['size']) { Environment.#setState({ size: value }); };
   static get size() { return Environment.state.size; };
 
+  static set density(value: EnvironmentState['density']) { Environment.#setState({ density: value }); };
+  static get density() { return Environment.state.density; };
+
   static get state(): EnvironmentState {
     const currentState: EnvironmentState = {
       path: '/',
       theme: 'g100',
       mode: 'productive',
       size: 'md',
+      density: 'normal',
     };
 
     for (const [key, value] of this.getUrl().searchParams) {

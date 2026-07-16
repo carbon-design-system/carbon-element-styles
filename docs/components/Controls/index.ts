@@ -89,6 +89,21 @@ export class CdsEsDocsControls extends HTMLElement {
           },
         ],
       }),
+      this.#createControl({
+        key: 'density',
+        label: 'Density',
+        icon: densityIcon,
+        options: [
+          {
+            value: 'condensed',
+            label: 'Condensed',
+          },
+          {
+            value: 'normal',
+            label: 'Normal',
+          },
+        ],
+      }),
     );
   }
 
