@@ -133,6 +133,13 @@ $-default-config: (
       display: none;
     }
 
+    & li[role="separator"] {
+      block-size: 0.0625rem;
+      background-color: theme.$border-subtle;
+      margin-block: spacing.$spacing-03;
+      margin-inline: layout.$density--padding;
+    }
+
     & + main,
     & + main + footer {
       margin-inline-start: 16rem;
