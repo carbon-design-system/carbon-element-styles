@@ -13,12 +13,20 @@ import html from './demo.html';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Small text';
+elementDemoContent.label = 'Table';
 
 elementDemoContent.references = [
   {
-    label: '<small>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/small',
+    label: '<table>',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table',
+  },
+  {
+    label: 'Data table',
+    url: 'https://carbondesignsystem.com/components/data-table/usage/',
+  },
+  {
+    label: 'Structured list',
+    url: 'https://carbondesignsystem.com/components/structured-list/usage/',
   },
 ];
 
@@ -26,5 +34,8 @@ elementDemoContent.css.replace(css);
 elementDemoContent.scssDoc = scssDoc;
 
 elementDemoContent.demos.set('default', { html });
+elementDemoContent.demos.set('data-table', { html, scssConfig: { kind: `'data-table'` } });
+elementDemoContent.demos.set('structured-list', { html, scssConfig: { kind: `'structured-list'` } });
+elementDemoContent.demos.set('structured-list--flush', { html, scssConfig: { kind: `'structured-list--flush'` } });
 
 export default elementDemoContent;
