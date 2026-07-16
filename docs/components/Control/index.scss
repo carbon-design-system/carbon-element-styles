@@ -42,17 +42,17 @@
     inline-size: 100%;
     grid-template-columns: min-content 1fr;
     transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+  }
 
-  :host:hover {
-      background-color: theme.$layer-hover;
-    }
+  :host(:hover) {
+    background-color: theme.$layer-hover;
+  }
 
-  :host select:enabled:hover {
-      background-color: transparent;
-    }
+  :host select:hover {
+    background-color: transparent !important;
+  }
 
   :host svg {
-      padding-inline-start: layout.$density--padding;
-    }
+    padding-inline-start: layout.$density--padding;
   }
 }

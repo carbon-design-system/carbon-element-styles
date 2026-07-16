@@ -6,7 +6,9 @@
  */
 
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/breakpoint';
 
+@use '../../../scss/layout';
 @use '../../../scss/elements/header-navigation';
 
 :host {
@@ -14,7 +16,11 @@
     selector: 'header',
   ));
 
-  .version {
-    color: theme.$text-helper;
+  @include breakpoint.breakpoint-down('lg') {
+    @include layout.density('condensed');
   }
+}
+
+:host .version {
+  color: theme.$text-helper;
 }

@@ -7,7 +7,11 @@
 
 import styles from './index.scss?inline';
 
+import navigationIcon from '@carbon/icons/svg/32/menu.svg?raw';
+import controlsIcon from '@carbon/icons/svg/32/settings--adjust.svg?raw';
+
 import { Environment } from '@/model/Environment';
+import type { CdsEsDocsPanelToggleButton } from '@/components/PanelToggleButton';
 
 import { version } from '../../../package.json';
 
@@ -78,9 +82,27 @@ export class CdsEsDocsHeader extends HTMLElement {
       this.#renderNavigation(),
     );
 
-    const slot = document.createElement('slot');
+    const controls = document.createElement('cds-es-docs-controls');
 
-    this.#header.replaceChildren(nav, slot);
+    const navigationPanelToggleButton = document.createElement('cds-es-docs-panel-toggle-button') as CdsEsDocsPanelToggleButton;
+    navigationPanelToggleButton.setAttribute('part', 'navigation-panel-toggle-button');
+    navigationPanelToggleButton.setAttribute('label', 'navigation');
+    navigationPanelToggleButton.setAttribute('auto-close-on-environment-change', 'true');
+    navigationPanelToggleButton.icon = navigationIcon;
+    navigationPanelToggleButton.target = document.querySelector('cds-es-docs-navigation')!;
+
+    const controlsPanelToggleButton = document.createElement('cds-es-docs-panel-toggle-button') as CdsEsDocsPanelToggleButton;
+    controlsPanelToggleButton.setAttribute('part', 'controls-panel-toggle-button');
+    controlsPanelToggleButton.setAttribute('label', 'controls');
+    controlsPanelToggleButton.icon = controlsIcon;
+    controlsPanelToggleButton.target = controls;
+
+    this.#header.replaceChildren(
+      navigationPanelToggleButton,
+      nav,
+      controls,
+      controlsPanelToggleButton,
+    );
   }
 
   connectedCallback() {

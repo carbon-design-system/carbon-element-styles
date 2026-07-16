@@ -11,6 +11,7 @@
 @use '@carbon/styles/scss/fonts';
 
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/breakpoint';
 
 @use '../scss/utilities/carbon';
 @use '../scss/layout';
@@ -35,14 +36,30 @@
 
 @include body.styles;
 
-cds-es-docs-navigation {
-  inset-block-start: 2.5rem;
-}
-
 main {
   block-size: calc(100vb - 2.5rem - 0.0625rem);
   margin-inline-start: 16rem;
   overflow: auto;
+
+  @include breakpoint.breakpoint-down('lg') {
+    margin-inline-start: 0;
+  }
+}
+
+main::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: theme.$overlay;
+  z-index: 9997;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity layout.$mode--transition-duration layout.$mode--transition-timing-function;
+}
+
+:root[data-has-overlay="true"] main::after {
+  opacity: 1;
+  pointer-events: all;
 }
 
 @each $mode in ('productive', 'expressive') {
