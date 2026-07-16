@@ -8,8 +8,8 @@
 import type { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
 import readme from '@/../README.md?raw';
-import bannerLight from '@/assets/banner-light.svg';
-import bannerDark from '@/assets/banner-dark.svg';
+import bannerLight from '@/public/banner-light.svg';
+import bannerDark from '@/public/banner-dark.svg';
 
 const markdownContent = document.createElement('cds-es-docs-markdown-content') as CdsEsDocsMarkdownContent;
 markdownContent.textContent = readme
@@ -18,7 +18,7 @@ markdownContent.textContent = readme
   // remove github relative links
   .replaceAll(/\]\(\.\/(.+)\)/g, '](https://github.com/carbon-design-system/carbon-element-styles/blob/main/$1)')
   // remove banner srcs
-  .replaceAll('./docs/assets/banner-dark.svg', bannerDark)
-  .replaceAll('./docs/assets/banner-light.svg', bannerLight);
+  .replaceAll('./docs/public/banner-dark.svg', bannerDark)
+  .replaceAll('./docs/public/banner-light.svg', bannerLight);
 
 export default markdownContent;

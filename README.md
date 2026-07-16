@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./docs/assets/banner-dark.svg">
-  <img alt="" src="./docs/assets/banner-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/public/banner-dark.svg">
+  <img alt="" src="./docs/public/banner-light.svg">
 </picture>
 
 # @carbon/element-styles
