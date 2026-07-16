@@ -30,7 +30,7 @@ elementDemoContent.css.replace(css);
 elementDemoContent.scssDoc = scssDoc;
 
 elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('block', { html });
-elementDemoContent.demos.set('inline', { html });
+elementDemoContent.demos.set('block', { html, scssConfig: { axis: 'block' } });
+elementDemoContent.demos.set('inline', { html, scssConfig: { axis: 'inline' } });
 
 export default elementDemoContent;

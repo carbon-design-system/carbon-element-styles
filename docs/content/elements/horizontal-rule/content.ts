@@ -13,16 +13,12 @@ import html from './demo.html';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Date and time input';
+elementDemoContent.label = 'Horizontal rule';
 
 elementDemoContent.references = [
   {
-    label: '<input type="datetime-local">',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local',
-  },
-  {
-    label: 'Date picker',
-    url: 'https://carbondesignsystem.com/components/date-picker/usage/',
+    label: '<hr>',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr',
   },
 ];
 
@@ -30,7 +26,7 @@ elementDemoContent.css.replace(css);
 elementDemoContent.scssDoc = scssDoc;
 
 elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('block', { html, scssConfig: { axis: 'block' } });
-elementDemoContent.demos.set('inline', { html, scssConfig: { axis: 'inline' } });
+elementDemoContent.demos.set('subtle', { html, scssConfig: { kind: 'subtle' } });
+elementDemoContent.demos.set('strong', { html, scssConfig: { kind: 'strong' } });
 
 export default elementDemoContent;
