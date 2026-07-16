@@ -7,6 +7,7 @@
 
 type EnvironmentState = {
   path?: string;
+  theme?: string;
 };
 
 export class Environment {
@@ -22,9 +23,13 @@ export class Environment {
   static set path(value: EnvironmentState['path']) { Environment.#setState({ path: value }); };
   static get path() { return Environment.state.path; };
 
+  static set theme(value: EnvironmentState['theme']) { Environment.#setState({ theme: value }); };
+  static get theme() { return Environment.state.theme; };
+
   static get state(): EnvironmentState {
     const currentState: EnvironmentState = {
-      path: undefined,
+      path: '/',
+      theme: 'g100',
     };
 
     for (const [key, value] of this.getUrl().searchParams) {

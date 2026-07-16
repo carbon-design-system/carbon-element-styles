@@ -18,18 +18,19 @@
 
 :root {
   @include carbon.emit-carbon-colors;
-
-  @include carbon.emit-carbon-tokens('g10');
-
-  @media (prefers-color-scheme: dark) {
-    @include carbon.emit-carbon-tokens('g100');
-  }
+  @include carbon.emit-carbon-tokens('white');
 
   @include layout.density('normal');
   @include layout.mode('productive');
   @include layout.size('md');
 
   background-color: theme.$background;
+}
+
+@each $theme in ('white', 'g10', 'g90', 'g100') {
+  :root[data-theme="#{$theme}"] {
+    @include carbon.emit-carbon-tokens($theme);
+  }
 }
 
 @include body.styles;

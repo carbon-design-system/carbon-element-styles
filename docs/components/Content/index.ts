@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Inventory } from '@/model/Inventory';
 import styles from './index.scss?inline';
 
 import { Environment } from '@/model/Environment';
+import { Inventory } from '@/model/Inventory';
 import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
 export class CdsEsDocsContent extends HTMLElement {

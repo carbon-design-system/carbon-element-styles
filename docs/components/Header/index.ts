@@ -78,7 +78,9 @@ export class CdsEsDocsHeader extends HTMLElement {
       this.#renderNavigation(),
     );
 
-    this.#header.replaceChildren(nav);
+    const slot = document.createElement('slot');
+
+    this.#header.replaceChildren(nav, slot);
   }
 
   connectedCallback() {

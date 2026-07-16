@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Environment } from '@/model/Environment';
 import { Inventory } from '@/model/Inventory';
 
 import { CdsEsDocsContent } from '@/components/Content';
@@ -12,6 +13,8 @@ import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 import { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
 import { CdsEsDocsApiTable } from '@/components/ApiTable';
+import { CdsEsDocsControl } from '@/components/Control';
+import { CdsEsDocsControls } from '@/components/Controls';
 import { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 import { CdsEsDocsHeader } from '@/components/Header';
 import { CdsEsDocsNavigation } from '@/components/Navigation';
@@ -26,9 +29,22 @@ window.customElements.define('cds-es-docs-element-demo-content', CdsEsDocsElemen
 window.customElements.define('cds-es-docs-markdown-content', CdsEsDocsMarkdownContent);
 
 window.customElements.define('cds-es-docs-api-table', CdsEsDocsApiTable);
+window.customElements.define('cds-es-docs-control', CdsEsDocsControl);
+window.customElements.define('cds-es-docs-controls', CdsEsDocsControls);
 window.customElements.define('cds-es-docs-element-overview', CdsEsDocsElementOverview);
 window.customElements.define('cds-es-docs-header', CdsEsDocsHeader);
 window.customElements.define('cds-es-docs-navigation', CdsEsDocsNavigation);
 window.customElements.define('cds-es-docs-source-code', CdsEsDocsSourceCode);
 window.customElements.define('cds-es-docs-tab-panel', CdsEsDocsTabPanel);
 window.customElements.define('cds-es-docs-tabs', CdsEsDocsTabs);
+
+function updateTheme() {
+  const { theme } = Environment;
+
+  if (theme) {
+    document.documentElement.dataset.theme = theme;
+  }
+}
+
+Environment.addEventListener('change', updateTheme);
+updateTheme();
