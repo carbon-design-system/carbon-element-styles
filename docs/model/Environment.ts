@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+  ? 'g100'
+  : 'white';
+
 type EnvironmentState = {
   path?: string;
   theme?: string;
@@ -41,7 +45,7 @@ export class Environment {
   static get state(): EnvironmentState {
     const currentState: EnvironmentState = {
       path: '/',
-      theme: 'g100',
+      theme: initialTheme,
       mode: 'productive',
       size: 'md',
       density: 'normal',

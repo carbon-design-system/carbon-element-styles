@@ -8,8 +8,8 @@
 import type { CdsEsDocsMarkdownContent } from '@/components/MarkdownContent';
 
 import readme from '@/../README.md?raw';
-import bannerLight from '@/public/banner-light.svg';
-import bannerDark from '@/public/banner-dark.svg';
+import bannerLight from '@/public/banner-light.svg?url';
+import bannerDark from '@/public/banner-dark.svg?url';
 
 const markdownContent = document.createElement('cds-es-docs-markdown-content') as CdsEsDocsMarkdownContent;
 markdownContent.textContent = readme
