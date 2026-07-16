@@ -72,6 +72,12 @@ export class CdsEsDocsNavigation extends HTMLElement {
     button.addEventListener('click', () => {
       const state = button.getAttribute('aria-expanded') === 'true';
       button.setAttribute('aria-expanded', (!state).toString());
+
+      const hasActiveChildren = button.parentElement?.querySelector('a[aria-current="page"]');
+
+      if (!state && !hasActiveChildren) {
+        button.parentElement?.querySelector('a')?.click();
+      }
     });
 
     return button;
