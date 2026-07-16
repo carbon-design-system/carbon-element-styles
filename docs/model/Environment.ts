@@ -53,6 +53,10 @@ export class Environment {
       }
     }
 
+    if (currentState.path === '/') {
+      currentState.path = 'documentation/introduction';
+    }
+
     return currentState;
   }
 
