@@ -1,0 +1,31 @@
+<!--
+Copyright IBM Corp. 2026
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<datalist id="combo-box-demo">
+  <option>Option 1</option>
+  <option>Option 2</option>
+  <option>Option 3</option>
+</datalist>
+
+<label>
+  Enabled
+  <input type="text" list="combo-box-demo" />
+</label>
+
+<br />
+
+<label>
+  Disabled
+  <input type="text" list="combo-box-demo" disabled />
+</label>
+
+<br />
+
+<label>
+  Invalid
+  <input type="text" list="combo-box-demo" aria-invalid="true" />
+</label>

@@ -126,7 +126,9 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     this.#render();
   }
 
-  attributeChangedCallback() {
-    this.#render();
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue !== newValue) {
+      this.#render();
+    }
   }
 }
