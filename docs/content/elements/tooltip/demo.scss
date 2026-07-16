@@ -1,0 +1,41 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:string';
+
+@use '../../../components/ElementDemoContent' as element-demo-content;
+@use '../../../../scss/elements/tooltip';
+
+@use '../../../../scss/elements/button';
+
+@include element-demo-content.demo('default') {
+  @include tooltip.styles;
+
+  // ↓ for demo only ↓
+  @include button.styles;
+};
+
+@each $alignment in (
+  'start start', 'start center', 'start end',
+  'center start', 'center end',
+  'end start', 'end center', 'end end',
+) {
+
+  $id: "alignment";
+  @each $part in string.split($alignment, " ") {
+    $id: "#{$id}-#{$part}";
+  }
+
+  @include element-demo-content.demo($id) {
+    @include tooltip.styles((
+      alignment: $alignment,
+    ));
+
+    // ↓ for demo only ↓
+    @include button.styles;
+  };
+}
