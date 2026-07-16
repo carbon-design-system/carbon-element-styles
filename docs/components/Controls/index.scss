@@ -8,5 +8,9 @@
 @use '../../../scss/layout';
 
 :host {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: layout.$density--padding;
   padding-inline-end: layout.$density--padding;
 }

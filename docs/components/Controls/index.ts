@@ -47,6 +47,21 @@ export class CdsEsDocsControls extends HTMLElement {
           },
         ],
       }),
+      this.#createControl({
+        key: 'mode',
+        label: 'Mode',
+        icon: modeIcon,
+        options: [
+          {
+            value: 'productive',
+            label: 'Productive',
+          },
+          {
+            value: 'expressive',
+            label: 'Expressive',
+          },
+        ],
+      }),
     );
   }
 

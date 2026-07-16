@@ -8,6 +8,7 @@
 type EnvironmentState = {
   path?: string;
   theme?: string;
+  mode?: string;
 };
 
 export class Environment {
@@ -26,10 +27,14 @@ export class Environment {
   static set theme(value: EnvironmentState['theme']) { Environment.#setState({ theme: value }); };
   static get theme() { return Environment.state.theme; };
 
+  static set mode(value: EnvironmentState['mode']) { Environment.#setState({ mode: value }); };
+  static get mode() { return Environment.state.mode; };
+
   static get state(): EnvironmentState {
     const currentState: EnvironmentState = {
       path: '/',
       theme: 'g100',
+      mode: 'productive',
     };
 
     for (const [key, value] of this.getUrl().searchParams) {
@@ -62,5 +67,13 @@ export class Environment {
     window.history.pushState(null, '', url.href);
 
     this.#eventTarget.dispatchEvent(new Event('change'));
+
+    this.apply();
+  }
+
+  static apply() {
+    for (const [key, value] of Object.entries(this.state)) {
+      document.documentElement.dataset[key] = value;
+    }
   }
 }

@@ -44,3 +44,9 @@ main {
   margin-inline-start: 16rem;
   overflow: auto;
 }
+
+@each $mode in ('productive', 'expressive') {
+  :root[data-mode="#{$mode}"] cds-es-docs-content {
+    @include layout.mode($mode);
+  }
+}

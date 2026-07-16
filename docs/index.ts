@@ -23,6 +23,7 @@ import { CdsEsDocsTabPanel } from '@/components/TabPanel';
 import { CdsEsDocsTabs } from '@/components/Tabs';
 
 await Inventory.load();
+Environment.apply();
 
 window.customElements.define('cds-es-docs-content', CdsEsDocsContent);
 window.customElements.define('cds-es-docs-element-demo-content', CdsEsDocsElementDemoContent);
@@ -37,14 +38,3 @@ window.customElements.define('cds-es-docs-navigation', CdsEsDocsNavigation);
 window.customElements.define('cds-es-docs-source-code', CdsEsDocsSourceCode);
 window.customElements.define('cds-es-docs-tab-panel', CdsEsDocsTabPanel);
 window.customElements.define('cds-es-docs-tabs', CdsEsDocsTabs);
-
-function updateTheme() {
-  const { theme } = Environment;
-
-  if (theme) {
-    document.documentElement.dataset.theme = theme;
-  }
-}
-
-Environment.addEventListener('change', updateTheme);
-updateTheme();
