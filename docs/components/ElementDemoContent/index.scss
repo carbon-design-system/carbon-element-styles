@@ -23,6 +23,7 @@
 }
 
 :host > .demo {
+  @include layout.mode--body;
   padding: spacing.$spacing-07;
   overflow: auto;
 }
