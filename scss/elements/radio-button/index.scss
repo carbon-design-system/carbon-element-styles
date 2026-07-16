@@ -22,7 +22,7 @@ $-default-config: (
 
 /// @group radio-button
 /// @param {Map} config [()]
-/// @param {Selector} config.selector [''label:has(input[type="radio"])'']
+/// @param {Selector} config.selector ['label:has(input[type="radio"])']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
