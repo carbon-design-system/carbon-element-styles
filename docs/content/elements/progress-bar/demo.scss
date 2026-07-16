@@ -1,0 +1,37 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../components/ElementDemoContent' as element-demo-content;
+@use '../../../../scss/elements/progress-bar';
+
+@include element-demo-content.demo('default') {
+  @include progress-bar.styles;
+};
+
+@include element-demo-content.demo('block') {
+  @include progress-bar.styles((
+    axis: 'block',
+  ));
+};
+
+@include element-demo-content.demo('inline') {
+  @include progress-bar.styles((
+    axis: 'inline',
+  ));
+};
+
+@include element-demo-content.demo('thick') {
+  @include progress-bar.styles((
+    thickness: 'thick',
+  ));
+};
+
+@include element-demo-content.demo('thin') {
+  @include progress-bar.styles((
+    thickness: 'thin',
+  ));
+};
