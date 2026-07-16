@@ -24,8 +24,10 @@
 
 :host > .demo {
   @include layout.mode--body;
+  position: relative;
   padding: spacing.$spacing-07;
   overflow: auto;
+  translate: 0 0;
 }
 
 :host > .fade {
