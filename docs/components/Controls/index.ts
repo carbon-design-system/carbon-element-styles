@@ -62,6 +62,33 @@ export class CdsEsDocsControls extends HTMLElement {
           },
         ],
       }),
+      this.#createControl({
+        key: 'size',
+        label: 'Size',
+        icon: sizeIcon,
+        options: [
+          {
+            value: 'xs',
+            label: 'XS',
+          },
+          {
+            value: 'sm',
+            label: 'SM',
+          },
+          {
+            value: 'md',
+            label: 'MD',
+          },
+          {
+            value: 'lg',
+            label: 'LG',
+          },
+          {
+            value: 'xl',
+            label: 'XL',
+          },
+        ],
+      }),
     );
   }
 

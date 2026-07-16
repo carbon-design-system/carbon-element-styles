@@ -50,3 +50,9 @@ main {
     @include layout.mode($mode);
   }
 }
+
+@each $size in ('xs', 'sm', 'md', 'lg', 'xl') {
+  :root[data-size="#{$size}"] cds-es-docs-content {
+    @include layout.size($size);
+  }
+}

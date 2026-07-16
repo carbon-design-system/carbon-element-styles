@@ -9,6 +9,7 @@ type EnvironmentState = {
   path?: string;
   theme?: string;
   mode?: string;
+  size?: string;
 };
 
 export class Environment {
@@ -30,11 +31,15 @@ export class Environment {
   static set mode(value: EnvironmentState['mode']) { Environment.#setState({ mode: value }); };
   static get mode() { return Environment.state.mode; };
 
+  static set size(value: EnvironmentState['size']) { Environment.#setState({ size: value }); };
+  static get size() { return Environment.state.size; };
+
   static get state(): EnvironmentState {
     const currentState: EnvironmentState = {
       path: '/',
       theme: 'g100',
       mode: 'productive',
+      size: 'md',
     };
 
     for (const [key, value] of this.getUrl().searchParams) {
