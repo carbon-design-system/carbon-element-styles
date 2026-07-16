@@ -1,0 +1,37 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '../../../components/ElementDemoContent' as element-demo-content;
+@use '../../../../scss/elements/tabs';
+
+@include element-demo-content.demo('default') {
+  @include tabs.styles;
+};
+
+@include element-demo-content.demo('line') {
+  @include tabs.styles((
+    kind: 'line',
+  ));
+};
+
+@include element-demo-content.demo('contained') {
+  @include tabs.styles((
+    kind: 'contained',
+  ));
+};
+
+@include element-demo-content.demo('content-switcher') {
+  @include tabs.styles((
+    kind: 'content-switcher',
+  ));
+};
+
+@include element-demo-content.demo('content-switcher--low-contrast') {
+  @include tabs.styles((
+    kind: 'content-switcher--low-contrast',
+  ));
+};
