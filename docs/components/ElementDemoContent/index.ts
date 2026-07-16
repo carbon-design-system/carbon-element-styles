@@ -50,6 +50,9 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
 
     this.#frame.classList.add('demo');
 
+    const fade = document.createElement('div');
+    fade.classList.add('fade');
+
     this.#tabs.append(
       this.#createTabPanel('Overview', this.#elementOverviewTabPanel),
       this.#createTabPanel('Configuration', this.#apiTableTabPanel),
@@ -57,7 +60,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       this.#createTabPanel('SCSS', this.#sourceScssTabPanel),
     );
 
-    this.shadowRoot?.replaceChildren(this.#frame, this.#tabs);
+    this.shadowRoot?.replaceChildren(this.#frame, fade, this.#tabs);
   }
 
   get activeTabIndex(): number {

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
 
 @use '../../../scss/layout';
@@ -18,11 +19,23 @@
 :host {
   block-size: 100%;
   display: grid;
-  grid-template-rows: 1fr 20rem;
+  grid-template-rows: 1fr 0 20rem;
 }
 
 :host > .demo {
   padding: spacing.$spacing-07;
+  overflow: auto;
+}
+
+:host > .fade {
+  block-size: 1.5rem;
+  background-image: linear-gradient(
+    transparent,
+    theme.$layer-background,
+  );
+  opacity: 0.5;
+  translate: 0 -100%;
+  pointer-events: none;
 }
 
 :host > cds-es-docs-tabs {

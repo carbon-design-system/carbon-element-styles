@@ -14,10 +14,11 @@
   position: relative;
 }
 
-:host > div {
+:host > * {
   position: absolute;
   inset: 0;
   padding: layout.$density--padding;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 

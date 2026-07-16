@@ -37,7 +37,7 @@
 @include body.styles;
 
 main {
-  block-size: calc(100vb - 2.5rem - 0.0625rem);
+  block-size: calc(100svb - 2.5rem - 0.0625rem);
   margin-inline-start: 16rem;
   overflow: auto;
 
