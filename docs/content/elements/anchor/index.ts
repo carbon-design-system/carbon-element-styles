@@ -17,8 +17,12 @@ export default new NavigationItem({
       label: 'Default',
     }),
     new NavigationItem({
-      id: 'no-visited-styles',
-      label: 'No visited styles',
+      id: 'with-visited-styles',
+      label: 'With visited styles',
+    }),
+    new NavigationItem({
+      id: 'without-visited-styles',
+      label: 'Without visited styles',
     }),
   ],
 });

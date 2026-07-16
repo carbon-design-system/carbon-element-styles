@@ -30,6 +30,7 @@ elementDemoContent.css.replace(css);
 elementDemoContent.scssDoc = scssDoc;
 
 elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('no-visited-styles', { html, scssConfig: { 'emit-visited': 'false' } });
+elementDemoContent.demos.set('with-visited-styles', { html, scssConfig: { 'emit-visited': 'true' } });
+elementDemoContent.demos.set('without-visited-styles', { html, scssConfig: { 'emit-visited': 'false' } });
 
 export default elementDemoContent;

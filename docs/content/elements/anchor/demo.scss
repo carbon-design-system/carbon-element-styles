@@ -12,7 +12,13 @@
   @include anchor.styles;
 };
 
-@include element-demo-content.demo('no-visited-styles') {
+@include element-demo-content.demo('with-visited-styles') {
+  @include anchor.styles((
+    emit-visited: true,
+  ));
+};
+
+@include element-demo-content.demo('without-visited-styles') {
   @include anchor.styles((
     emit-visited: false,
   ));
