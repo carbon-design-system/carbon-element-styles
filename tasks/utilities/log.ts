@@ -28,3 +28,7 @@ export function warning(...data: any[]) {
 export function error(...data: any[]) {
   console.error(colors.red, '✗', ...data, colors.reset);
 }
+
+export function summary(...data: any[]) {
+  console.info(colors.reset, '\n', '↪', ...data, colors.reset);
+}

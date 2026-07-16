@@ -56,6 +56,11 @@ function parseScssDoc(source: string): ScssParameter[] | null {
   return parameters;
 }
 
+const summary = {
+  skipped: 0,
+  succeeded: 0,
+};
+
 const elementFolders = await readdir(elementsDir);
 
 for (const folder of elementFolders) {
@@ -66,6 +71,7 @@ for (const folder of elementFolders) {
     await access(docsPath);
   } catch {
     log.info(`Skipping ${folder} (no matching docs folder)…`);
+    summary.skipped++;
     continue;
   }
 
@@ -74,6 +80,7 @@ for (const folder of elementFolders) {
 
   if (!docs) {
     log.warning(`Skipping ${folder} (could not parse scss docs)…`);
+    summary.skipped++;
     continue;
   }
 
@@ -94,6 +101,16 @@ export default docs;
 `;
 
   const outFile = join(docsPath, 'scss.ts');
-  await writeFile(outFile, output, 'utf8');
-  log.success(`Wrote ${folder}/scss.ts`);
+
+  try {
+    await writeFile(outFile, output, 'utf8');
+
+    log.success(`Wrote ${folder}/scss.ts`);
+    summary.succeeded++;
+  } catch (error) {
+    log.error(`Error writing ${folder}/scss.ts`, '\n', error);
+    process.exit(1);
+  }
 }
+
+log.summary(`Wrote ${summary.succeeded} scss docs (${summary.skipped} skipped)`);

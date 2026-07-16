@@ -20,6 +20,8 @@ await mkdir(targetDir, {
   recursive: true,
 });
 
+let succeeded = 0;
+
 for (const file of await readdir(sourceDir)) {
   const name = file.replace(extname(file), '');
   log.info(`Building ${name}…`);
@@ -42,6 +44,7 @@ for (const file of await readdir(sourceDir)) {
       );
 
       log.success(`Wrote ${name}.css`);
+      succeeded++;
     } catch (error) {
       log.error(`Error writing ${file}`, '\n', error);
       process.exit(1);
@@ -51,3 +54,5 @@ for (const file of await readdir(sourceDir)) {
     process.exit(1);
   }
 }
+
+log.summary(`Wrote ${succeeded} prebuilts`);

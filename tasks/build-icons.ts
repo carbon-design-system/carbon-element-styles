@@ -89,4 +89,6 @@ for (const id of iconIds) {
   await buildIcon(id);
 }
 
-writeScss();
+await writeScss();
+
+log.summary(`Wrote ${iconIds.length} icons`);
