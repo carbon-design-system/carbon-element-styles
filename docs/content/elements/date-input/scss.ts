@@ -14,7 +14,7 @@ const docs = new ScssDoc();
 
 docs.parameters.set('selector', {
   type: `Selector`,
-  default: `'label:has(input[type="text"][list])'`,
+  default: `'label:has(input[type="date"])'`,
 });
 
 docs.parameters.set('axis', {
