@@ -13,8 +13,10 @@ import type { Plugin } from 'vite';
 
 import * as log from './log';
 
-const suffix = '?carbon-icons';
 const contentDir = resolve(import.meta.dirname, '../../docs/content/');
+
+const prefix = '\0carbon-icons:';
+const suffix = '.js';
 
 export const carbonIcons: Plugin = {
   name: 'carbon-icons',
@@ -31,15 +33,15 @@ export const carbonIcons: Plugin = {
       return null;
     }
 
-    return `${path}${suffix}`;
+    return `${prefix}${path}${suffix}`;
   },
 
   load(id) {
-    if (!id.endsWith(suffix)) {
+    if (!id.startsWith(prefix) || !id.endsWith(suffix)) {
       return null;
     }
 
-    const raw = readFileSync(id.slice(0, -suffix.length), 'utf8');
+    const raw = readFileSync(id.slice(prefix.length, -suffix.length), 'utf8');
 
     const content = raw.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
       try {
