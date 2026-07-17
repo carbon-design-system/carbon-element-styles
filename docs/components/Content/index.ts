@@ -9,6 +9,7 @@ import styles from './index.scss?inline';
 
 import { Environment } from '@/model/Environment';
 import { Inventory } from '@/model/Inventory';
+import { ContentBase } from '@/components/ContentBase';
 import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
 export class CdsEsDocsContent extends HTMLElement {
@@ -27,9 +28,11 @@ export class CdsEsDocsContent extends HTMLElement {
 
       if (item) {
         try {
-          const { default: defaultExport } = await item.content?.() ?? {};
+          const { default: defaultExport, ...additionalExports } = await item.content?.() ?? {};
 
-          if (defaultExport instanceof HTMLElement) {
+          if (defaultExport instanceof ContentBase) {
+            defaultExport.meta = additionalExports;
+
             if (item.key) {
               defaultExport.setAttribute('key', item.key);
             }

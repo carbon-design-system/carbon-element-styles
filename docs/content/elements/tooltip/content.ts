@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from 'virtual:scss-docs/tooltip';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/tooltip';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -25,9 +25,6 @@ elementDemoContent.references = [
     url: 'https://carbondesignsystem.com/components/tooltip/usage/',
   },
 ];
-
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
 
 const setup = (frame: HTMLElement) => {
   for (const button of frame.querySelectorAll('button')) {
@@ -45,7 +42,7 @@ const setup = (frame: HTMLElement) => {
   }
 };
 
-elementDemoContent.demos.set('default', { html, setup });
+elementDemoContent.demos.set('default', { setup });
 
 const alignments = [
   'start start', 'start center', 'start end',
@@ -55,7 +52,7 @@ const alignments = [
 
 for (const alignment of alignments) {
   const key = `alignment-${alignment.replace(' ', '-')}`;
-  elementDemoContent.demos.set(key, { html, setup, scssConfig: { alignment: `'${alignment}'` } });
+  elementDemoContent.demos.set(key, { setup, scssConfig: { alignment: `'${alignment}'` } });
 }
 
 export default elementDemoContent;

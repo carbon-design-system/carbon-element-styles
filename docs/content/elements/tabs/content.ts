@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from 'virtual:scss-docs/tabs';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/tabs';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -29,9 +29,6 @@ elementDemoContent.references = [
     url: 'https://carbondesignsystem.com/components/content-switcher/usage/',
   },
 ];
-
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
 
 const setup = (frame: HTMLElement) => {
   frame.querySelectorAll('[role="tab"]').forEach((tab) => {
@@ -58,10 +55,10 @@ const setup = (frame: HTMLElement) => {
   });
 };
 
-elementDemoContent.demos.set('default', { html, setup });
-elementDemoContent.demos.set('line', { html, setup, scssConfig: { kind: `'line'` } });
-elementDemoContent.demos.set('contained', { html, setup, scssConfig: { kind: `'contained'` } });
-elementDemoContent.demos.set('content-switcher', { html, setup, scssConfig: { kind: `'content-switcher'` } });
-elementDemoContent.demos.set('content-switcher--low-contrast', { html, setup, scssConfig: { kind: `'content-switcher--low-contrast'` } });
+elementDemoContent.demos.set('default', { setup });
+elementDemoContent.demos.set('line', { setup, scssConfig: { kind: `'line'` } });
+elementDemoContent.demos.set('contained', { setup, scssConfig: { kind: `'contained'` } });
+elementDemoContent.demos.set('content-switcher', { setup, scssConfig: { kind: `'content-switcher'` } });
+elementDemoContent.demos.set('content-switcher--low-contrast', { setup, scssConfig: { kind: `'content-switcher--low-contrast'` } });
 
 export default elementDemoContent;
