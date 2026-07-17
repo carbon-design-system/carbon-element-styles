@@ -8,7 +8,7 @@
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
 import css from './demo.scss?inline';
-import scssDoc from './scss';
+import scssDoc from 'virtual:scss-docs/code';
 import html from './demo.html';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;

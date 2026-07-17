@@ -17,3 +17,8 @@ declare module 'virtual:docs-inventory' {
   export = inventory;
 }
 
+declare module 'virtual:scss-docs/*' {
+  import type { ScssDoc } from '@/model/ScssDoc';
+  const scssDoc: ScssDoc;
+  export default scssDoc;
+}
