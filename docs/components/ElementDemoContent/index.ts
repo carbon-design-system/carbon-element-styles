@@ -4,7 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import styles from './index.scss?inline';
+
+import { ContentBase } from '@/components/ContentBase';
 
 import type { ScssDoc } from '@/model/ScssDoc';
 
@@ -13,7 +16,11 @@ import type { CdsEsDocsElementOverview } from '@/components/ElementOverview';
 import type { CdsEsDocsSourceCode } from '@/components/SourceCode';
 import type { CdsEsDocsTabs } from '@/components/Tabs';
 
-export class CdsEsDocsElementDemoContent extends HTMLElement {
+export class CdsEsDocsElementDemoContent extends ContentBase<{
+  css: string;
+  html: string;
+  scssDoc: ScssDoc;
+}> {
   static observedAttributes = ['key', 'request-id'];
 
   key: string = '';
@@ -23,10 +30,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     url: string;
   }[] = [];
   notes?: string;
-  css = new CSSStyleSheet();
-  scssDoc?: ScssDoc;
   demos: Map<string, {
-    html: string;
     scssConfig?: {
       [key: string]: string;
     },
@@ -96,9 +100,11 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     const demo = this.demos.get(this.getAttribute('request-id') ?? '');
 
     if (demo) {
-      this.shadowRoot?.adoptedStyleSheets.splice(1, Infinity, this.css);
+      const stylesheet = new CSSStyleSheet();
+      stylesheet.replace(this.meta?.css ?? '');
+      this.shadowRoot?.adoptedStyleSheets.splice(1, Infinity, stylesheet);
 
-      this.#frame.innerHTML = demo.html;
+      this.#frame.innerHTML = demo.html ?? this.meta?.html ?? '';
       demo.setup?.(this.#frame);
 
       this.#elementOverviewTabPanel.label = this.label;
@@ -106,7 +112,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       this.#elementOverviewTabPanel.notes = this.notes;
 
       this.#apiTableTabPanel.clearRows();
-      for (const entry of this.scssDoc?.parameters.entries() ?? []) {
+      for (const entry of this.meta?.scssDoc.parameters.entries() ?? []) {
         this.#apiTableTabPanel.insertRow({
           key: entry[0],
           type: entry[1].type,
@@ -115,7 +121,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       }
 
       this.#sourceHtmlTabPanel.setAttribute('kind', 'html');
-      this.#sourceHtmlTabPanel.textContent = demo.html;
+      this.#sourceHtmlTabPanel.textContent = demo.html ?? this.meta?.html ?? '';
 
       this.#sourceScssTabPanel.setAttribute('kind', 'scss');
       this.#sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);

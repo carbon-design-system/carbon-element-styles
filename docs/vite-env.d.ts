@@ -11,3 +11,14 @@ declare module '*.html' {
   const content: string;
   export default content;
 }
+
+declare module 'virtual:docs-inventory' {
+  const inventory: Record<string, unknown>;
+  export = inventory;
+}
+
+declare module 'virtual:scss-docs/*' {
+  import type { ScssDoc } from '@/model/ScssDoc';
+  const scssDoc: ScssDoc;
+  export default scssDoc;
+}

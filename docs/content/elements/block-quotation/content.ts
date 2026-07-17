@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from './scss';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/block-quotation';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -34,9 +34,6 @@ elementDemoContent.notes = /* md */`
 To denote a source, use a suceeding \`<cite>\` element.
 `;
 
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
-
-elementDemoContent.demos.set('default', { html });
+elementDemoContent.demos.set('default', {});
 
 export default elementDemoContent;

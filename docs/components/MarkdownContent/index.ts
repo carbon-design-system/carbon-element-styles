@@ -9,7 +9,9 @@ import { marked } from 'marked';
 
 import styles from './index.scss?inline';
 
-export class CdsEsDocsMarkdownContent extends HTMLElement {
+import { ContentBase } from '@/components/ContentBase';
+
+export class CdsEsDocsMarkdownContent extends ContentBase {
   #observer = new MutationObserver(() => this.#render());
 
   constructor() {

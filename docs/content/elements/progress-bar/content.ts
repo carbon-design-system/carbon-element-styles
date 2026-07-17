@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from './scss';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/progress-bar';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -26,13 +26,10 @@ elementDemoContent.references = [
   },
 ];
 
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
-
-elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('block', { html, scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set('inline', { html, scssConfig: { axis: `'inline'` } });
-elementDemoContent.demos.set('thick', { html, scssConfig: { thickness: `'thick'` } });
-elementDemoContent.demos.set('thin', { html, scssConfig: { thickness: `'thin'` } });
+elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set('block', { scssConfig: { axis: `'block'` } });
+elementDemoContent.demos.set('inline', { scssConfig: { axis: `'inline'` } });
+elementDemoContent.demos.set('thick', { scssConfig: { thickness: `'thick'` } });
+elementDemoContent.demos.set('thin', { scssConfig: { thickness: `'thin'` } });
 
 export default elementDemoContent;

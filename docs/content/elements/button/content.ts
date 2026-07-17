@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from './scss';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/button';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -31,16 +31,13 @@ elementDemoContent.notes = /* md */`
 - When using both text and an icon, the text must be wrapped in some element, such as a \`<span>\`.
 `;
 
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
-
-elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('primary', { html, scssConfig: { kind: `'primary'` } });
-elementDemoContent.demos.set('secondary', { html, scssConfig: { kind: `'secondary'` } });
-elementDemoContent.demos.set('tertiary', { html, scssConfig: { kind: `'tertiary'` } });
-elementDemoContent.demos.set('ghost', { html, scssConfig: { kind: `'ghost'` } });
-elementDemoContent.demos.set('danger--primary', { html, scssConfig: { kind: `'danger--primary'` } });
-elementDemoContent.demos.set('danger--tertiary', { html, scssConfig: { kind: `'danger--tertiary'` } });
-elementDemoContent.demos.set('danger--ghost', { html, scssConfig: { kind: `'danger--ghost'` } });
+elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set('primary', { scssConfig: { kind: `'primary'` } });
+elementDemoContent.demos.set('secondary', { scssConfig: { kind: `'secondary'` } });
+elementDemoContent.demos.set('tertiary', { scssConfig: { kind: `'tertiary'` } });
+elementDemoContent.demos.set('ghost', { scssConfig: { kind: `'ghost'` } });
+elementDemoContent.demos.set('danger--primary', { scssConfig: { kind: `'danger--primary'` } });
+elementDemoContent.demos.set('danger--tertiary', { scssConfig: { kind: `'danger--tertiary'` } });
+elementDemoContent.demos.set('danger--ghost', { scssConfig: { kind: `'danger--ghost'` } });
 
 export default elementDemoContent;

@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from './scss';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/popover';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -26,12 +26,9 @@ elementDemoContent.references = [
   },
 ];
 
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
-
-elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('with-caret', { html, scssConfig: { caret: 'true' } });
-elementDemoContent.demos.set('without-caret', { html, scssConfig: { caret: 'false' } });
+elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set('with-caret', { scssConfig: { caret: 'true' } });
+elementDemoContent.demos.set('without-caret', { scssConfig: { caret: 'false' } });
 
 const alignments = [
   'start start', 'start center', 'start end',
@@ -41,7 +38,7 @@ const alignments = [
 
 for (const alignment of alignments) {
   const key = `alignment-${alignment.replace(' ', '-')}`;
-  elementDemoContent.demos.set(key, { html, scssConfig: { alignment: `'${alignment}'` } });
+  elementDemoContent.demos.set(key, { scssConfig: { alignment: `'${alignment}'` } });
 }
 
 export default elementDemoContent;

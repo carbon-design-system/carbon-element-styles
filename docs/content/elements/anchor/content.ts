@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from './scss';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/anchor';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -26,11 +26,8 @@ elementDemoContent.references = [
   },
 ];
 
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
-
-elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('with-visited-styles', { html, scssConfig: { 'emit-visited': 'true' } });
-elementDemoContent.demos.set('without-visited-styles', { html, scssConfig: { 'emit-visited': 'false' } });
+elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set('with-visited-styles', { scssConfig: { 'emit-visited': 'true' } });
+elementDemoContent.demos.set('without-visited-styles', { scssConfig: { 'emit-visited': 'false' } });
 
 export default elementDemoContent;

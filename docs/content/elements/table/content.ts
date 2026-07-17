@@ -7,9 +7,9 @@
 
 import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
 
-import css from './demo.scss?inline';
-import scssDoc from './scss';
-import html from './demo.html';
+export { default as css } from './demo.scss?inline';
+export { default as html } from './demo.html';
+export { default as scssDoc } from 'virtual:scss-docs/table';
 
 const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
 
@@ -30,12 +30,9 @@ elementDemoContent.references = [
   },
 ];
 
-elementDemoContent.css.replace(css);
-elementDemoContent.scssDoc = scssDoc;
-
-elementDemoContent.demos.set('default', { html });
-elementDemoContent.demos.set('data-table', { html, scssConfig: { kind: `'data-table'` } });
-elementDemoContent.demos.set('structured-list', { html, scssConfig: { kind: `'structured-list'` } });
-elementDemoContent.demos.set('structured-list--flush', { html, scssConfig: { kind: `'structured-list--flush'` } });
+elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set('data-table', { scssConfig: { kind: `'data-table'` } });
+elementDemoContent.demos.set('structured-list', { scssConfig: { kind: `'structured-list'` } });
+elementDemoContent.demos.set('structured-list--flush', { scssConfig: { kind: `'structured-list--flush'` } });
 
 export default elementDemoContent;

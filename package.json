@@ -18,7 +18,9 @@
   "keywords": [
     "ibm",
     "carbon",
-    "carbon-design-system"
+    "carbon-design-system",
+    "components",
+    "css"
   ],
   "publishConfig": {
     "access": "public",
@@ -28,10 +30,9 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "dev": "vite docs",
     "build": "npm run build:icons && npm run build:prebuilts && npm run build:docs",
-    "build:scss-docs": "node tasks/build-scss-docs.ts",
     "build:icons": "node tasks/build-icons.ts",
     "build:prebuilts": "node tasks/build-prebuilts.ts",
-    "build:docs": "npm run build:scss-docs && vite build docs"
+    "build:docs": "vite build docs"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.11.0"
