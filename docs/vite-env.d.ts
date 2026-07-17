@@ -11,3 +11,9 @@ declare module '*.html' {
   const content: string;
   export default content;
 }
+
+declare module 'virtual:docs-inventory' {
+  const inventory: Record<string, unknown>;
+  export = inventory;
+}
+

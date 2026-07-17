@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as inventory from 'virtual:docs-inventory';
+
 import { NavigationItem } from '@/model/NavigationItem';
 
 export class Inventory {
-  static #paths = import.meta.glob('../content/**/index.ts') as Record<string, () => Promise<{ default: unknown }>>;
   static #content: Map<string, NavigationItem> = new Map();
 
   static get content(): ReadonlyMap<string, NavigationItem> {
@@ -32,14 +33,9 @@ export class Inventory {
   }
 
   static async #parsePaths() {
-    for (const path in this.#paths) {
-      const { default: defaultExport } = await this.#paths[path]();
-
-      if (defaultExport instanceof NavigationItem) {
-        const prefix = path
-          .replace(/^\.\.\/content\//, '')
-          .replace(/\/index\.ts$/, '');
-        this.#registerContent(prefix, defaultExport);
+    for (const [exportName, value] of Object.entries(inventory)) {
+      if (value instanceof NavigationItem) {
+        this.#registerContent(exportName, value);
       }
     }
   }

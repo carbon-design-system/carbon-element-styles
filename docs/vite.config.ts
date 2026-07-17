@@ -10,6 +10,7 @@ import { defineConfig } from 'vite';
 import type { UserConfig } from 'vite';
 
 import { carbonIcons } from '../tasks/utilities/vite-carbon-icons';
+import { docsInventory } from '../tasks/utilities/vite-docs-inventory';
 import { prependBanner } from '../tasks/utilities/vite-prepend-banner';
 
 export const config: UserConfig = {
@@ -24,6 +25,7 @@ export const config: UserConfig = {
   },
   plugins: [
     carbonIcons,
+    docsInventory,
     prependBanner,
   ],
 };
