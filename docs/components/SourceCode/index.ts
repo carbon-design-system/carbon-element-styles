@@ -7,6 +7,8 @@
 
 import styles from './index.scss?inline';
 
+import hljs from 'highlight.js';
+
 export class CdsEsDocsSourceCode extends HTMLElement {
   #observer = new MutationObserver(() => this.#render());
 
@@ -31,18 +33,24 @@ export class CdsEsDocsSourceCode extends HTMLElement {
   }
 
   #renderHtml(): string {
-    return this.textContent.replace(/^<!--[\s\S]*?-->\s*/, '');
+    return hljs.highlight(
+      this.textContent.replace(/^<!--[\s\S]*?-->\s*/, ''),
+      { language: 'html' },
+    ).value;
   }
 
   #renderScss(): string {
-    return this.textContent;
+    return hljs.highlight(
+      this.textContent,
+      { language: 'scss' },
+    ).value;
   }
 
   #render() {
     const renderer = this.#renderers[this.getAttribute('kind') ?? ''];
 
     if (renderer) {
-      this.#code.innerText = renderer.bind(this)();
+      this.#code.innerHTML = renderer.bind(this)();
     }
   }
 

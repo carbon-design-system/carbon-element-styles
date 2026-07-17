@@ -10,8 +10,11 @@
 @use '../../../scss/layout';
 @use '../../../scss/prebuilt/editorial/elements' as editorial-elements;
 
+@use '../../scss/syntax-highlighting';
+
 :host {
   @include editorial-elements.styles;
+  @include syntax-highlighting.styles;
   display: block;
   box-sizing: border-box;
 }
