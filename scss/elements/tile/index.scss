@@ -42,8 +42,18 @@ $-default-config: (
       border: 0.0625rem solid theme.$border-tile;
       transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
+      &:visited {
+        color: inherit;
+      }
+
+      & svg,
+      &:visited svg {
+        fill: currentColor;
+      }
+
       &:hover {
         @include layer.layer-background-hover;
+        color: inherit;
       }
 
       &:active {
