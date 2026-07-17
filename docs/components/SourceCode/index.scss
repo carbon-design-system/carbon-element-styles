@@ -7,8 +7,11 @@
 
 @use '../../../scss/elements/preformatted';
 
+@use '../../scss/syntax-highlighting';
+
 :host {
   @include preformatted.styles;
+  @include syntax-highlighting.styles;
 }
 
 :host pre {
