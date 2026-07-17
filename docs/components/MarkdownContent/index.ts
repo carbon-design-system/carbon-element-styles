@@ -5,11 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { marked } from 'marked';
-
 import styles from './index.scss?inline';
 
+import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
+
 import { ContentBase } from '@/components/ContentBase';
+
+marked.use(
+  markedHighlight({
+    highlight(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    }
+  }),
+);
 
 export class CdsEsDocsMarkdownContent extends ContentBase {
   #observer = new MutationObserver(() => this.#render());
@@ -29,7 +40,7 @@ export class CdsEsDocsMarkdownContent extends ContentBase {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = html;
     }
-  }  
+  }
 
   async connectedCallback() {
     this.#observer.observe(this, {

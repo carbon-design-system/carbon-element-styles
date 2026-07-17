@@ -18,6 +18,14 @@ export const config: UserConfig = {
   base: './',
   build: {
     sourcemap: false,
+    license: {
+      fileName: 'licenses.txt',
+    },
+    rolldownOptions: {
+      output: {
+        postBanner: '/* See licenses of bundled dependencies at https://element-styles.carbondesignsystem.com/licenses.txt */',
+      },
+    },
   },
   resolve: {
     alias: {
