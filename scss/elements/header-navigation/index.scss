@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/utilities/focus-outline';
 
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -74,9 +75,11 @@ $-default-config: (
       transition-duration: layout.$mode--transition-duration;
       transition-timing-function: layout.$mode--transition-timing-function;
 
-      &:hover {
-        background-color: theme.$layer-hover;
-        color: theme.$text-primary;
+      @include guards.hover {
+        &:hover {
+          background-color: theme.$layer-hover;
+          color: theme.$text-primary;
+        }
       }
 
       &:active {
