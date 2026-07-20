@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/components/button/tokens' as carbon-button;
 
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -60,8 +61,10 @@ $-default-config: (
       cursor: pointer;
       transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
-      &:hover {
-        background-color: carbon-button.$button-primary-hover;
+      @include guards.hover {
+        &:hover {
+          background-color: carbon-button.$button-primary-hover;
+        }
       }
 
       &:active {
@@ -74,11 +77,18 @@ $-default-config: (
     }
 
     & input[type="file"]:disabled::file-selector-button,
-    & input[type="file"]:disabled::file-selector-button:hover,
     & input[type="file"]:disabled::file-selector-button:active {
       cursor: not-allowed;
       background-color: carbon-button.$button-disabled;
       color: theme.$text-on-color-disabled;
+    }
+
+    @include guards.hover {
+      & input[type="file"]:disabled::file-selector-button:hover {
+        cursor: not-allowed;
+        background-color: carbon-button.$button-disabled;
+        color: theme.$text-on-color-disabled;
+      }
     }
   }
 }
