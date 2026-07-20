@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/utilities/focus-outline';
 
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -43,8 +44,10 @@ $-default-config: (
       }
     }
 
-    &:hover {
-      color: theme.$link-primary-hover;
+    @include guards.hover {
+      &:hover {
+        color: theme.$link-primary-hover;
+      }
     }
 
     @if $emit-visited {

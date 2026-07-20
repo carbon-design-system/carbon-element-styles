@@ -13,6 +13,7 @@
 
 @use '../../layout';
 @use '../../utilities/icons';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -75,9 +76,11 @@ $-default-config: (
       transition-duration: layout.$mode--transition-duration;
       transition-timing-function: layout.$mode--transition-timing-function;
 
-      &:hover {
-        background-color: theme.$layer-hover;
-        color: theme.$text-primary;
+      @include guards.hover {
+        &:hover {
+          background-color: theme.$layer-hover;
+          color: theme.$text-primary;
+        }
       }
 
       &:active {
@@ -124,8 +127,10 @@ $-default-config: (
       box-shadow: inset 0.25rem 0 0 0 theme.$border-interactive;
       color: theme.$text-primary;
 
-      &:hover {
-        background-color: theme.$layer-selected-hover;
+      @include guards.hover {
+        &:hover {
+          background-color: theme.$layer-selected-hover;
+        }
       }
     }
 

@@ -12,6 +12,7 @@
 
 @use '../../layout';
 @use '../../utilities/icons';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -48,8 +49,10 @@ $-default-config: (
       margin-inline-end: calc(layout.$density--padding * -1);
       padding-inline-end: layout.$density--padding;
 
-      &:hover {
-        background-color: theme.$layer-hover;
+      @include guards.hover {
+        &:hover {
+          background-color: theme.$layer-hover;
+        }
       }
 
       &:active {

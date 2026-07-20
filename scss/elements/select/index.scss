@@ -13,6 +13,7 @@
 
 @use '../../layout';
 @use '../../utilities/icons';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -51,8 +52,10 @@ $-default-config: (
     & select {
       cursor: pointer;
 
-      &:enabled:hover {
-        background-color: theme.$field-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          background-color: theme.$field-hover;
+        }
       }
 
       &:enabled:active {

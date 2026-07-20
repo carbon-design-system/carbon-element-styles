@@ -12,6 +12,7 @@
 @use '../_labelled-input';
 
 @use '../../utilities/icons';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -48,8 +49,10 @@ $-default-config: (
     }
 
     & input[type="text"][list] {
-      &:enabled:hover {
-        background-color: theme.$field-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          background-color: theme.$field-hover;
+        }
       }
 
       &:enabled:active {

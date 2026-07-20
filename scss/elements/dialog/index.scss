@@ -20,6 +20,7 @@
 
 @use '../../layout';
 @use '../../utilities/icons';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -167,8 +168,10 @@ $-default-config: (
       cursor: pointer;
       transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
-      &:hover {
-        background-color: theme.$layer-hover;
+      @include guards.hover {
+        &:hover {
+          background-color: theme.$layer-hover;
+        }
       }
 
       &:active {

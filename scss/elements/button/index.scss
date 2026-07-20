@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/components/button/tokens' as carbon-button;
 
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -86,8 +87,10 @@ $-default-config: (
       background-color: carbon-button.$button-primary;
       color: theme.$text-on-color;
 
-      &:hover {
-        background-color: carbon-button.$button-primary-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          background-color: carbon-button.$button-primary-hover;
+        }
       }
 
       &:active {
@@ -104,8 +107,10 @@ $-default-config: (
       background-color: carbon-button.$button-secondary;
       color: theme.$text-on-color;
 
-      &:enabled:hover {
-        background-color: carbon-button.$button-secondary-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          background-color: carbon-button.$button-secondary-hover;
+        }
       }
 
       &:enabled:active {
@@ -124,14 +129,16 @@ $-default-config: (
       outline: 0.0625rem solid carbon-button.$button-tertiary;
       outline-offset: -0.0625rem;
 
+      @include guards.hover {
+        &:enabled:hover {
+          color: theme.$text-inverse;
+          background-color: carbon-button.$button-tertiary-hover;
+        }
+      }
+
       &:focus {
         color: theme.$text-inverse;
         background-color: carbon-button.$button-tertiary;
-      }
-
-      &:enabled:hover {
-        color: theme.$text-inverse;
-        background-color: carbon-button.$button-tertiary-hover;
       }
 
       &:enabled:active {
@@ -149,9 +156,11 @@ $-default-config: (
       color: theme.$link-primary;
       padding-inline-end: layout.$density--padding;
 
-      &:enabled:hover {
-        color: theme.$link-primary-hover;
-        background-color: theme.$layer-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          color: theme.$link-primary-hover;
+          background-color: theme.$layer-hover;
+        }
       }
 
       &:enabled:active {
@@ -181,8 +190,10 @@ $-default-config: (
       background-color: carbon-button.$button-danger-primary;
       color: theme.$text-on-color;
 
-      &:enabled:hover {
-        background-color: carbon-button.$button-danger-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          background-color: carbon-button.$button-danger-hover;
+        }
       }
 
       &:enabled:active {
@@ -201,15 +212,17 @@ $-default-config: (
       outline: 0.0625rem solid carbon-button.$button-danger-secondary;
       outline-offset: -0.0625rem;
 
+      @include guards.hover {
+        &:enabled:hover {
+          color: theme.$text-on-color;
+          background-color: carbon-button.$button-danger-hover;
+          outline-color: carbon-button.$button-danger-hover;
+        }
+      }
+
       &:focus {
         color: theme.$text-on-color;
         background-color: carbon-button.$button-danger-primary;
-      }
-
-      &:enabled:hover {
-        color: theme.$text-on-color;
-        background-color: carbon-button.$button-danger-hover;
-        outline-color: carbon-button.$button-danger-hover;
       }
 
       &:enabled:active {
@@ -228,10 +241,12 @@ $-default-config: (
       color: carbon-button.$button-danger-secondary;
       padding-inline-end: layout.$density--padding;
 
-      &:enabled:hover {
-        color: theme.$text-on-color;
-        background-color: carbon-button.$button-danger-hover;
-        outline-color: carbon-button.$button-danger-hover;
+      @include guards.hover {
+        &:enabled:hover {
+          color: theme.$text-on-color;
+          background-color: carbon-button.$button-danger-hover;
+          outline-color: carbon-button.$button-danger-hover;
+        }
       }
 
       &:enabled:active {
