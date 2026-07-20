@@ -194,13 +194,16 @@ $-default-config: (
     &[open]:modal {
       translate: 0 0;
       opacity: 1;
-      transition-property: opacity, translate;
-      transition-duration: motion.$duration-moderate-02;
-      transition-timing-function: layout.$mode--transition-timing-function;
 
-      @starting-style {
-        opacity: 0;
-        translate: 0 -1.5rem;
+      @include guards.motion {
+        transition-property: opacity, translate;
+        transition-duration: motion.$duration-moderate-02;
+        transition-timing-function: layout.$mode--transition-timing-function;
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 -1.5rem;
+        }
       }
     }
 
