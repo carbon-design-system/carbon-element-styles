@@ -70,7 +70,10 @@ $-default-config: (
       translate: 0 calc((1lh - 1rem) * 0.5);
       display: inline-block;
       margin-inline-end: layout.$density--padding;
-      transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+      @include guards.motion {
+        transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      }
     }
 
     &[open] {
