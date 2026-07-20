@@ -9,6 +9,14 @@
 /// @group guards
 @mixin hover {
   @media (any-hover: hover) {
-    @content
+    @content;
+  }
+}
+
+/// Guards styles to users without a "reduced motion" preference on devices that can meaningfully display motion.
+/// @group guards
+@mixin motion {
+  @media (prefers-reduced-motion: no-preference) and (update: fast) {
+    @content;
   }
 }
