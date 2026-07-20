@@ -15,6 +15,7 @@
 
 @use '../../layout';
 @use '../../utilities/icons';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -51,9 +52,11 @@ $-default-config: (
         fill: currentColor;
       }
 
-      &:hover {
-        @include layer.layer-background-hover;
-        color: inherit;
+      @include guards.hover {
+        &:hover {
+          @include layer.layer-background-hover;
+          color: inherit;
+        }
       }
 
       &:active {
@@ -74,8 +77,10 @@ $-default-config: (
         transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
       }
 
-      &:hover::after {
-        color: theme.$icon-primary;
+      @include guards.hover {
+        &:hover::after {
+          color: theme.$icon-primary;
+        }
       }
     }
   }
