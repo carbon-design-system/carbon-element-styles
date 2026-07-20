@@ -14,6 +14,7 @@
 @use '@carbon/styles/scss/components/content-switcher/tokens' as carbon-content-switcher;
 
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -49,8 +50,10 @@ $-default-config: (
       transition-duration: layout.$mode--transition-duration;
       transition-timing-function: layout.$mode--transition-timing-function;
 
-      &:enabled:hover:not([aria-selected="true"]) {
-        color: theme.$text-primary;
+      @include guards.hover {
+        &:enabled:hover:not([aria-selected="true"]) {
+          color: theme.$text-primary;
+        }
       }
 
       &:focus {
@@ -72,8 +75,10 @@ $-default-config: (
         border-block-end: 0.125rem solid theme.$border-subtle;
         margin-inline-end: 0.0625rem;
 
-        &:enabled:hover:not([aria-selected="true"]) {
-          border-block-end-color: theme.$border-strong;
+        @include guards.hover {
+          &:enabled:hover:not([aria-selected="true"]) {
+            border-block-end-color: theme.$border-strong;
+          }
         }
 
         &[aria-selected="true"] {
@@ -97,8 +102,10 @@ $-default-config: (
           border-inline-end: 0.0625rem solid theme.$border-strong;
         }
 
-        &:enabled:hover:not([aria-selected="true"]) {
-          background-color: theme.$layer-accent-hover;
+        @include guards.hover {
+          &:enabled:hover:not([aria-selected="true"]) {
+            background-color: theme.$layer-accent-hover;
+          }
         }
 
         &[aria-selected="true"] {
@@ -141,8 +148,10 @@ $-default-config: (
           border-end-end-radius: inherit;
         }
 
-        &:enabled:hover:not([aria-selected="true"]) {
-          background-color: theme.$layer-hover;
+        @include guards.hover {
+          &:enabled:hover:not([aria-selected="true"]) {
+            background-color: theme.$layer-hover;
+          }
         }
 
         &:enabled:active:not([aria-selected="true"]) {
@@ -178,10 +187,15 @@ $-default-config: (
         &[aria-selected="true"]::after,
         &:last-child::after,
         &:has(+ [aria-selected="true"])::after,
-        &:hover::after,
-        &:has(+ :hover)::after,
         &:focus::after {
           visibility: hidden;
+        }
+
+        @include guards.hover {
+          &:hover::after,
+          &:has(+ :hover)::after {
+            visibility: hidden;
+          }
         }
       }
     }
@@ -193,9 +207,14 @@ $-default-config: (
       }
 
       & button[role="tab"] {
-        &:enabled:hover:not([aria-selected="true"]),
         &:enabled:active:not([aria-selected="true"]) {
           background-color: carbon-content-switcher.$content-switcher-background-hover;
+        }
+
+        @include guards.hover {
+          &:enabled:hover:not([aria-selected="true"]) {
+            background-color: carbon-content-switcher.$content-switcher-background-hover;
+          }
         }
 
         &[aria-selected="true"] {
