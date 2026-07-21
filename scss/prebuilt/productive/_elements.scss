@@ -21,6 +21,7 @@
 @use '../../elements/description-list';
 @use '../../elements/details';
 @use '../../elements/dialog';
+@use '../../elements/email-input';
 @use '../../elements/fieldset';
 @use '../../elements/file-input';
 @use '../../elements/footer';
@@ -86,6 +87,7 @@
   @include description-list.styles;
   @include details.styles;
   @include dialog.styles;
+  @include email-input.styles;
   @include fieldset.styles;
   @include file-input.styles;
   @include footer.styles;
