@@ -15,6 +15,7 @@
 
 @use '../../config';
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -68,9 +69,13 @@ $-indeterminate-ratio: 0.25;
     & progress:not([value])::-webkit-progress-value {
       inline-size: calc(100% * $-indeterminate-ratio);
       animation-name: #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate;
-      animation-duration: calc(motion.$duration-slow-02 * 2);
+      animation-duration: calc(motion.$duration-slow-02 * 5);
       animation-timing-function: linear;
       animation-iteration-count: infinite;
+
+      @include guards.motion {
+        animation-duration: calc(motion.$duration-slow-02 * 2);
+      }
     }
 
     @keyframes #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate {

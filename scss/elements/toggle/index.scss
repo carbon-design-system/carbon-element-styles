@@ -15,6 +15,7 @@
 @use '../label';
 
 @use '../../layout';
+@use '../../utilities/guards';
 
 $config: () !default;
 
@@ -98,7 +99,10 @@ $-knob-size: calc($-block-size - $-knob-spacing * 2);
       background-color: theme.$icon-on-color;
       inset-inline-start: $-knob-spacing;
       inset-block-start: $-knob-spacing;
-      transition: translate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+
+      @include guards.motion {
+        transition: translate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      }
     }
 
     & button[role="switch"][aria-checked="true"]::before {
