@@ -56,4 +56,21 @@ export const docsInventory: Plugin = {
 
     return lines.join('\n');
   },
+
+  configureServer(server) {
+    server.watcher.add(contentDir);
+    server.watcher.on('addDir', invalidate);
+    server.watcher.on('unlinkDir', invalidate);
+    server.watcher.on('add', invalidate);
+    server.watcher.on('unlink', invalidate);
+
+    function invalidate(changedPath: string) {
+      if (!changedPath.startsWith(contentDir)) return;
+      const mod = server.moduleGraph.getModuleById(resolvedId);
+      if (mod) {
+        server.moduleGraph.invalidateModule(mod);
+        server.reloadModule(mod);
+      }
+    }
+  },
 };
