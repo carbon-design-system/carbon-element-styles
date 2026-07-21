@@ -57,6 +57,7 @@
 @use '../../elements/side-navigation';
 @use '../../elements/small-text';
 @use '../../elements/table';
+@use '../../elements/telephone-number-input';
 @use '../../elements/text-area';
 @use '../../elements/text-input';
 @use '../../elements/tile';
@@ -122,6 +123,7 @@
   @include side-navigation.styles;
   @include small-text.styles;
   @include table.styles;
+  @include telephone-number-input.styles;
   @include text-area.styles;
   @include text-input.styles;
   @include tile.styles;
