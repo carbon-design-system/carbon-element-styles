@@ -57,6 +57,7 @@
 @use '../../elements/side-navigation';
 @use '../../elements/small-text';
 @use '../../elements/table';
+@use '../../elements/telephone-number-input';
 @use '../../elements/text-area';
 @use '../../elements/text-input';
 @use '../../elements/tile';
@@ -124,6 +125,7 @@
   @include table.styles((
     kind: 'structured-list',
   ));
+  @include telephone-number-input.styles;
   @include text-area.styles;
   @include text-input.styles;
   @include tile.styles;
