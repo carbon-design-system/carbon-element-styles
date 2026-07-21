@@ -43,7 +43,6 @@ $-indeterminate-ratio: 0.25;
 
     & progress {
       appearance: none;
-      inline-size: 100%;
 
       @if map.get($props, 'thickness') == 'thick' {
         block-size: 0.5rem;
