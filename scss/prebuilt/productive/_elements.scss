@@ -66,6 +66,7 @@
 @use '../../elements/tooltip';
 @use '../../elements/tree-view';
 @use '../../elements/unordered-list';
+@use '../../elements/url-input';
 
 @mixin styles {
   @include abbreviation.styles;
@@ -131,4 +132,5 @@
   @include toggle.styles;
   @include tooltip.styles;
   @include unordered-list.styles;
+  @include url-input.styles;
 }
