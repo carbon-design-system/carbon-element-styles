@@ -14,6 +14,7 @@
 @use '../../elements/button';
 @use '../../elements/checkbox';
 @use '../../elements/code';
+@use '../../elements/color-input';
 @use '../../elements/combo-box';
 @use '../../elements/date-input';
 @use '../../elements/date-time-input';
@@ -82,6 +83,7 @@
   ));
   @include checkbox.styles;
   @include code.styles;
+  @include color-input.styles;
   @include combo-box.styles;
   @include date-input.styles;
   @include date-time-input.styles;
