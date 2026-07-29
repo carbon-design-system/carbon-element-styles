@@ -5,53 +5,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/tooltip';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/tooltip";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Tooltip';
+elementDemoContent.label = "Tooltip";
 
 elementDemoContent.references = [
   {
     label: '"hint" popover',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#using_hint_popover_state',
+    url: "https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using#using_hint_popover_state",
   },
   {
-    label: 'Tooltip',
-    url: 'https://carbondesignsystem.com/components/tooltip/usage/',
+    label: "Tooltip",
+    url: "https://carbondesignsystem.com/components/tooltip/usage/",
   },
 ];
 
 const setup = (frame: HTMLElement) => {
-  for (const button of frame.querySelectorAll('button')) {
+  for (const button of frame.querySelectorAll("button")) {
     const tooltip = button.querySelector<HTMLElement>('[popover="hint"]');
 
-    button.addEventListener('mouseover', () => {
+    button.addEventListener("mouseover", () => {
       tooltip?.showPopover({
         source: button,
       });
     });
 
-    button.addEventListener('mouseout', () => {
+    button.addEventListener("mouseout", () => {
       tooltip?.hidePopover();
     });
   }
 };
 
-elementDemoContent.demos.set('default', { setup });
+elementDemoContent.demos.set("default", { setup });
 
 const alignments = [
-  'start start', 'start center', 'start end',
-  'center start', 'center end',
-  'end start', 'end center', 'end end',
+  "start start",
+  "start center",
+  "start end",
+  "center start",
+  "center end",
+  "end start",
+  "end center",
+  "end end",
 ];
 
 for (const alignment of alignments) {
-  const key = `alignment-${alignment.replace(' ', '-')}`;
+  const key = `alignment-${alignment.replace(" ", "-")}`;
   elementDemoContent.demos.set(key, { setup, scssConfig: { alignment: `'${alignment}'` } });
 }
 

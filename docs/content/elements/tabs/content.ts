@@ -5,60 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/tabs';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/tabs";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Tabs';
+elementDemoContent.label = "Tabs";
 
 elementDemoContent.references = [
   {
-    label: 'tablist role',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tablist_role',
+    label: "tablist role",
+    url: "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tablist_role",
   },
   {
-    label: 'Tabs',
-    url: 'https://carbondesignsystem.com/components/tabs/usage/',
+    label: "Tabs",
+    url: "https://carbondesignsystem.com/components/tabs/usage/",
   },
   {
-    label: 'Content switcher',
-    url: 'https://carbondesignsystem.com/components/content-switcher/usage/',
+    label: "Content switcher",
+    url: "https://carbondesignsystem.com/components/content-switcher/usage/",
   },
 ];
 
 const setup = (frame: HTMLElement) => {
   frame.querySelectorAll('[role="tab"]').forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const targetId = tab.getAttribute('aria-controls');
+    tab.addEventListener("click", () => {
+      const targetId = tab.getAttribute("aria-controls");
 
       if (targetId) {
         const target = frame.querySelector(`#${targetId}`);
 
         if (target) {
           frame.querySelectorAll('[role="tab"]').forEach((t) => {
-            t.setAttribute('aria-selected', 'false');
+            t.setAttribute("aria-selected", "false");
           });
 
           frame.querySelectorAll('[role="tabpanel"]').forEach((t) => {
-            t.setAttribute('hidden', '');
+            t.setAttribute("hidden", "");
           });
 
-          tab.setAttribute('aria-selected', 'true');
-          target.removeAttribute('hidden');
+          tab.setAttribute("aria-selected", "true");
+          target.removeAttribute("hidden");
         }
       }
     });
   });
 };
 
-elementDemoContent.demos.set('default', { setup });
-elementDemoContent.demos.set('line', { setup, scssConfig: { kind: `'line'` } });
-elementDemoContent.demos.set('contained', { setup, scssConfig: { kind: `'contained'` } });
-elementDemoContent.demos.set('content-switcher', { setup, scssConfig: { kind: `'content-switcher'` } });
-elementDemoContent.demos.set('content-switcher--low-contrast', { setup, scssConfig: { kind: `'content-switcher--low-contrast'` } });
+elementDemoContent.demos.set("default", { setup });
+elementDemoContent.demos.set("line", { setup, scssConfig: { kind: `'line'` } });
+elementDemoContent.demos.set("contained", { setup, scssConfig: { kind: `'contained'` } });
+elementDemoContent.demos.set("content-switcher", {
+  setup,
+  scssConfig: { kind: `'content-switcher'` },
+});
+elementDemoContent.demos.set("content-switcher--low-contrast", {
+  setup,
+  scssConfig: { kind: `'content-switcher--low-contrast'` },
+});
 
 export default elementDemoContent;

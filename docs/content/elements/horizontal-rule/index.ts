@@ -5,24 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
-  id: 'horizontal-rule',
-  label: 'Horizontal rule',
-  content: () => import('./content'),
+  id: "horizontal-rule",
+  label: "Horizontal rule",
+  content: () => import("./content"),
   items: [
     new NavigationItem({
-      id: 'default',
-      label: 'Default',
+      id: "default",
+      label: "Default",
     }),
     new NavigationItem({
-      id: 'subtle',
-      label: 'Subtle',
+      id: "subtle",
+      label: "Subtle",
     }),
     new NavigationItem({
-      id: 'strong',
-      label: 'Strong',
+      id: "strong",
+      label: "Strong",
     }),
   ],
 });

@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 
-import type { Plugin } from 'vite';
+import type { Plugin } from "vite";
 
-const elementsScssDir = resolve(import.meta.dirname, '../../scss/elements');
+const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
 
-const virtualPrefix = 'virtual:scss-docs/';
-const resolvedPrefix = '\0scss-docs:';
+const virtualPrefix = "virtual:scss-docs/";
+const resolvedPrefix = "\0scss-docs:";
 
 type ScssParameter = {
   name: string;
@@ -29,8 +29,8 @@ function parseScssDoc(source: string): ScssParameter[] | null {
   }
 
   const lines = match[1]
-    .split('\n')
-    .map((l) => l.replace(/^\/\/\/\s?/, '').trim())
+    .split("\n")
+    .map((l) => l.replace(/^\/\/\/\s?/, "").trim())
     .filter(Boolean);
 
   const parameters: ScssParameter[] = [];
@@ -38,15 +38,17 @@ function parseScssDoc(source: string): ScssParameter[] | null {
   for (const line of lines) {
     // @param {type} name [default]
     // @param {type} name.key [default]
-    const paramMatch = line.match(/^@param\s+\{([^}]+)\}\s+([\w.-]+)\s+\[((?:[^\[\]]|\[[^\]]*\])*)\]/);
+    const paramMatch = line.match(
+      /^@param\s+\{([^}]+)\}\s+([\w.-]+)\s+\[((?:[^\[\]]|\[[^\]]*\])*)\]/,
+    );
 
     if (paramMatch) {
-      const name = paramMatch[2].trim().replace(/config.?/, '');
+      const name = paramMatch[2].trim().replace(/config.?/, "");
 
       if (name) {
         parameters.push({
           name,
-          type: paramMatch[1].trim().replaceAll(/ \| /g, '\n| '),
+          type: paramMatch[1].trim().replaceAll(/ \| /g, "\n| "),
           default: paramMatch[3].trim(),
         });
       }
@@ -57,7 +59,7 @@ function parseScssDoc(source: string): ScssParameter[] | null {
 }
 
 export const scssDocs: Plugin = {
-  name: 'scss-docs',
+  name: "scss-docs",
 
   resolveId(source) {
     if (source.startsWith(virtualPrefix)) {
@@ -71,8 +73,8 @@ export const scssDocs: Plugin = {
     }
 
     const elementName = id.slice(resolvedPrefix.length);
-    const scssPath = resolve(elementsScssDir, elementName, 'index.scss');
-    const source = await readFile(scssPath, 'utf8');
+    const scssPath = resolve(elementsScssDir, elementName, "index.scss");
+    const source = await readFile(scssPath, "utf8");
     const parameters = parseScssDoc(source) ?? [];
 
     return `
@@ -80,10 +82,14 @@ export const scssDocs: Plugin = {
 
       const docs = new ScssDoc();
 
-      ${parameters.map((parameter) => `docs.parameters.set('${parameter.name}', {
+      ${parameters
+        .map(
+          (parameter) => `docs.parameters.set('${parameter.name}', {
         type: \`${parameter.type}\`,
         default: \`${parameter.default}\`,
-      });`).join('\n\n')}
+      });`,
+        )
+        .join("\n\n")}
 
       export default docs;
     `;

@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/utilities/focus-outline';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/utilities/focus-outline";
 
-@use '../../layout';
-@use '../../utilities/icons';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/icons";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'details',
+  selector: "details",
 );
 
 /// @group details
@@ -26,7 +26,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     border-block-start: 0.0625rem solid theme.$border-subtle;
     box-sizing: border-box;
     padding-inline-start: calc(layout.$density--padding + 1rem + layout.$density--padding);
@@ -60,19 +60,20 @@ $-default-config: (
       }
 
       &:focus {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
       }
     }
 
     & summary::before {
-      content: '';
+      content: "";
       @include icons.chevron--down;
       translate: 0 calc((1lh - 1rem) * 0.5);
       display: inline-block;
       margin-inline-end: layout.$density--padding;
 
       @include guards.motion {
-        transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
+        transition: rotate layout.$mode--transition-duration
+          layout.$mode--transition-timing-function;
       }
     }
 

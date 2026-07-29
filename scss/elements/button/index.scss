@@ -5,21 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
-@use 'sass:string';
+@use "sass:map";
+@use "sass:string";
 
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/components/button/tokens" as carbon-button;
 
-@use '../../layout';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'button',
-  kind: 'secondary',
+  selector: "button",
+  kind: "secondary",
 );
 
 /// @group button
@@ -29,7 +29,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     @include layout.mode--body-compact;
     appearance: none;
     border: none;
@@ -78,12 +78,12 @@ $-default-config: (
       aspect-ratio: 1;
       justify-content: center;
 
-       & > svg {
+      & > svg {
         margin-inline: 0;
-       }
+      }
     }
 
-    @if map.get($props, 'kind') == 'primary' {
+    @if map.get($props, "kind") == "primary" {
       background-color: carbon-button.$button-primary;
       color: theme.$text-on-color;
 
@@ -103,7 +103,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'secondary' {
+    @if map.get($props, "kind") == "secondary" {
       background-color: carbon-button.$button-secondary;
       color: theme.$text-on-color;
 
@@ -123,7 +123,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'tertiary' {
+    @if map.get($props, "kind") == "tertiary" {
       background-color: transparent;
       color: carbon-button.$button-tertiary;
       outline: 0.0625rem solid carbon-button.$button-tertiary;
@@ -151,7 +151,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'ghost' {
+    @if map.get($props, "kind") == "ghost" {
       background-color: transparent;
       color: theme.$link-primary;
       padding-inline-end: layout.$density--padding;
@@ -186,7 +186,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'danger--primary' {
+    @if map.get($props, "kind") == "danger--primary" {
       background-color: carbon-button.$button-danger-primary;
       color: theme.$text-on-color;
 
@@ -206,7 +206,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'danger--tertiary' {
+    @if map.get($props, "kind") == "danger--tertiary" {
       background-color: transparent;
       color: carbon-button.$button-danger-secondary;
       outline: 0.0625rem solid carbon-button.$button-danger-secondary;
@@ -236,7 +236,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'danger--ghost' {
+    @if map.get($props, "kind") == "danger--ghost" {
       background-color: transparent;
       color: carbon-button.$button-danger-secondary;
       padding-inline-end: layout.$density--padding;

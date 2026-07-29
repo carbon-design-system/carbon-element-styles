@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/tile';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/tile";
 
-@use '../../../../scss/elements/text-input';
+@use "../../../../scss/elements/text-input";
 
-@include element-demo-content.demo('default') {
+@include element-demo-content.demo("default") {
   @include tile.styles;
 
   // ↓ for demo only ↓
   @include text-input.styles;
-};
+}

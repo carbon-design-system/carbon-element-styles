@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/spacing";
 
-@use '../../../scss/layout';
-@use '../../../scss/prebuilt/editorial/elements' as editorial-elements;
+@use "../../../scss/layout";
+@use "../../../scss/prebuilt/editorial/elements" as editorial-elements;
 
-@use '../../scss/syntax-highlighting';
+@use "../../scss/syntax-highlighting";
 
 :host {
   @include editorial-elements.styles;

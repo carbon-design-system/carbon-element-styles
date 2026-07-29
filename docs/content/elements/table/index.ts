@@ -5,28 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
-  id: 'table',
-  label: 'Table',
-  content: () => import('./content'),
+  id: "table",
+  label: "Table",
+  content: () => import("./content"),
   items: [
     new NavigationItem({
-      id: 'default',
-      label: 'Default',
+      id: "default",
+      label: "Default",
     }),
     new NavigationItem({
-      id: 'data-table',
-      label: 'Data table',
+      id: "data-table",
+      label: "Data table",
     }),
     new NavigationItem({
-      id: 'structured-list',
-      label: 'Structured list',
+      id: "structured-list",
+      label: "Structured list",
     }),
     new NavigationItem({
-      id: 'structured-list--flush',
-      label: 'Structured list (flush)',
+      id: "structured-list--flush",
+      label: "Structured list (flush)",
     }),
   ],
 });

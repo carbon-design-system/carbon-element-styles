@@ -5,19 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/breakpoint';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/breakpoint";
 
-@use '../../../scss/layout';
+@use "../../../scss/layout";
 
-@use '../../../scss/elements/select';
+@use "../../../scss/elements/select";
 
 :host {
-  @include layout.density('condensed');
+  @include layout.density("condensed");
 
-  @include select.styles((
-    axis: 'inline',
-  ));
+  @include select.styles(
+    (
+      axis: "inline",
+    )
+  );
 }
 
 :host span {
@@ -31,17 +33,18 @@
   fill: currentColor;
 }
 
-@include breakpoint.breakpoint-down('lg') {
+@include breakpoint.breakpoint-down("lg") {
   :host {
-    @include layout.density('normal');
-    @include layout.size('sm');
+    @include layout.density("normal");
+    @include layout.size("sm");
     inline-size: 100%;
   }
 
   :host label:has(select) {
     inline-size: 100%;
     grid-template-columns: min-content 1fr;
-    transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+    transition: background-color layout.$mode--transition-duration
+      layout.$mode--transition-timing-function;
   }
 
   :host(:hover) {

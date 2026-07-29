@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
-  id: 'radio-button',
-  label: 'Radio button',
-  content: () => import('./content'),
+  id: "radio-button",
+  label: "Radio button",
+  content: () => import("./content"),
   items: [
     new NavigationItem({
-      id: 'default',
-      label: 'Default',
+      id: "default",
+      label: "Default",
     }),
   ],
 });

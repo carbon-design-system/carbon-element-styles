@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'blockquote',
+  selector: "blockquote",
 );
 
 /// @group block-quotation
@@ -24,7 +24,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     margin-block: layout.$mode--margin-block;
     margin-inline: spacing.$spacing-08;
     max-inline-size: 50ch;
@@ -56,7 +56,7 @@ $-default-config: (
     }
 
     & + cite::before {
-      content: '—';
+      content: "—";
       margin-inline-end: spacing.$spacing-02;
     }
   }

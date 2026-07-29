@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import themeIcon from '@carbon/icons/svg/32/color-palette.svg?raw';
-import modeIcon from '@carbon/icons/svg/32/scale.svg?raw';
-import sizeIcon from '@carbon/icons/svg/32/fit-to-height.svg?raw';
-import densityIcon from '@carbon/icons/svg/32/fit-to-width.svg?raw';
+import themeIcon from "@carbon/icons/svg/32/color-palette.svg?raw";
+import modeIcon from "@carbon/icons/svg/32/scale.svg?raw";
+import sizeIcon from "@carbon/icons/svg/32/fit-to-height.svg?raw";
+import densityIcon from "@carbon/icons/svg/32/fit-to-width.svg?raw";
 
-import { CdsEsDocsControl } from '@/components/Control';
+import { CdsEsDocsControl } from "@/components/Control";
 
 export class CdsEsDocsControls extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
@@ -25,82 +25,82 @@ export class CdsEsDocsControls extends HTMLElement {
 
     this.shadowRoot?.append(
       this.#createControl({
-        key: 'theme',
-        label: 'Theme',
+        key: "theme",
+        label: "Theme",
         icon: themeIcon,
         options: [
           {
-            value: 'white',
-            label: 'White',
+            value: "white",
+            label: "White",
           },
           {
-            value: 'g10',
-            label: 'Gray 10',
+            value: "g10",
+            label: "Gray 10",
           },
           {
-            value: 'g90',
-            label: 'Gray 90',
+            value: "g90",
+            label: "Gray 90",
           },
           {
-            value: 'g100',
-            label: 'Gray 100',
+            value: "g100",
+            label: "Gray 100",
           },
         ],
       }),
       this.#createControl({
-        key: 'mode',
-        label: 'Mode',
+        key: "mode",
+        label: "Mode",
         icon: modeIcon,
         options: [
           {
-            value: 'productive',
-            label: 'Productive',
+            value: "productive",
+            label: "Productive",
           },
           {
-            value: 'expressive',
-            label: 'Expressive',
+            value: "expressive",
+            label: "Expressive",
           },
         ],
       }),
       this.#createControl({
-        key: 'size',
-        label: 'Size',
+        key: "size",
+        label: "Size",
         icon: sizeIcon,
         options: [
           {
-            value: 'xs',
-            label: 'XS',
+            value: "xs",
+            label: "XS",
           },
           {
-            value: 'sm',
-            label: 'SM',
+            value: "sm",
+            label: "SM",
           },
           {
-            value: 'md',
-            label: 'MD',
+            value: "md",
+            label: "MD",
           },
           {
-            value: 'lg',
-            label: 'LG',
+            value: "lg",
+            label: "LG",
           },
           {
-            value: 'xl',
-            label: 'XL',
+            value: "xl",
+            label: "XL",
           },
         ],
       }),
       this.#createControl({
-        key: 'density',
-        label: 'Density',
+        key: "density",
+        label: "Density",
         icon: densityIcon,
         options: [
           {
-            value: 'condensed',
-            label: 'Condensed',
+            value: "condensed",
+            label: "Condensed",
           },
           {
-            value: 'normal',
-            label: 'Normal',
+            value: "normal",
+            label: "Normal",
           },
         ],
       }),
@@ -116,9 +116,9 @@ export class CdsEsDocsControls extends HTMLElement {
     key: string;
     label: string;
     icon: string;
-    options: CdsEsDocsControl['options'];
+    options: CdsEsDocsControl["options"];
   }) {
-    const control = document.createElement('cds-es-docs-control') as CdsEsDocsControl;
+    const control = document.createElement("cds-es-docs-control") as CdsEsDocsControl;
     control.key = key;
     control.label = label;
     control.icon = icon;

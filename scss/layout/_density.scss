@@ -5,23 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/spacing";
 
-@use '../utilities/tokens';
+@use "../utilities/tokens";
 
 $-densities: (
   condensed: spacing.$spacing-03,
   normal: spacing.$spacing-05,
 );
 
-$-default-density: 'normal';
+$-default-density: "normal";
 
 /// @group layout--density
 /// @param {'condensed' | 'normal'} density ['normal']
 @mixin density($density: $-default-density) {
-  @include tokens.set('density--padding', map.get($-densities, $density));
+  @include tokens.set("density--padding", map.get($-densities, $density));
 }
 
-$density--padding: tokens.get('density--padding', map.get($-densities, $-default-density));
+$density--padding: tokens.get("density--padding", map.get($-densities, $-default-density));

@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/body';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/body";
 
-@include element-demo-content.demo('default') {
-  @include body.styles((
-    selector: '&',
-  ));
-};
+@include element-demo-content.demo("default") {
+  @include body.styles(
+    (
+      selector: "&",
+    )
+  );
+}

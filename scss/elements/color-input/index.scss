@@ -5,22 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../_labelled-input';
+@use "../_labelled-input";
 
-@use '../../layout';
-@use '../../utilities/icons';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/icons";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
   selector: 'label:has(input[type="color"])',
-  axis: 'block',
+  axis: "block",
 );
 
 /// @group color-input
@@ -30,19 +30,21 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
-    @include labelled-input.styles((
-      label: (
-        selector: '&',
-        axis: map.get($props, 'axis'),
-      ),
-      input: (
-        selector: 'input[type="color"]',
-        emit-readonly: false,
-      ),
-      fixed-input-trailing-slots: 1,
-      input-invalid-slot: 'after',
-    ));
+  #{map.get($props, "selector")} {
+    @include labelled-input.styles(
+      (
+        label: (
+          selector: "&",
+          axis: map.get($props, "axis"),
+        ),
+        input: (
+          selector: 'input[type="color"]',
+          emit-readonly: false,
+        ),
+        fixed-input-trailing-slots: 1,
+        input-invalid-slot: "after",
+      )
+    );
 
     /*
         inline padding
@@ -54,13 +56,8 @@ $-default-config: (
       + inline padding
     */
     $-min-inline-size: calc(
+      layout.$density--padding + 1rem + spacing.$spacing-05 + 1rem + spacing.$spacing-03 + 1rem +
         layout.$density--padding
-      + 1rem
-      + spacing.$spacing-05
-      + 1rem
-      + spacing.$spacing-03
-      + 1rem
-      + layout.$density--padding
     );
 
     & input[type="color"] {

@@ -5,34 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/table';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/table";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Table';
+elementDemoContent.label = "Table";
 
 elementDemoContent.references = [
   {
-    label: '<table>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table',
+    label: "<table>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table",
   },
   {
-    label: 'Data table',
-    url: 'https://carbondesignsystem.com/components/data-table/usage/',
+    label: "Data table",
+    url: "https://carbondesignsystem.com/components/data-table/usage/",
   },
   {
-    label: 'Structured list',
-    url: 'https://carbondesignsystem.com/components/structured-list/usage/',
+    label: "Structured list",
+    url: "https://carbondesignsystem.com/components/structured-list/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
-elementDemoContent.demos.set('data-table', { scssConfig: { kind: `'data-table'` } });
-elementDemoContent.demos.set('structured-list', { scssConfig: { kind: `'structured-list'` } });
-elementDemoContent.demos.set('structured-list--flush', { scssConfig: { kind: `'structured-list--flush'` } });
+elementDemoContent.demos.set("default", {});
+elementDemoContent.demos.set("data-table", { scssConfig: { kind: `'data-table'` } });
+elementDemoContent.demos.set("structured-list", { scssConfig: { kind: `'structured-list'` } });
+elementDemoContent.demos.set("structured-list--flush", {
+  scssConfig: { kind: `'structured-list--flush'` },
+});
 
 export default elementDemoContent;

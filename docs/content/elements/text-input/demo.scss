@@ -5,21 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/text-input';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/text-input";
 
-@include element-demo-content.demo('default') {
+@include element-demo-content.demo("default") {
   @include text-input.styles;
-};
+}
 
-@include element-demo-content.demo('block') {
-  @include text-input.styles((
-    axis: 'block',
-  ));
-};
+@include element-demo-content.demo("block") {
+  @include text-input.styles(
+    (
+      axis: "block",
+    )
+  );
+}
 
-@include element-demo-content.demo('inline') {
-  @include text-input.styles((
-    axis: 'inline',
-  ));
-};
+@include element-demo-content.demo("inline") {
+  @include text-input.styles(
+    (
+      axis: "inline",
+    )
+  );
+}

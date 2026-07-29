@@ -5,27 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/breakpoint';
-@use '@carbon/styles/scss/motion';
-@use '@carbon/styles/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/layer/layer-tokens';
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/breakpoint";
+@use "@carbon/styles/scss/motion";
+@use "@carbon/styles/scss/utilities/focus-outline";
+@use "@carbon/styles/scss/layer/layer-tokens";
 
-@use '../button';
+@use "../button";
 
-@use '../_layer';
+@use "../_layer";
 
-@use '../../layout';
-@use '../../utilities/icons';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/icons";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'dialog',
+  selector: "dialog",
 );
 
 /// @group dialog
@@ -34,13 +34,13 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     position: relative;
     padding: 0;
 
     &:modal {
-      @include layout.size('md');
-      @include layout.density('normal');
+      @include layout.size("md");
+      @include layout.density("normal");
       @include layer.styles;
 
       color: theme.$text-primary;
@@ -51,24 +51,24 @@ $-default-config: (
       box-sizing: border-box;
 
       &:focus {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
       }
 
-      @include breakpoint.breakpoint('xlg') {
+      @include breakpoint.breakpoint("xlg") {
         inline-size: 48%;
       }
 
-      @include breakpoint.breakpoint-down('xlg') {
+      @include breakpoint.breakpoint-down("xlg") {
         inline-size: 60%;
         max-block-size: 84%;
       }
 
-      @include breakpoint.breakpoint-down('lg') {
+      @include breakpoint.breakpoint-down("lg") {
         inline-size: 84%;
         max-block-size: 90%;
       }
 
-      @include breakpoint.breakpoint-down('md') {
+      @include breakpoint.breakpoint-down("md") {
         inline-size: 100%;
         block-size: 100%;
         max-inline-size: 100dvi;
@@ -86,7 +86,7 @@ $-default-config: (
     }
 
     &:modal footer {
-      @include layout.size('xl');
+      @include layout.size("xl");
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       margin-inline: calc(layout.$density--padding * -1);
@@ -100,52 +100,64 @@ $-default-config: (
     // single button
     &:modal footer > button:only-child {
       grid-column: 3 / span 2;
-      @include button.styles((
-        selector: '&',
-        kind: 'primary',
-      ));
+      @include button.styles(
+        (
+          selector: "&",
+          kind: "primary",
+        )
+      );
     }
 
     // two buttons
     &:modal footer > button:first-child:has(+ button:last-child) {
       grid-column: 1 / span 2;
-      @include button.styles((
-        selector: '&',
-        kind: 'secondary',
-      ));
+      @include button.styles(
+        (
+          selector: "&",
+          kind: "secondary",
+        )
+      );
     }
 
     &:modal footer > button:first-child + button:last-child {
       grid-column: 3 / span 2;
-      @include button.styles((
-        selector: '&',
-        kind: 'primary',
-      ));
+      @include button.styles(
+        (
+          selector: "&",
+          kind: "primary",
+        )
+      );
     }
 
     // three buttons
     &:modal footer > button:first-child:not(:has(+ button:last-child), :last-child) {
       grid-column: 1;
-      @include button.styles((
-        selector: '&',
-        kind: 'ghost',
-      ));
+      @include button.styles(
+        (
+          selector: "&",
+          kind: "ghost",
+        )
+      );
     }
 
     &:modal footer > button:not(:first-child):has(+ button:last-child) {
       grid-column: 3;
-      @include button.styles((
-        selector: '&',
-        kind: 'secondary',
-      ));
+      @include button.styles(
+        (
+          selector: "&",
+          kind: "secondary",
+        )
+      );
     }
 
     &:modal footer > button:not(:first-child) + button:last-child {
       grid-column: 4;
-      @include button.styles((
-        selector: '&',
-        kind: 'primary',
-      ));
+      @include button.styles(
+        (
+          selector: "&",
+          kind: "primary",
+        )
+      );
     }
 
     // header close button
@@ -166,7 +178,8 @@ $-default-config: (
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      transition: background-color layout.$mode--transition-duration
+        layout.$mode--transition-timing-function;
 
       @include guards.hover {
         &:hover {
@@ -179,7 +192,7 @@ $-default-config: (
       }
 
       &:focus {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
       }
     }
 
@@ -187,7 +200,7 @@ $-default-config: (
       @include icons.close($size: 1.25rem);
       display: block;
       inset: 0;
-      content: '';
+      content: "";
     }
 
     // entry animation

@@ -5,33 +5,33 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { normalizePath } from 'vite';
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { normalizePath } from "vite";
 
-import type { Plugin } from 'vite';
+import type { Plugin } from "vite";
 
-import * as log from './log';
+import * as log from "./log";
 
-const contentDir = resolve(import.meta.dirname, '../../docs/content/');
+const contentDir = resolve(import.meta.dirname, "../../docs/content/");
 const contentDirNormalized = normalizePath(contentDir);
 
-const prefix = '\0carbon-icons:';
-const suffix = '.js';
+const prefix = "\0carbon-icons:";
+const suffix = ".js";
 
 const htmlToVirtualId = new Map<string, string>();
 
 export const carbonIcons: Plugin = {
-  name: 'carbon-icons',
-  enforce: 'pre',
+  name: "carbon-icons",
+  enforce: "pre",
 
   resolveId(source, importer) {
-    if (!source.endsWith('.html') || !importer) {
+    if (!source.endsWith(".html") || !importer) {
       return null;
     }
 
-    const path = resolve(importer, '..', source);
+    const path = resolve(importer, "..", source);
 
     if (!path.startsWith(contentDir)) {
       return null;
@@ -48,13 +48,13 @@ export const carbonIcons: Plugin = {
     const filePath = id.slice(prefix.length, -suffix.length);
     this.addWatchFile(filePath);
     htmlToVirtualId.set(normalizePath(filePath), id);
-    const raw = readFileSync(filePath, 'utf8');
+    const raw = readFileSync(filePath, "utf8");
 
     const content = raw.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
       try {
         const iconPath = fileURLToPath(import.meta.resolve(`@carbon/icons/svg/32/${name}.svg`));
-        return readFileSync(iconPath, 'utf8');
-      } catch(e) {
+        return readFileSync(iconPath, "utf8");
+      } catch (e) {
         log.error(`Could not find Carbon icon with name '${name}'.\n   Requested by '${id}'.`, e);
       }
 
@@ -67,7 +67,7 @@ export const carbonIcons: Plugin = {
   hotUpdate({ file, server }) {
     const normalized = normalizePath(file);
 
-    if (!normalized.startsWith(contentDirNormalized) || !normalized.endsWith('.html')) {
+    if (!normalized.startsWith(contentDirNormalized) || !normalized.endsWith(".html")) {
       return;
     }
 
@@ -79,7 +79,7 @@ export const carbonIcons: Plugin = {
 
     const graph = server.environments.client.moduleGraph;
     const mod = graph.getModuleById(virtualId);
-    
+
     if (mod) {
       graph.invalidateModule(mod);
       return [mod];

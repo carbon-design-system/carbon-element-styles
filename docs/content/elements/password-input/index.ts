@@ -5,24 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
-  id: 'password-input',
-  label: 'Password input',
-  content: () => import('./content'),
+  id: "password-input",
+  label: "Password input",
+  content: () => import("./content"),
   items: [
     new NavigationItem({
-      id: 'default',
-      label: 'Default',
+      id: "default",
+      label: "Default",
     }),
     new NavigationItem({
-      id: 'block',
-      label: 'Block',
+      id: "block",
+      label: "Block",
     }),
     new NavigationItem({
-      id: 'inline',
-      label: 'Inline',
+      id: "inline",
+      label: "Inline",
     }),
   ],
 });

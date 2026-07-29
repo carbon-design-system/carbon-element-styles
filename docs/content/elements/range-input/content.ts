@@ -5,29 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/range-input';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/range-input";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Range input';
+elementDemoContent.label = "Range input";
 
 elementDemoContent.references = [
   {
     label: '<input type="range">',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range',
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range",
   },
   {
-    label: 'Slider',
-    url: 'https://carbondesignsystem.com/components/slider/usage/',
+    label: "Slider",
+    url: "https://carbondesignsystem.com/components/slider/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
-elementDemoContent.demos.set('block', { scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set('inline', { scssConfig: { axis: `'inline'` } });
+elementDemoContent.demos.set("default", {});
+elementDemoContent.demos.set("block", { scssConfig: { axis: `'block'` } });
+elementDemoContent.demos.set("inline", { scssConfig: { axis: `'inline'` } });
 
 export default elementDemoContent;

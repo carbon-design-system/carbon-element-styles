@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../../../scss/elements/tabs';
+@use "../../../scss/elements/tabs";
 
 :host {
   @include tabs.styles;

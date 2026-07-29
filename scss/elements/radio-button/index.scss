@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/utilities/focus-outline';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/utilities/focus-outline";
 
-@use '../label';
+@use "../label";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
@@ -26,11 +26,13 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
-    @include label.styles((
-      selector: '&',
-      axis: 'inline',
-    ));
+  #{map.get($props, "selector")} {
+    @include label.styles(
+      (
+        selector: "&",
+        axis: "inline",
+      )
+    );
 
     justify-content: start;
     cursor: pointer;
@@ -47,7 +49,7 @@ $-default-config: (
       border: 0.0625rem solid currentColor;
 
       &:focus {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
         outline-offset: 0.125rem;
       }
 
@@ -56,7 +58,7 @@ $-default-config: (
       }
 
       &:checked::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0.25rem;
         border-radius: 50%;

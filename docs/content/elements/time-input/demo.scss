@@ -5,21 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/time-input';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/time-input";
 
-@include element-demo-content.demo('default') {
+@include element-demo-content.demo("default") {
   @include time-input.styles;
-};
+}
 
-@include element-demo-content.demo('block') {
-  @include time-input.styles((
-    axis: 'block',
-  ));
-};
+@include element-demo-content.demo("block") {
+  @include time-input.styles(
+    (
+      axis: "block",
+    )
+  );
+}
 
-@include element-demo-content.demo('inline') {
-  @include time-input.styles((
-    axis: 'inline',
-  ));
-};
+@include element-demo-content.demo("inline") {
+  @include time-input.styles(
+    (
+      axis: "inline",
+    )
+  );
+}

@@ -1,10 +1,15 @@
 {
   "name": "@carbon/element-styles",
-  "description": "An experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names.",
   "version": "0.3.6-rc.0",
+  "description": "An experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names.",
+  "keywords": [
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "css",
+    "ibm"
+  ],
   "license": "Apache-2.0",
-  "type": "module",
-  "sass": "index.scss",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carbon-design-system/carbon-element-styles.git"
@@ -15,13 +20,7 @@
     "css",
     "telemetry.yml"
   ],
-  "keywords": [
-    "ibm",
-    "carbon",
-    "carbon-design-system",
-    "components",
-    "css"
-  ],
+  "type": "module",
   "publishConfig": {
     "access": "public",
     "provenance": true
@@ -39,9 +38,6 @@
   "dependencies": {
     "@ibm/telemetry-js": "^1.11.0"
   },
-  "peerDependencies": {
-    "@carbon/styles": "^1.102.0"
-  },
   "devDependencies": {
     "@carbon/icons": "^11.84.0",
     "@types/node": "^26.1.1",
@@ -51,5 +47,9 @@
     "oxfmt": "^0.61.0",
     "sass": "^1.101.0",
     "vite": "^8.1.5"
-  }
+  },
+  "peerDependencies": {
+    "@carbon/styles": "^1.102.0"
+  },
+  "sass": "index.scss"
 }

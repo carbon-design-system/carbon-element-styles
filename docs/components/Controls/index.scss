@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/breakpoint';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/breakpoint";
 
-@use '../../../scss/layout';
+@use "../../../scss/layout";
 
 :host {
   display: flex;
@@ -17,7 +17,7 @@
   column-gap: layout.$density--padding;
   padding-inline-end: layout.$density--padding;
 
-  @include breakpoint.breakpoint-down('lg') {
+  @include breakpoint.breakpoint-down("lg") {
     translate: 100% 0;
     inline-size: 16rem;
     position: fixed;

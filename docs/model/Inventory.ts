@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as inventory from 'virtual:docs-inventory';
+import * as inventory from "virtual:docs-inventory";
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export class Inventory {
   static #content: Map<string, NavigationItem> = new Map();
@@ -21,9 +21,7 @@ export class Inventory {
   }
 
   static #registerContent(prefix: string, item: NavigationItem) {
-    const accessor = prefix.endsWith(`/${item.id}`)
-      ? prefix
-      : `${prefix}/${item.id}`;
+    const accessor = prefix.endsWith(`/${item.id}`) ? prefix : `${prefix}/${item.id}`;
 
     this.#content.set(accessor, item);
 

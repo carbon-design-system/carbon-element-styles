@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/theme";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'hr',
-  kind: 'subtle',
+  selector: "hr",
+  kind: "subtle",
 );
 
 /// @group horizontal-rule
@@ -25,16 +25,16 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     border: none;
     block-size: 0.0625rem;
     margin-block: layout.$mode--margin-block;
 
-    @if map.get($props, 'kind') == 'subtle' {
+    @if map.get($props, "kind") == "subtle" {
       background-color: theme.$border-subtle;
     }
 
-    @if map.get($props, 'kind') == 'strong' {
+    @if map.get($props, "kind") == "strong" {
       background-color: theme.$border-strong;
     }
   }

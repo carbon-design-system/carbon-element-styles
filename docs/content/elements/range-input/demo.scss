@@ -5,21 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/range-input';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/range-input";
 
-@include element-demo-content.demo('default') {
+@include element-demo-content.demo("default") {
   @include range-input.styles;
-};
+}
 
-@include element-demo-content.demo('block') {
-  @include range-input.styles((
-    axis: 'block',
-  ));
-};
+@include element-demo-content.demo("block") {
+  @include range-input.styles(
+    (
+      axis: "block",
+    )
+  );
+}
 
-@include element-demo-content.demo('inline') {
-  @include range-input.styles((
-    axis: 'inline',
-  ));
-};
+@include element-demo-content.demo("inline") {
+  @include range-input.styles(
+    (
+      axis: "inline",
+    )
+  );
+}

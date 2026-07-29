@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/theme";
 
-@use '../../../scss/elements/_layer';
-@use '../../../scss/layout';
+@use "../../../scss/elements/_layer";
+@use "../../../scss/layout";
 
 :host {
   position: relative;
@@ -24,7 +24,7 @@
 
 :host::before,
 :host::after {
-  content: '';
+  content: "";
   position: absolute;
   inset-inline: 0;
   block-size: 1.5rem;
@@ -33,17 +33,10 @@
 
 :host::before {
   inset-block-start: 0;
-  background-image: linear-gradient(
-    0deg,
-    transparent,
-    theme.$layer,
-  );
+  background-image: linear-gradient(0deg, transparent, theme.$layer);
 }
 
 :host::after {
   inset-block-end: 0;
-  background-image: linear-gradient(
-    transparent,
-    theme.$layer,
-  );
+  background-image: linear-gradient(transparent, theme.$layer);
 }

@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '../_labelled-input';
+@use "../_labelled-input";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'label:has(textarea)',
+  selector: "label:has(textarea)",
 );
 
 /// @group text-area
@@ -23,20 +23,24 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
-    @include labelled-input.styles((
-      label: (
-        selector: '&',
-        axis: 'block',
-      ),
-      input: (
-        selector: 'textarea',
-      ),
-      input-invalid-slot: 'after',
-    ));
+  #{map.get($props, "selector")} {
+    @include labelled-input.styles(
+      (
+        label: (
+          selector: "&",
+          axis: "block",
+        ),
+        input: (
+          selector: "textarea",
+        ),
+        input-invalid-slot: "after",
+      )
+    );
 
     & textarea {
-      min-block-size: calc(layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end);
+      min-block-size: calc(
+        layout.$size--padding-block-start + 2lh + layout.$size--padding-block-end
+      );
       resize: vertical;
     }
   }

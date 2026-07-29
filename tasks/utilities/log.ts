@@ -6,29 +6,29 @@
  */
 
 const colors = {
-  reset: '\x1b[0m',
-  gray: '\x1b[90m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  red: '\x1b[31m',
+  reset: "\x1b[0m",
+  gray: "\x1b[90m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  red: "\x1b[31m",
 };
 
 export function info(...data: any[]) {
-  console.info(colors.gray, '·', ...data, colors.reset);
+  console.info(colors.gray, "·", ...data, colors.reset);
 }
 
 export function success(...data: any[]) {
-  console.info(colors.green, '✓', ...data, colors.reset);
+  console.info(colors.green, "✓", ...data, colors.reset);
 }
 
 export function warning(...data: any[]) {
-  console.warn(colors.yellow, '⚠', ...data, colors.reset);
+  console.warn(colors.yellow, "⚠", ...data, colors.reset);
 }
 
 export function error(...data: any[]) {
-  console.error(colors.red, '✗', ...data, colors.reset);
+  console.error(colors.red, "✗", ...data, colors.reset);
 }
 
 export function summary(...data: any[]) {
-  console.info(colors.reset, '\n', '↪', ...data, colors.reset);
+  console.info(colors.reset, "\n", "↪", ...data, colors.reset);
 }

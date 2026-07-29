@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/utilities/focus-outline';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/utilities/focus-outline";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
@@ -53,14 +53,14 @@ $-default-config: (
     color: theme.$text-placeholder;
   }
 
-  @if map.get($props, 'emit-readonly') {
+  @if map.get($props, "emit-readonly") {
     &:read-only {
       background-color: transparent;
       border-block-end-color: theme.$border-subtle;
     }
   }
 
-  @if map.get($props, 'emit-disabled') {
+  @if map.get($props, "emit-disabled") {
     &:disabled {
       color: theme.$text-disabled;
       background-color: theme.$layer;
@@ -69,7 +69,7 @@ $-default-config: (
     }
   }
 
-  @if map.get($props, 'emit-invalid') {
+  @if map.get($props, "emit-invalid") {
     &:invalid,
     &[aria-invalid="true"] {
       outline-offset: -0.125rem;
@@ -78,15 +78,15 @@ $-default-config: (
     }
   }
 
-  @if map.get($props, 'emit-focus') {
+  @if map.get($props, "emit-focus") {
     &:focus {
-      @include focus-outline.focus-outline('outline');
+      @include focus-outline.focus-outline("outline");
     }
 
-    @if map.get($props, 'emit-invalid') {
+    @if map.get($props, "emit-invalid") {
       &:focus:invalid,
       &:focus[aria-invalid="true"] {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
       }
     }
   }

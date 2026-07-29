@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/code';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/code";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Code';
+elementDemoContent.label = "Code";
 
 elementDemoContent.references = [
   {
-    label: '<code>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code',
+    label: "<code>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code",
   },
   {
-    label: 'Inline code snippet',
-    url: 'https://carbondesignsystem.com/components/code-snippet/usage/#inline',
+    label: "Inline code snippet",
+    url: "https://carbondesignsystem.com/components/code-snippet/usage/#inline",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

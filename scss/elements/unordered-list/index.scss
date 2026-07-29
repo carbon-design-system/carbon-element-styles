@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/spacing";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'ul',
+  selector: "ul",
 );
 
 /// @group unordered-list
@@ -23,8 +23,8 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
-    list-style-type: '–';
+  #{map.get($props, "selector")} {
+    list-style-type: "–";
     padding: 0;
 
     & li {
@@ -35,7 +35,7 @@ $-default-config: (
     }
 
     & li li {
-      list-style-type: '▪\FE0E';
+      list-style-type: "▪\FE0E";
     }
 
     & li p {

@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/fieldset';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/fieldset";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Fieldset';
+elementDemoContent.label = "Fieldset";
 
 elementDemoContent.references = [
   {
-    label: '<fieldset>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset',
+    label: "<fieldset>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset",
   },
   {
-    label: 'Form',
-    url: 'https://carbondesignsystem.com/components/form/usage/',
+    label: "Form",
+    url: "https://carbondesignsystem.com/components/form/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

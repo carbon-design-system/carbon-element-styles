@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
-@use 'sass:string';
+@use "sass:map";
+@use "sass:string";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/utilities/focus-outline';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/utilities/focus-outline";
 
-@use '../../layout';
-@use '../../utilities/icons';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/icons";
+@use "../../utilities/guards";
 
 $config: () !default;
 
@@ -28,7 +28,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     background-color: theme.$layer;
     list-style: none;
     margin: 0;
@@ -73,7 +73,7 @@ $-default-config: (
       outline: none;
 
       & > :is(span, a) {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
       }
     }
 
@@ -116,7 +116,7 @@ $-default-config: (
     }
 
     &:has([aria-expanded]) li[role="treeitem"] > :is(span, a)::before {
-      content: '';
+      content: "";
       display: block;
       inline-size: 1rem;
       translate: 0 0.0625rem;

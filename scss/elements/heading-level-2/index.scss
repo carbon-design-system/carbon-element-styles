@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '../_heading';
+@use "../_heading";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'h2',
+  selector: "h2",
 );
 
 /// @group heading-level-2
@@ -23,7 +23,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     @include heading.styles;
     @include layout.mode--heading-level-2;
   }

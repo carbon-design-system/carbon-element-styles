@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/header-navigation';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/header-navigation";
 
-@include element-demo-content.demo('default') {
-  @include header-navigation.styles((
-    selector: '& header',
-  ));
-};
+@include element-demo-content.demo("default") {
+  @include header-navigation.styles(
+    (
+      selector: "& header",
+    )
+  );
+}

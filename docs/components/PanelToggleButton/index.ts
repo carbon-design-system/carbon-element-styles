@@ -5,28 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import closeIcon from '@carbon/icons/svg/32/close.svg?raw';
+import closeIcon from "@carbon/icons/svg/32/close.svg?raw";
 
-import { Environment } from '@/model/Environment';
+import { Environment } from "@/model/Environment";
 
 export class CdsEsDocsPanelToggleButton extends HTMLElement {
-  static observedAttributes = [
-    'blocked',
-    'label',
-  ];
+  static observedAttributes = ["blocked", "label"];
 
-  #button: HTMLButtonElement = document.createElement('button');
+  #button: HTMLButtonElement = document.createElement("button");
   observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'data-has-overlay') {
-        const overlayExists = document.documentElement.dataset.hasOverlay === 'true';
+      if (mutation.type === "attributes" && mutation.attributeName === "data-has-overlay") {
+        const overlayExists = document.documentElement.dataset.hasOverlay === "true";
 
         if (!overlayExists) {
-          this.setAttribute('blocked', 'false');
+          this.setAttribute("blocked", "false");
         } else {
-          this.setAttribute('blocked', this.isExpanded ? 'false' : 'true');
+          this.setAttribute("blocked", this.isExpanded ? "false" : "true");
         }
       }
     }
@@ -38,12 +35,12 @@ export class CdsEsDocsPanelToggleButton extends HTMLElement {
   }
 
   get isExpanded(): boolean {
-    return this.#button.getAttribute('aria-expanded') === 'true';
+    return this.#button.getAttribute("aria-expanded") === "true";
   }
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
@@ -51,29 +48,29 @@ export class CdsEsDocsPanelToggleButton extends HTMLElement {
 
     this.shadowRoot?.appendChild(this.#button);
 
-    this.#button.setAttribute('aria-expanded', 'false');
-    this.#button.addEventListener('click', () => {
+    this.#button.setAttribute("aria-expanded", "false");
+    this.#button.addEventListener("click", () => {
       this.#handleClick();
     });
   }
 
   #updateButton() {
     if (this.isExpanded) {
-      this.#button.setAttribute('aria-label', `Close ${this.getAttribute('label')}`);
+      this.#button.setAttribute("aria-label", `Close ${this.getAttribute("label")}`);
       this.#button.innerHTML = closeIcon;
-      document.documentElement.dataset.hasOverlay = 'true';
+      document.documentElement.dataset.hasOverlay = "true";
     } else {
-      this.#button.setAttribute('aria-label', `Open ${this.getAttribute('label')}`);
-      this.#button.innerHTML = this.icon ?? '';
-      document.documentElement.dataset.hasOverlay = 'false';
+      this.#button.setAttribute("aria-label", `Open ${this.getAttribute("label")}`);
+      this.#button.innerHTML = this.icon ?? "";
+      document.documentElement.dataset.hasOverlay = "false";
     }
 
-    this.#button.setAttribute('title', this.#button.getAttribute('aria-label')!);
+    this.#button.setAttribute("title", this.#button.getAttribute("aria-label")!);
   }
 
   #handleClick() {
     const newState = !this.isExpanded;
-    this.#button.setAttribute('aria-expanded', newState.toString());
+    this.#button.setAttribute("aria-expanded", newState.toString());
     this.#updateButton();
 
     const target = this.#button.ariaControlsElements?.[0] as HTMLElement | undefined;
@@ -84,21 +81,21 @@ export class CdsEsDocsPanelToggleButton extends HTMLElement {
   }
 
   #handleEnvironmentChange() {
-    if (this.getAttribute('auto-close-on-environment-change') === 'true' && this.isExpanded) {
+    if (this.getAttribute("auto-close-on-environment-change") === "true" && this.isExpanded) {
       this.#handleClick();
     }
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     switch (name) {
-      case 'label':
+      case "label":
         this.#updateButton();
         break;
-      case 'blocked':
-        if (newValue === 'true') {
-          this.#button.setAttribute('disabled', 'true');
+      case "blocked":
+        if (newValue === "true") {
+          this.#button.setAttribute("disabled", "true");
         } else {
-          this.#button.removeAttribute('disabled');
+          this.#button.removeAttribute("disabled");
         }
         break;
     }
@@ -109,14 +106,14 @@ export class CdsEsDocsPanelToggleButton extends HTMLElement {
 
     this.observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-has-overlay'],
+      attributeFilter: ["data-has-overlay"],
     });
 
-    Environment.addEventListener('change', this.#handleEnvironmentChange.bind(this));
+    Environment.addEventListener("change", this.#handleEnvironmentChange.bind(this));
   }
 
   disconnectedCallback() {
     this.observer.disconnect();
-    Environment.removeEventListener('change', this.#handleEnvironmentChange.bind(this));
+    Environment.removeEventListener("change", this.#handleEnvironmentChange.bind(this));
   }
-};
+}

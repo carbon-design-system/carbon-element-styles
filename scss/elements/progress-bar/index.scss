@@ -5,24 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/config' as carbon-config;
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/motion';
+@use "@carbon/styles/scss/config" as carbon-config;
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/motion";
 
-@use '../label';
+@use "../label";
 
-@use '../../config';
-@use '../../layout';
-@use '../../utilities/guards';
+@use "../../config";
+@use "../../layout";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'label:has(progress)',
-  axis: 'block',
-  thickness: 'thick',
+  selector: "label:has(progress)",
+  axis: "block",
+  thickness: "thick",
 );
 
 $-indeterminate-ratio: 0.25;
@@ -35,20 +35,22 @@ $-indeterminate-ratio: 0.25;
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
-    @include label.styles((
-      selector: '&',
-      axis: map.get($props, 'axis'),
-    ));
+  #{map.get($props, "selector")} {
+    @include label.styles(
+      (
+        selector: "&",
+        axis: map.get($props, "axis"),
+      )
+    );
 
     & progress {
       appearance: none;
 
-      @if map.get($props, 'thickness') == 'thick' {
+      @if map.get($props, "thickness") == "thick" {
         block-size: 0.5rem;
       }
 
-      @if map.get($props, 'thickness') == 'thin' {
+      @if map.get($props, "thickness") == "thin" {
         block-size: 0.25rem;
       }
     }

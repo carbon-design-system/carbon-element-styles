@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../scss/elements/preformatted';
+@use "../../../scss/elements/preformatted";
 
-@use '../../scss/syntax-highlighting';
+@use "../../scss/syntax-highlighting";
 
 :host {
   @include preformatted.styles;
