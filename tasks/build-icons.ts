@@ -20,6 +20,7 @@ const iconIds = [
   'checkmark',
   'chevron--down',
   'close',
+  'color-palette',
   'event--schedule',
   'search',
   'time',

@@ -8,15 +8,19 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizePath } from 'vite';
 
 import type { Plugin } from 'vite';
 
 import * as log from './log';
 
 const contentDir = resolve(import.meta.dirname, '../../docs/content/');
+const contentDirNormalized = normalizePath(contentDir);
 
 const prefix = '\0carbon-icons:';
 const suffix = '.js';
+
+const htmlToVirtualId = new Map<string, string>();
 
 export const carbonIcons: Plugin = {
   name: 'carbon-icons',
@@ -41,7 +45,10 @@ export const carbonIcons: Plugin = {
       return null;
     }
 
-    const raw = readFileSync(id.slice(prefix.length, -suffix.length), 'utf8');
+    const filePath = id.slice(prefix.length, -suffix.length);
+    this.addWatchFile(filePath);
+    htmlToVirtualId.set(normalizePath(filePath), id);
+    const raw = readFileSync(filePath, 'utf8');
 
     const content = raw.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
       try {
@@ -55,5 +62,27 @@ export const carbonIcons: Plugin = {
     });
 
     return `export default ${JSON.stringify(content)}`;
+  },
+
+  hotUpdate({ file, server }) {
+    const normalized = normalizePath(file);
+
+    if (!normalized.startsWith(contentDirNormalized) || !normalized.endsWith('.html')) {
+      return;
+    }
+
+    const virtualId = htmlToVirtualId.get(normalized);
+
+    if (!virtualId) {
+      return;
+    }
+
+    const graph = server.environments.client.moduleGraph;
+    const mod = graph.getModuleById(virtualId);
+    
+    if (mod) {
+      graph.invalidateModule(mod);
+      return [mod];
+    }
   },
 };
