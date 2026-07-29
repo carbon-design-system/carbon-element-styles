@@ -136,6 +136,7 @@ export class CdsEsDocsNavigation extends HTMLElement {
       .map((item) => this.#renderItem(item));
     const elements = this.#items
       .find((i) => i.path === 'elements')?.children
+      .toSorted((a, b) => a.item.label.localeCompare(b.item.label))
       .map((item) => this.#renderItem(item));
 
     const separator = document.createElement('li');
