@@ -80,11 +80,11 @@ export class CdsEsDocsPanelToggleButton extends HTMLElement {
     }
   }
 
-  #handleEnvironmentChange() {
+  #handleEnvironmentChange = () => {
     if (this.getAttribute("auto-close-on-environment-change") === "true" && this.isExpanded) {
       this.#handleClick();
     }
-  }
+  };
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     switch (name) {
@@ -109,11 +109,11 @@ export class CdsEsDocsPanelToggleButton extends HTMLElement {
       attributeFilter: ["data-has-overlay"],
     });
 
-    Environment.addEventListener("change", this.#handleEnvironmentChange.bind(this));
+    Environment.addEventListener("change", this.#handleEnvironmentChange);
   }
 
   disconnectedCallback() {
     this.observer.disconnect();
-    Environment.removeEventListener("change", this.#handleEnvironmentChange.bind(this));
+    Environment.removeEventListener("change", this.#handleEnvironmentChange);
   }
 }

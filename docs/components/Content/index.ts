@@ -50,8 +50,11 @@ export class CdsEsDocsContent extends HTMLElement {
 
               setTimeout(() => {
                 if (retainedTabIndex >= 0) {
-                  (this.shadowRoot?.firstChild as CdsEsDocsElementDemoContent).activeTabIndex =
-                    retainedTabIndex;
+                  const demoContent = this.shadowRoot?.firstChild as CdsEsDocsElementDemoContent;
+
+                  if (demoContent) {
+                    demoContent.activeTabIndex = retainedTabIndex;
+                  }
                 }
               });
             }

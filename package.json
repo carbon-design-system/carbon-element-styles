@@ -35,6 +35,7 @@
     "lint": "oxlint --deny-warnings",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "check": "npm run format:check && npm run lint",
     "prepare": "husky"
   },
   "dependencies": {

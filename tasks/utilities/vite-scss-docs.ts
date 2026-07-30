@@ -39,7 +39,7 @@ function parseScssDoc(source: string): ScssParameter[] | null {
     // @param {type} name [default]
     // @param {type} name.key [default]
     const paramMatch = line.match(
-      /^@param\s+\{([^}]+)\}\s+([\w.-]+)\s+\[((?:[^\[\]]|\[[^\]]*\])*)\]/,
+      /^@param\s+\{([^}]+)\}\s+([\w.-]+)\s+\[((?:[^[\]]|\[[^\]]*\])*)\]/,
     );
 
     if (paramMatch) {
