@@ -24,7 +24,6 @@ concurrency:
 jobs:
   version:
     runs-on: ubuntu-latest
-    continue-on-error: false
     permissions:
       contents: write
       pull-requests: write
