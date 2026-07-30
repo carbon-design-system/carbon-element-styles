@@ -32,9 +32,10 @@
     "build:icons": "node tasks/build-icons.ts",
     "build:prebuilts": "node tasks/build-prebuilts.ts",
     "build:docs": "vite build docs",
-    "lint": "oxlint",
+    "lint": "oxlint --deny-warnings",
     "format": "oxfmt",
-    "format:check": "oxfmt --check"
+    "format:check": "oxfmt --check",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.11.0"
@@ -43,6 +44,7 @@
     "@carbon/icons": "^11.84.0",
     "@types/node": "^26.1.1",
     "highlight.js": "^11.11.1",
+    "husky": "^9.1.7",
     "marked": "^18.0.6",
     "marked-highlight": "^2.2.4",
     "oxfmt": "^0.61.0",
