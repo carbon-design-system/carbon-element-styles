@@ -27,16 +27,17 @@
   },
   "scripts": {
     "postinstall": "ibmtelemetry --config=telemetry.yml",
+    "prepare": "husky",
     "dev": "vite docs",
     "build": "npm run build:icons && npm run build:prebuilts && npm run build:docs",
     "build:icons": "node tasks/build-icons.ts",
     "build:prebuilts": "node tasks/build-prebuilts.ts",
     "build:docs": "vite build docs",
-    "lint": "oxlint --deny-warnings",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
-    "check": "npm run format:check && npm run lint",
-    "prepare": "husky"
+    "lint": "oxlint --deny-warnings",
+    "typecheck": "tsc -p docs",
+    "check": "npm run format:check && npm run lint && npm run typecheck"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.11.0"
@@ -51,6 +52,7 @@
     "oxfmt": "^0.61.0",
     "oxlint": "^1.76.0",
     "sass": "^1.101.0",
+    "typescript": "^7.0.2",
     "vite": "^8.1.5"
   },
   "peerDependencies": {

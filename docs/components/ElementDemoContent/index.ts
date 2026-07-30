@@ -111,7 +111,7 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
       stylesheet.replace(this.meta?.css ?? "");
       this.shadowRoot?.adoptedStyleSheets.splice(1, Infinity, stylesheet);
 
-      this.#frame.innerHTML = demo.html ?? this.meta?.html ?? "";
+      this.#frame.innerHTML = this.meta?.html ?? "";
       demo.setup?.(this.#frame);
 
       this.#elementOverviewTabPanel.label = this.label;
@@ -128,7 +128,7 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
       }
 
       this.#sourceHtmlTabPanel.setAttribute("kind", "html");
-      this.#sourceHtmlTabPanel.textContent = demo.html ?? this.meta?.html ?? "";
+      this.#sourceHtmlTabPanel.textContent = this.meta?.html ?? "";
 
       this.#sourceScssTabPanel.setAttribute("kind", "scss");
       this.#sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);
