@@ -32,6 +32,7 @@
     "build:icons": "node tasks/build-icons.ts",
     "build:prebuilts": "node tasks/build-prebuilts.ts",
     "build:docs": "vite build docs",
+    "lint": "oxlint",
     "format": "oxfmt",
     "format:check": "oxfmt --check"
   },
@@ -45,6 +46,7 @@
     "marked": "^18.0.6",
     "marked-highlight": "^2.2.4",
     "oxfmt": "^0.61.0",
+    "oxlint": "^1.76.0",
     "sass": "^1.101.0",
     "vite": "^8.1.5"
   },
