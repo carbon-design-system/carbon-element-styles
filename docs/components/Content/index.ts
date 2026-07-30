@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import { Environment } from '@/model/Environment';
-import { Inventory } from '@/model/Inventory';
-import { ContentBase } from '@/components/ContentBase';
-import { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import { Environment } from "@/model/Environment";
+import { Inventory } from "@/model/Inventory";
+import { ContentBase } from "@/components/ContentBase";
+import { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
 export class CdsEsDocsContent extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
@@ -28,27 +28,33 @@ export class CdsEsDocsContent extends HTMLElement {
 
       if (item) {
         try {
-          const { default: defaultExport, ...additionalExports } = await item.content?.() ?? {};
+          const { default: defaultExport, ...additionalExports } = (await item.content?.()) ?? {};
 
           if (defaultExport instanceof ContentBase) {
             defaultExport.meta = additionalExports;
 
             if (item.key) {
-              defaultExport.setAttribute('key', item.key);
+              defaultExport.setAttribute("key", item.key);
             }
 
-            defaultExport.setAttribute('request-id', item.id);
+            defaultExport.setAttribute("request-id", item.id);
 
             if (this.shadowRoot?.firstChild !== defaultExport) {
-              const retainedTabIndex = this.shadowRoot?.firstChild instanceof CdsEsDocsElementDemoContent && defaultExport instanceof CdsEsDocsElementDemoContent
-                ? this.shadowRoot.firstChild.activeTabIndex
-                : -1;
+              const retainedTabIndex =
+                this.shadowRoot?.firstChild instanceof CdsEsDocsElementDemoContent &&
+                defaultExport instanceof CdsEsDocsElementDemoContent
+                  ? this.shadowRoot.firstChild.activeTabIndex
+                  : -1;
 
               this.shadowRoot?.replaceChildren(defaultExport);
 
               setTimeout(() => {
                 if (retainedTabIndex >= 0) {
-                  (this.shadowRoot?.firstChild as CdsEsDocsElementDemoContent).activeTabIndex = retainedTabIndex;
+                  const demoContent = this.shadowRoot?.firstChild as CdsEsDocsElementDemoContent;
+
+                  if (demoContent) {
+                    demoContent.activeTabIndex = retainedTabIndex;
+                  }
                 }
               });
             }
@@ -61,11 +67,11 @@ export class CdsEsDocsContent extends HTMLElement {
   #boundRender = () => this.#render();
 
   connectedCallback() {
-    Environment.addEventListener('change', this.#boundRender);
+    Environment.addEventListener("change", this.#boundRender);
     this.#render();
   }
 
   disconnectedCallback() {
-    Environment.removeEventListener('change', this.#boundRender);
+    Environment.removeEventListener("change", this.#boundRender);
   }
 }

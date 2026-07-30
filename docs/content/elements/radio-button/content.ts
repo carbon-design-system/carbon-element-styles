@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/radio-button';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/radio-button";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Radio button';
+elementDemoContent.label = "Radio button";
 
 elementDemoContent.references = [
   {
     label: '<input type="radio">',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio',
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio",
   },
   {
-    label: 'Radio button',
-    url: 'https://carbondesignsystem.com/components/radio-button/usage/',
+    label: "Radio button",
+    url: "https://carbondesignsystem.com/components/radio-button/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

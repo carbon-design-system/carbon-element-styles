@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/components/button/tokens' as carbon-button;
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/utilities/focus-outline";
+@use "@carbon/styles/scss/components/button/tokens" as carbon-button;
 
-@use '../../layout';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/guards";
 
 $config: () !default;
 
@@ -27,7 +27,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     @include layout.mode--heading-compact;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,8 @@ $-default-config: (
       padding-inline-start: layout.$density--padding;
       padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
       cursor: pointer;
-      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      transition: background-color layout.$mode--transition-duration
+        layout.$mode--transition-timing-function;
 
       @include guards.hover {
         &:hover {

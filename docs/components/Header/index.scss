@@ -5,19 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/breakpoint';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/breakpoint";
 
-@use '../../../scss/layout';
-@use '../../../scss/elements/header-navigation';
+@use "../../../scss/layout";
+@use "../../../scss/elements/header-navigation";
 
 :host {
-  @include header-navigation.styles((
-    selector: 'header',
-  ));
+  @include header-navigation.styles(
+    (
+      selector: "header",
+    )
+  );
 
-  @include breakpoint.breakpoint-down('lg') {
-    @include layout.density('condensed');
+  @include breakpoint.breakpoint-down("lg") {
+    @include layout.density("condensed");
   }
 }
 

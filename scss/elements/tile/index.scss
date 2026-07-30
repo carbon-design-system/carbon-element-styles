@@ -5,22 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/utilities/focus-outline';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/utilities/focus-outline";
 
-@use '../_layer';
+@use "../_layer";
 
-@use '../../layout';
-@use '../../utilities/icons';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/icons";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: '[data-tile]',
+  selector: "[data-tile]",
 );
 
 /// @group tile
@@ -29,7 +29,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     @include layer.styles;
     padding: layout.$density--padding;
     box-sizing: border-box;
@@ -41,7 +41,8 @@ $-default-config: (
       text-decoration: none;
       padding-inline-end: spacing.$spacing-09;
       border: 0.0625rem solid theme.$border-tile;
-      transition: background-color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+      transition: background-color layout.$mode--transition-duration
+        layout.$mode--transition-timing-function;
 
       &:visited {
         color: inherit;
@@ -64,12 +65,12 @@ $-default-config: (
       }
 
       &:focus {
-        @include focus-outline.focus-outline('outline');
+        @include focus-outline.focus-outline("outline");
       }
 
       &::after {
         @include icons.arrow--right;
-        content: '';
+        content: "";
         position: absolute;
         color: theme.$link-primary;
         inset-block-end: layout.$density--padding;

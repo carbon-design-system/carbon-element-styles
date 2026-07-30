@@ -5,63 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import { ContentBase } from '@/components/ContentBase';
+import { ContentBase } from "@/components/ContentBase";
 
-import type { ScssDoc } from '@/model/ScssDoc';
+import type { ScssDoc } from "@/model/ScssDoc";
 
-import type { CdsEsDocsApiTable } from '@/components/ApiTable';
-import type { CdsEsDocsElementOverview } from '@/components/ElementOverview';
-import type { CdsEsDocsSourceCode } from '@/components/SourceCode';
-import type { CdsEsDocsTabs } from '@/components/Tabs';
+import type { CdsEsDocsApiTable } from "@/components/ApiTable";
+import type { CdsEsDocsElementOverview } from "@/components/ElementOverview";
+import type { CdsEsDocsSourceCode } from "@/components/SourceCode";
+import type { CdsEsDocsTabs } from "@/components/Tabs";
 
 export class CdsEsDocsElementDemoContent extends ContentBase<{
   css: string;
   html: string;
   scssDoc: ScssDoc;
 }> {
-  static observedAttributes = ['key', 'request-id'];
+  static observedAttributes = ["key", "request-id"];
 
-  key: string = '';
-  label: string = '';
+  key: string = "";
+  label: string = "";
   references: {
     label: string;
     url: string;
   }[] = [];
   notes?: string;
-  demos: Map<string, {
-    scssConfig?: {
-      [key: string]: string;
-    },
-    setup?: (frame: HTMLElement) => void;
-  }> = new Map();
+  demos: Map<
+    string,
+    {
+      scssConfig?: {
+        [key: string]: string;
+      };
+      setup?: (frame: HTMLElement) => void;
+    }
+  > = new Map();
 
-  #frame: HTMLDivElement = document.createElement('div');
-  #tabs = document.createElement('cds-es-docs-tabs') as CdsEsDocsTabs;
-  #elementOverviewTabPanel = document.createElement('cds-es-docs-element-overview') as CdsEsDocsElementOverview;
-  #apiTableTabPanel = document.createElement('cds-es-docs-api-table') as CdsEsDocsApiTable;
-  #sourceHtmlTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
-  #sourceScssTabPanel = document.createElement('cds-es-docs-source-code') as CdsEsDocsSourceCode;
+  #frame: HTMLDivElement = document.createElement("div");
+  #tabs = document.createElement("cds-es-docs-tabs") as CdsEsDocsTabs;
+  #elementOverviewTabPanel = document.createElement(
+    "cds-es-docs-element-overview",
+  ) as CdsEsDocsElementOverview;
+  #apiTableTabPanel = document.createElement("cds-es-docs-api-table") as CdsEsDocsApiTable;
+  #sourceHtmlTabPanel = document.createElement("cds-es-docs-source-code") as CdsEsDocsSourceCode;
+  #sourceScssTabPanel = document.createElement("cds-es-docs-source-code") as CdsEsDocsSourceCode;
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
 
-    this.#frame.classList.add('demo');
+    this.#frame.classList.add("demo");
 
-    const fade = document.createElement('div');
-    fade.classList.add('fade');
+    const fade = document.createElement("div");
+    fade.classList.add("fade");
 
     this.#tabs.append(
-      this.#createTabPanel('Overview', this.#elementOverviewTabPanel),
-      this.#createTabPanel('Configuration', this.#apiTableTabPanel),
-      this.#createTabPanel('HTML', this.#sourceHtmlTabPanel),
-      this.#createTabPanel('SCSS', this.#sourceScssTabPanel),
+      this.#createTabPanel("Overview", this.#elementOverviewTabPanel),
+      this.#createTabPanel("Configuration", this.#apiTableTabPanel),
+      this.#createTabPanel("HTML", this.#sourceHtmlTabPanel),
+      this.#createTabPanel("SCSS", this.#sourceScssTabPanel),
     );
 
     this.shadowRoot?.replaceChildren(this.#frame, fade, this.#tabs);
@@ -76,35 +81,37 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
   }
 
   #createTabPanel(label: string, content: HTMLElement): HTMLElement {
-    const tabPanel = document.createElement('cds-es-docs-tab-panel');
-    tabPanel.setAttribute('label', label);
+    const tabPanel = document.createElement("cds-es-docs-tab-panel");
+    tabPanel.setAttribute("label", label);
 
     tabPanel.append(content);
 
     return tabPanel;
   }
 
-  #getScssSourceCode(demo: CdsEsDocsElementDemoContent['demos'] extends Map<any, infer I> ? I : never): string {
+  #getScssSourceCode(
+    demo: CdsEsDocsElementDemoContent["demos"] extends Map<any, infer I> ? I : never,
+  ): string {
     if (!demo.scssConfig) {
-      return `@include ${this.getAttribute('key')}.styles;`;
+      return `@include ${this.getAttribute("key")}.styles;`;
     }
 
     const scssMapEntries = Object.entries(demo.scssConfig)
       .map(([key, value]) => `  ${key}: ${value},`)
-      .join('\n');
+      .join("\n");
 
-    return `@include ${this.getAttribute('key')}.styles((\n${scssMapEntries}\n));`;
+    return `@include ${this.getAttribute("key")}.styles((\n${scssMapEntries}\n));`;
   }
 
   #render() {
-    const demo = this.demos.get(this.getAttribute('request-id') ?? '');
+    const demo = this.demos.get(this.getAttribute("request-id") ?? "");
 
     if (demo) {
       const stylesheet = new CSSStyleSheet();
-      stylesheet.replace(this.meta?.css ?? '');
+      stylesheet.replace(this.meta?.css ?? "");
       this.shadowRoot?.adoptedStyleSheets.splice(1, Infinity, stylesheet);
 
-      this.#frame.innerHTML = demo.html ?? this.meta?.html ?? '';
+      this.#frame.innerHTML = this.meta?.html ?? "";
       demo.setup?.(this.#frame);
 
       this.#elementOverviewTabPanel.label = this.label;
@@ -120,10 +127,10 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
         });
       }
 
-      this.#sourceHtmlTabPanel.setAttribute('kind', 'html');
-      this.#sourceHtmlTabPanel.textContent = demo.html ?? this.meta?.html ?? '';
+      this.#sourceHtmlTabPanel.setAttribute("kind", "html");
+      this.#sourceHtmlTabPanel.textContent = this.meta?.html ?? "";
 
-      this.#sourceScssTabPanel.setAttribute('kind', 'scss');
+      this.#sourceScssTabPanel.setAttribute("kind", "scss");
       this.#sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);
     }
   }

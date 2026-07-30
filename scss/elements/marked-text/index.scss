@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/theme";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'mark',
+  selector: "mark",
 );
 
 /// @group marked-text
@@ -25,7 +25,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     padding-inline: spacing.$spacing-01;
     background-color: colors.$yellow-20;
     color: colors.$black;

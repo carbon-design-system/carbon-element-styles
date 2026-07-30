@@ -5,69 +5,69 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../elements/abbreviation';
-@use '../../elements/address';
-@use '../../elements/anchor';
-@use '../../elements/block-quotation';
-@use '../../elements/body';
-@use '../../elements/bold-text';
-@use '../../elements/button';
-@use '../../elements/checkbox';
-@use '../../elements/code';
-@use '../../elements/color-input';
-@use '../../elements/combo-box';
-@use '../../elements/date-input';
-@use '../../elements/date-time-input';
-@use '../../elements/deleted-text';
-@use '../../elements/description-list';
-@use '../../elements/details';
-@use '../../elements/dialog';
-@use '../../elements/email-input';
-@use '../../elements/fieldset';
-@use '../../elements/file-input';
-@use '../../elements/footer';
-@use '../../elements/header-navigation';
-@use '../../elements/heading-level-1';
-@use '../../elements/heading-level-2';
-@use '../../elements/heading-level-3';
-@use '../../elements/heading-level-4';
-@use '../../elements/heading-level-5';
-@use '../../elements/heading-level-6';
-@use '../../elements/horizontal-rule';
-@use '../../elements/image';
-@use '../../elements/inline-loading';
-@use '../../elements/inline-quotation';
-@use '../../elements/inserted-text';
-@use '../../elements/italic-text';
-@use '../../elements/keyboard-input';
-@use '../../elements/label';
-@use '../../elements/main';
-@use '../../elements/marked-text';
-@use '../../elements/menu';
-@use '../../elements/number-input';
-@use '../../elements/ordered-list';
-@use '../../elements/paragraph';
-@use '../../elements/password-input';
-@use '../../elements/popover';
-@use '../../elements/preformatted';
-@use '../../elements/progress-bar';
-@use '../../elements/radio-button';
-@use '../../elements/range-input';
-@use '../../elements/search-input';
-@use '../../elements/select';
-@use '../../elements/side-navigation';
-@use '../../elements/small-text';
-@use '../../elements/table';
-@use '../../elements/telephone-number-input';
-@use '../../elements/text-area';
-@use '../../elements/text-input';
-@use '../../elements/tile';
-@use '../../elements/time-input';
-@use '../../elements/toggle';
-@use '../../elements/tooltip';
-@use '../../elements/tree-view';
-@use '../../elements/unordered-list';
-@use '../../elements/url-input';
+@use "../../elements/abbreviation";
+@use "../../elements/address";
+@use "../../elements/anchor";
+@use "../../elements/block-quotation";
+@use "../../elements/body";
+@use "../../elements/bold-text";
+@use "../../elements/button";
+@use "../../elements/checkbox";
+@use "../../elements/code";
+@use "../../elements/color-input";
+@use "../../elements/combo-box";
+@use "../../elements/date-input";
+@use "../../elements/date-time-input";
+@use "../../elements/deleted-text";
+@use "../../elements/description-list";
+@use "../../elements/details";
+@use "../../elements/dialog";
+@use "../../elements/email-input";
+@use "../../elements/fieldset";
+@use "../../elements/file-input";
+@use "../../elements/footer";
+@use "../../elements/header-navigation";
+@use "../../elements/heading-level-1";
+@use "../../elements/heading-level-2";
+@use "../../elements/heading-level-3";
+@use "../../elements/heading-level-4";
+@use "../../elements/heading-level-5";
+@use "../../elements/heading-level-6";
+@use "../../elements/horizontal-rule";
+@use "../../elements/image";
+@use "../../elements/inline-loading";
+@use "../../elements/inline-quotation";
+@use "../../elements/inserted-text";
+@use "../../elements/italic-text";
+@use "../../elements/keyboard-input";
+@use "../../elements/label";
+@use "../../elements/main";
+@use "../../elements/marked-text";
+@use "../../elements/menu";
+@use "../../elements/number-input";
+@use "../../elements/ordered-list";
+@use "../../elements/paragraph";
+@use "../../elements/password-input";
+@use "../../elements/popover";
+@use "../../elements/preformatted";
+@use "../../elements/progress-bar";
+@use "../../elements/radio-button";
+@use "../../elements/range-input";
+@use "../../elements/search-input";
+@use "../../elements/select";
+@use "../../elements/side-navigation";
+@use "../../elements/small-text";
+@use "../../elements/table";
+@use "../../elements/telephone-number-input";
+@use "../../elements/text-area";
+@use "../../elements/text-input";
+@use "../../elements/tile";
+@use "../../elements/time-input";
+@use "../../elements/toggle";
+@use "../../elements/tooltip";
+@use "../../elements/tree-view";
+@use "../../elements/unordered-list";
+@use "../../elements/url-input";
 
 @mixin styles {
   @include abbreviation.styles;
@@ -77,10 +77,12 @@
   @include body.styles;
   @include bold-text.styles;
   @include button.styles;
-  @include button.styles((
-    selector: 'button[type="submit"]',
-    kind: 'primary',
-  ));
+  @include button.styles(
+    (
+      selector: 'button[type="submit"]',
+      kind: "primary",
+    )
+  );
   @include checkbox.styles;
   @include code.styles;
   @include color-input.styles;
@@ -125,9 +127,11 @@
   @include select.styles;
   @include side-navigation.styles;
   @include small-text.styles;
-  @include table.styles((
-    kind: 'structured-list',
-  ));
+  @include table.styles(
+    (
+      kind: "structured-list",
+    )
+  );
   @include telephone-number-input.styles;
   @include text-area.styles;
   @include text-input.styles;

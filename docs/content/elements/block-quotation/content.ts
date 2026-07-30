@@ -5,35 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/block-quotation';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/block-quotation";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Block quotation';
+elementDemoContent.label = "Block quotation";
 
 elementDemoContent.references = [
   {
-    label: '<blockquote>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote',
+    label: "<blockquote>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote",
   },
   {
-    label: '<cite>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite',
+    label: "<cite>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite",
   },
   {
-    label: 'Type sets',
-    url: 'https://carbondesignsystem.com/elements/typography/type-sets/',
+    label: "Type sets",
+    url: "https://carbondesignsystem.com/elements/typography/type-sets/",
   },
 ];
 
-elementDemoContent.notes = /* md */`
+elementDemoContent.notes = /* md */ `
 To denote a source, use a suceeding \`<cite>\` element.
 `;
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
-  id: 'introduction',
-  label: 'Introduction',
-  content: () => import('./content'),
+  id: "introduction",
+  label: "Introduction",
+  content: () => import("./content"),
 });

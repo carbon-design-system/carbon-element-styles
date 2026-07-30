@@ -5,29 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/telephone-number-input';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/telephone-number-input";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Telephone number input';
+elementDemoContent.label = "Telephone number input";
 
 elementDemoContent.references = [
   {
     label: '<input type="tel">',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/tel',
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/tel",
   },
   {
-    label: 'Text input',
-    url: 'https://carbondesignsystem.com/components/text-input/usage/',
+    label: "Text input",
+    url: "https://carbondesignsystem.com/components/text-input/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
-elementDemoContent.demos.set('block', { scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set('inline', { scssConfig: { axis: `'inline'` } });
+elementDemoContent.demos.set("default", {});
+elementDemoContent.demos.set("block", { scssConfig: { axis: `'block'` } });
+elementDemoContent.demos.set("inline", { scssConfig: { axis: `'inline'` } });
 
 export default elementDemoContent;

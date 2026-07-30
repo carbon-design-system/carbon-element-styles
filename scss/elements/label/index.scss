@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'label',
-  axis: 'block',
+  selector: "label",
+  axis: "block",
 );
 
 /// @group label
@@ -26,7 +26,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     display: grid;
     gap: spacing.$spacing-03;
     color: theme.$text-secondary;
@@ -35,13 +35,13 @@ $-default-config: (
       color: theme.$text-disabled;
     }
 
-    @if map.get($props, 'axis') == 'block' {
+    @if map.get($props, "axis") == "block" {
       @include layout.mode--label;
       // flex-direction: column;
       grid-auto-flow: row;
     }
 
-    @if map.get($props, 'axis') == 'inline' {
+    @if map.get($props, "axis") == "inline" {
       @include layout.mode--body-compact;
       // flex-direction: row;
       grid-auto-flow: column;

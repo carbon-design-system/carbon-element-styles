@@ -5,20 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import { marked } from 'marked';
-import { markedHighlight } from 'marked-highlight';
-import hljs from 'highlight.js';
+import { marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import hljs from "highlight.js";
 
-import { ContentBase } from '@/components/ContentBase';
+import { ContentBase } from "@/components/ContentBase";
 
 marked.use(
   markedHighlight({
     highlight(code, lang) {
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      const language = hljs.getLanguage(lang) ? lang : "plaintext";
       return hljs.highlight(code, { language }).value;
-    }
+    },
   }),
 );
 
@@ -27,7 +27,7 @@ export class CdsEsDocsMarkdownContent extends ContentBase {
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
@@ -35,7 +35,7 @@ export class CdsEsDocsMarkdownContent extends ContentBase {
   }
 
   async #render() {
-    const html = await marked.parse(this.textContent ?? '');
+    const html = await marked.parse(this.textContent ?? "");
 
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = html;

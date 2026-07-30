@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/footer';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/footer";
 
-@include element-demo-content.demo('default') {
-  @include footer.styles((
-    selector: '& footer',
-  ));
-};
+@include element-demo-content.demo("default") {
+  @include footer.styles(
+    (
+      selector: "& footer",
+    )
+  );
+}

@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/marked-text';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/marked-text";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Marked text';
+elementDemoContent.label = "Marked text";
 
 elementDemoContent.references = [
   {
-    label: '<mark>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark',
+    label: "<mark>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark",
   },
   {
-    label: 'Text highlighter',
-    url: 'https://labs.carbondesignsystem.com/?path=/docs/react_components-texthighlighter--overview',
+    label: "Text highlighter",
+    url: "https://labs.carbondesignsystem.com/?path=/docs/react_components-texthighlighter--overview",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

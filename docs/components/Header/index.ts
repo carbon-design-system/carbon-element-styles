@@ -5,22 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import navigationIcon from '@carbon/icons/svg/32/menu.svg?raw';
-import controlsIcon from '@carbon/icons/svg/32/settings--adjust.svg?raw';
+import navigationIcon from "@carbon/icons/svg/32/menu.svg?raw";
+import controlsIcon from "@carbon/icons/svg/32/settings--adjust.svg?raw";
 
-import { Environment } from '@/model/Environment';
-import type { CdsEsDocsPanelToggleButton } from '@/components/PanelToggleButton';
+import { Environment } from "@/model/Environment";
+import type { CdsEsDocsPanelToggleButton } from "@/components/PanelToggleButton";
 
-import { version } from '../../../package.json';
+import { version } from "../../../package.json";
 
 export class CdsEsDocsHeader extends HTMLElement {
-  #header: HTMLElement = document.createElement('header');
+  #header: HTMLElement = document.createElement("header");
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
@@ -30,23 +30,26 @@ export class CdsEsDocsHeader extends HTMLElement {
   }
 
   #renderTitle() {
-    const anchor = document.createElement('a');
-    anchor.setAttribute('href', Environment.getUrl({
-      path: '/',
-    }).toString());
-    anchor.addEventListener('click', (e) => {
+    const anchor = document.createElement("a");
+    anchor.setAttribute(
+      "href",
+      Environment.getUrl({
+        path: "/",
+      }).toString(),
+    );
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
-      Environment.path = '/';
+      Environment.path = "/";
     });
 
-    anchor.textContent = 'Carbon';
+    anchor.textContent = "Carbon";
 
-    const bold = document.createElement('b');
-    bold.textContent = 'element styles';
+    const bold = document.createElement("b");
+    bold.textContent = "element styles";
 
-    const span = document.createElement('span');
-    span.textContent = `v${version}`
-    span.classList.add('version');
+    const span = document.createElement("span");
+    span.textContent = `v${version}`;
+    span.classList.add("version");
 
     anchor.append(bold, span);
 
@@ -54,10 +57,10 @@ export class CdsEsDocsHeader extends HTMLElement {
   }
 
   #createNavigationItem(label: string, href: string) {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
+    const li = document.createElement("li");
+    const a = document.createElement("a");
     a.textContent = label;
-    a.setAttribute('href', href);
+    a.setAttribute("href", href);
 
     li.append(a);
 
@@ -65,35 +68,39 @@ export class CdsEsDocsHeader extends HTMLElement {
   }
 
   #renderNavigation() {
-    const ul = document.createElement('ul');
+    const ul = document.createElement("ul");
 
     ul.append(
-      this.#createNavigationItem('GitHub', 'https://github.com/carbon-design-system/carbon-element-styles'),
+      this.#createNavigationItem(
+        "GitHub",
+        "https://github.com/carbon-design-system/carbon-element-styles",
+      ),
     );
 
     return ul;
   }
 
   #renderHeader() {
-    const nav = document.createElement('nav');
+    const nav = document.createElement("nav");
 
-    nav.append(
-      this.#renderTitle(),
-      this.#renderNavigation(),
-    );
+    nav.append(this.#renderTitle(), this.#renderNavigation());
 
-    const controls = document.createElement('cds-es-docs-controls');
+    const controls = document.createElement("cds-es-docs-controls");
 
-    const navigationPanelToggleButton = document.createElement('cds-es-docs-panel-toggle-button') as CdsEsDocsPanelToggleButton;
-    navigationPanelToggleButton.setAttribute('part', 'navigation-panel-toggle-button');
-    navigationPanelToggleButton.setAttribute('label', 'navigation');
-    navigationPanelToggleButton.setAttribute('auto-close-on-environment-change', 'true');
+    const navigationPanelToggleButton = document.createElement(
+      "cds-es-docs-panel-toggle-button",
+    ) as CdsEsDocsPanelToggleButton;
+    navigationPanelToggleButton.setAttribute("part", "navigation-panel-toggle-button");
+    navigationPanelToggleButton.setAttribute("label", "navigation");
+    navigationPanelToggleButton.setAttribute("auto-close-on-environment-change", "true");
     navigationPanelToggleButton.icon = navigationIcon;
-    navigationPanelToggleButton.target = document.querySelector('cds-es-docs-navigation')!;
+    navigationPanelToggleButton.target = document.querySelector("cds-es-docs-navigation")!;
 
-    const controlsPanelToggleButton = document.createElement('cds-es-docs-panel-toggle-button') as CdsEsDocsPanelToggleButton;
-    controlsPanelToggleButton.setAttribute('part', 'controls-panel-toggle-button');
-    controlsPanelToggleButton.setAttribute('label', 'controls');
+    const controlsPanelToggleButton = document.createElement(
+      "cds-es-docs-panel-toggle-button",
+    ) as CdsEsDocsPanelToggleButton;
+    controlsPanelToggleButton.setAttribute("part", "controls-panel-toggle-button");
+    controlsPanelToggleButton.setAttribute("label", "controls");
     controlsPanelToggleButton.icon = controlsIcon;
     controlsPanelToggleButton.target = controls;
 

@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/spacing";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'dl',
+  selector: "dl",
 );
 
 /// @group description-list
@@ -23,7 +23,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     display: grid;
     grid-template-columns: max-content 1fr;
     column-gap: spacing.$spacing-04;

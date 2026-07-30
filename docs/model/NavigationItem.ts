@@ -18,10 +18,10 @@ export class NavigationItem {
     items,
     content,
   }: {
-    id: NavigationItem['id'];
-    label: NavigationItem['label'];
-    items?: NavigationItem['items'];
-    content?: NavigationItem['content'];
+    id: NavigationItem["id"];
+    label: NavigationItem["label"];
+    items?: NavigationItem["items"];
+    content?: NavigationItem["content"];
   }) {
     this.id = id;
     this.label = label;

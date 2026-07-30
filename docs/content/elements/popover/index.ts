@@ -5,34 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 const alignments = [
-  'start start', 'start center', 'start end',
-  'center start', 'center end',
-  'end start', 'end center', 'end end',
+  "start start",
+  "start center",
+  "start end",
+  "center start",
+  "center end",
+  "end start",
+  "end center",
+  "end end",
 ];
 
 export default new NavigationItem({
-  id: 'popover',
-  label: 'Popover',
-  content: () => import('./content'),
+  id: "popover",
+  label: "Popover",
+  content: () => import("./content"),
   items: [
     new NavigationItem({
-      id: 'default',
-      label: 'Default',
+      id: "default",
+      label: "Default",
     }),
     new NavigationItem({
-      id: 'with-caret',
-      label: 'With caret',
+      id: "with-caret",
+      label: "With caret",
     }),
     new NavigationItem({
-      id: 'without-caret',
-      label: 'Without caret',
+      id: "without-caret",
+      label: "Without caret",
     }),
-    ...alignments.map((alignment) => new NavigationItem({
-      id: `alignment-${alignment.replace(' ', '-')}`,
-      label: `Alignment: ${alignment}`,
-    })),
+    ...alignments.map(
+      (alignment) =>
+        new NavigationItem({
+          id: `alignment-${alignment.replace(" ", "-")}`,
+          label: `Alignment: ${alignment}`,
+        }),
+    ),
   ],
 });

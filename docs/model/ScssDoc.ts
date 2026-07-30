@@ -6,8 +6,11 @@
  */
 
 export class ScssDoc {
-  parameters = new Map<string, {
-    type: string;
-    default: string;
-  }>();
+  parameters = new Map<
+    string,
+    {
+      type: string;
+      default: string;
+    }
+  >();
 }

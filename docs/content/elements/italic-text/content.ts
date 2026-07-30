@@ -5,23 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/italic-text';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/italic-text";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Italic text';
+elementDemoContent.label = "Italic text";
 
 elementDemoContent.references = [
   {
-    label: '<i>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/i',
+    label: "<i>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/i",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

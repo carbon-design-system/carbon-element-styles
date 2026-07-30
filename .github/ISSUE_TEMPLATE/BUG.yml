@@ -1,12 +1,11 @@
 name: Bug report 🐛
-description:
-  Something not working as expected? This is the place to report your issue.
-labels: 'type/bug'
+description: Something not working as expected? This is the place to report your issue.
+labels: "type/bug"
 labels: []
 body:
   - type: markdown
     attributes:
-      value: '## Welcome!'
+      value: "## Welcome!"
   - type: markdown
     attributes:
       value: Thanks for taking the time to fill out this bug report.
@@ -41,16 +40,14 @@ body:
     id: example-url
     attributes:
       label: Reproduction/example
-      description:
-        Re-create the issue using [CodeSandbox](https://codesandbox.io/) or [Stackblitz](https://stackblitz.com).
+      description: Re-create the issue using [CodeSandbox](https://codesandbox.io/) or [Stackblitz](https://stackblitz.com).
     validations:
       required: true
   - type: textarea
     id: reproduce
     attributes:
       label: Steps to reproduce
-      description:
-        How do we reproduce the error you described using the reproduction/example link above?
+      description: How do we reproduce the error you described using the reproduction/example link above?
     validations:
       required: true
   - type: input
@@ -64,8 +61,6 @@ body:
       label: Code of Conduct
       description: Please confirm the following
       options:
-        - label:
-            I agree to follow this project’s [Code of Conduct](https://github.com/carbon-design-system/.github/blob/main/.github/CODE_OF_CONDUCT.md)
+        - label: I agree to follow this project’s [Code of Conduct](https://github.com/carbon-design-system/.github/blob/main/.github/CODE_OF_CONDUCT.md)
           required: true
-        - label:
-            I checked the [current issues](https://github.com/carbon-design-system/carbon-element-styles/issues) for duplicate problems
+        - label: I checked the [current issues](https://github.com/carbon-design-system/carbon-element-styles/issues) for duplicate problems

@@ -21,13 +21,22 @@ You can also use any of the [prebuilt stylesheets](#using-prebuilts) via our CDN
 
 ```html
 <!-- specific version (recommended) -->
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/element-styles/version/v[x.y.z]/prebuilt/expressive.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/element-styles/version/v[x.y.z]/prebuilt/expressive.css"
+/>
 
 <!-- "latest" tag -->
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/prebuilt/expressive.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/element-styles/tag/v0/latest/prebuilt/expressive.css"
+/>
 
 <!-- "next" tag -->
-<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/element-styles/tag/v0/next/prebuilt/expressive.css" />
+<link
+  rel="stylesheet"
+  href="https://1.www.s81c.com/common/carbon/element-styles/tag/v0/next/prebuilt/expressive.css"
+/>
 ```
 
 ### Importing individual elements
@@ -35,7 +44,7 @@ You can also use any of the [prebuilt stylesheets](#using-prebuilts) via our CDN
 To make use of individual elements, import them via `@use` and include their `styles` mixin in your Sass stylesheets:
 
 ```scss
-@use '@carbon/element-styles/scss/elements/button';
+@use "@carbon/element-styles/scss/elements/button";
 
 @include button.styles;
 ```
@@ -47,19 +56,23 @@ Every element has a default selector on which it's styles are emitted. You can c
 The `button` element for example expects to be emitted on a `<button>` tag. By default, it's selector is simply `button`. If you only want to emit these styles on buttons that are explicitly of type button, you can do so via the `with` syntax of Sass or each time you include the mixin.
 
 ```scss
-@use '@carbon/element-styles/scss/elements/button' with ($config: (
-  selector: 'button[type="button"]',
-));
+@use "@carbon/element-styles/scss/elements/button" with (
+  $config: (
+    selector: 'button[type="button"]',
+  )
+);
 
 @include button.styles;
 ```
 
 ```scss
-@use '@carbon/element-styles/scss/elements/button';
+@use "@carbon/element-styles/scss/elements/button";
 
-@include button.styles((
-  selector: 'button[type="button"]',
-));
+@include button.styles(
+  (
+    selector: 'button[type="button"]',
+  )
+);
 ```
 
 #### Configuring elements
@@ -67,31 +80,37 @@ The `button` element for example expects to be emitted on a `<button>` tag. By d
 Some elements have additional configuration options to adjust their visual appearance. You can configure these options the same way as you can configure the selector: via the `with` syntax of Sass or each time you include the mixin:
 
 ```scss
-@use '@carbon/element-styles/scss/elements/button' with ($config: (
-  kind: 'ghost',
-));
+@use "@carbon/element-styles/scss/elements/button" with (
+  $config: (
+    kind: "ghost",
+  )
+);
 
 @include button.styles;
 ```
 
 ```scss
-@use '@carbon/element-styles/scss/elements/button';
+@use "@carbon/element-styles/scss/elements/button";
 
-@include button.styles((
-  kind: 'ghost',
-));
+@include button.styles(
+  (
+    kind: "ghost",
+  )
+);
 ```
 
 Combining these options with custom selectors means you can emit multiple variants of the same element depending on their context:
 
 ```scss
-@use '@carbon/element-styles/scss/elements/button';
+@use "@carbon/element-styles/scss/elements/button";
 
 @include button.styles;
-@include button.styles((
-  selector: 'button[type="submit"]',
-  kind: 'primary',
-));
+@include button.styles(
+  (
+    selector: 'button[type="submit"]',
+    kind: "primary",
+  )
+);
 ```
 
 ### Using prebuilts
@@ -168,17 +187,17 @@ Only includes non-interactive elements with their default selectors. Uses an exp
 **Important**: in order for button styles to work, you must emit the Carbon's component tokens for buttons. If you're using `@carbon/styles` that's likely already the case. For convenience, this library also provides an `emit-carbon-tokens` mixin which includes the necessary component tokens.
 
 ```scss
-@use '@carbon/element-styles';
+@use "@carbon/element-styles";
 
 :root {
-  @include element-styles.emit-carbon-tokens('white');
+  @include element-styles.emit-carbon-tokens("white");
 }
 ```
 
 To also generate CSS custom properties of all available colors, use the `emit-carbon-colors` mixin:
 
 ```scss
-@use '@carbon/element-styles';
+@use "@carbon/element-styles";
 
 :root {
   @include element-styles.emit-carbon-colors;
@@ -217,10 +236,10 @@ Controls the density of elements, mostly through inline padding.
 #### Example
 
 ```scss
-@use '@carbon/element-styles/scss/layout';
+@use "@carbon/element-styles/scss/layout";
 
 :root {
-  @include layout.density('condensed');
+  @include layout.density("condensed");
 }
 
 .callout {
@@ -269,10 +288,10 @@ Controls the overall visual impression through font sizes and spacings.
 #### Example
 
 ```scss
-@use '@carbon/element-styles/scss/layout';
+@use "@carbon/element-styles/scss/layout";
 
 :root {
-  @include layout.mode('expressive');
+  @include layout.mode("expressive");
 }
 
 .callout {
@@ -310,10 +329,10 @@ Controls the height of elements.
 #### Example
 
 ```scss
-@use '@carbon/element-styles/scss/layout';
+@use "@carbon/element-styles/scss/layout";
 
 :root {
-  @include layout.size('lg');
+  @include layout.size("lg");
 }
 
 .callout header {
@@ -330,7 +349,6 @@ Controls the height of elements.
 The goal of this library is to provide opinionated styles for native HTML elements and ARIA patterns. Several components from the core Carbon libraries are intentionally missing from this project due to a lack of matching native counterparts. The intent is to not rely on class names or special attributes.
 
 However, there is one exception to this: the tile element. Tiles are one of the most fundamental and widely used components in Carbon. The default selector for tile styles is `[data-tile]`.
-
 
 ### 2. Logical layouts
 

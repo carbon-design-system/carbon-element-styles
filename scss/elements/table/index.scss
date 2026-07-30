@@ -5,21 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../_layer';
+@use "../_layer";
 
-@use '../../layout';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'table',
-  kind: 'data-table',
+  selector: "table",
+  kind: "data-table",
 );
 
 /// @group table
@@ -29,7 +29,7 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     border-spacing: 0;
     inline-size: 100%;
     margin-block: layout.$mode--margin-block;
@@ -73,7 +73,7 @@ $-default-config: (
       padding: layout.$density--padding;
     }
 
-    @if map.get($props, 'kind') == 'data-table' {
+    @if map.get($props, "kind") == "data-table" {
       background-color: theme.$layer;
 
       & tbody tr,
@@ -102,7 +102,11 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'structured-list' or map.get($props, 'kind') == 'structured-list--flush' {
+    @if map.get($props, "kind") ==
+      "structured-list" or
+      map.get($props, "kind") ==
+      "structured-list--flush"
+    {
       & tfoot th,
       & tfoot td {
         border-block-start: 0.0625rem solid theme.$border-subtle;
@@ -115,7 +119,7 @@ $-default-config: (
       }
     }
 
-    @if map.get($props, 'kind') == 'structured-list--flush' {
+    @if map.get($props, "kind") == "structured-list--flush" {
       & th:first-child,
       & td:first-child {
         padding-inline-start: 0;

@@ -5,30 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
 export class CdsEsDocsTabs extends HTMLElement {
-  #tablist: HTMLDivElement = document.createElement('div');
+  #tablist: HTMLDivElement = document.createElement("div");
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
 
-    this.#tablist.setAttribute('role', 'tablist');
+    this.#tablist.setAttribute("role", "tablist");
 
     this.shadowRoot?.appendChild(this.#tablist);
 
-    const slot = document.createElement('slot');
+    const slot = document.createElement("slot");
     this.shadowRoot?.appendChild(slot);
   }
 
   get activeTabIndex(): number {
-    return Array.from(this.#tablist.querySelectorAll('[role="tab"]'))
-      .findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+    return Array.from(this.#tablist.querySelectorAll('[role="tab"]')).findIndex(
+      (tab) => tab.getAttribute("aria-selected") === "true",
+    );
   }
 
   set activeTabIndex(index: number) {
@@ -40,29 +41,31 @@ export class CdsEsDocsTabs extends HTMLElement {
   }
 
   #activateTab(tab: HTMLButtonElement) {
-    for (const activeTab of (this.shadowRoot?.querySelectorAll('[role="tab"][aria-selected="true"]') ?? [])) {
-      activeTab.setAttribute('aria-selected', 'false');
+    for (const activeTab of this.shadowRoot?.querySelectorAll(
+      '[role="tab"][aria-selected="true"]',
+    ) ?? []) {
+      activeTab.setAttribute("aria-selected", "false");
 
-      for (const element of (activeTab.ariaControlsElements ?? [])) {
+      for (const element of activeTab.ariaControlsElements ?? []) {
         (element as HTMLElement).hidden = true;
       }
     }
 
-    tab.setAttribute('aria-selected', 'true');
+    tab.setAttribute("aria-selected", "true");
 
-    for (const element of (tab.ariaControlsElements ?? [])) {
+    for (const element of tab.ariaControlsElements ?? []) {
       (element as HTMLElement).hidden = false;
     }
   }
 
   #createTab(tabpanel: Element): HTMLButtonElement {
-    const button = document.createElement('button');
-    button.textContent = tabpanel.getAttribute('label');
-    button.setAttribute('type', 'button');
-    button.setAttribute('role', 'tab');
-    button.setAttribute('aria-selected', 'false');
+    const button = document.createElement("button");
+    button.textContent = tabpanel.getAttribute("label");
+    button.setAttribute("type", "button");
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-selected", "false");
     button.ariaControlsElements = [tabpanel];
-    button.addEventListener('click', () => {
+    button.addEventListener("click", () => {
       this.#activateTab(button);
     });
 
@@ -73,8 +76,9 @@ export class CdsEsDocsTabs extends HTMLElement {
 
   #renderTablist() {
     this.#tablist.replaceChildren(
-      ...Array.from(this.querySelectorAll('cds-es-docs-tab-panel') ?? [])
-        .map((tabpanel) => this.#createTab(tabpanel)),
+      ...Array.from(this.querySelectorAll("cds-es-docs-tab-panel") ?? []).map((tabpanel) =>
+        this.#createTab(tabpanel),
+      ),
     );
   }
 
@@ -89,4 +93,4 @@ export class CdsEsDocsTabs extends HTMLElement {
       }
     });
   }
-};
+}

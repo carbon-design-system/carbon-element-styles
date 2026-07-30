@@ -5,28 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/checkbox';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/checkbox";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Checkbox';
+elementDemoContent.label = "Checkbox";
 
 elementDemoContent.references = [
   {
     label: '<input type="checkbox">',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox',
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox",
   },
   {
-    label: 'Checkbox',
-    url: 'https://carbondesignsystem.com/components/checkbox/usage/',
+    label: "Checkbox",
+    url: "https://carbondesignsystem.com/components/checkbox/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {
+elementDemoContent.demos.set("default", {
   setup: (frame) => {
     Array.from(frame.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'))
       .slice(-2)

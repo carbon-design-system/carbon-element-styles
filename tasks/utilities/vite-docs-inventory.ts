@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { readdir } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { readdir } from "node:fs/promises";
+import { resolve } from "node:path";
 
-import type { Plugin } from 'vite';
+import type { Plugin } from "vite";
 
-const contentDir = resolve(import.meta.dirname, '../../docs/content');
+const contentDir = resolve(import.meta.dirname, "../../docs/content");
 
-const virtualId = 'virtual:docs-inventory';
-const resolvedId = '\0virtual:docs-inventory';
+const virtualId = "virtual:docs-inventory";
+const resolvedId = "\0virtual:docs-inventory";
 
-async function findLeafEntries(dir: string = contentDir, prefix: string = ''): Promise<string[]> {
+async function findLeafEntries(dir: string = contentDir, prefix: string = ""): Promise<string[]> {
   const entries: string[] = [];
 
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -25,7 +25,7 @@ async function findLeafEntries(dir: string = contentDir, prefix: string = ''): P
     const childDir = resolve(dir, entry.name);
     const children = await readdir(childDir, { withFileTypes: true });
 
-    if (children.some((c) => !c.isDirectory() && c.name === 'index.ts')) {
+    if (children.some((c) => !c.isDirectory() && c.name === "index.ts")) {
       entries.push(relativePath);
     }
 
@@ -36,7 +36,7 @@ async function findLeafEntries(dir: string = contentDir, prefix: string = ''): P
 }
 
 export const docsInventory: Plugin = {
-  name: 'docs-inventory',
+  name: "docs-inventory",
 
   resolveId(source) {
     if (source === virtualId) {
@@ -50,19 +50,19 @@ export const docsInventory: Plugin = {
     }
 
     const lines = (await findLeafEntries()).map((entry) => {
-      const filePath = resolve(contentDir, entry, 'index.ts');
+      const filePath = resolve(contentDir, entry, "index.ts");
       return `export { default as ${JSON.stringify(entry)} } from ${JSON.stringify(filePath)};`;
     });
 
-    return lines.join('\n');
+    return lines.join("\n");
   },
 
   configureServer(server) {
     server.watcher.add(contentDir);
-    server.watcher.on('addDir', invalidate);
-    server.watcher.on('unlinkDir', invalidate);
-    server.watcher.on('add', invalidate);
-    server.watcher.on('unlink', invalidate);
+    server.watcher.on("addDir", invalidate);
+    server.watcher.on("unlinkDir", invalidate);
+    server.watcher.on("add", invalidate);
+    server.watcher.on("unlink", invalidate);
 
     function invalidate(changedPath: string) {
       if (!changedPath.startsWith(contentDir)) return;

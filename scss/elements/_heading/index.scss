@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/spacing";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 

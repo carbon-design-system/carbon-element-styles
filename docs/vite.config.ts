@@ -5,39 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
-import type { UserConfig } from 'vite';
+import { resolve } from "node:path";
+import { defineConfig } from "vite";
+import type { UserConfig } from "vite";
 
-import { carbonIcons } from '../tasks/utilities/vite-carbon-icons';
-import { docsInventory } from '../tasks/utilities/vite-docs-inventory';
-import { prependBanner } from '../tasks/utilities/vite-prepend-banner';
-import { scssDocs } from '../tasks/utilities/vite-scss-docs';
+import { carbonIcons } from "../tasks/utilities/vite-carbon-icons";
+import { docsInventory } from "../tasks/utilities/vite-docs-inventory";
+import { prependBanner } from "../tasks/utilities/vite-prepend-banner";
+import { scssDocs } from "../tasks/utilities/vite-scss-docs";
 
 export const config: UserConfig = {
-  base: './',
+  base: "./",
   build: {
     sourcemap: false,
     license: {
-      fileName: 'licenses.txt',
+      fileName: "licenses.txt",
     },
     rolldownOptions: {
       output: {
-        postBanner: '/* See licenses of bundled dependencies at https://element-styles.carbondesignsystem.com/licenses.txt */',
+        postBanner:
+          "/* See licenses of bundled dependencies at https://element-styles.carbondesignsystem.com/licenses.txt */",
       },
     },
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname),
+      "@": resolve(__dirname),
     },
   },
-  plugins: [
-    carbonIcons,
-    docsInventory,
-    scssDocs,
-    prependBanner,
-  ],
+  plugins: [carbonIcons, docsInventory, scssDocs, prependBanner],
 };
 
 export default defineConfig(config);

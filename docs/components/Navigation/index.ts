@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import { Environment } from '@/model/Environment';
-import { Inventory } from '@/model/Inventory';
-import { NavigationItem } from '@/model/NavigationItem';
+import { Environment } from "@/model/Environment";
+import { Inventory } from "@/model/Inventory";
+import { NavigationItem } from "@/model/NavigationItem";
 
 type Item = {
   path: string;
@@ -19,11 +19,11 @@ type Item = {
 
 export class CdsEsDocsNavigation extends HTMLElement {
   #items: Item[] = [];
-  #ul: HTMLUListElement = document.createElement('ul');
+  #ul: HTMLUListElement = document.createElement("ul");
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
@@ -49,10 +49,8 @@ export class CdsEsDocsNavigation extends HTMLElement {
 
       knownItems.set(key, node);
 
-      const separator = key.lastIndexOf('/');
-      const parent = separator === -1
-        ? this.#items
-        : getOrCreate(key.slice(0, separator)).children;
+      const separator = key.lastIndexOf("/");
+      const parent = separator === -1 ? this.#items : getOrCreate(key.slice(0, separator)).children;
 
       parent.push(node);
 
@@ -63,20 +61,20 @@ export class CdsEsDocsNavigation extends HTMLElement {
   }
 
   #renderBranchItem(item: Item): HTMLButtonElement {
-    const button = document.createElement('button');
+    const button = document.createElement("button");
 
     button.textContent = item.item?.label;
-    button.setAttribute('type', 'button');
-    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute("type", "button");
+    button.setAttribute("aria-expanded", "false");
 
-    button.addEventListener('click', () => {
-      const state = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', (!state).toString());
+    button.addEventListener("click", () => {
+      const state = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", (!state).toString());
 
       const hasActiveChildren = button.parentElement?.querySelector('a[aria-current="page"]');
 
       if (!state && !hasActiveChildren) {
-        button.parentElement?.querySelector('a')?.click();
+        button.parentElement?.querySelector("a")?.click();
       }
     });
 
@@ -84,25 +82,28 @@ export class CdsEsDocsNavigation extends HTMLElement {
   }
 
   #renderLeafItem(item: Item): HTMLAnchorElement {
-    const anchor = document.createElement('a');
+    const anchor = document.createElement("a");
 
     anchor.textContent = item.item.label;
-    anchor.setAttribute('href', Environment.getUrl({
-      path: item.path,
-    }).toString());
+    anchor.setAttribute(
+      "href",
+      Environment.getUrl({
+        path: item.path,
+      }).toString(),
+    );
 
     function updateAriaCurrent() {
       if (item.path === Environment.path) {
-        anchor.setAttribute('aria-current', 'page');
+        anchor.setAttribute("aria-current", "page");
       } else {
-        anchor.removeAttribute('aria-current');
+        anchor.removeAttribute("aria-current");
       }
     }
 
-    Environment.addEventListener('change', updateAriaCurrent);
+    Environment.addEventListener("change", updateAriaCurrent);
     updateAriaCurrent();
 
-    anchor.addEventListener('click', (e) => {
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
       Environment.path = item.path;
     });
@@ -111,20 +112,15 @@ export class CdsEsDocsNavigation extends HTMLElement {
   }
 
   #renderItem(item: Item): HTMLLIElement {
-    const li = document.createElement('li');
+    const li = document.createElement("li");
 
     if (item.children.length > 0) {
-      const submenu = document.createElement('ul');
+      const submenu = document.createElement("ul");
       submenu.replaceChildren(...item.children.map((child) => this.#renderItem(child)));
 
-      li.append(
-        this.#renderBranchItem(item),
-        submenu,
-      );
+      li.append(this.#renderBranchItem(item), submenu);
     } else {
-      li.append(
-        this.#renderLeafItem(item),
-      );
+      li.append(this.#renderLeafItem(item));
     }
 
     return li;
@@ -132,21 +128,17 @@ export class CdsEsDocsNavigation extends HTMLElement {
 
   #renderMenu() {
     const documentation = this.#items
-      .find((i) => i.path === 'documentation')?.children
-      .map((item) => this.#renderItem(item));
+      .find((i) => i.path === "documentation")
+      ?.children.map((item) => this.#renderItem(item));
     const elements = this.#items
-      .find((i) => i.path === 'elements')?.children
-      .toSorted((a, b) => a.item.label.localeCompare(b.item.label))
+      .find((i) => i.path === "elements")
+      ?.children.toSorted((a, b) => a.item.label.localeCompare(b.item.label))
       .map((item) => this.#renderItem(item));
 
-    const separator = document.createElement('li');
-    separator.setAttribute('role', 'separator');
+    const separator = document.createElement("li");
+    separator.setAttribute("role", "separator");
 
-    this.#ul.replaceChildren(
-      ...documentation ?? [],
-      separator,
-      ...elements ?? [],
-    );
+    this.#ul.replaceChildren(...(documentation ?? []), separator, ...(elements ?? []));
   }
 
   connectedCallback() {

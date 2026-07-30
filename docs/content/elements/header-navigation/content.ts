@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/header-navigation';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/header-navigation";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Header navigation';
+elementDemoContent.label = "Header navigation";
 
 elementDemoContent.references = [
   {
-    label: '<header>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header',
+    label: "<header>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header",
   },
   {
-    label: 'UI shell header',
-    url: 'https://carbondesignsystem.com/components/UI-shell-header/usage/',
+    label: "UI shell header",
+    url: "https://carbondesignsystem.com/components/UI-shell-header/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

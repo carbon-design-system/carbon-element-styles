@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '../_labelled-input';
+@use "../_labelled-input";
 
-@use '../../layout';
+@use "../../layout";
 
 $config: () !default;
 
 $-default-config: (
   selector: 'label:has(input[type="url"])',
-  axis: 'block',
+  axis: "block",
 );
 
 /// @group url-input
@@ -25,16 +25,18 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'selector')} {
-    @include labelled-input.styles((
-      label: (
-        selector: '&',
-        axis: map.get($props, 'axis'),
-      ),
-      input: (
-        selector: 'input[type="url"]',
-      ),
-      input-invalid-slot: 'after',
-    ));
+  #{map.get($props, "selector")} {
+    @include labelled-input.styles(
+      (
+        label: (
+          selector: "&",
+          axis: map.get($props, "axis"),
+        ),
+        input: (
+          selector: 'input[type="url"]',
+        ),
+        input-invalid-slot: "after",
+      )
+    );
   }
 }

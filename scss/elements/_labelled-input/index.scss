@@ -5,26 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../label';
-@use '../_input';
+@use "../label";
+@use "../_input";
 
-@use '../../layout';
-@use '../../utilities/icons';
+@use "../../layout";
+@use "../../utilities/icons";
 
 $config: () !default;
 
 $-default-config: (
   label: (
-    selector: 'label',
-    axis: 'block',
+    selector: "label",
+    axis: "block",
   ),
   input: (
-    selector: 'input',
+    selector: "input",
     emit-readonly: true,
     emit-disabled: true,
     emit-invalid: true,
@@ -52,25 +52,29 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, 'label', 'selector')} {
-    @include label.styles((
-      selector: '&',
-      axis: map.get($props, 'label', 'axis'),
-    ));
+  #{map.get($props, "label", "selector")} {
+    @include label.styles(
+      (
+        selector: "&",
+        axis: map.get($props, "label", "axis"),
+      )
+    );
 
     position: relative;
 
-    #{map.get($props, 'input', 'selector')} {
-      @include input.styles((
-        selector: '&',
-        emit-readonly: map.get($props, 'input', 'emit-readonly'),
-        emit-disabled: map.get($props, 'input', 'emit-disabled'),
-        emit-invalid: map.get($props, 'input', 'emit-invalid'),
-        emit-focus: map.get($props, 'input', 'emit-focus'),
-      ));
+    #{map.get($props, "input", "selector")} {
+      @include input.styles(
+        (
+          selector: "&",
+          emit-readonly: map.get($props, "input", "emit-readonly"),
+          emit-disabled: map.get($props, "input", "emit-disabled"),
+          emit-invalid: map.get($props, "input", "emit-invalid"),
+          emit-focus: map.get($props, "input", "emit-focus"),
+        )
+      );
 
-      padding-inline-start: -get-slot-space(map.get($props, 'fixed-input-leading-slots'));
-      padding-inline-end: -get-slot-space(map.get($props, 'fixed-input-trailing-slots'));
+      padding-inline-start: -get-slot-space(map.get($props, "fixed-input-leading-slots"));
+      padding-inline-end: -get-slot-space(map.get($props, "fixed-input-trailing-slots"));
     }
 
     &::before,
@@ -80,25 +84,25 @@ $-default-config: (
       pointer-events: none;
       inset-block-start: calc(layout.$size--padding-block-start - ((1rem - 1lh) * 0.5));
 
-      @if map.get($props, 'label', 'axis') == 'block' {
+      @if map.get($props, "label", "axis") == "block" {
         grid-row: 2;
       } @else {
         grid-column: 2;
       }
     }
 
-    @if map.get($props, 'input-invalid-slot') and map.get($props, 'input', 'emit-invalid') {
-      &:has(#{map.get($props, 'input', 'selector')}:invalid),
-      &:has(#{map.get($props, 'input', 'selector')}[aria-invalid="true"]) {
+    @if map.get($props, "input-invalid-slot") and map.get($props, "input", "emit-invalid") {
+      &:has(#{map.get($props, "input", "selector")}:invalid),
+      &:has(#{map.get($props, "input", "selector")}[aria-invalid="true"]) {
         &::#{map.get($props, 'input-invalid-slot')} {
-          @include input-trailing-slot(map.get($props, 'fixed-input-trailing-slots') + 1) {
+          @include input-trailing-slot(map.get($props, "fixed-input-trailing-slots") + 1) {
             @include icons.warning--filled;
             color: theme.$support-error;
           }
         }
 
-        #{map.get($props, 'input', 'selector')} {
-          padding-inline-end: -get-slot-space(map.get($props, 'fixed-input-trailing-slots') + 1);
+        #{map.get($props, "input", "selector")} {
+          padding-inline-end: -get-slot-space(map.get($props, "fixed-input-trailing-slots") + 1);
         }
       }
     }
@@ -123,21 +127,19 @@ $-default-config: (
     + inline padding if has any slots
   */
   @return calc(
-      layout.$density--padding
-    + $count * 1rem
-    + max(($count - 1) * spacing.$spacing-03, 0rem)
-    + $additional-inline-padding
+    layout.$density--padding + $count * 1rem + max(($count - 1) * spacing.$spacing-03, 0rem) +
+      $additional-inline-padding
   );
 }
 
 @mixin input-leading-slot($index: 1) {
-  content: '';
+  content: "";
   inset-inline-start: -get-slot-offset($index);
   @content;
 }
 
 @mixin input-trailing-slot($index: 1) {
-  content: '';
+  content: "";
   inset-inline-end: -get-slot-offset($index);
   @content;
 }

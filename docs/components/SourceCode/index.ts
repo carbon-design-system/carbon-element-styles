@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import styles from './index.scss?inline';
+import styles from "./index.scss?inline";
 
-import hljs from 'highlight.js';
+import hljs from "highlight.js";
 
 export class CdsEsDocsSourceCode extends HTMLElement {
   #observer = new MutationObserver(() => this.#render());
 
-  #code: HTMLElement = document.createElement('code');
+  #code: HTMLElement = document.createElement("code");
 
   #renderers: { [kind: string]: () => string } = {
     html: this.#renderHtml,
@@ -21,33 +21,28 @@ export class CdsEsDocsSourceCode extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
 
     const stylesheet = new CSSStyleSheet();
     stylesheet.replace(styles);
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
 
-    const preformatted = document.createElement('pre');
+    const preformatted = document.createElement("pre");
     preformatted.appendChild(this.#code);
     this.shadowRoot?.appendChild(preformatted);
   }
 
   #renderHtml(): string {
-    return hljs.highlight(
-      this.textContent.replace(/^<!--[\s\S]*?-->\s*/, ''),
-      { language: 'html' },
-    ).value;
+    return hljs.highlight(this.textContent.replace(/^<!--[\s\S]*?-->\s*/, ""), { language: "html" })
+      .value;
   }
 
   #renderScss(): string {
-    return hljs.highlight(
-      this.textContent,
-      { language: 'scss' },
-    ).value;
+    return hljs.highlight(this.textContent, { language: "scss" }).value;
   }
 
   #render() {
-    const renderer = this.#renderers[this.getAttribute('kind') ?? ''];
+    const renderer = this.#renderers[this.getAttribute("kind") ?? ""];
 
     if (renderer) {
       this.#code.innerHTML = renderer.bind(this)();
@@ -67,4 +62,4 @@ export class CdsEsDocsSourceCode extends HTMLElement {
   disconnectedCallback() {
     this.#observer.disconnect();
   }
-};
+}

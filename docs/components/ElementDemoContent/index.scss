@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
 
-@use '../../../scss/layout';
+@use "../../../scss/layout";
 
 @mixin demo($id) {
   :host([request-id="#{$id}"]) > .demo {
@@ -32,17 +32,14 @@
 
 :host > .fade {
   block-size: 1.5rem;
-  background-image: linear-gradient(
-    transparent,
-    theme.$layer-background,
-  );
+  background-image: linear-gradient(transparent, theme.$layer-background);
   opacity: 0.5;
   translate: 0 -100%;
   pointer-events: none;
 }
 
 :host > cds-es-docs-tabs {
-  @include layout.mode('productive');
-  @include layout.size('md');
-  @include layout.density('normal');
+  @include layout.mode("productive");
+  @include layout.size("md");
+  @include layout.density("normal");
 }

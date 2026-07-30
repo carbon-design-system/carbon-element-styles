@@ -5,44 +5,44 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { NavigationItem } from '@/model/NavigationItem';
+import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
-  id: 'button',
-  label: 'Button',
-  content: () => import('./content'),
+  id: "button",
+  label: "Button",
+  content: () => import("./content"),
   items: [
     new NavigationItem({
-      id: 'default',
-      label: 'Default',
+      id: "default",
+      label: "Default",
     }),
     new NavigationItem({
-      id: 'primary',
-      label: 'Primary',
+      id: "primary",
+      label: "Primary",
     }),
     new NavigationItem({
-      id: 'secondary',
-      label: 'Secondary',
+      id: "secondary",
+      label: "Secondary",
     }),
     new NavigationItem({
-      id: 'tertiary',
-      label: 'Tertiary',
+      id: "tertiary",
+      label: "Tertiary",
     }),
     new NavigationItem({
-      id: 'ghost',
-      label: 'Ghost',
+      id: "ghost",
+      label: "Ghost",
     }),
     new NavigationItem({
-      id: 'danger--primary',
-      label: 'Danger primary',
+      id: "danger--primary",
+      label: "Danger primary",
     }),
     new NavigationItem({
-      id: 'danger--tertiary',
-      label: 'Danger tertiary',
+      id: "danger--tertiary",
+      label: "Danger tertiary",
     }),
     new NavigationItem({
-      id: 'danger--ghost',
-      label: 'Danger ghost',
+      id: "danger--ghost",
+      label: "Danger ghost",
     }),
   ],
 });

@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/preformatted';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/preformatted";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Preformatted';
+elementDemoContent.label = "Preformatted";
 
 elementDemoContent.references = [
   {
-    label: '<pre>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre',
+    label: "<pre>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre",
   },
   {
-    label: 'Multi-line code snippet',
-    url: 'https://carbondesignsystem.com/components/code-snippet/usage/#multi-line',
+    label: "Multi-line code snippet",
+    url: "https://carbondesignsystem.com/components/code-snippet/usage/#multi-line",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

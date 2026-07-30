@@ -5,29 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/search-input';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/search-input";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Search input';
+elementDemoContent.label = "Search input";
 
 elementDemoContent.references = [
   {
     label: '<input type="search">',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search',
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search",
   },
   {
-    label: 'Search',
-    url: 'https://carbondesignsystem.com/components/search/usage/',
+    label: "Search",
+    url: "https://carbondesignsystem.com/components/search/usage/",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
-elementDemoContent.demos.set('block', { scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set('inline', { scssConfig: { axis: `'inline'` } });
+elementDemoContent.demos.set("default", {});
+elementDemoContent.demos.set("block", { scssConfig: { axis: `'block'` } });
+elementDemoContent.demos.set("inline", { scssConfig: { axis: `'inline'` } });
 
 export default elementDemoContent;

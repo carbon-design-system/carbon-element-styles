@@ -5,27 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { CdsEsDocsElementDemoContent } from '@/components/ElementDemoContent';
+import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 
-export { default as css } from './demo.scss?inline';
-export { default as html } from './demo.html';
-export { default as scssDoc } from 'virtual:scss-docs/image';
+export { default as css } from "./demo.scss?inline";
+export { default as html } from "./demo.html";
+export { default as scssDoc } from "virtual:scss-docs/image";
 
-const elementDemoContent = document.createElement('cds-es-docs-element-demo-content') as CdsEsDocsElementDemoContent;
+const elementDemoContent = document.createElement(
+  "cds-es-docs-element-demo-content",
+) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = 'Image';
+elementDemoContent.label = "Image";
 
 elementDemoContent.references = [
   {
-    label: '<img>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img',
+    label: "<img>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img",
   },
   {
-    label: '<picture>',
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture',
+    label: "<picture>",
+    url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture",
   },
 ];
 
-elementDemoContent.demos.set('default', {});
+elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

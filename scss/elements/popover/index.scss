@@ -5,25 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
-@use 'sass:string';
-@use 'sass:list';
+@use "sass:map";
+@use "sass:string";
+@use "sass:list";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/utilities/box-shadow';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/utilities/box-shadow";
 
-@use '../_layer';
+@use "../_layer";
 
-@use '../../layout';
-@use '../../utilities/tokens';
+@use "../../layout";
+@use "../../utilities/tokens";
 
 $config: () !default;
 
 $-default-config: (
-  selector: '[popover]',
+  selector: "[popover]",
   caret: true,
-  alignment: 'end center',
+  alignment: "end center",
 );
 
 /// @group popover
@@ -35,11 +35,11 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
 
   $-caret-size: 0rem;
-  @if map.get($props, 'caret') {
+  @if map.get($props, "caret") {
     $-caret-size: 0.75rem;
   }
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     @include layer.styles;
     @include box-shadow.box-shadow;
     @include layout.mode--body;
@@ -52,25 +52,20 @@ $-default-config: (
 
     &::before {
       @include box-shadow.box-shadow;
-      content: '';
+      content: "";
       position: absolute;
       display: block;
       block-size: $-caret-size;
       inline-size: $-caret-size;
       background-color: inherit;
-      clip-path: polygon(
-        0% 0%,
-        100% 0%,
-        100% 100%,
-        0% 0%,
-      );
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%);
     }
 
-    $-alignment: string.split(map.get($props, 'alignment'), " ");
+    $-alignment: string.split(map.get($props, "alignment"), " ");
     $-alignment-block: list.nth($-alignment, 1);
     $-alignment-inline: list.nth($-alignment, 2);
 
-    @if $-alignment-block == 'start' {
+    @if $-alignment-block == "start" {
       position-area: start center;
       inset-block-end: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
       inset-block-start: unset;
@@ -82,7 +77,7 @@ $-default-config: (
       }
     }
 
-    @if $-alignment-block == 'end' {
+    @if $-alignment-block == "end" {
       position-area: end center;
       inset-block-start: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
       inset-block-end: unset;
@@ -94,44 +89,44 @@ $-default-config: (
       }
     }
 
-    @if $-alignment-block == 'start' or $-alignment-block == 'end' {
-      @if $-alignment-inline == 'start' {
+    @if $-alignment-block == "start" or $-alignment-block == "end" {
+      @if $-alignment-inline == "start" {
         translate: calc(-50% + layout.$density--padding + spacing.$spacing-02) 0;
 
         &::before {
-          inset-inline-start: -get-caret-offset('end', $-caret-size);
+          inset-inline-start: -get-caret-offset("end", $-caret-size);
         }
-      } @else if $-alignment-inline == 'end' {
+      } @else if $-alignment-inline == "end" {
         translate: calc(50% - layout.$density--padding - spacing.$spacing-02) 0;
 
         &::before {
-          inset-inline-start: -get-caret-offset('start', $-caret-size);
+          inset-inline-start: -get-caret-offset("start", $-caret-size);
         }
-      } @else if $-alignment-inline == 'center' {
+      } @else if $-alignment-inline == "center" {
         &::before {
-          inset-inline-start: -get-caret-offset('center', $-caret-size);
+          inset-inline-start: -get-caret-offset("center", $-caret-size);
         }
       }
     }
 
-    @if map.get($props, 'alignment') == 'center start' {
+    @if map.get($props, "alignment") == "center start" {
       position-area: center start;
       translate: calc((spacing.$spacing-02 + ($-caret-size * 0.5)) * -1);
 
       &::before {
-        inset-block-start: -get-caret-offset('center', $-caret-size);
+        inset-block-start: -get-caret-offset("center", $-caret-size);
         inset-block-end: unset;
         inset-inline-end: calc($-caret-size * -0.5);
         rotate: 45deg;
       }
     }
 
-    @if map.get($props, 'alignment') == 'center end' {
+    @if map.get($props, "alignment") == "center end" {
       position-area: center end;
       translate: calc(spacing.$spacing-02 + ($-caret-size * 0.5));
 
       &::before {
-        inset-block-start: -get-caret-offset('center', $-caret-size);
+        inset-block-start: -get-caret-offset("center", $-caret-size);
         inset-block-end: unset;
         inset-inline-start: calc($-caret-size * -0.5);
         rotate: -135deg;
@@ -141,15 +136,15 @@ $-default-config: (
 }
 
 @function -get-caret-offset($position, $caret-size: 0rem) {
-  @if ($position == 'start') {
+  @if ($position == "start") {
     @return calc(layout.$density--padding - $caret-size * 0.5 + spacing.$spacing-02);
   }
 
-  @if ($position == 'center') {
+  @if ($position == "center") {
     @return calc(50% - $caret-size * 0.5);
   }
 
-  @if ($position == 'end') {
+  @if ($position == "end") {
     @return calc(100% - layout.$density--padding - $caret-size * 0.5 - spacing.$spacing-02);
   }
 

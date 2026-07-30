@@ -5,65 +5,77 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:string';
+@use "sass:string";
 
-@use '../../../components/ElementDemoContent' as element-demo-content;
-@use '../../../../scss/elements/popover';
+@use "../../../components/ElementDemoContent" as element-demo-content;
+@use "../../../../scss/elements/popover";
 
-@use '../../../../scss/elements/button';
-@use '../../../../scss/elements/text-input';
-@use '../../../../scss/elements/tile';
+@use "../../../../scss/elements/button";
+@use "../../../../scss/elements/text-input";
+@use "../../../../scss/elements/tile";
 
-@include element-demo-content.demo('default') {
+@include element-demo-content.demo("default") {
   @include popover.styles;
 
   // ↓ for demo only ↓
   @include button.styles;
   @include text-input.styles;
   @include tile.styles;
-};
+}
 
-@include element-demo-content.demo('with-caret') {
-  @include popover.styles((
-    caret: true,
-  ));
-
-  // ↓ for demo only ↓
-  @include button.styles;
-  @include text-input.styles;
-  @include tile.styles;
-};
-
-@include element-demo-content.demo('without-caret') {
-  @include popover.styles((
-    caret: false,
-  ));
+@include element-demo-content.demo("with-caret") {
+  @include popover.styles(
+    (
+      caret: true,
+    )
+  );
 
   // ↓ for demo only ↓
   @include button.styles;
   @include text-input.styles;
   @include tile.styles;
-};
+}
 
-@each $alignment in (
-  'start start', 'start center', 'start end',
-  'center start', 'center end',
-  'end start', 'end center', 'end end',
-) {
+@include element-demo-content.demo("without-caret") {
+  @include popover.styles(
+    (
+      caret: false,
+    )
+  );
 
+  // ↓ for demo only ↓
+  @include button.styles;
+  @include text-input.styles;
+  @include tile.styles;
+}
+
+@each $alignment
+    in (
+      "start start",
+      "start center",
+      "start end",
+      "center start",
+      "center end",
+      "end start",
+      "end center",
+      "end end"
+    )
+{
   $id: "alignment";
   @each $part in string.split($alignment, " ") {
     $id: "#{$id}-#{$part}";
   }
 
   @include element-demo-content.demo($id) {
-    @include popover.styles((
-      alignment: $alignment,
-    ));
+    @include popover.styles(
+      (
+        alignment: $alignment,
+      )
+    );
 
     // ↓ for demo only ↓
     @include button.styles;
     @include text-input.styles;
     @include tile.styles;
-  };
+  }
 }

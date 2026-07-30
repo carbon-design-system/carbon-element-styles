@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use 'sass:map';
+@use "sass:map";
 
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/utilities/focus-outline';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/utilities/focus-outline";
 
-@use '../../layout';
-@use '../../utilities/guards';
+@use "../../layout";
+@use "../../utilities/guards";
 
 $config: () !default;
 
 $-default-config: (
-  selector: 'a',
+  selector: "a",
   emit-visited: true,
 );
 
@@ -27,9 +27,9 @@ $-default-config: (
 /// @param {Bool} config.emit-visited [true] - Enable visited link styles using theme.$link-visited
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
-  $emit-visited: map.get($props, 'emit-visited') == true;
+  $emit-visited: map.get($props, "emit-visited") == true;
 
-  #{map.get($props, 'selector')} {
+  #{map.get($props, "selector")} {
     display: inline-flex;
     align-items: center;
     column-gap: spacing.$spacing-03;
@@ -60,7 +60,7 @@ $-default-config: (
     }
 
     &:focus {
-      @include focus-outline.focus-outline('outline');
+      @include focus-outline.focus-outline("outline");
     }
 
     & svg {
