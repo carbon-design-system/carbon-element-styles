@@ -38,7 +38,7 @@ for (const file of await readdir(sourceDir)) {
     try {
       await writeFile(
         new URL(new URL(`${targetDir}/${name}.css`)),
-        css.at(0) + getBanner("css") + css.slice(1),
+        css.at(0) + getBanner({ fileType: "css", year: 2026 }) + css.slice(1),
       );
 
       log.success(`Wrote ${name}.css`);
