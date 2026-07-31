@@ -46,7 +46,7 @@ describe("All source files contain a valid copyright header", async () => {
       let content = "";
 
       try {
-        content = String(await readFile(path));
+        content = await readFile(path, "utf-8");
       } catch (e) {
         log.error(`Error reading file "${path}"`, e);
         return;

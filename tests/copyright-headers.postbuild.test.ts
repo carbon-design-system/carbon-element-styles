@@ -35,7 +35,7 @@ describe("All dist files contain a valid copyright header", async () => {
       let content = "";
 
       try {
-        content = String(await readFile(path));
+        content = await readFile(path, "utf-8");
 
         if (content.startsWith("const __vite__mapDeps")) {
           content = content.split("\n").slice(1).join("\n");
