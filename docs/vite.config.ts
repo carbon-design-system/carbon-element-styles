@@ -9,10 +9,10 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import type { UserConfig } from "vite";
 
-import { carbonIcons } from "../tasks/utilities/vite-carbon-icons";
-import { docsInventory } from "../tasks/utilities/vite-docs-inventory";
-import { prependBanner } from "../tasks/utilities/vite-prepend-banner";
-import { scssDocs } from "../tasks/utilities/vite-scss-docs";
+import { carbonIcons } from "../tasks/plugins/vite-carbon-icons";
+import { docsInventory } from "../tasks/plugins/vite-docs-inventory";
+import { prependBanner } from "../tasks/plugins/vite-prepend-banner";
+import { scssDocs } from "../tasks/plugins/vite-scss-docs";
 
 export const config: UserConfig = {
   base: "./",

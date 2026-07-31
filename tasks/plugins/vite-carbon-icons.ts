@@ -12,7 +12,7 @@ import { normalizePath } from "vite";
 
 import type { Plugin } from "vite";
 
-import * as log from "./log";
+import * as log from "../utilities/log";
 
 const contentDir = resolve(import.meta.dirname, "../../docs/content/");
 const contentDirNormalized = normalizePath(contentDir);

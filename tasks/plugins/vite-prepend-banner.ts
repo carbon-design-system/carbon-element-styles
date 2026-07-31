@@ -8,23 +8,23 @@
 import { extname } from "node:path";
 import type { Plugin } from "vite";
 
-import { type FileType, getBanner, supportedFileTypes } from "./get-banner";
+import { type FileType, getBanner, supportedFileTypes } from "../utilities/banner";
 
 export const prependBanner: Plugin = {
   name: "prepend-banner",
 
-  generateBundle(options, bundle) {
+  generateBundle(_, bundle) {
     for (const fileName in bundle) {
       const file = bundle[fileName];
       const fileType = extname(fileName).slice(1);
 
       if (supportedFileTypes.includes(fileType as FileType)) {
         if (file.type === "chunk") {
-          file.code = getBanner(fileType as FileType) + file.code;
+          file.code = getBanner({ fileType: fileType as FileType, year: 2026 }) + file.code;
         }
 
         if (file.type === "asset") {
-          file.source = getBanner(fileType as FileType) + file.source;
+          file.source = getBanner({ fileType: fileType as FileType, year: 2026 }) + file.source;
         }
       }
     }
