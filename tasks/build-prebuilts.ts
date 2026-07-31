@@ -11,7 +11,7 @@ import { mkdir, readdir, writeFile } from "node:fs/promises";
 import { compile } from "sass";
 
 import * as log from "./utilities/log.ts";
-import { getBanner } from "./utilities/get-banner.ts";
+import { getBanner } from "./utilities/banner.ts";
 
 const sourceDir = new URL("../scss/prebuilt", import.meta.url);
 const targetDir = new URL("../css/prebuilt", import.meta.url);

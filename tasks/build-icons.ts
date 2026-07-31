@@ -8,7 +8,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 import * as log from "./utilities/log.ts";
-import { getBanner } from "./utilities/get-banner.ts";
+import { getBanner } from "./utilities/banner.ts";
 
 const iconIds = [
   "arrow--right",

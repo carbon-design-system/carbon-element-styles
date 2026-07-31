@@ -8,12 +8,12 @@
 import { extname } from "node:path";
 import type { Plugin } from "vite";
 
-import { type FileType, getBanner, supportedFileTypes } from "../utilities/get-banner";
+import { type FileType, getBanner, supportedFileTypes } from "../utilities/banner";
 
 export const prependBanner: Plugin = {
   name: "prepend-banner",
 
-  generateBundle(options, bundle) {
+  generateBundle(_, bundle) {
     for (const fileName in bundle) {
       const file = bundle[fileName];
       const fileType = extname(fileName).slice(1);

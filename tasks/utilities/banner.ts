@@ -36,5 +36,25 @@ export function getBanner(options: { fileType: FileType; year?: number | null })
 
   const lines = [`${banner[0]} ${copyrightYear}`, ...banner.slice(1)];
 
-  return [leading, ...lines.map((line) => `${inline} ${line}`.trimEnd()), trailing, ""].join("\n");
+  return [
+    leading,
+    ...lines.map((line) => (inline === "" ? line : `${inline} ${line}`).trimEnd()),
+    trailing,
+    "",
+  ].join("\n");
+}
+
+export function validateBanner(content: string, options: { fileType: FileType }) {
+  const [expectedYearLine, ...expectedRemainingLines] = getBanner({
+    fileType: options.fileType,
+    year: null,
+  })
+    .split("\n")
+    .slice(1, -2);
+  const [yearLine, ...remainingLines] = content.split("\n").slice(1, expectedRemainingLines.length);
+
+  return (
+    yearLine.match(String.raw`${RegExp.escape(expectedYearLine)} \d{4}(, \d{4})?$`) &&
+    remainingLines.every((rl, i) => rl === expectedRemainingLines[i])
+  );
 }
