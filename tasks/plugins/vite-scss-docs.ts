@@ -67,31 +67,34 @@ export const scssDocs: Plugin = {
     }
   },
 
-  async load(id) {
-    if (!id.startsWith(resolvedPrefix)) {
-      return null;
-    }
+  load: {
+    filter: {
+      id: {
+        include: [new RegExp(`^${resolvedPrefix}`)],
+      },
+    },
+    async handler(id) {
+      const elementName = id.slice(resolvedPrefix.length);
+      const scssPath = resolve(elementsScssDir, elementName, "index.scss");
+      const source = await readFile(scssPath, "utf8");
+      const parameters = parseScssDoc(source) ?? [];
 
-    const elementName = id.slice(resolvedPrefix.length);
-    const scssPath = resolve(elementsScssDir, elementName, "index.scss");
-    const source = await readFile(scssPath, "utf8");
-    const parameters = parseScssDoc(source) ?? [];
+      return `
+        import { ScssDoc } from '@/model/ScssDoc';
 
-    return `
-      import { ScssDoc } from '@/model/ScssDoc';
+        const docs = new ScssDoc();
 
-      const docs = new ScssDoc();
+        ${parameters
+          .map(
+            (parameter) => `docs.parameters.set('${parameter.name}', {
+          type: \`${parameter.type}\`,
+          default: \`${parameter.default}\`,
+        });`,
+          )
+          .join("\n\n")}
 
-      ${parameters
-        .map(
-          (parameter) => `docs.parameters.set('${parameter.name}', {
-        type: \`${parameter.type}\`,
-        default: \`${parameter.default}\`,
-      });`,
-        )
-        .join("\n\n")}
-
-      export default docs;
-    `;
+        export default docs;
+      `;
+    },
   },
 };
