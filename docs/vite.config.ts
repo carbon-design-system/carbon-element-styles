@@ -9,10 +9,10 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import type { UserConfig } from "vite";
 
-import { carbonIcons } from "../tasks/plugins/vite-carbon-icons";
-import { docsInventory } from "../tasks/plugins/vite-docs-inventory";
-import { prependBanner } from "../tasks/plugins/vite-prepend-banner";
-import { scssDocs } from "../tasks/plugins/vite-scss-docs";
+import { carbonIcons } from "../tasks/plugins/vite-carbon-icons.ts";
+import { docsInventory } from "../tasks/plugins/vite-docs-inventory.ts";
+import { prependBanner } from "../tasks/plugins/vite-prepend-banner.ts";
+import { scssDocs } from "../tasks/plugins/vite-scss-docs.ts";
 
 export const config: UserConfig = {
   base: "./",
@@ -30,7 +30,7 @@ export const config: UserConfig = {
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname),
+      "@": resolve(import.meta.dirname),
     },
   },
   plugins: [carbonIcons, docsInventory, scssDocs, prependBanner],
