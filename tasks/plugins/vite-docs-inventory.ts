@@ -44,17 +44,20 @@ export const docsInventory: Plugin = {
     }
   },
 
-  async load(id) {
-    if (id !== resolvedId) {
-      return null;
-    }
+  load: {
+    filter: {
+      id: {
+        include: [new RegExp(`^${resolvedId}$`)],
+      },
+    },
+    async handler() {
+      const lines = (await findLeafEntries()).map((entry) => {
+        const filePath = resolve(contentDir, entry, "index.ts");
+        return `export { default as ${JSON.stringify(entry)} } from ${JSON.stringify(filePath)};`;
+      });
 
-    const lines = (await findLeafEntries()).map((entry) => {
-      const filePath = resolve(contentDir, entry, "index.ts");
-      return `export { default as ${JSON.stringify(entry)} } from ${JSON.stringify(filePath)};`;
-    });
-
-    return lines.join("\n");
+      return lines.join("\n");
+    },
   },
 
   configureServer(server) {

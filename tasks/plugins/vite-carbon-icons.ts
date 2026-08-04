@@ -40,28 +40,31 @@ export const carbonIcons: Plugin = {
     return `${prefix}${path}${suffix}`;
   },
 
-  load(id) {
-    if (!id.startsWith(prefix) || !id.endsWith(suffix)) {
-      return null;
-    }
+  load: {
+    filter: {
+      id: {
+        include: [new RegExp(`^${prefix}.+${suffix}$`)],
+      },
+    },
+    handler(id) {
+      const filePath = id.slice(prefix.length, -suffix.length);
+      this.addWatchFile(filePath);
+      htmlToVirtualId.set(normalizePath(filePath), id);
+      const raw = readFileSync(filePath, "utf8");
 
-    const filePath = id.slice(prefix.length, -suffix.length);
-    this.addWatchFile(filePath);
-    htmlToVirtualId.set(normalizePath(filePath), id);
-    const raw = readFileSync(filePath, "utf8");
+      const content = raw.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
+        try {
+          const iconPath = fileURLToPath(import.meta.resolve(`@carbon/icons/svg/32/${name}.svg`));
+          return readFileSync(iconPath, "utf8");
+        } catch (e) {
+          log.error(`Could not find Carbon icon with name '${name}'.\n   Requested by '${id}'.`, e);
+        }
 
-    const content = raw.replaceAll(/{{ cds-icon:(.+?) }}/g, (original, name) => {
-      try {
-        const iconPath = fileURLToPath(import.meta.resolve(`@carbon/icons/svg/32/${name}.svg`));
-        return readFileSync(iconPath, "utf8");
-      } catch (e) {
-        log.error(`Could not find Carbon icon with name '${name}'.\n   Requested by '${id}'.`, e);
-      }
+        return original;
+      });
 
-      return original;
-    });
-
-    return `export default ${JSON.stringify(content)}`;
+      return `export default ${JSON.stringify(content)}`;
+    },
   },
 
   hotUpdate({ file, server }) {
