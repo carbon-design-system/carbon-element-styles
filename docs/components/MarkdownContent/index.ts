@@ -9,7 +9,7 @@ import styles from "./index.scss?inline";
 
 import { marked } from "marked";
 import { markedHighlight } from "marked-highlight";
-import hljs from "highlight.js";
+import hljs from "@/utilities/hljs";
 
 import { ContentBase } from "@/components/ContentBase";
 
