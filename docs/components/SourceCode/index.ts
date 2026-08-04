@@ -7,7 +7,7 @@
 
 import styles from "./index.scss?inline";
 
-import hljs from "highlight.js";
+import hljs from "@/utilities/hljs";
 
 export class CdsEsDocsSourceCode extends HTMLElement {
   #observer = new MutationObserver(() => this.#render());
