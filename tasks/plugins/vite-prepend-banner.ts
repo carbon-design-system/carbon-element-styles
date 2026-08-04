@@ -8,7 +8,7 @@
 import { extname } from "node:path";
 import type { Plugin } from "vite";
 
-import { type FileType, getBanner, supportedFileTypes } from "../utilities/banner";
+import { type FileType, getBanner, supportedFileTypes } from "../utilities/banner.ts";
 
 export const prependBanner: Plugin = {
   name: "prepend-banner",
