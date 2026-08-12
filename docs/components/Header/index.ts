@@ -8,6 +8,8 @@
 import styles from "./index.scss?inline";
 
 import navigationIcon from "@carbon/icons/svg/32/menu.svg?raw";
+import githubIcon from "@carbon/icons/svg/32/logo--github.svg?raw";
+import npmIcon from "@carbon/icons/svg/32/logo--npm.svg?raw";
 import controlsIcon from "@carbon/icons/svg/32/settings--adjust.svg?raw";
 
 import { Environment } from "@/model/Environment";
@@ -56,11 +58,15 @@ export class CdsEsDocsHeader extends HTMLElement {
     return anchor;
   }
 
-  #createNavigationItem(label: string, href: string) {
+  #createNavigationItem(label: string, href: string, ariaLabel?: string) {
     const li = document.createElement("li");
     const a = document.createElement("a");
-    a.textContent = label;
+    a.innerHTML = label;
     a.setAttribute("href", href);
+
+    if (ariaLabel) {
+      a.setAttribute("aria-label", ariaLabel);
+    }
 
     li.append(a);
 
@@ -72,8 +78,14 @@ export class CdsEsDocsHeader extends HTMLElement {
 
     ul.append(
       this.#createNavigationItem(
-        "GitHub",
+        githubIcon,
         "https://github.com/carbon-design-system/carbon-element-styles",
+        "GitHub",
+      ),
+      this.#createNavigationItem(
+        npmIcon,
+        "https://www.npmjs.com/package/@carbon/element-styles",
+        "npm",
       ),
     );
 
