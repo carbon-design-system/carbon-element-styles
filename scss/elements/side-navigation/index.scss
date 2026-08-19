@@ -14,6 +14,7 @@
 @use "../../layout";
 @use "../../utilities/icons";
 @use "../../utilities/guards";
+@use "../../utilities/active-indicator";
 
 $config: () !default;
 
@@ -124,7 +125,7 @@ $-default-config: (
     & li > a[aria-current="page"] {
       @include layout.mode--heading-compact;
       background-color: theme.$layer-selected;
-      box-shadow: inset 0.25rem 0 0 0 theme.$border-interactive;
+      box-shadow: active-indicator.left();
       color: theme.$text-primary;
 
       @include guards.hover {

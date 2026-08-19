@@ -13,6 +13,7 @@
 
 @use "../../layout";
 @use "../../utilities/guards";
+@use "../../utilities/active-indicator";
 
 $config: () !default;
 
@@ -93,7 +94,7 @@ $-default-config: (
 
     & > nav ul li a[aria-current="page"] {
       color: theme.$text-primary;
-      box-shadow: inset 0 -0.25rem 0 0 theme.$border-interactive;
+      box-shadow: active-indicator.bottom();
     }
 
     & > nav ul li a svg {
