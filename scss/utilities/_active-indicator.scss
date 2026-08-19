@@ -1,0 +1,39 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "@carbon/styles/scss/theme";
+
+$-thickness: 0.1875rem;
+$-color: theme.$border-interactive;
+
+/// Top active indicator box-shadow
+/// @group active-indicator
+/// @return {String} - The box-shadow definition
+@function top() {
+  @return inset 0 $-thickness 0 0 $-color;
+}
+
+/// Bottom active indicator box-shadow
+/// @group active-indicator
+/// @return {String} - The box-shadow definition
+@function bottom() {
+  @return inset 0 #{$-thickness * -1} 0 0 $-color;
+}
+
+/// Left active indicator box-shadow
+/// @group active-indicator
+/// @return {String} - The box-shadow definition
+@function left() {
+  @return inset $-thickness 0 0 0 $-color;
+}
+
+/// Right active indicator box-shadow
+/// @group active-indicator
+/// @return {String} - The box-shadow definition
+@function right() {
+  @return inset #{$-thickness * -1} 0 0 0 $-color;
+}
