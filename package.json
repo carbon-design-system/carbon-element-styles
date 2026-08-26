@@ -1,6 +1,6 @@
 {
   "name": "@carbon/element-styles",
-  "version": "0.3.9",
+  "version": "0.3.10-rc.0",
   "description": "An experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names.",
   "keywords": [
     "carbon",
