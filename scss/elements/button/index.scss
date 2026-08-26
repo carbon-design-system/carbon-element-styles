@@ -184,6 +184,11 @@ $-default-config: (
       &:disabled > svg:first-child:has(+ [popover="hint"]:last-child) {
         color: theme.$icon-disabled;
       }
+
+      &[aria-pressed="true"]:has(> svg:only-child),
+      &[aria-pressed="true"]:has(> svg:first-child + [popover="hint"]:last-child) {
+        background-color: theme.$background-selected;
+      }
     }
 
     @if map.get($props, "kind") == "danger--primary" {
