@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/heading-level-3";
+import scssDoc from "virtual:scss-docs/heading-level-3";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Heading level 3";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<h1>–<h6>",
@@ -27,7 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/elements/typography/type-sets/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

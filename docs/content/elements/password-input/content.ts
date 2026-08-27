@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/password-input";
+import scssDoc from "virtual:scss-docs/password-input";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Password input";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: '<input type="password">',
@@ -27,9 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/text-input/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("block", { scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set("inline", { scssConfig: { axis: `'inline'` } });
 
 export default elementDemoContent;

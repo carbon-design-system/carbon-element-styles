@@ -11,8 +11,6 @@ import { marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "@/utilities/hljs";
 
-import { ContentBase } from "@/components/ContentBase";
-
 marked.use(
   markedHighlight({
     highlight(code, lang) {
@@ -22,7 +20,7 @@ marked.use(
   }),
 );
 
-export class CdsEsDocsMarkdownContent extends ContentBase {
+export class CdsEsDocsMarkdownContent extends HTMLElement {
   #observer = new MutationObserver(() => this.#render());
 
   constructor() {

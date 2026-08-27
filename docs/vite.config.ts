@@ -12,6 +12,7 @@ import type { UserConfig } from "vite";
 import { carbonIcons } from "../tasks/plugins/vite-carbon-icons.ts";
 import { docsInventory } from "../tasks/plugins/vite-docs-inventory.ts";
 import { prependBanner } from "../tasks/plugins/vite-prepend-banner.ts";
+import { scssConfig } from "../tasks/plugins/vite-scss-config.ts";
 import { scssDocs } from "../tasks/plugins/vite-scss-docs.ts";
 
 export const config: UserConfig = {
@@ -33,7 +34,7 @@ export const config: UserConfig = {
       "@": resolve(import.meta.dirname),
     },
   },
-  plugins: [carbonIcons, docsInventory, scssDocs, prependBanner],
+  plugins: [carbonIcons, docsInventory, scssConfig, scssDocs, prependBanner],
 };
 
 export default defineConfig(config);

@@ -10,12 +10,6 @@
 
 @use "../../../scss/layout";
 
-@mixin demo($id) {
-  :host([request-id="#{$id}"]) > .demo {
-    @content;
-  }
-}
-
 :host {
   block-size: 100%;
   display: grid;

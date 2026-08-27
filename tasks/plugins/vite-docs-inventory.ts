@@ -20,6 +20,7 @@ async function findLeafEntries(dir: string = contentDir, prefix: string = ""): P
 
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
+    if (entry.name.startsWith("_")) continue;
 
     const relativePath = prefix ? `${prefix}/${entry.name}` : entry.name;
     const childDir = resolve(dir, entry.name);

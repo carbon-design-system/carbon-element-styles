@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/tooltip";
+import scssDoc from "virtual:scss-docs/tooltip";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Tooltip";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: '"hint" popover',
@@ -27,39 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/tooltip/usage/",
   },
 ];
-
-const setup = (frame: HTMLElement) => {
-  for (const button of frame.querySelectorAll("button")) {
-    const tooltip = button.querySelector<HTMLElement>('[popover="hint"]');
-
-    button.addEventListener("mouseover", () => {
-      tooltip?.showPopover({
-        source: button,
-      });
-    });
-
-    button.addEventListener("mouseout", () => {
-      tooltip?.hidePopover();
-    });
-  }
-};
-
-elementDemoContent.demos.set("default", { setup });
-
-const alignments = [
-  "start start",
-  "start center",
-  "start end",
-  "center start",
-  "center end",
-  "end start",
-  "end center",
-  "end end",
-];
-
-for (const alignment of alignments) {
-  const key = `alignment-${alignment.replace(" ", "-")}`;
-  elementDemoContent.demos.set(key, { setup, scssConfig: { alignment: `'${alignment}'` } });
-}
 
 export default elementDemoContent;

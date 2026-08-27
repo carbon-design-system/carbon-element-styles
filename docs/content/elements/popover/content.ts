@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/popover";
+import scssDoc from "virtual:scss-docs/popover";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Popover";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "Popover API",
@@ -27,25 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/popover/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("with-caret", { scssConfig: { caret: "true" } });
-elementDemoContent.demos.set("without-caret", { scssConfig: { caret: "false" } });
-
-const alignments = [
-  "start start",
-  "start center",
-  "start end",
-  "center start",
-  "center end",
-  "end start",
-  "end center",
-  "end end",
-];
-
-for (const alignment of alignments) {
-  const key = `alignment-${alignment.replace(" ", "-")}`;
-  elementDemoContent.demos.set(key, { scssConfig: { alignment: `'${alignment}'` } });
-}
 
 export default elementDemoContent;

@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/block-quotation";
+import scssDoc from "virtual:scss-docs/block-quotation";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Block quotation";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<blockquote>",
@@ -31,11 +30,8 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/elements/typography/type-sets/",
   },
 ];
-
 elementDemoContent.notes = /* md */ `
 To denote a source, use a suceeding \`<cite>\` element.
 `;
-
-elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

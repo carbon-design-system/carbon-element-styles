@@ -7,8 +7,6 @@
 
 import styles from "./index.scss?inline";
 
-import { ContentBase } from "@/components/ContentBase";
-
 import type { ScssDoc } from "@/model/ScssDoc";
 
 import type { CdsEsDocsApiTable } from "@/components/ApiTable";
@@ -16,11 +14,7 @@ import type { CdsEsDocsElementOverview } from "@/components/ElementOverview";
 import type { CdsEsDocsSourceCode } from "@/components/SourceCode";
 import type { CdsEsDocsTabs } from "@/components/Tabs";
 
-export class CdsEsDocsElementDemoContent extends ContentBase<{
-  css: string;
-  html: string;
-  scssDoc: ScssDoc;
-}> {
+export class CdsEsDocsElementDemoContent extends HTMLElement {
   static observedAttributes = ["key", "request-id"];
 
   key: string = "";
@@ -30,13 +24,16 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
     url: string;
   }[] = [];
   notes?: string;
+  scssDoc?: ScssDoc;
   demos: Map<
     string,
     {
+      css: string;
+      html: string;
       scssConfig?: {
         [key: string]: string;
       };
-      setup?: (frame: HTMLElement) => void;
+      setup?: (frame: ShadowRoot) => void;
     }
   > = new Map();
 
@@ -58,6 +55,8 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
     this.shadowRoot?.adoptedStyleSheets.push(stylesheet);
 
     this.#frame.classList.add("demo");
+    this.#frame.attachShadow({ mode: "open" });
+    this.#frame.appendChild(document.createElement("slot"));
 
     const fade = document.createElement("div");
     fade.classList.add("fade");
@@ -106,20 +105,20 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
   #render() {
     const demo = this.demos.get(this.getAttribute("request-id") ?? "");
 
-    if (demo) {
+    if (demo && this.#frame.shadowRoot) {
       const stylesheet = new CSSStyleSheet();
-      stylesheet.replace(this.meta?.css ?? "");
-      this.shadowRoot?.adoptedStyleSheets.splice(1, Infinity, stylesheet);
+      stylesheet.replace(demo.css);
+      this.#frame.shadowRoot.adoptedStyleSheets = [stylesheet];
 
-      this.#frame.innerHTML = this.meta?.html ?? "";
-      demo.setup?.(this.#frame);
+      this.#frame.shadowRoot.innerHTML = demo.html;
+      demo.setup?.(this.#frame.shadowRoot);
 
       this.#elementOverviewTabPanel.label = this.label;
       this.#elementOverviewTabPanel.references = this.references;
       this.#elementOverviewTabPanel.notes = this.notes;
 
       this.#apiTableTabPanel.clearRows();
-      for (const entry of this.meta?.scssDoc.parameters.entries() ?? []) {
+      for (const entry of this.scssDoc?.parameters.entries() ?? []) {
         this.#apiTableTabPanel.insertRow({
           key: entry[0],
           type: entry[1].type,
@@ -128,7 +127,7 @@ export class CdsEsDocsElementDemoContent extends ContentBase<{
       }
 
       this.#sourceHtmlTabPanel.setAttribute("kind", "html");
-      this.#sourceHtmlTabPanel.textContent = this.meta?.html ?? "";
+      this.#sourceHtmlTabPanel.textContent = demo.html;
 
       this.#sourceScssTabPanel.setAttribute("kind", "scss");
       this.#sourceScssTabPanel.textContent = this.#getScssSourceCode(demo);

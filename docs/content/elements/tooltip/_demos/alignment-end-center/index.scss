@@ -1,0 +1,19 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "../../../../../../scss/elements/tooltip";
+
+@use "../../../../../../scss/elements/button";
+
+$config: (
+  alignment: "end center",
+);
+
+@include tooltip.styles($config);
+
+// ↓ for demo only ↓
+@include button.styles;

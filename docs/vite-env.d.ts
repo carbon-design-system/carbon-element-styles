@@ -22,3 +22,8 @@ declare module "virtual:scss-docs/*" {
   const scssDoc: ScssDoc;
   export default scssDoc;
 }
+
+declare module "virtual:scss-config/*" {
+  const scssConfig: Record<string, string> | undefined;
+  export default scssConfig;
+}
