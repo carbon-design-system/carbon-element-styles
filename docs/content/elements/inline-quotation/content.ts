@@ -6,28 +6,24 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/inline-quotation";
+import scssDoc from "virtual:scss-docs/inline-quotation";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Inline quotation";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<q>",
     url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q",
   },
 ];
-
 elementDemoContent.notes = /* md */ `
 Appropriate quotation marks are added automatically.
 `;
-
-elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

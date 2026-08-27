@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/progress-bar";
+import scssDoc from "virtual:scss-docs/progress-bar";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Progress bar";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<progress>",
@@ -27,11 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/progress-bar/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("block", { scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set("inline", { scssConfig: { axis: `'inline'` } });
-elementDemoContent.demos.set("thick", { scssConfig: { thickness: `'thick'` } });
-elementDemoContent.demos.set("thin", { scssConfig: { thickness: `'thin'` } });
 
 export default elementDemoContent;

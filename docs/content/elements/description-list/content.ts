@@ -6,24 +6,21 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/description-list";
+import scssDoc from "virtual:scss-docs/description-list";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Description list";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<dl>",
     url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

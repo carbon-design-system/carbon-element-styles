@@ -6,26 +6,21 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/horizontal-rule";
+import scssDoc from "virtual:scss-docs/horizontal-rule";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Horizontal rule";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<hr>",
     url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("subtle", { scssConfig: { kind: "subtle" } });
-elementDemoContent.demos.set("strong", { scssConfig: { kind: "strong" } });
 
 export default elementDemoContent;

@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/table";
+import scssDoc from "virtual:scss-docs/table";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Table";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<table>",
@@ -31,12 +30,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/structured-list/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("data-table", { scssConfig: { kind: `'data-table'` } });
-elementDemoContent.demos.set("structured-list", { scssConfig: { kind: `'structured-list'` } });
-elementDemoContent.demos.set("structured-list--flush", {
-  scssConfig: { kind: `'structured-list--flush'` },
-});
 
 export default elementDemoContent;

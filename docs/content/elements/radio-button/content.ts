@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/radio-button";
+import scssDoc from "virtual:scss-docs/radio-button";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Radio button";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: '<input type="radio">',
@@ -27,7 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/radio-button/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/button";
+import scssDoc from "virtual:scss-docs/button";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Button";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<button>",
@@ -27,20 +26,10 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/button/usage/",
   },
 ];
-
 elementDemoContent.notes = /* md */ `
 - Any SVG will be treated as a square icon.
 - When using both text and an icon, the text must be wrapped in some element, such as a \`<span>\`.
 - Support for \`aria-pressed="true"\` is exclusive to icon-only ghost buttons.
 `;
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("primary", { scssConfig: { kind: `'primary'` } });
-elementDemoContent.demos.set("secondary", { scssConfig: { kind: `'secondary'` } });
-elementDemoContent.demos.set("tertiary", { scssConfig: { kind: `'tertiary'` } });
-elementDemoContent.demos.set("ghost", { scssConfig: { kind: `'ghost'` } });
-elementDemoContent.demos.set("danger--primary", { scssConfig: { kind: `'danger--primary'` } });
-elementDemoContent.demos.set("danger--tertiary", { scssConfig: { kind: `'danger--tertiary'` } });
-elementDemoContent.demos.set("danger--ghost", { scssConfig: { kind: `'danger--ghost'` } });
 
 export default elementDemoContent;

@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/code";
+import scssDoc from "virtual:scss-docs/code";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Code";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<code>",
@@ -27,7 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/code-snippet/usage/#inline",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
 
 export default elementDemoContent;

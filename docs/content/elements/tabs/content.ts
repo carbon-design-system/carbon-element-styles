@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/tabs";
+import scssDoc from "virtual:scss-docs/tabs";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Tabs";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "tablist role",
@@ -31,42 +30,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/content-switcher/usage/",
   },
 ];
-
-const setup = (frame: HTMLElement) => {
-  frame.querySelectorAll('[role="tab"]').forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const targetId = tab.getAttribute("aria-controls");
-
-      if (targetId) {
-        const target = frame.querySelector(`#${targetId}`);
-
-        if (target) {
-          frame.querySelectorAll('[role="tab"]').forEach((t) => {
-            t.setAttribute("aria-selected", "false");
-          });
-
-          frame.querySelectorAll('[role="tabpanel"]').forEach((t) => {
-            t.setAttribute("hidden", "");
-          });
-
-          tab.setAttribute("aria-selected", "true");
-          target.removeAttribute("hidden");
-        }
-      }
-    });
-  });
-};
-
-elementDemoContent.demos.set("default", { setup });
-elementDemoContent.demos.set("line", { setup, scssConfig: { kind: `'line'` } });
-elementDemoContent.demos.set("contained", { setup, scssConfig: { kind: `'contained'` } });
-elementDemoContent.demos.set("content-switcher", {
-  setup,
-  scssConfig: { kind: `'content-switcher'` },
-});
-elementDemoContent.demos.set("content-switcher--low-contrast", {
-  setup,
-  scssConfig: { kind: `'content-switcher--low-contrast'` },
-});
 
 export default elementDemoContent;

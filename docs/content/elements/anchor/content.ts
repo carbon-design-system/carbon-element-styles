@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/anchor";
+import scssDoc from "virtual:scss-docs/anchor";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Abbreviation";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<a>",
@@ -27,9 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/link/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("with-visited-styles", { scssConfig: { "emit-visited": "true" } });
-elementDemoContent.demos.set("without-visited-styles", { scssConfig: { "emit-visited": "false" } });
 
 export default elementDemoContent;

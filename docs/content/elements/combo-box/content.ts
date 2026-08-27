@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/combo-box";
+import scssDoc from "virtual:scss-docs/combo-box";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Combo box";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "<datalist> (textual)",
@@ -27,9 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/dropdown/usage/#combo-box",
   },
 ];
-
-elementDemoContent.demos.set("default", {});
-elementDemoContent.demos.set("block", { scssConfig: { axis: `'block'` } });
-elementDemoContent.demos.set("inline", { scssConfig: { axis: `'inline'` } });
 
 export default elementDemoContent;

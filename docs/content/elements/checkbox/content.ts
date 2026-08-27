@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/checkbox";
+import scssDoc from "virtual:scss-docs/checkbox";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Checkbox";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: '<input type="checkbox">',
@@ -27,15 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/checkbox/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {
-  setup: (frame) => {
-    Array.from(frame.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'))
-      .slice(-2)
-      .forEach((checkbox) => {
-        checkbox.indeterminate = true;
-      });
-  },
-});
 
 export default elementDemoContent;

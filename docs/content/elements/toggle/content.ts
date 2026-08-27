@@ -6,17 +6,16 @@
  */
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
-
-export { default as css } from "./demo.scss?inline";
-export { default as html } from "./demo.html";
-export { default as scssDoc } from "virtual:scss-docs/toggle";
+import scssDoc from "virtual:scss-docs/toggle";
+import { demos } from "./_demos";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
 elementDemoContent.label = "Toggle";
-
+elementDemoContent.scssDoc = scssDoc;
+elementDemoContent.demos = demos;
 elementDemoContent.references = [
   {
     label: "switch role",
@@ -27,18 +26,5 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/toggle/usage/",
   },
 ];
-
-elementDemoContent.demos.set("default", {
-  setup: (frame) => {
-    frame.querySelectorAll('button[role="switch"]').forEach((toggle) => {
-      toggle.addEventListener("click", () => {
-        const state = toggle.getAttribute("aria-checked") === "true";
-        toggle.setAttribute("aria-checked", (!state).toString());
-        toggle.children[Number(state)].setAttribute("aria-hidden", "true");
-        toggle.children[Number(!state)].setAttribute("aria-hidden", "false");
-      });
-    });
-  },
-});
 
 export default elementDemoContent;
