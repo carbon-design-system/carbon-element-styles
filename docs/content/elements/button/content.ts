@@ -29,6 +29,7 @@ elementDemoContent.references = [
 elementDemoContent.notes = /* md */ `
 - Any SVG will be treated as a square icon.
 - When using both text and an icon, the text must be wrapped in some element, such as a \`<span>\`.
+- Support for \`aria-pressed="true"\` is exclusive to icon-only ghost buttons.
 `;
 
 export default elementDemoContent;
