@@ -76,6 +76,7 @@ function parseDeclaration(declaration: Declaration): ParsedFeatureResult {
     return {
       key: property,
       feature: {
+        type: "property",
         browsers: parseBrowserStatus(propertyCompat.__compat?.support),
       },
     };
@@ -93,6 +94,7 @@ function parseFunction(func: Function): ParsedFeatureResult {
     return {
       key: `${name}()`,
       feature: {
+        type: "function",
         browsers: parseBrowserStatus(funcCompat.__compat?.support),
       },
     };

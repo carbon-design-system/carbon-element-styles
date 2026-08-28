@@ -25,6 +25,7 @@ export type BrowserCompatibility = {
   features: Record<
     string,
     {
+      type: "property" | "function";
       browsers: BrowserCompatibility["browsers"];
     }
   >;

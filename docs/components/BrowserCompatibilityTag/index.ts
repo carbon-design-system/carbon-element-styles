@@ -12,6 +12,9 @@ import newlyAvailableIcon from "@carbon/icons/svg/32/pending.svg?raw";
 import limitedAvailableIcon from "@carbon/icons/svg/32/misuse--outline.svg?raw";
 import unknownAvailableIcon from "@carbon/icons/svg/32/help.svg?raw";
 
+import typePropertyIcon from "@carbon/icons/svg/32/diamond--outline.svg?raw";
+import typeFunctionIcon from "@carbon/icons/svg/32/function--2.svg?raw";
+
 import launchDialogIcon from "@carbon/icons/svg/32/arrow--up-right.svg?raw";
 
 import type { CdsEsDocsTag } from "@/components/Tag";
@@ -182,6 +185,15 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     }
   }
 
+  #getTypeIcon(type: BrowserCompatibility["features"][0]["type"]): SVGElement {
+    switch (type) {
+      case "property":
+        return this.#getIconAsSvgElement(typePropertyIcon);
+      case "function":
+        return this.#getIconAsSvgElement(typeFunctionIcon);
+    }
+  }
+
   #getFeatureCompatibilityTable(): HTMLTableElement {
     const table = document.createElement("table");
 
@@ -229,6 +241,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
 
       const featureCell = row.insertCell();
       featureCell.textContent = feature;
+      featureCell.prepend(this.#getTypeIcon(compatibility.type));
 
       for (const browser of browsers) {
         const release = compatibility.browsers[browser];
