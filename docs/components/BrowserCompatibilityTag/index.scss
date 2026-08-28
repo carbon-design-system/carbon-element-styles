@@ -107,6 +107,11 @@
     padding-block-end: 0 !important;
   }
 
+  dialog > header > p {
+    @include layout.mode--body-compact;
+    color: theme.$text-secondary;
+  }
+
   dialog .feature-compatibility-table {
     position: relative;
     overflow: hidden;

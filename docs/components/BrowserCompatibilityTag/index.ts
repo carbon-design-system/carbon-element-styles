@@ -268,6 +268,11 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     const header = document.createElement("header");
     header.textContent = "Browser compatibility";
 
+    const disclaimer = document.createElement("p");
+    disclaimer.textContent =
+      "This compatibility report is automatically generated from the source code and may not cover all used CSS features. Please open an issue if you find a mistake.";
+    header.appendChild(disclaimer);
+
     const closeButton = document.createElement("button");
     closeButton.addEventListener("click", () => {
       this.#dialog.close();
