@@ -90,7 +90,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     if (baselineStatus === "high") {
       return {
         color: "green",
-        label: "Widely available",
+        label: "Widely supported",
         since: `since ${this.#formatDate(since!.date as string)}`,
         icon: this.#getIconAsSvgElement(widelyAvailableIcon),
       };
@@ -99,7 +99,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     if (baselineStatus === "low") {
       return {
         color: "blue",
-        label: "Newly available",
+        label: "Newly suported",
         since: `since ${this.#formatDate(since!.date as string)}`,
         icon: this.#getIconAsSvgElement(newlyAvailableIcon),
       };
@@ -108,7 +108,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     if (baselineStatus === false) {
       return {
         color: "gray",
-        label: "Limited availability",
+        label: "Limited support",
         icon: this.#getIconAsSvgElement(limitedAvailableIcon),
       };
     }

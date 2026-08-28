@@ -6,10 +6,7 @@
  */
 
 import { CustomProperty, Declaration, transform, UnparsedProperty } from "lightningcss";
-import bcd, {
-  type SimpleSupportStatement,
-  type SupportBlock,
-} from "@mdn/browser-compat-data" with { type: "json" };
+import bcd, { type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
 
 import { browsers, type BrowserCompatibility } from "../../docs/model/BrowserCompatibility.ts";
 
@@ -26,20 +23,24 @@ function parseBrowserStatus(support: SupportBlock | undefined): BrowserCompatibi
 
       if (support) {
         const { releases } = bcd.browsers[browser];
-        const browserSupport = support[browser] as SimpleSupportStatement;
+        const browserSupport = support[browser];
 
         if (browserSupport) {
-          const { version_added } = browserSupport;
+          const { version_added } = Array.isArray(browserSupport)
+            ? browserSupport[0]
+            : browserSupport;
 
           if (version_added === false) {
             status.version = false;
             status.date = false;
             status.isPrerelease = false;
           } else if (version_added) {
-            const release = releases[version_added];
+            const version = version_added.startsWith("≤") ? version_added.slice(1) : version_added;
+
+            const release = releases[version];
 
             if (release) {
-              status.version = version_added;
+              status.version = version;
               status.date = release.release_date;
               status.isPrerelease = !["retired", "current"].includes(release.status);
             }
