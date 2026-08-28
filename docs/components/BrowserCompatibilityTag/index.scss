@@ -152,6 +152,10 @@
     color: theme.$text-primary;
   }
 
+  dialog td:first-child > svg {
+    color: theme.$text-helper;
+  }
+
   dialog td > svg {
     margin-inline-end: spacing.$spacing-03;
     inset-block-start: 0.125rem;

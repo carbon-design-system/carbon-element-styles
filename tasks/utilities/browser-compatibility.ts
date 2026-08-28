@@ -15,6 +15,7 @@ import {
   SupportsRule,
   transform,
   UnparsedProperty,
+  Variable,
 } from "lightningcss";
 import bcd, { type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
 
@@ -103,6 +104,22 @@ function parseFunction(func: Function): ParsedFeatureResult {
   if (compat) {
     return {
       key: `${name}()`,
+      feature: {
+        type: "function",
+        browsers: parseBrowserStatus(compat.__compat?.support),
+      },
+    };
+  }
+
+  return null;
+}
+
+function parseVariable(_: Variable): ParsedFeatureResult {
+  const compat = bcd.css.types["var"];
+
+  if (compat) {
+    return {
+      key: `var()`,
       feature: {
         type: "function",
         browsers: parseBrowserStatus(compat.__compat?.support),
@@ -210,6 +227,10 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
       },
       Function(func) {
         const feature = parseFunction(func);
+        if (feature) features[feature.key] = feature.feature;
+      },
+      Variable(variable) {
+        const feature = parseVariable(variable);
         if (feature) features[feature.key] = feature.feature;
       },
       Selector(selector) {
