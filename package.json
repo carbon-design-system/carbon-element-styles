@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@carbon/icons": "^11.84.0",
+    "@mdn/browser-compat-data": "^8.0.13",
     "@types/node": "^26.1.1",
     "highlight.js": "^11.11.1",
     "husky": "^9.1.7",

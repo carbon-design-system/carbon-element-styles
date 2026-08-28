@@ -8,5 +8,6 @@
 export { default as css } from "./index.scss?inline";
 export { default as html } from "../index.html";
 export { default as scssConfig } from "virtual:scss-config/checkbox/default";
+export { default as browserCompatibility } from "virtual:browser-compatibility/checkbox/default";
 
 export { setup } from "../setup";

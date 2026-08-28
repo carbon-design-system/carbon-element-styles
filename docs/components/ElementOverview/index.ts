@@ -7,12 +7,15 @@
 
 import styles from "./index.scss?inline";
 
+import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
+
 export class CdsEsDocsElementOverview extends HTMLElement {
   #headingElement: HTMLHeadingElement = document.createElement("h1");
   #referencesElement: HTMLElement = document.createElement("section");
   #notesElement: HTMLElement = document.createElement("section");
 
   label: string = "";
+  browserCompatibility?: BrowserCompatibility;
   references: {
     label: string;
     url: string;

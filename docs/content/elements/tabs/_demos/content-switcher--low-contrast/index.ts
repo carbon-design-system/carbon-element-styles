@@ -8,5 +8,6 @@
 export { default as css } from "./index.scss?inline";
 export { default as html } from "../index.html";
 export { default as scssConfig } from "virtual:scss-config/tabs/content-switcher--low-contrast";
+export { default as browserCompatibility } from "virtual:browser-compatibility/tabs/content-switcher--low-contrast";
 
 export { setup } from "../setup";
