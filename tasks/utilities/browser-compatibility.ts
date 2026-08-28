@@ -5,12 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CustomProperty, Declaration, transform, UnparsedProperty } from "lightningcss";
+import { CustomProperty, Declaration, Function, transform, UnparsedProperty } from "lightningcss";
 import bcd, { type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
 
 import { browsers, type BrowserCompatibility } from "../../docs/model/BrowserCompatibility.ts";
 
-type ParsedFeatureResult = { key: string; feature: BrowserCompatibility["features"][0] } | null;
+type ParsedFeatureResult = {
+  key: string;
+  feature: BrowserCompatibility["features"][0];
+} | null;
 
 function parseBrowserStatus(support: SupportBlock | undefined): BrowserCompatibility["browsers"] {
   return Object.fromEntries(
@@ -81,6 +84,23 @@ function parseDeclaration(declaration: Declaration): ParsedFeatureResult {
   return null;
 }
 
+function parseFunction(func: Function): ParsedFeatureResult {
+  const { name } = func;
+
+  const funcCompat = bcd.css.types[name];
+
+  if (funcCompat) {
+    return {
+      key: `${name}()`,
+      feature: {
+        browsers: parseBrowserStatus(funcCompat.__compat?.support),
+      },
+    };
+  }
+
+  return null;
+}
+
 export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility {
   const features: BrowserCompatibility["features"] = {};
 
@@ -90,6 +110,10 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
     visitor: {
       Declaration(declaration) {
         const feature = parseDeclaration(declaration);
+        if (feature) features[feature.key] = feature.feature;
+      },
+      Function(func) {
+        const feature = parseFunction(func);
         if (feature) features[feature.key] = feature.feature;
       },
     },
