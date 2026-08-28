@@ -12,6 +12,8 @@ import newlyAvailableIcon from "@carbon/icons/svg/32/pending.svg?raw";
 import limitedAvailableIcon from "@carbon/icons/svg/32/misuse--outline.svg?raw";
 import unknownAvailableIcon from "@carbon/icons/svg/32/help.svg?raw";
 
+import launchDialogIcon from "@carbon/icons/svg/32/arrow--up-right.svg?raw";
+
 import type { CdsEsDocsTag } from "@/components/Tag";
 import { browserNames, browsers, type BrowserCompatibility } from "@/model/BrowserCompatibility";
 
@@ -20,6 +22,7 @@ import { getBaselineStatus } from "@/utilities/baseline";
 export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
   #tag = document.createElement("cds-es-docs-tag") as CdsEsDocsTag;
   #popover = document.createElement("div");
+  #dialog = document.createElement("dialog");
 
   #support?: BrowserCompatibility;
 
@@ -30,6 +33,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
 
     this.#renderTag();
     this.#renderPopover();
+    this.#renderDialog();
   }
 
   constructor() {
@@ -45,7 +49,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
 
     this.#popover.setAttribute("popover", "");
 
-    this.shadowRoot?.appendChild(this.#popover);
+    this.shadowRoot?.append(this.#popover, this.#dialog);
   }
 
   #handleClick = () => {
@@ -116,6 +120,26 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     };
   }
 
+  #renderTag() {
+    const status = this.#getStatus(getBaselineStatus(Object.values(this.#support?.browsers ?? [])));
+
+    this.#tag.setAttribute("color", status.color);
+
+    const label = document.createElement("span");
+    label.textContent = status.label;
+
+    const content = [status.icon, label];
+
+    if (status.since) {
+      const since = document.createElement("b");
+      since.textContent = status.since;
+
+      content.push(since);
+    }
+
+    this.#tag.replaceChildren(...content);
+  }
+
   #renderPopover() {
     if (this.#support) {
       const ul = document.createElement("ul");
@@ -148,28 +172,100 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
         ul.appendChild(li);
       }
 
-      this.#popover.replaceChildren(ul);
+      const launchDialogButton = document.createElement("button");
+      launchDialogButton.appendChild(this.#getIconAsSvgElement(launchDialogIcon));
+      launchDialogButton.addEventListener("click", () => {
+        this.#dialog.showModal();
+      });
+
+      this.#popover.replaceChildren(ul, launchDialogButton);
     }
   }
 
-  #renderTag() {
-    const status = this.#getStatus(getBaselineStatus(Object.values(this.#support?.browsers ?? [])));
+  #getFeatureCompatibilityTable(): HTMLTableElement {
+    const table = document.createElement("table");
 
-    this.#tag.setAttribute("color", status.color);
+    const thead = document.createElement("thead");
+    table.appendChild(thead);
 
-    const label = document.createElement("span");
-    label.textContent = status.label;
+    const headerRow = thead.insertRow();
 
-    const content = [status.icon, label];
-
-    if (status.since) {
-      const since = document.createElement("b");
-      since.textContent = status.since;
-
-      content.push(since);
+    for (const label of ["Feature", ...browsers.map((browser) => browserNames[browser])]) {
+      const cell = document.createElement("th");
+      cell.textContent = label;
+      headerRow.appendChild(cell);
     }
 
-    this.#tag.replaceChildren(...content);
+    const tbody = document.createElement("tbody");
+    table.appendChild(tbody);
+
+    const sortedFeatures = Object.entries(this.#support?.features ?? []).toSorted(
+      ([_, a], [__, b]) => {
+        function convertBrowserDateToNumber(
+          browser: BrowserCompatibility["browsers"][(typeof browsers)[number]],
+        ) {
+          return browser.date === false
+            ? Infinity
+            : typeof browser.date === "string"
+              ? new Date(browser.date).getTime()
+              : -Infinity;
+        }
+
+        const aNewest = Object.values(a.browsers)
+          .map(convertBrowserDateToNumber)
+          .toSorted((a, b) => b - a)
+          .at(0)!;
+        const bNewest = Object.values(b.browsers)
+          .map(convertBrowserDateToNumber)
+          .toSorted((a, b) => b - a)
+          .at(0)!;
+
+        return bNewest - aNewest;
+      },
+    );
+
+    for (const [feature, compatibility] of sortedFeatures) {
+      const row = tbody.insertRow();
+
+      const featureCell = row.insertCell();
+      featureCell.textContent = feature;
+
+      for (const browser of browsers) {
+        const release = compatibility.browsers[browser];
+        const baselineStatus = getBaselineStatus([release]);
+        const status = this.#getStatus(baselineStatus);
+
+        const cell = row.insertCell();
+        cell.textContent = release.version || "--";
+
+        const icon = status.icon;
+        icon.classList.add("status", `status--${status.color}`);
+        cell.prepend(icon);
+      }
+    }
+
+    return table;
+  }
+
+  #renderDialog() {
+    const header = document.createElement("header");
+    header.textContent = "Browser compatibility";
+
+    const closeButton = document.createElement("button");
+    closeButton.addEventListener("click", () => {
+      this.#dialog.close();
+    });
+    header.appendChild(closeButton);
+
+    const container = document.createElement("div");
+    container.classList.add("feature-compatibility-table");
+
+    const tableContainer = document.createElement("div");
+    tableContainer.classList.add("table-container");
+    tableContainer.appendChild(this.#getFeatureCompatibilityTable());
+    container.appendChild(tableContainer);
+
+    this.#dialog.replaceChildren(header, container);
   }
 
   connectedCallback() {}

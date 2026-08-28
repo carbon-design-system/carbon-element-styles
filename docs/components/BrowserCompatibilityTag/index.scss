@@ -9,6 +9,9 @@
 @use "@carbon/styles/scss/spacing";
 
 @use "../../../scss/elements/popover";
+@use "../../../scss/elements/button";
+@use "../../../scss/elements/dialog";
+@use "../../../scss/elements/table";
 
 @use "../../../scss/layout";
 
@@ -19,10 +22,29 @@
     )
   );
 
+  @include button.styles(
+    (
+      kind: "ghost",
+    )
+  );
+
+  @include dialog.styles;
+
+  @include table.styles(
+    (
+      kind: "structured-list--flush",
+    )
+  );
+
+  [popover] {
+    @include layout.size("sm");
+  }
+
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-inline-end: calc(layout.$size--block-size + spacing.$spacing-03);
   }
 
   li {
@@ -35,7 +57,8 @@
     margin-block-start: spacing.$spacing-03;
   }
 
-  li > svg {
+  li > svg,
+  dialog td > svg {
     fill: currentColor;
     block-size: 1rem;
     inline-size: 1rem;
@@ -43,15 +66,18 @@
     inset-block-start: 0.0625rem;
   }
 
-  li > svg.status--green {
+  li > svg.status--green,
+  dialog td > svg.status--green {
     color: theme.$support-success;
   }
 
-  li > svg.status--blue {
+  li > svg.status--blue,
+  dialog td > svg.status--blue {
     color: theme.$support-info;
   }
 
-  li > svg.status--gray {
+  li > svg.status--gray,
+  dialog td > svg.status--gray {
     color: theme.$icon-secondary;
   }
 
@@ -69,5 +95,59 @@
     @include layout.mode--helper-text;
     color: theme.$text-secondary;
     grid-column: 2;
+  }
+
+  ul + button {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  dialog {
+    padding-block-end: 0 !important;
+  }
+
+  dialog .feature-compatibility-table {
+    position: relative;
+    overflow: hidden;
+    block-size: 50vb;
+    margin-inline: calc(layout.$density--padding * -1);
+  }
+
+  dialog .feature-compatibility-table::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline: 0;
+    block-size: layout.$density--padding;
+    background: linear-gradient(transparent, theme.$layer-background);
+  }
+
+  dialog .table-container {
+    overflow: auto;
+    block-size: 100%;
+    padding-inline: layout.$density--padding;
+  }
+
+  dialog table {
+    @include layout.size("xs");
+    margin: 0;
+    padding-block-end: layout.$density--padding;
+  }
+
+  dialog thead {
+    background-color: theme.$layer-background;
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 1;
+  }
+
+  dialog td:first-child {
+    @include layout.mode--code;
+  }
+
+  dialog td > svg {
+    margin-inline-end: spacing.$spacing-03;
+    inset-block-start: 0.125rem;
   }
 }
