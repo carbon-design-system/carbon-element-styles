@@ -8,9 +8,13 @@
 import styles from "./index.scss?inline";
 
 import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
+import type { CdsEsDocsBrowserCompatibilityTag } from "../BrowserCompatibilityTag";
 
 export class CdsEsDocsElementOverview extends HTMLElement {
   #headingElement: HTMLHeadingElement = document.createElement("h1");
+  #browserCompatibilityTag = document.createElement(
+    "cds-es-docs-browser-compatibility-tag",
+  ) as CdsEsDocsBrowserCompatibilityTag;
   #referencesElement: HTMLElement = document.createElement("section");
   #notesElement: HTMLElement = document.createElement("section");
 
@@ -44,11 +48,18 @@ export class CdsEsDocsElementOverview extends HTMLElement {
     const notesContent = document.createElement("cds-es-docs-markdown-content");
     this.#notesElement.append(notesContent);
 
-    this.shadowRoot?.append(this.#headingElement, this.#referencesElement, this.#notesElement);
+    this.shadowRoot?.append(
+      this.#headingElement,
+      this.#browserCompatibilityTag,
+      this.#referencesElement,
+      this.#notesElement,
+    );
   }
 
   #render() {
     this.#headingElement.textContent = this.label;
+
+    this.#browserCompatibilityTag.support = this.browserCompatibility;
 
     this.#referencesElement.querySelector("ul")?.replaceChildren(
       ...(this.references ?? []).map((reference) => {

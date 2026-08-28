@@ -6,14 +6,20 @@
  */
 
 export const browsers = ["chrome", "edge", "firefox", "safari"] as const;
+export const browserNames: Record<(typeof browsers)[number], string> = {
+  chrome: "Chrome",
+  edge: "Edge",
+  firefox: "Firefox",
+  safari: "Safari",
+};
 
 export type BrowserCompatibility = {
   browsers: Record<
     (typeof browsers)[number],
     {
-      date?: string;
-      version?: string;
-      isPrerelease?: boolean;
+      date?: string | false;
+      version?: string | false;
+      isPrerelease?: boolean | false;
     }
   >;
   features: Record<

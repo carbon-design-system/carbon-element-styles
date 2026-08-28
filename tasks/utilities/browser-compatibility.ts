@@ -31,7 +31,11 @@ function parseBrowserStatus(support: SupportBlock | undefined): BrowserCompatibi
         if (browserSupport) {
           const { version_added } = browserSupport;
 
-          if (version_added) {
+          if (version_added === false) {
+            status.version = false;
+            status.date = false;
+            status.isPrerelease = false;
+          } else if (version_added) {
             const release = releases[version_added];
 
             if (release) {

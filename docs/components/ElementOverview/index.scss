@@ -13,6 +13,8 @@
 @use "../../../scss/elements/label";
 @use "../../../scss/elements/unordered-list";
 
+@use "../../../scss/layout";
+
 :host {
   @include layer.styles;
 
@@ -33,6 +35,10 @@
 :host h1,
 :host ul {
   margin-block-start: 0;
+}
+
+:host cds-es-docs-browser-compatibility-tag {
+  @include layout.size("xs");
 }
 
 :host h2 {

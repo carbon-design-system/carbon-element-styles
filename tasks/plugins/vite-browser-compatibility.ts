@@ -13,6 +13,7 @@ import type { Plugin } from "vite";
 import { getBrowserCompatibilityForCss } from "../utilities/browser-compatibility.ts";
 
 const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
+const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
 const nodeModulesDir = resolve(import.meta.dirname, "../../node_modules");
 
 const virtualPrefix = "virtual:browser-compatibility/";
@@ -35,10 +36,13 @@ export const browserCompatibility: Plugin = {
     },
     async handler(id) {
       const [elementName, demoName] = id.slice(resolvedPrefix.length).split("/");
-      const scssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
-      this.addWatchFile(scssPath);
+      const demoScssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
+      const elementScssPath = resolve(elementsScssDir, elementName, "index.scss");
 
-      const { css } = await compileAsync(scssPath, {
+      this.addWatchFile(demoScssPath);
+      this.addWatchFile(elementScssPath);
+
+      const { css } = await compileAsync(demoScssPath, {
         loadPaths: [nodeModulesDir],
       });
 
