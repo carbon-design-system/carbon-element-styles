@@ -9,7 +9,9 @@ import {
   CustomProperty,
   Declaration,
   Function,
+  MediaQuery,
   Selector,
+  SupportsCondition,
   transform,
   UnparsedProperty,
 } from "lightningcss";
@@ -95,14 +97,14 @@ function parseDeclaration(declaration: Declaration): ParsedFeatureResult {
 function parseFunction(func: Function): ParsedFeatureResult {
   const { name } = func;
 
-  const funcCompat = bcd.css.types[name];
+  const compat = bcd.css.types[name];
 
-  if (funcCompat) {
+  if (compat) {
     return {
       key: `${name}()`,
       feature: {
         type: "function",
-        browsers: parseBrowserStatus(funcCompat.__compat?.support),
+        browsers: parseBrowserStatus(compat.__compat?.support),
       },
     };
   }
@@ -146,6 +148,38 @@ function parseSelector(selector: Selector): ParsedFeatureResult {
   return null;
 }
 
+function parseMediaQuery(_: MediaQuery): ParsedFeatureResult {
+  const compat = bcd.css["at-rules"].media;
+
+  if (compat) {
+    return {
+      key: `@media`,
+      feature: {
+        type: "at-rule",
+        browsers: parseBrowserStatus(compat.__compat?.support),
+      },
+    };
+  }
+
+  return null;
+}
+
+function parseSupportsCondition(_: SupportsCondition): ParsedFeatureResult {
+  const compat = bcd.css["at-rules"].supports;
+
+  if (compat) {
+    return {
+      key: `@supports`,
+      feature: {
+        type: "at-rule",
+        browsers: parseBrowserStatus(compat.__compat?.support),
+      },
+    };
+  }
+
+  return null;
+}
+
 export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility {
   const features: BrowserCompatibility["features"] = {};
 
@@ -164,6 +198,15 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
       Selector(selector) {
         const feature = parseSelector(selector);
         if (feature) features[feature.key] = feature.feature;
+      },
+      MediaQuery(mediaQuery) {
+        const feature = parseMediaQuery(mediaQuery);
+        if (feature) features[feature.key] = feature.feature;
+      },
+      SupportsCondition(supportsCondition) {
+        const feature = parseSupportsCondition(supportsCondition);
+        if (feature) features[feature.key] = feature.feature;
+        return supportsCondition;
       },
     },
   });

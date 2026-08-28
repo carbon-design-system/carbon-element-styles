@@ -15,6 +15,7 @@ import unknownAvailableIcon from "@carbon/icons/svg/32/help.svg?raw";
 import typePropertyIcon from "@carbon/icons/svg/32/diamond--outline.svg?raw";
 import typeFunctionIcon from "@carbon/icons/svg/32/function--2.svg?raw";
 import typeSelectorIcon from "@carbon/icons/svg/32/select--01.svg?raw";
+import typeAtRuleIcon from "@carbon/icons/svg/32/at.svg?raw";
 
 import launchDialogIcon from "@carbon/icons/svg/32/arrow--up-right.svg?raw";
 
@@ -187,14 +188,14 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
   }
 
   #getTypeIcon(type: BrowserCompatibility["features"][0]["type"]): SVGElement {
-    switch (type) {
-      case "property":
-        return this.#getIconAsSvgElement(typePropertyIcon);
-      case "function":
-        return this.#getIconAsSvgElement(typeFunctionIcon);
-      case "selector":
-        return this.#getIconAsSvgElement(typeSelectorIcon);
-    }
+    const icons: Record<BrowserCompatibility["features"][0]["type"], string> = {
+      property: typePropertyIcon,
+      function: typeFunctionIcon,
+      selector: typeSelectorIcon,
+      ["at-rule"]: typeAtRuleIcon,
+    };
+
+    return this.#getIconAsSvgElement(icons[type]);
   }
 
   #getFeatureCompatibilityTable(): HTMLTableElement {
