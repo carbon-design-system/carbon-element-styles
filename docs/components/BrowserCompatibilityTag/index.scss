@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+
 @use "../../../scss/elements/popover";
 
 @use "../../../scss/layout";
@@ -15,4 +18,56 @@
       alignment: "start center",
     )
   );
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: spacing.$spacing-03;
+  }
+
+  li:not(:first-child) {
+    margin-block-start: spacing.$spacing-03;
+  }
+
+  li > svg {
+    fill: currentColor;
+    block-size: 1rem;
+    inline-size: 1rem;
+    position: relative;
+    inset-block-start: 0.0625rem;
+  }
+
+  li > svg.status--green {
+    color: theme.$support-success;
+  }
+
+  li > svg.status--blue {
+    color: theme.$support-info;
+  }
+
+  li > svg.status--gray {
+    color: theme.$icon-secondary;
+  }
+
+  li > p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  li > p:first-of-type {
+    @include layout.mode--heading-compact;
+    color: theme.$text-primary;
+  }
+
+  li > p:last-of-type {
+    @include layout.mode--helper-text;
+    color: theme.$text-secondary;
+    grid-column: 2;
+  }
 }

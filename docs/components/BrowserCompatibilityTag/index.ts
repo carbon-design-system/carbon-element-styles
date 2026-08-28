@@ -13,7 +13,7 @@ import limitedAvailableIcon from "@carbon/icons/svg/32/misuse--outline.svg?raw";
 import unknownAvailableIcon from "@carbon/icons/svg/32/help.svg?raw";
 
 import type { CdsEsDocsTag } from "@/components/Tag";
-import { type BrowserCompatibility } from "@/model/BrowserCompatibility";
+import { browserNames, browsers, type BrowserCompatibility } from "@/model/BrowserCompatibility";
 
 import { getBaselineStatus } from "@/utilities/baseline";
 
@@ -61,13 +61,19 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     return temp.firstElementChild as SVGElement;
   }
 
-  #getStatus(): {
+  #formatDate(date: string): string {
+    return new Intl.DateTimeFormat("en-us", {
+      month: "long",
+      year: "numeric",
+    }).format(new Date(date));
+  }
+
+  #getStatus(baselineStatus: ReturnType<typeof getBaselineStatus>): {
     color: string;
     label: string;
     since?: string;
     icon: SVGElement;
   } {
-    const baselineStatus = getBaselineStatus(this.#support?.browsers);
     const since =
       baselineStatus === "high" || baselineStatus === "low"
         ? Object.values(this.#support?.browsers ?? [])
@@ -77,16 +83,11 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
             .at(0)
         : undefined;
 
-    const formatDate = new Intl.DateTimeFormat("en-us", {
-      month: "long",
-      year: "numeric",
-    }).format;
-
     if (baselineStatus === "high") {
       return {
         color: "green",
         label: "Widely available",
-        since: `since ${formatDate(new Date(since!.date as string))}`,
+        since: `since ${this.#formatDate(since!.date as string)}`,
         icon: this.#getIconAsSvgElement(widelyAvailableIcon),
       };
     }
@@ -95,7 +96,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
       return {
         color: "blue",
         label: "Newly available",
-        since: `since ${formatDate(new Date(since!.date as string))}`,
+        since: `since ${this.#formatDate(since!.date as string)}`,
         icon: this.#getIconAsSvgElement(newlyAvailableIcon),
       };
     }
@@ -115,10 +116,44 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     };
   }
 
-  #renderPopover() {}
+  #renderPopover() {
+    if (this.#support) {
+      const ul = document.createElement("ul");
+      ul.setAttribute("role", "list");
+
+      for (const browser of browsers) {
+        const release = this.#support.browsers[browser];
+        const baselineStatus = getBaselineStatus([release]);
+        const status = this.#getStatus(baselineStatus);
+
+        const li = document.createElement("li");
+
+        const icon = status.icon;
+        icon.classList.add("status", `status--${status.color}`);
+        li.appendChild(icon);
+
+        const heading = document.createElement("p");
+        heading.textContent = browserNames[browser];
+        li.appendChild(heading);
+
+        const subline = document.createElement("p");
+        subline.textContent =
+          release.version && release.date
+            ? `since ${release.version} (${this.#formatDate(release.date)})`
+            : baselineStatus === false
+              ? "Unsupported"
+              : "Unknown";
+        li.appendChild(subline);
+
+        ul.appendChild(li);
+      }
+
+      this.#popover.replaceChildren(ul);
+    }
+  }
 
   #renderTag() {
-    const status = this.#getStatus();
+    const status = this.#getStatus(getBaselineStatus(Object.values(this.#support?.browsers ?? [])));
 
     this.#tag.setAttribute("color", status.color);
 

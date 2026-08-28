@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { BrowserCompatibility } from "../../docs/model/BrowserCompatibility";
+import { BrowserCompatibility, browsers } from "../../docs/model/BrowserCompatibility";
 
 const highThreshold = (() => {
   const now = new Date();
@@ -15,16 +15,14 @@ const highThreshold = (() => {
 })();
 
 export function getBaselineStatus(
-  support?: BrowserCompatibility["browsers"],
+  support?: BrowserCompatibility["browsers"][(typeof browsers)[number]][],
 ): "high" | "low" | false | undefined {
   if (!support) {
     return undefined;
   }
 
-  const browsers = Object.values(support);
-
   if (
-    browsers.some(
+    support.some(
       (status) =>
         status.date === undefined ||
         status.isPrerelease === undefined ||
@@ -35,14 +33,14 @@ export function getBaselineStatus(
   }
 
   if (
-    browsers.some(
+    support.some(
       (status) => status.date === false || status.version === false || status.isPrerelease === true,
     )
   ) {
     return false;
   }
 
-  const newestMinimumRequired = browsers
+  const newestMinimumRequired = support
     .map((browser) => new Date(browser.date as string).getTime())
     .toSorted((a, b) => b - a)
     .at(0)!;
