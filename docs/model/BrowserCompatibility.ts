@@ -13,6 +13,13 @@ export type BrowserCompatibility = {
     {
       date?: string;
       version?: string;
+      isPrerelease?: boolean;
+    }
+  >;
+  features: Record<
+    string,
+    {
+      browsers: BrowserCompatibility["browsers"];
     }
   >;
 };

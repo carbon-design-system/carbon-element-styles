@@ -10,7 +10,7 @@ import { compileAsync } from "sass";
 
 import type { Plugin } from "vite";
 
-import { browsers, type BrowserCompatibility } from "../../docs/model/BrowserCompatibility";
+import { getBrowserCompatibilityForCss } from "../utilities/browser-compatibility.ts";
 
 const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
 const nodeModulesDir = resolve(import.meta.dirname, "../../node_modules");
@@ -38,21 +38,11 @@ export const browserCompatibility: Plugin = {
       const scssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
       this.addWatchFile(scssPath);
 
-      await compileAsync(scssPath, {
+      const { css } = await compileAsync(scssPath, {
         loadPaths: [nodeModulesDir],
       });
 
-      const browserCompatibility = {
-        browsers: Object.fromEntries(
-          browsers.map((browser) => [
-            browser,
-            {
-              version: undefined,
-              date: undefined,
-            },
-          ]),
-        ),
-      } as BrowserCompatibility;
+      const browserCompatibility = getBrowserCompatibilityForCss(css);
 
       return `export default ${JSON.stringify(browserCompatibility)};`;
     },
