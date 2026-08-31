@@ -7,6 +7,7 @@
 
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/breakpoint";
 
 @use "../../../scss/elements/popover";
 @use "../../../scss/elements/button";
@@ -85,6 +86,12 @@
   dialog {
     padding-block-end: 0 !important;
 
+    @include breakpoint.breakpoint-up("md") {
+      &:modal {
+        block-size: 75vb;
+      }
+    }
+
     p {
       color: theme.$text-secondary;
     }
@@ -104,7 +111,7 @@
     .feature-compatibility-table {
       position: relative;
       overflow: hidden;
-      block-size: 50vb;
+      block-size: 100%;
       margin-inline: calc(layout.$density--padding * -1);
     }
 

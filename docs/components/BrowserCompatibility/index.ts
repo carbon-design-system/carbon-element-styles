@@ -288,8 +288,8 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
     body.appendChild(legend);
 
     for (const [baselineStatus, label] of [
-      ["high", "Supported since ≥ 30 months"],
-      ["low", "Supported since < 30 months"],
+      ["high", "Released ≥ 30 months ago"],
+      ["low", "Released < 30 months ago"],
       [false, "Not supported"],
     ] as const) {
       const definition = this.#getStatus(baselineStatus);
