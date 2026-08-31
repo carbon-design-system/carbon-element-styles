@@ -6,18 +6,18 @@
  */
 
 import {
-  ContainerRule,
-  CustomProperty,
-  Declaration,
-  Function,
-  MediaRule,
-  Selector,
-  SupportsRule,
   transform,
-  UnparsedProperty,
-  Variable,
+  type ContainerRule,
+  type CustomProperty,
+  type Declaration,
+  type Function,
+  type MediaRule,
+  type Selector,
+  type SupportsRule,
+  type UnparsedProperty,
+  type Variable,
 } from "lightningcss";
-import bcd, { type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
+import bcd, { Identifier, type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
 
 import { browsers, type BrowserCompatibility } from "../../docs/model/BrowserCompatibility.ts";
 
@@ -70,6 +70,24 @@ function parseBrowserStatus(support: SupportBlock | undefined): BrowserCompatibi
   ) as BrowserCompatibility["browsers"];
 }
 
+function parsedFeatureResult(
+  type: NonNullable<ParsedFeatureResult>["feature"]["type"],
+  label: string,
+  compat: Identifier,
+): ParsedFeatureResult {
+  if (compat) {
+    return {
+      key: label,
+      feature: {
+        type,
+        browsers: parseBrowserStatus(compat.__compat?.support),
+      },
+    };
+  }
+
+  return null;
+}
+
 function parseDeclaration(declaration: Declaration): ParsedFeatureResult {
   let property = declaration.property as string;
 
@@ -81,137 +99,53 @@ function parseDeclaration(declaration: Declaration): ParsedFeatureResult {
     property = (declaration.value as CustomProperty).name;
   }
 
-  const propertyCompat = bcd.css.properties[property];
-
-  if (propertyCompat) {
-    return {
-      key: property,
-      feature: {
-        type: "property",
-        browsers: parseBrowserStatus(propertyCompat.__compat?.support),
-      },
-    };
-  }
-
-  return null;
+  return parsedFeatureResult("property", property, bcd.css.properties[property]);
 }
 
 function parseFunction(func: Function): ParsedFeatureResult {
   const { name } = func;
 
-  const compat = bcd.css.types[name];
-
-  if (compat) {
-    return {
-      key: `${name}()`,
-      feature: {
-        type: "function",
-        browsers: parseBrowserStatus(compat.__compat?.support),
-      },
-    };
-  }
-
-  return null;
+  return parsedFeatureResult("function", `${name}()`, bcd.css.types[name]);
 }
 
 function parseVariable(_: Variable): ParsedFeatureResult {
-  const compat = bcd.css.types["var"];
-
-  if (compat) {
-    return {
-      key: `var()`,
-      feature: {
-        type: "function",
-        browsers: parseBrowserStatus(compat.__compat?.support),
-      },
-    };
-  }
-
-  return null;
+  return parsedFeatureResult("function", "var()", bcd.css.types["var"]);
 }
 
 function parseSelector(selector: Selector): ParsedFeatureResult {
   const pseudoClass = selector.find((s) => s.type === "pseudo-class");
 
   if (pseudoClass) {
-    const compat = bcd.css.selectors[pseudoClass.kind];
-
-    if (compat) {
-      return {
-        key: `:${pseudoClass.kind}`,
-        feature: {
-          type: "selector",
-          browsers: parseBrowserStatus(compat.__compat?.support),
-        },
-      };
-    }
+    return parsedFeatureResult(
+      "selector",
+      `:${pseudoClass.kind}`,
+      bcd.css.selectors[pseudoClass.kind],
+    );
   }
 
   const pseudoElement = selector.find((s) => s.type === "pseudo-element");
 
   if (pseudoElement) {
-    const compat = bcd.css.selectors[pseudoElement.kind];
-
-    if (compat) {
-      return {
-        key: `::${pseudoElement.kind}`,
-        feature: {
-          type: "selector",
-          browsers: parseBrowserStatus(compat.__compat?.support),
-        },
-      };
-    }
+    return parsedFeatureResult(
+      "selector",
+      `::${pseudoElement.kind}`,
+      bcd.css.selectors[pseudoElement.kind],
+    );
   }
 
   return null;
 }
 
 function parseMediaRule(_: MediaRule): ParsedFeatureResult {
-  const compat = bcd.css["at-rules"].media;
-
-  if (compat) {
-    return {
-      key: `@media`,
-      feature: {
-        type: "at-rule",
-        browsers: parseBrowserStatus(compat.__compat?.support),
-      },
-    };
-  }
-
-  return null;
+  return parsedFeatureResult("at-rule", "@media", bcd.css["at-rules"].media);
 }
 
 function parseContainerRule(_: ContainerRule): ParsedFeatureResult {
-  const compat = bcd.css["at-rules"].container;
-
-  if (compat) {
-    return {
-      key: `@container`,
-      feature: {
-        type: "at-rule",
-        browsers: parseBrowserStatus(compat.__compat?.support),
-      },
-    };
-  }
-
-  return null;
+  return parsedFeatureResult("at-rule", "@container", bcd.css["at-rules"].container);
 }
 
 function parseSupportsRule(_: SupportsRule): ParsedFeatureResult {
-  const compat = bcd.css["at-rules"].supports;
-
-  if (compat) {
-    return {
-      key: `@supports`,
-      feature: {
-        type: "at-rule",
-        browsers: parseBrowserStatus(compat.__compat?.support),
-      },
-    };
-  }
-
-  return null;
+  return parsedFeatureResult("at-rule", "@supports", bcd.css["at-rules"].supports);
 }
 
 export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility {

@@ -12,7 +12,7 @@ import newlyAvailableIcon from "@carbon/icons/svg/32/pending.svg?raw";
 import limitedAvailableIcon from "@carbon/icons/svg/32/misuse--outline.svg?raw";
 import unknownAvailableIcon from "@carbon/icons/svg/32/help.svg?raw";
 
-import typePropertyIcon from "@carbon/icons/svg/32/diamond--outline.svg?raw";
+import typePropertyIcon from "@carbon/icons/svg/32/paint-brush.svg?raw";
 import typeFunctionIcon from "@carbon/icons/svg/32/function--2.svg?raw";
 import typeSelectorIcon from "@carbon/icons/svg/32/select--01.svg?raw";
 import typeAtRuleIcon from "@carbon/icons/svg/32/at.svg?raw";
