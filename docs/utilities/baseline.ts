@@ -45,7 +45,7 @@ export function getBaselineStatus(
     .toSorted((a, b) => b - a)
     .at(0)!;
 
-  if (newestMinimumRequired < highThreshold) {
+  if (newestMinimumRequired <= highThreshold) {
     return "high";
   }
 

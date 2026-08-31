@@ -8,6 +8,7 @@
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/breakpoint";
+@use "@carbon/styles/scss/utilities/visually-hidden";
 
 @use "../../../scss/elements/popover";
 @use "../../../scss/elements/button";
@@ -43,17 +44,11 @@
     padding-inline-end: calc(layout.$size--block-size + spacing.$spacing-03);
   }
 
-  li {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    column-gap: spacing.$spacing-02;
-  }
-
   [popover] {
     @include layout.size("sm");
 
     li:not(:first-child) {
-      margin-block-start: spacing.$spacing-03;
+      margin-block-start: layout.$mode--margin-block;
     }
 
     li > p {
@@ -61,13 +56,13 @@
       white-space: nowrap;
     }
 
-    li svg.status {
-      inset-block-start: 0.0625rem;
-    }
-
     li > p:first-of-type {
       @include layout.mode--heading-compact;
       color: theme.$text-primary;
+      display: inline-grid;
+      grid-template-columns: max-content max-content;
+      align-items: center;
+      column-gap: spacing.$spacing-02;
     }
 
     li > p:last-of-type {
@@ -80,6 +75,7 @@
       position: absolute;
       inset-block-start: 0;
       inset-inline-end: 0;
+      border-start-end-radius: 0.125rem;
     }
   }
 
@@ -107,6 +103,9 @@
 
     ul li {
       @include layout.mode--helper-text;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: spacing.$spacing-02;
     }
 
     .feature-compatibility-table {
@@ -123,6 +122,7 @@
       inset-inline: 0;
       block-size: layout.$density--padding;
       background: linear-gradient(transparent, theme.$layer-background);
+      z-index: 1;
     }
 
     .table-container {
@@ -172,6 +172,41 @@
     td > svg {
       margin-inline-end: spacing.$spacing-02;
       inset-block-start: 0.125rem;
+    }
+
+    td:has(svg.status--gray) {
+      color: theme.$text-helper;
+    }
+
+    @include breakpoint.breakpoint-down("md") {
+      table {
+        @include layout.size("sm");
+      }
+
+      tr {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      td {
+        display: block;
+      }
+
+      th:first-child {
+        @include visually-hidden.visually-hidden;
+      }
+
+      td:first-child {
+        @include layout.size("xs");
+        font-weight: 600;
+        grid-column: 1 / -1;
+        border-block-end: none;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+        padding-inline-start: 0;
+      }
     }
   }
 

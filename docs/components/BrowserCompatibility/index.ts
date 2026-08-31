@@ -8,11 +8,11 @@
 import styles from "./index.scss?inline";
 
 import widelyAvailableIcon from "@carbon/icons/svg/32/checkmark--outline.svg?raw";
-import newlyAvailableIcon from "@carbon/icons/svg/32/pending.svg?raw";
+import newlyAvailableIcon from "@carbon/icons/svg/32/change--circle.svg?raw";
 import limitedAvailableIcon from "@carbon/icons/svg/32/misuse--outline.svg?raw";
 import unknownAvailableIcon from "@carbon/icons/svg/32/help.svg?raw";
 
-import typePropertyIcon from "@carbon/icons/svg/32/paint-brush.svg?raw";
+import typePropertyIcon from "@carbon/icons/svg/32/paint-brush--alt.svg?raw";
 import typeFunctionIcon from "@carbon/icons/svg/32/function--2.svg?raw";
 import typeSelectorIcon from "@carbon/icons/svg/32/select--01.svg?raw";
 import typeAtRuleIcon from "@carbon/icons/svg/32/at.svg?raw";
@@ -159,13 +159,13 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
 
         const li = document.createElement("li");
 
-        const icon = status.icon;
-        icon.classList.add("status", `status--${status.color}`);
-        li.appendChild(icon);
-
         const heading = document.createElement("p");
         heading.textContent = browserNames[browser];
         li.appendChild(heading);
+
+        const icon = status.icon;
+        icon.classList.add("status", `status--${status.color}`);
+        heading.appendChild(icon);
 
         const subline = document.createElement("p");
         subline.textContent =

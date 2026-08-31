@@ -37,8 +37,16 @@
   margin-block-start: 0;
 }
 
+:host h1 {
+  margin-block-end: calc(layout.$mode--margin-block * 0.5);
+}
+
 :host cds-es-docs-browser-compatibility {
   @include layout.size("xs");
+}
+
+:host cds-es-docs-browser-compatibility + section {
+  margin-block-start: layout.$mode--margin-block;
 }
 
 :host h2 {
