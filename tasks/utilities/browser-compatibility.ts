@@ -11,7 +11,9 @@ import {
   type CustomProperty,
   type Declaration,
   type Function,
+  type MediaCondition,
   type MediaRule,
+  type QueryFeatureFor_MediaFeatureId,
   type Selector,
   type SupportsRule,
   type UnparsedProperty,
@@ -134,8 +136,18 @@ function parseSelector(selector: Selector): ParsedFeatureResult[] {
   return [];
 }
 
-function parseMediaRule(_: MediaRule): ParsedFeatureResult[] {
-  return parsedFeatureResult("at-rule", [["@media", bcd.css["at-rules"].media]]);
+function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
+  const [query] = mediaRule.query.mediaQueries;
+  const names = (
+    (query.condition as { conditions?: MediaCondition[] }).conditions ?? [query.condition]
+  )
+    .filter((condition) => condition && condition.type === "feature")
+    .map((condition) => (condition as { value: QueryFeatureFor_MediaFeatureId }).value.name);
+
+  return parsedFeatureResult(
+    "at-rule",
+    names.map((name) => [`@media (${name})`, bcd.css["at-rules"].media[name]]),
+  );
 }
 
 function parseContainerRule(_: ContainerRule): ParsedFeatureResult[] {
