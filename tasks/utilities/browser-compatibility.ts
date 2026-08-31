@@ -6,6 +6,7 @@
  */
 
 import {
+  LengthValue,
   transform,
   type ContainerRule,
   type CustomProperty,
@@ -113,7 +114,7 @@ function parseFunction(func: Function): ParsedFeatureResult[] {
 }
 
 function parseVariable(_: Variable): ParsedFeatureResult[] {
-  return parsedFeatureResult("function", [["var()", bcd.css.types["var"]]]);
+  return parsedFeatureResult("function", [["var()", bcd.css.types.var]]);
 }
 
 function parseSelector(selector: Selector): ParsedFeatureResult[] {
@@ -134,6 +135,10 @@ function parseSelector(selector: Selector): ParsedFeatureResult[] {
   }
 
   return [];
+}
+
+function parseLength(length: LengthValue): ParsedFeatureResult[] {
+  return parsedFeatureResult("length", [[length.unit, bcd.css.types.length[length.unit]]]);
 }
 
 function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
@@ -176,6 +181,9 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
       },
       Selector(selector) {
         featureResults.push(...parseSelector(selector));
+      },
+      Length(length) {
+        featureResults.push(...parseLength(length));
       },
       Rule: {
         media(rule) {

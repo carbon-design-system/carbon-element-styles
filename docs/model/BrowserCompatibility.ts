@@ -26,7 +26,7 @@ export type BrowserCompatibility = {
     string,
     {
       label: string;
-      type: "property" | "function" | "selector" | "at-rule";
+      type: "property" | "function" | "selector" | "at-rule" | "length";
       browsers: BrowserCompatibility["browsers"];
     }
   >;

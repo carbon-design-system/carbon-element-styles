@@ -16,6 +16,7 @@ import typePropertyIcon from "@carbon/icons/svg/32/paint-brush.svg?raw";
 import typeFunctionIcon from "@carbon/icons/svg/32/function--2.svg?raw";
 import typeSelectorIcon from "@carbon/icons/svg/32/select--01.svg?raw";
 import typeAtRuleIcon from "@carbon/icons/svg/32/at.svg?raw";
+import typeLengthIcon from "@carbon/icons/svg/32/ruler--alt.svg?raw";
 
 import launchDialogIcon from "@carbon/icons/svg/32/arrow--up-right.svg?raw";
 
@@ -193,6 +194,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
       function: typeFunctionIcon,
       selector: typeSelectorIcon,
       ["at-rule"]: typeAtRuleIcon,
+      length: typeLengthIcon,
     };
 
     return this.#getIconAsSvgElement(icons[type]);
