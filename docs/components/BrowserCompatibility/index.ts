@@ -282,7 +282,7 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
 
     const disclaimer = document.createElement("p");
     disclaimer.textContent =
-      "This compatibility report is automatically generated from the source code and may not cover all used CSS features. Please open an issue if you find a mistake.";
+      "This compatibility report was automatically generated from the source code and may not cover all used CSS features. Please open an issue if you find a mistake.";
     body.appendChild(disclaimer);
 
     const legend = document.createElement("ul");

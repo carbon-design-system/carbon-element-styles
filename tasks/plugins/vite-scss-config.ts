@@ -16,7 +16,7 @@ const virtualPrefix = "virtual:scss-config/";
 const resolvedPrefix = "\0scss-config:";
 
 function parseScssConfig(source: string): Record<string, string> | undefined {
-  const match = source.match(/\$config:\s*\(([^)]*)\)/);
+  const match = source.match(/\$config:\s*\(([\s\S]*?)\);/);
 
   if (!match) {
     return undefined;
