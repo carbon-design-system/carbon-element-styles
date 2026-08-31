@@ -17,7 +17,7 @@ const highThreshold = (() => {
 export function getBaselineStatus(
   support?: BrowserCompatibility["browsers"][(typeof browsers)[number]][],
 ): "high" | "low" | false | undefined {
-  if (!support) {
+  if (!support || support.length === 0) {
     return undefined;
   }
 

@@ -87,6 +87,7 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
     const since =
       baselineStatus === "high" || baselineStatus === "low"
         ? Object.values(this.#support?.browsers ?? [])
+            .filter((b) => typeof b.date === "string")
             .toSorted(
               (a, b) => new Date(b.date as string).getTime() - new Date(a.date as string).getTime(),
             )
@@ -97,7 +98,7 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
       return {
         color: "green",
         label: "Wide browser support",
-        since: `since ${this.#formatDate(since!.date as string)}`,
+        since: since ? `since ${this.#formatDate(since.date as string)}` : undefined,
         icon: this.#getIconAsSvgElement(widelyAvailableIcon),
       };
     }
@@ -105,8 +106,8 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
     if (baselineStatus === "low") {
       return {
         color: "blue",
-        label: "New browser suport",
-        since: `since ${this.#formatDate(since!.date as string)}`,
+        label: "New browser support",
+        since: since ? `since ${this.#formatDate(since.date as string)}` : undefined,
         icon: this.#getIconAsSvgElement(newlyAvailableIcon),
       };
     }

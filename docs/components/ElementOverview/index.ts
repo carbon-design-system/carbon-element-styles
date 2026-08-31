@@ -18,13 +18,30 @@ export class CdsEsDocsElementOverview extends HTMLElement {
   #referencesElement: HTMLElement = document.createElement("section");
   #notesElement: HTMLElement = document.createElement("section");
 
-  label: string = "";
-  browserCompatibility?: BrowserCompatibility;
-  references: {
-    label: string;
-    url: string;
-  }[] = [];
-  notes?: string;
+  #label: string = "";
+  #browserCompatibility?: BrowserCompatibility;
+  #references: { label: string; url: string }[] = [];
+  #notes?: string;
+
+  set label(value: string) {
+    this.#label = value;
+    this.#render();
+  }
+
+  set browserCompatibility(value: BrowserCompatibility | undefined) {
+    this.#browserCompatibility = value;
+    this.#render();
+  }
+
+  set references(value: { label: string; url: string }[]) {
+    this.#references = value;
+    this.#render();
+  }
+
+  set notes(value: string | undefined) {
+    this.#notes = value;
+    this.#render();
+  }
 
   constructor() {
     super();
@@ -57,12 +74,12 @@ export class CdsEsDocsElementOverview extends HTMLElement {
   }
 
   #render() {
-    this.#headingElement.textContent = this.label;
+    this.#headingElement.textContent = this.#label;
 
-    this.#BrowserCompatibility.support = this.browserCompatibility;
+    this.#BrowserCompatibility.support = this.#browserCompatibility;
 
     this.#referencesElement.querySelector("ul")?.replaceChildren(
-      ...(this.references ?? []).map((reference) => {
+      ...(this.#references ?? []).map((reference) => {
         const listItem = document.createElement("li");
 
         const anchor = document.createElement("a");
@@ -79,11 +96,7 @@ export class CdsEsDocsElementOverview extends HTMLElement {
 
     const notesContent = this.#notesElement.querySelector("cds-es-docs-markdown-content");
     if (notesContent) {
-      notesContent.textContent = this.notes?.trim() ?? "";
+      notesContent.textContent = this.#notes?.trim() ?? "";
     }
-  }
-
-  connectedCallback() {
-    this.#render();
   }
 }
