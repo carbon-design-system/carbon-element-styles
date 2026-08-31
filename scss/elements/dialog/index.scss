@@ -43,6 +43,8 @@ $-default-config: (
       @include layout.density("normal");
       @include layer.styles;
 
+      display: flex;
+      flex-direction: column;
       color: theme.$text-primary;
       border: none;
       padding-inline: layout.$density--padding;
