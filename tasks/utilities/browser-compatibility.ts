@@ -143,6 +143,7 @@ function parseLength(length: LengthValue): ParsedFeatureResult[] {
 
 function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
   const [query] = mediaRule.query.mediaQueries;
+
   const names = (
     (query.condition as { conditions?: MediaCondition[] }).conditions ?? [query.condition]
   )
@@ -155,7 +156,25 @@ function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
   );
 }
 
-function parseContainerRule(_: ContainerRule): ParsedFeatureResult[] {
+function parseContainerRule(containerRule: ContainerRule): ParsedFeatureResult[] {
+  const { condition } = containerRule;
+
+  if (
+    condition?.type === "style" &&
+    condition.value.type === "declaration" &&
+    condition.value.value.property === "custom"
+  ) {
+    return parsedFeatureResult("at-rule", [
+      ["@container style(--*)", bcd.css["at-rules"].container.style_queries_for_custom_properties],
+    ]);
+  }
+
+  if (condition?.type === "scroll-state") {
+    return parsedFeatureResult("at-rule", [
+      ["@container scroll-state()", bcd.css["at-rules"].container["scroll-state_queries"]],
+    ]);
+  }
+
   return parsedFeatureResult("at-rule", [["@container", bcd.css["at-rules"].container]]);
 }
 
