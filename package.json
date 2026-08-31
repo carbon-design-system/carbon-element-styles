@@ -52,7 +52,7 @@
     "husky": "^9.1.7",
     "marked": "^18.0.6",
     "marked-highlight": "^2.2.4",
-    "oxfmt": "^0.64.0",
+    "oxfmt": "^0.65.0",
     "oxlint": "^1.76.0",
     "sass": "^1.101.0",
     "typescript": "^7.0.2",
