@@ -23,7 +23,7 @@ import { CdsEsDocsSourceCode } from "@/components/SourceCode";
 import { CdsEsDocsTabPanel } from "@/components/TabPanel";
 import { CdsEsDocsTabs } from "@/components/Tabs";
 import { CdsEsDocsTag } from "@/components/Tag";
-import { CdsEsDocsBrowserCompatibilityTag } from "@/components/BrowserCompatibilityTag";
+import { CdsEsDocsBrowserCompatibility } from "@/components/BrowserCompatibility";
 
 await Inventory.load();
 Environment.apply();
@@ -43,7 +43,4 @@ window.customElements.define("cds-es-docs-source-code", CdsEsDocsSourceCode);
 window.customElements.define("cds-es-docs-tab-panel", CdsEsDocsTabPanel);
 window.customElements.define("cds-es-docs-tabs", CdsEsDocsTabs);
 window.customElements.define("cds-es-docs-tag", CdsEsDocsTag);
-window.customElements.define(
-  "cds-es-docs-browser-compatibility-tag",
-  CdsEsDocsBrowserCompatibilityTag,
-);
+window.customElements.define("cds-es-docs-browser-compatibility", CdsEsDocsBrowserCompatibility);

@@ -1,0 +1,188 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+
+@use "../../../scss/elements/popover";
+@use "../../../scss/elements/button";
+@use "../../../scss/elements/dialog";
+@use "../../../scss/elements/paragraph";
+@use "../../../scss/elements/table";
+
+@use "../../../scss/layout";
+
+:host {
+  @include popover.styles(
+    (
+      alignment: "start center",
+    )
+  );
+  @include button.styles(
+    (
+      kind: "ghost",
+    )
+  );
+  @include dialog.styles;
+  @include paragraph.styles;
+  @include table.styles(
+    (
+      kind: "structured-list--flush",
+    )
+  );
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-inline-end: calc(layout.$size--block-size + spacing.$spacing-03);
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: spacing.$spacing-02;
+  }
+
+  [popover] {
+    @include layout.size("sm");
+
+    li:not(:first-child) {
+      margin-block-start: spacing.$spacing-03;
+    }
+
+    li > p {
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    li svg.status {
+      inset-block-start: 0.0625rem;
+    }
+
+    li > p:first-of-type {
+      @include layout.mode--heading-compact;
+      color: theme.$text-primary;
+    }
+
+    li > p:last-of-type {
+      @include layout.mode--helper-text;
+      color: theme.$text-secondary;
+      grid-column: 2;
+    }
+
+    ul + button {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+    }
+  }
+
+  dialog {
+    padding-block-end: 0 !important;
+
+    p {
+      color: theme.$text-secondary;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      column-gap: layout.$density--padding;
+      margin-block-end: layout.$mode--margin-block;
+      color: theme.$text-helper;
+    }
+
+    ul li {
+      @include layout.mode--helper-text;
+    }
+
+    .feature-compatibility-table {
+      position: relative;
+      overflow: hidden;
+      block-size: 50vb;
+      margin-inline: calc(layout.$density--padding * -1);
+    }
+
+    .feature-compatibility-table::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline: 0;
+      block-size: layout.$density--padding;
+      background: linear-gradient(transparent, theme.$layer-background);
+    }
+
+    .table-container {
+      overflow: auto;
+      block-size: 100%;
+      padding-inline: layout.$density--padding;
+    }
+
+    table {
+      @include layout.size("xs");
+      margin: 0;
+      padding-block-end: layout.$density--padding;
+    }
+
+    thead {
+      background-color: theme.$layer-background;
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+    }
+
+    td {
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      inset-inline-start: 0;
+      background: linear-gradient(
+        90deg,
+        theme.$layer-background calc(100% - layout.$density--padding),
+        transparent
+      );
+      z-index: 1;
+    }
+
+    td:first-child {
+      @include layout.mode--code;
+      color: theme.$text-primary;
+    }
+
+    td:first-child > svg {
+      color: theme.$text-helper;
+    }
+
+    td > svg {
+      margin-inline-end: spacing.$spacing-02;
+      inset-block-start: 0.125rem;
+    }
+  }
+
+  svg.status {
+    fill: currentColor;
+    block-size: 1rem;
+    inline-size: 1rem;
+    position: relative;
+  }
+
+  svg.status--green {
+    color: theme.$support-success;
+  }
+
+  svg.status--blue {
+    color: theme.$support-info;
+  }
+
+  svg.status--gray {
+    color: theme.$icon-secondary;
+  }
+}

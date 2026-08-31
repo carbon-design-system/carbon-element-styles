@@ -8,13 +8,13 @@
 import styles from "./index.scss?inline";
 
 import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
-import type { CdsEsDocsBrowserCompatibilityTag } from "../BrowserCompatibilityTag";
+import type { CdsEsDocsBrowserCompatibility } from "../BrowserCompatibility";
 
 export class CdsEsDocsElementOverview extends HTMLElement {
   #headingElement: HTMLHeadingElement = document.createElement("h1");
-  #browserCompatibilityTag = document.createElement(
-    "cds-es-docs-browser-compatibility-tag",
-  ) as CdsEsDocsBrowserCompatibilityTag;
+  #BrowserCompatibility = document.createElement(
+    "cds-es-docs-browser-compatibility",
+  ) as CdsEsDocsBrowserCompatibility;
   #referencesElement: HTMLElement = document.createElement("section");
   #notesElement: HTMLElement = document.createElement("section");
 
@@ -50,7 +50,7 @@ export class CdsEsDocsElementOverview extends HTMLElement {
 
     this.shadowRoot?.append(
       this.#headingElement,
-      this.#browserCompatibilityTag,
+      this.#BrowserCompatibility,
       this.#referencesElement,
       this.#notesElement,
     );
@@ -59,7 +59,7 @@ export class CdsEsDocsElementOverview extends HTMLElement {
   #render() {
     this.#headingElement.textContent = this.label;
 
-    this.#browserCompatibilityTag.support = this.browserCompatibility;
+    this.#BrowserCompatibility.support = this.browserCompatibility;
 
     this.#referencesElement.querySelector("ul")?.replaceChildren(
       ...(this.references ?? []).map((reference) => {

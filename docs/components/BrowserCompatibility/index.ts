@@ -25,7 +25,7 @@ import { browserNames, browsers, type BrowserCompatibility } from "@/model/Brows
 
 import { getBaselineStatus } from "@/utilities/baseline";
 
-export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
+export class CdsEsDocsBrowserCompatibility extends HTMLElement {
   #tag = document.createElement("cds-es-docs-tag") as CdsEsDocsTag;
   #popover = document.createElement("div");
   #dialog = document.createElement("dialog");
@@ -96,7 +96,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     if (baselineStatus === "high") {
       return {
         color: "green",
-        label: "Widely supported",
+        label: "Wide browser support",
         since: `since ${this.#formatDate(since!.date as string)}`,
         icon: this.#getIconAsSvgElement(widelyAvailableIcon),
       };
@@ -105,7 +105,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     if (baselineStatus === "low") {
       return {
         color: "blue",
-        label: "Newly suported",
+        label: "New browser suport",
         since: `since ${this.#formatDate(since!.date as string)}`,
         icon: this.#getIconAsSvgElement(newlyAvailableIcon),
       };
@@ -114,7 +114,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     if (baselineStatus === false) {
       return {
         color: "gray",
-        label: "Limited support",
+        label: "Limited browser support",
         icon: this.#getIconAsSvgElement(limitedAvailableIcon),
       };
     }
@@ -245,7 +245,10 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
 
       const featureCell = row.insertCell();
       featureCell.textContent = feature.label;
-      featureCell.prepend(this.#getTypeIcon(feature.type));
+
+      const typeIcon = this.#getTypeIcon(feature.type);
+      typeIcon.classList.add("status");
+      featureCell.prepend(typeIcon);
 
       for (const browser of browsers) {
         const release = feature.browsers[browser];
@@ -268,16 +271,38 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     const header = document.createElement("header");
     header.textContent = "Browser compatibility";
 
-    const disclaimer = document.createElement("p");
-    disclaimer.textContent =
-      "This compatibility report is automatically generated from the source code and may not cover all used CSS features. Please open an issue if you find a mistake.";
-    header.appendChild(disclaimer);
-
     const closeButton = document.createElement("button");
     closeButton.addEventListener("click", () => {
       this.#dialog.close();
     });
     header.appendChild(closeButton);
+
+    const body = document.createElement("div");
+
+    const disclaimer = document.createElement("p");
+    disclaimer.textContent =
+      "This compatibility report is automatically generated from the source code and may not cover all used CSS features. Please open an issue if you find a mistake.";
+    body.appendChild(disclaimer);
+
+    const legend = document.createElement("ul");
+    body.appendChild(legend);
+
+    for (const [baselineStatus, label] of [
+      ["high", "Supported since ≥ 30 months"],
+      ["low", "Supported since < 30 months"],
+      [false, "Not supported"],
+    ] as const) {
+      const definition = this.#getStatus(baselineStatus);
+
+      const legendItem = document.createElement("li");
+      legendItem.textContent = label;
+
+      const icon = definition.icon;
+      icon.classList.add("status", `status--${definition.color}`);
+      legendItem.prepend(icon);
+
+      legend.appendChild(legendItem);
+    }
 
     const container = document.createElement("div");
     container.classList.add("feature-compatibility-table");
@@ -287,7 +312,7 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     tableContainer.appendChild(this.#getFeatureCompatibilityTable());
     container.appendChild(tableContainer);
 
-    this.#dialog.replaceChildren(header, container);
+    this.#dialog.replaceChildren(header, body, container);
   }
 
   connectedCallback() {}

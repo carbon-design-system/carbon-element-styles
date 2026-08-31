@@ -47,6 +47,7 @@
 
 :host > button {
   @include button-reset.reset;
+  color: inherit;
   display: inherit;
   gap: inherit;
   align-items: inherit;
