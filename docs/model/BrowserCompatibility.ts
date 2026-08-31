@@ -25,6 +25,7 @@ export type BrowserCompatibility = {
   features: Record<
     string,
     {
+      label: string;
       type: "property" | "function" | "selector" | "at-rule";
       browsers: BrowserCompatibility["browsers"];
     }

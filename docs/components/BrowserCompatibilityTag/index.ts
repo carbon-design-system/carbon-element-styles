@@ -215,40 +215,38 @@ export class CdsEsDocsBrowserCompatibilityTag extends HTMLElement {
     const tbody = document.createElement("tbody");
     table.appendChild(tbody);
 
-    const sortedFeatures = Object.entries(this.#support?.features ?? []).toSorted(
-      ([_, a], [__, b]) => {
-        function convertBrowserDateToNumber(
-          browser: BrowserCompatibility["browsers"][(typeof browsers)[number]],
-        ) {
-          return browser.date === false
-            ? Infinity
-            : typeof browser.date === "string"
-              ? new Date(browser.date).getTime()
-              : -Infinity;
-        }
+    const sortedFeatures = Object.values(this.#support?.features ?? []).toSorted((a, b) => {
+      function convertBrowserDateToNumber(
+        browser: BrowserCompatibility["browsers"][(typeof browsers)[number]],
+      ) {
+        return browser.date === false
+          ? Infinity
+          : typeof browser.date === "string"
+            ? new Date(browser.date).getTime()
+            : -Infinity;
+      }
 
-        const aNewest = Object.values(a.browsers)
-          .map(convertBrowserDateToNumber)
-          .toSorted((a, b) => b - a)
-          .at(0)!;
-        const bNewest = Object.values(b.browsers)
-          .map(convertBrowserDateToNumber)
-          .toSorted((a, b) => b - a)
-          .at(0)!;
+      const aNewest = Object.values(a.browsers)
+        .map(convertBrowserDateToNumber)
+        .toSorted((a, b) => b - a)
+        .at(0)!;
+      const bNewest = Object.values(b.browsers)
+        .map(convertBrowserDateToNumber)
+        .toSorted((a, b) => b - a)
+        .at(0)!;
 
-        return bNewest - aNewest;
-      },
-    );
+      return bNewest - aNewest;
+    });
 
-    for (const [feature, compatibility] of sortedFeatures) {
+    for (const feature of sortedFeatures) {
       const row = tbody.insertRow();
 
       const featureCell = row.insertCell();
-      featureCell.textContent = feature;
-      featureCell.prepend(this.#getTypeIcon(compatibility.type));
+      featureCell.textContent = feature.label;
+      featureCell.prepend(this.#getTypeIcon(feature.type));
 
       for (const browser of browsers) {
-        const release = compatibility.browsers[browser];
+        const release = feature.browsers[browser];
         const baselineStatus = getBaselineStatus([release]);
         const status = this.#getStatus(baselineStatus);
 
