@@ -10,53 +10,12 @@ import { resolve } from "node:path";
 
 import type { Plugin } from "vite";
 
+import { parseScssDoc } from "../utilities/parse-scss-doc.ts";
+
 const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
 
 const virtualPrefix = "virtual:scss-docs/";
 const resolvedPrefix = "\0scss-docs:";
-
-type ScssParameter = {
-  name: string;
-  type: string;
-  default: string;
-};
-
-function parseScssDoc(source: string): ScssParameter[] | null {
-  const match = source.match(/((?:\/\/\/[^\n]*\n)+)@mixin styles/);
-
-  if (!match) {
-    return null;
-  }
-
-  const lines = match[1]
-    .split("\n")
-    .map((l) => l.replace(/^\/\/\/\s?/, "").trim())
-    .filter(Boolean);
-
-  const parameters: ScssParameter[] = [];
-
-  for (const line of lines) {
-    // @param {type} name [default]
-    // @param {type} name.key [default]
-    const paramMatch = line.match(
-      /^@param\s+\{([^}]+)\}\s+([\w.-]+)\s+\[((?:[^[\]]|\[[^\]]*\])*)\]/,
-    );
-
-    if (paramMatch) {
-      const name = paramMatch[2].trim().replace(/config.?/, "");
-
-      if (name) {
-        parameters.push({
-          name,
-          type: paramMatch[1].trim().replaceAll(/ \| /g, "\n| "),
-          default: paramMatch[3].trim(),
-        });
-      }
-    }
-  }
-
-  return parameters;
-}
 
 export const scssDocs: Plugin = {
   name: "scss-docs",
