@@ -15,7 +15,6 @@ import {
   type LengthValue,
   type MediaCondition,
   type MediaRule,
-  type QueryFeatureFor_MediaFeatureId,
   type Selector,
   type StartingStyleRule,
   type SupportsRule,
@@ -161,14 +160,18 @@ function parseLength(length: LengthValue): ParsedFeatureResult[] {
   return parsedFeatureResult("length", [[length.unit, bcd.css.types.length[unit]]]);
 }
 
-function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
-  const [query] = mediaRule.query.mediaQueries;
+function collectMediaFeatureNames(condition: MediaCondition | null | undefined): string[] {
+  if (!condition) return [];
+  if (condition.type === "feature") return [condition.value.name];
+  if (condition.type === "not") return collectMediaFeatureNames(condition.value);
+  if (condition.type === "operation") return condition.conditions.flatMap(collectMediaFeatureNames);
+  return [];
+}
 
-  const names = (
-    (query.condition as { conditions?: MediaCondition[] }).conditions ?? [query.condition]
-  )
-    .filter((condition) => condition && condition.type === "feature")
-    .map((condition) => (condition as { value: QueryFeatureFor_MediaFeatureId }).value.name);
+function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
+  const names = mediaRule.query.mediaQueries.flatMap((query) =>
+    collectMediaFeatureNames(query.condition),
+  );
 
   return parsedFeatureResult(
     "at-rule",
