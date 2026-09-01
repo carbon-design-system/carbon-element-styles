@@ -11,5 +11,6 @@ export default defineConfig({
   test: {
     exclude: [...configDefaults.exclude, "**/*.postbuild.test.[jt]s"],
     isolate: false,
+    pool: "threads",
   },
 });
