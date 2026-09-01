@@ -84,12 +84,22 @@ describe("Correctly parses CSS features", () => {
 
   test("@media", () => {
     const featureLabels = getParsedFeatureLabels(/* css */ `
-      @media (prefers-color-scheme: dark), (height >= 200px) and (orientation: landscape) {}
+      @media (prefers-contrast: more) {}
+      @media (prefers-color-scheme: dark), (orientation: landscape) {}
+      @media not (prefers-reduced-motion: reduce) {}
+      @media (height >= 200px) and (display-mode: fullscreen) {}
+      @media ((width <= 600px) and (color-gamut: srgb)) or (prefers-reduced-transparency: reduce) {}
     `);
 
-    expect(featureLabels).toContain("@media (height)");
-    expect(featureLabels).toContain("@media (orientation)");
+    expect(featureLabels).toContain("@media (prefers-contrast)");
     expect(featureLabels).toContain("@media (prefers-color-scheme)");
+    expect(featureLabels).toContain("@media (orientation)");
+    expect(featureLabels).toContain("@media (prefers-reduced-motion)");
+    expect(featureLabels).toContain("@media (height)");
+    expect(featureLabels).toContain("@media (display-mode)");
+    expect(featureLabels).toContain("@media (width)");
+    expect(featureLabels).toContain("@media (color-gamut)");
+    expect(featureLabels).toContain("@media (prefers-reduced-transparency)");
   });
 
   test("@container", () => {
