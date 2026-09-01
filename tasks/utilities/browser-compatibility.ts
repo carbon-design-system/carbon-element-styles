@@ -6,12 +6,13 @@
  */
 
 import {
-  LengthValue,
   transform,
   type ContainerRule,
   type CustomProperty,
   type Declaration,
   type Function,
+  type KeyframesRule,
+  type LengthValue,
   type MediaCondition,
   type MediaRule,
   type QueryFeatureFor_MediaFeatureId,
@@ -182,6 +183,10 @@ function parseSupportsRule(_: SupportsRule): ParsedFeatureResult[] {
   return parsedFeatureResult("at-rule", [["@supports", bcd.css["at-rules"].supports]]);
 }
 
+function parseKeyframesRule(_: KeyframesRule): ParsedFeatureResult[] {
+  return parsedFeatureResult("at-rule", [["@keyframes", bcd.css["at-rules"].keyframes]]);
+}
+
 export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility {
   const featureResults: ParsedFeatureResult[] = [];
 
@@ -213,6 +218,9 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
         },
         supports(rule) {
           featureResults.push(...parseSupportsRule(rule.value));
+        },
+        keyframes(rule) {
+          featureResults.push(...parseKeyframesRule(rule.value));
         },
       },
     },
