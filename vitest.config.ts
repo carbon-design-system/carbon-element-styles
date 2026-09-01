@@ -10,5 +10,6 @@ import { defineConfig, configDefaults } from "vitest/config";
 export default defineConfig({
   test: {
     exclude: [...configDefaults.exclude, "**/*.postbuild.test.[jt]s"],
+    isolate: false,
   },
 });
