@@ -120,17 +120,29 @@ function parseVariable(_: Variable): ParsedFeatureResult[] {
 }
 
 function parseSelector(selector: Selector): ParsedFeatureResult[] {
-  const selectors: Parameters<typeof parsedFeatureResult>[1] = [];
+  const results: ParsedFeatureResult[] = [];
 
   for (const pseudoClass of selector.filter((s) => s.type === "pseudo-class")) {
-    selectors.push([`:${pseudoClass.kind}`, bcd.css.selectors[pseudoClass.kind]]);
+    results.push(
+      ...parsedFeatureResult("selector", [
+        [`:${pseudoClass.kind}`, bcd.css.selectors[pseudoClass.kind]],
+      ]),
+    );
+
+    for (const argumentSelector of (pseudoClass as { selectors: Selector[] }).selectors ?? []) {
+      results.push(...parseSelector(argumentSelector));
+    }
   }
 
   for (const pseudoElement of selector.filter((s) => s.type === "pseudo-element")) {
-    selectors.push([`::${pseudoElement.kind}`, bcd.css.selectors[pseudoElement.kind]]);
+    results.push(
+      ...parsedFeatureResult("selector", [
+        [`::${pseudoElement.kind}`, bcd.css.selectors[pseudoElement.kind]],
+      ]),
+    );
   }
 
-  return parsedFeatureResult("selector", selectors);
+  return results;
 }
 
 function parseLength(length: LengthValue): ParsedFeatureResult[] {
