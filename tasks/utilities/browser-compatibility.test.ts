@@ -47,31 +47,39 @@ describe("Correctly parses CSS features", () => {
       div::before {}
       div:has(p) {}
       div:has(p:is([data-test])) {}
+      div:not(:disabled)::after {}
     `);
 
     expect(featureLabels).toContain("::before");
     expect(featureLabels).toContain(":has");
     expect(featureLabels).toContain(":is");
+    expect(featureLabels).toContain(":not");
+    expect(featureLabels).toContain(":disabled");
+    expect(featureLabels).toContain("::after");
   });
 
   test("Length", () => {
     const featureLabels = getParsedFeatureLabels(/* css */ `
       div {
-        font-size: 2rem;
-        margin-block: 2lh;
-        inline-size: 50vi;
-        max-inline-size: 80ch;
-        block-size: 100cqb;
-        max-block-size: 50dvb;
+        font-size: 1rem;
+        padding-block: 1.2lh;
+        max-inline-size: 40ch;
+        block-size: 50vb;
+        inline-size: 40dvi;
+        max-block-size: 80lvmin;
+        min-block-size: 50svmax;
+        margin-block: 5cqi;
       }
     `);
 
     expect(featureLabels).toContain("rem");
     expect(featureLabels).toContain("lh");
-    expect(featureLabels).toContain("vi");
     expect(featureLabels).toContain("ch");
-    expect(featureLabels).toContain("cqb");
-    expect(featureLabels).toContain("dbv");
+    expect(featureLabels).toContain("vb");
+    expect(featureLabels).toContain("dvi");
+    expect(featureLabels).toContain("lvmin");
+    expect(featureLabels).toContain("svmax");
+    expect(featureLabels).toContain("cqi");
   });
 
   test("@media", () => {

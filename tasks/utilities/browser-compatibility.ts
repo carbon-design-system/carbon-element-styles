@@ -146,7 +146,19 @@ function parseSelector(selector: Selector): ParsedFeatureResult[] {
 }
 
 function parseLength(length: LengthValue): ParsedFeatureResult[] {
-  return parsedFeatureResult("length", [[length.unit, bcd.css.types.length[length.unit]]]);
+  const specialUnits: { [prefix: string]: string } = {
+    sv: "viewport_percentage_units_small",
+    dv: "viewport_percentage_units_dynamic",
+    lv: "viewport_percentage_units_large",
+    cq: "container_query_length_units",
+  };
+
+  const unit =
+    Object.entries(specialUnits)
+      .find(([u]) => length.unit.startsWith(u))
+      ?.at(1) ?? length.unit;
+
+  return parsedFeatureResult("length", [[length.unit, bcd.css.types.length[unit]]]);
 }
 
 function parseMediaRule(mediaRule: MediaRule): ParsedFeatureResult[] {
