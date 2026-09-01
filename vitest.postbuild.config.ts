@@ -6,9 +6,12 @@
  */
 
 import { defineConfig } from "vitest/config";
+import baseConfig from "./vitest.config.ts";
 
 export default defineConfig({
   test: {
+    ...baseConfig.test,
     include: ["**/*.postbuild.test.[jt]s"],
+    exclude: undefined,
   },
 });

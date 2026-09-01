@@ -5,15 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe } from "vitest";
-
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
 import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
-describe("range-input", () => {
-  scssExposesFunctioningPublicStylesMixin({
-    module: "elements/range-input",
-  });
-
-  usesNoDeprecatedCssFeatures({ element: "range-input" });
+scssExposesFunctioningPublicStylesMixin({
+  module: "elements/range-input",
 });
+
+usesNoDeprecatedCssFeatures({ element: "range-input" });

@@ -5,12 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe } from "vitest";
-
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
 
-describe("_labelled-input", () => {
-  scssExposesFunctioningPublicStylesMixin({
-    module: "elements/_labelled-input",
-  });
+scssExposesFunctioningPublicStylesMixin({
+  module: "elements/_labelled-input",
 });
