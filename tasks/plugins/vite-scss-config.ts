@@ -10,42 +10,12 @@ import { resolve } from "node:path";
 
 import type { Plugin } from "vite";
 
+import { parseScssConfig } from "../utilities/parse-scss-config.ts";
+
 const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
 
 const virtualPrefix = "virtual:scss-config/";
 const resolvedPrefix = "\0scss-config:";
-
-function parseScssConfig(source: string): Record<string, string> | undefined {
-  const match = source.match(/\$config:\s*\(([\s\S]*?)\);/);
-
-  if (!match) {
-    return undefined;
-  }
-
-  const mapBody = match[1];
-  const result: Record<string, string> = {};
-
-  for (const entry of mapBody.split(",")) {
-    const colonIndex = entry.indexOf(":");
-
-    if (colonIndex === -1) {
-      continue;
-    }
-
-    const key = entry.slice(0, colonIndex).trim();
-    const value = entry.slice(colonIndex + 1).trim();
-
-    if (key === "selector") {
-      continue;
-    }
-
-    if (key) {
-      result[key] = value;
-    }
-  }
-
-  return result;
-}
 
 export const scssConfig: Plugin = {
   name: "scss-config",
