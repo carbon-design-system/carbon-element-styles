@@ -8,3 +8,4 @@
 export { default as css } from "./index.scss?inline";
 export { default as html } from "../index.html";
 export { default as scssConfig } from "virtual:scss-config/button/danger--primary";
+export { default as browserCompatibility } from "virtual:browser-compatibility/button/danger--primary";

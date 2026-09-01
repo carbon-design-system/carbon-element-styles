@@ -8,3 +8,4 @@
 export { default as css } from "./index.scss?inline";
 export { default as html } from "../index.html";
 export { default as scssConfig } from "virtual:scss-config/italic-text/default";
+export { default as browserCompatibility } from "virtual:browser-compatibility/italic-text/default";

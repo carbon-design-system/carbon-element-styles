@@ -27,3 +27,9 @@ declare module "virtual:scss-config/*" {
   const scssConfig: Record<string, string> | undefined;
   export default scssConfig;
 }
+
+declare module "virtual:browser-compatibility/*" {
+  import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
+  const browserCompatibility: BrowserCompatibility;
+  export default browserCompatibility;
+}

@@ -14,6 +14,8 @@ import type { CdsEsDocsElementOverview } from "@/components/ElementOverview";
 import type { CdsEsDocsSourceCode } from "@/components/SourceCode";
 import type { CdsEsDocsTabs } from "@/components/Tabs";
 
+import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
+
 export class CdsEsDocsElementDemoContent extends HTMLElement {
   static observedAttributes = ["key", "request-id"];
 
@@ -30,6 +32,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
     {
       css: string;
       html: string;
+      browserCompatibility?: BrowserCompatibility;
       scssConfig?: {
         [key: string]: string;
       };
@@ -114,6 +117,7 @@ export class CdsEsDocsElementDemoContent extends HTMLElement {
       demo.setup?.(this.#frame.shadowRoot);
 
       this.#elementOverviewTabPanel.label = this.label;
+      this.#elementOverviewTabPanel.browserCompatibility = demo.browserCompatibility;
       this.#elementOverviewTabPanel.references = this.references;
       this.#elementOverviewTabPanel.notes = this.notes;
 

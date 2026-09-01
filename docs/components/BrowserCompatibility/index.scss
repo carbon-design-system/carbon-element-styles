@@ -1,0 +1,231 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/breakpoint";
+@use "@carbon/styles/scss/utilities/visually-hidden";
+
+@use "../../../scss/elements/popover";
+@use "../../../scss/elements/button";
+@use "../../../scss/elements/dialog";
+@use "../../../scss/elements/paragraph";
+@use "../../../scss/elements/table";
+
+@use "../../../scss/layout";
+
+:host {
+  @include popover.styles(
+    (
+      alignment: "start center",
+    )
+  );
+  @include button.styles(
+    (
+      kind: "ghost",
+    )
+  );
+  @include dialog.styles;
+  @include paragraph.styles;
+  @include table.styles(
+    (
+      kind: "structured-list--flush",
+    )
+  );
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-inline-end: calc(layout.$size--block-size + spacing.$spacing-03);
+  }
+
+  [popover] {
+    @include layout.size("sm");
+
+    li:not(:first-child) {
+      margin-block-start: layout.$mode--margin-block;
+    }
+
+    li > p {
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    li > p:first-of-type {
+      @include layout.mode--heading-compact;
+      color: theme.$text-primary;
+      display: inline-grid;
+      grid-template-columns: max-content max-content;
+      align-items: center;
+      column-gap: spacing.$spacing-02;
+    }
+
+    li > p:last-of-type {
+      @include layout.mode--helper-text;
+      color: theme.$text-secondary;
+      grid-column: 2;
+    }
+
+    ul + button {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      border-start-end-radius: 0.125rem;
+    }
+  }
+
+  dialog {
+    padding-block-end: 0 !important;
+
+    @include breakpoint.breakpoint-up("md") {
+      &:modal {
+        block-size: 75vb;
+      }
+    }
+
+    p {
+      color: theme.$text-secondary;
+      margin-block-start: 0;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      column-gap: layout.$density--padding;
+      margin-block-end: layout.$mode--margin-block;
+      color: theme.$text-helper;
+    }
+
+    ul li {
+      @include layout.mode--helper-text;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: spacing.$spacing-02;
+    }
+
+    .feature-compatibility-table {
+      position: relative;
+      overflow: hidden;
+      block-size: 100%;
+      margin-inline: calc(layout.$density--padding * -1);
+    }
+
+    .feature-compatibility-table::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline: 0;
+      block-size: layout.$density--padding;
+      background: linear-gradient(transparent, theme.$layer-background);
+      z-index: 1;
+    }
+
+    .table-container {
+      overflow: auto;
+      block-size: 100%;
+      padding-inline: layout.$density--padding;
+    }
+
+    table {
+      @include layout.size("xs");
+      margin: 0;
+      padding-block-end: layout.$density--padding;
+    }
+
+    thead {
+      background-color: theme.$layer-background;
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+    }
+
+    td {
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      inset-inline-start: 0;
+      background: linear-gradient(
+        90deg,
+        theme.$layer-background calc(100% - layout.$density--padding),
+        transparent
+      );
+      z-index: 1;
+    }
+
+    td:first-child {
+      @include layout.mode--code;
+      color: theme.$text-primary;
+    }
+
+    td:first-child > svg {
+      color: theme.$text-helper;
+    }
+
+    td > svg {
+      margin-inline-end: spacing.$spacing-02;
+      inset-block-start: 0.125rem;
+    }
+
+    td:has(svg.status--gray) {
+      color: theme.$text-helper;
+    }
+
+    @include breakpoint.breakpoint-down("md") {
+      table {
+        @include layout.size("sm");
+      }
+
+      tr {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      td {
+        display: block;
+      }
+
+      th:first-child {
+        @include visually-hidden.visually-hidden;
+      }
+
+      td:first-child {
+        @include layout.size("xs");
+        font-weight: 600;
+        grid-column: 1 / -1;
+        border-block-end: none;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+        padding-inline-start: 0;
+      }
+    }
+  }
+
+  svg.status {
+    fill: currentColor;
+    block-size: 1rem;
+    inline-size: 1rem;
+    position: relative;
+  }
+
+  svg.status--green {
+    color: theme.$support-success;
+  }
+
+  svg.status--blue {
+    color: theme.$support-info;
+  }
+
+  svg.status--gray {
+    color: theme.$icon-secondary;
+  }
+}
