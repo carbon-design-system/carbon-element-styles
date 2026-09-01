@@ -51,10 +51,15 @@ export function validateBanner(content: string, options: { fileType: FileType })
   })
     .split("\n")
     .slice(1, -2);
-  const [yearLine, ...remainingLines] = content.split("\n").slice(1, expectedRemainingLines.length);
+  const [yearLine, ...remainingLines] = content
+    .split("\n")
+    .slice(1, expectedRemainingLines.length + 2);
+
+  if (!yearLine) return false;
 
   return (
     yearLine.match(String.raw`${RegExp.escape(expectedYearLine)} \d{4}(, \d{4})?$`) &&
+    remainingLines.length === expectedRemainingLines.length &&
     remainingLines.every((rl, i) => rl === expectedRemainingLines[i])
   );
 }
