@@ -11,15 +11,11 @@ import {
   type CustomProperty,
   type Declaration,
   type Function,
-  type KeyframesRule,
   type LengthValue,
   type MediaCondition,
   type MediaRule,
   type Selector,
-  type StartingStyleRule,
-  type SupportsRule,
   type UnparsedProperty,
-  type Variable,
 } from "lightningcss";
 import bcd, { Identifier, type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
 
@@ -114,7 +110,7 @@ function parseFunction(func: Function): ParsedFeatureResult[] {
   return parsedFeatureResult("function", [[`${func.name}()`, bcd.css.types[func.name]]]);
 }
 
-function parseVariable(_: Variable): ParsedFeatureResult[] {
+function parseVariable(): ParsedFeatureResult[] {
   return parsedFeatureResult("function", [["var()", bcd.css.types.var]]);
 }
 
@@ -201,15 +197,15 @@ function parseContainerRule(containerRule: ContainerRule): ParsedFeatureResult[]
   return parsedFeatureResult("at-rule", [["@container", bcd.css["at-rules"].container]]);
 }
 
-function parseSupportsRule(_: SupportsRule): ParsedFeatureResult[] {
+function parseSupportsRule(): ParsedFeatureResult[] {
   return parsedFeatureResult("at-rule", [["@supports", bcd.css["at-rules"].supports]]);
 }
 
-function parseKeyframesRule(_: KeyframesRule): ParsedFeatureResult[] {
+function parseKeyframesRule(): ParsedFeatureResult[] {
   return parsedFeatureResult("at-rule", [["@keyframes", bcd.css["at-rules"].keyframes]]);
 }
 
-function parseStartingStyleRule(_: StartingStyleRule): ParsedFeatureResult[] {
+function parseStartingStyleRule(): ParsedFeatureResult[] {
   return parsedFeatureResult("at-rule", [
     ["@starting-style", bcd.css["at-rules"]["starting-style"]],
   ]);
@@ -228,8 +224,8 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
       Function(func) {
         featureResults.push(...parseFunction(func));
       },
-      Variable(variable) {
-        featureResults.push(...parseVariable(variable));
+      Variable() {
+        featureResults.push(...parseVariable());
       },
       Selector(selector) {
         featureResults.push(...parseSelector(selector));
@@ -244,14 +240,14 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
         container(rule) {
           featureResults.push(...parseContainerRule(rule.value));
         },
-        supports(rule) {
-          featureResults.push(...parseSupportsRule(rule.value));
+        supports() {
+          featureResults.push(...parseSupportsRule());
         },
-        keyframes(rule) {
-          featureResults.push(...parseKeyframesRule(rule.value));
+        keyframes() {
+          featureResults.push(...parseKeyframesRule());
         },
-        "starting-style"(rule) {
-          featureResults.push(...parseStartingStyleRule(rule.value));
+        "starting-style"() {
+          featureResults.push(...parseStartingStyleRule());
         },
       },
     },
