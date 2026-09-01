@@ -17,6 +17,7 @@ import {
   type MediaRule,
   type QueryFeatureFor_MediaFeatureId,
   type Selector,
+  type StartingStyleRule,
   type SupportsRule,
   type UnparsedProperty,
   type Variable,
@@ -187,6 +188,12 @@ function parseKeyframesRule(_: KeyframesRule): ParsedFeatureResult[] {
   return parsedFeatureResult("at-rule", [["@keyframes", bcd.css["at-rules"].keyframes]]);
 }
 
+function parseStartingStyleRule(_: StartingStyleRule): ParsedFeatureResult[] {
+  return parsedFeatureResult("at-rule", [
+    ["@starting-style", bcd.css["at-rules"]["starting-style"]],
+  ]);
+}
+
 export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility {
   const featureResults: ParsedFeatureResult[] = [];
 
@@ -221,6 +228,9 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
         },
         keyframes(rule) {
           featureResults.push(...parseKeyframesRule(rule.value));
+        },
+        "starting-style"(rule) {
+          featureResults.push(...parseStartingStyleRule(rule.value));
         },
       },
     },
