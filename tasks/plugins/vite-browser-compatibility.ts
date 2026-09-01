@@ -5,26 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
-import { compileStringAsync } from "sass";
 
 import type { Plugin } from "vite";
 
-import { getBrowserCompatibilityForCss } from "../utilities/browser-compatibility.ts";
+import { getBrowserCompatibilityForDemo } from "../utilities/browser-compatibility.ts";
 
 const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
 const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
-const nodeModulesDir = resolve(import.meta.dirname, "../../node_modules");
 
 const virtualPrefix = "virtual:browser-compatibility/";
 const resolvedPrefix = "\0browser-compatibility:";
-
-function extractConfigMap(source: string): string {
-  const match = source.match(/\$config:\s*(\([\s\S]*?\));/);
-  return match ? match[1] : "()";
-}
 
 export const browserCompatibility: Plugin = {
   name: "browser-compatibility",
@@ -49,20 +40,7 @@ export const browserCompatibility: Plugin = {
       this.addWatchFile(demoScssPath);
       this.addWatchFile(elementScssPath);
 
-      const source = await readFile(demoScssPath, "utf8");
-      const configMap = extractConfigMap(source);
-
-      const syntheticScss = `
-        @use "${pathToFileURL(elementScssPath).href}" as element;
-        $config: ${configMap};
-        @include element.styles($config);
-      `;
-
-      const { css } = await compileStringAsync(syntheticScss, {
-        loadPaths: [nodeModulesDir],
-      });
-
-      const browserCompatibility = getBrowserCompatibilityForCss(css);
+      const browserCompatibility = await getBrowserCompatibilityForDemo(elementName, demoName);
 
       return `export default ${JSON.stringify(browserCompatibility)};`;
     },

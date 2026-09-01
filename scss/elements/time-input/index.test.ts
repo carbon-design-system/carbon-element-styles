@@ -8,9 +8,12 @@
 import { describe } from "vitest";
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
 describe("time-input", () => {
   scssExposesFunctioningPublicStylesMixin({
     module: "elements/time-input",
   });
+
+  usesNoDeprecatedCssFeatures({ element: "time-input" });
 });

@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+
 import {
   transform,
   type ContainerRule,
@@ -18,8 +22,13 @@ import {
   type UnparsedProperty,
 } from "lightningcss";
 import bcd, { Identifier, type SupportBlock } from "@mdn/browser-compat-data" with { type: "json" };
+import { compileStringAsync } from "sass";
 
 import { browsers, type BrowserCompatibility } from "../../docs/model/BrowserCompatibility.ts";
+
+const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
+const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
+const nodeModulesDir = resolve(import.meta.dirname, "../../node_modules");
 
 type ParsedFeatureResult = {
   id: string;
@@ -84,6 +93,7 @@ function parsedFeatureResult(
           label,
           type: type,
           browsers: parseBrowserStatus(compat.__compat?.support),
+          deprecated: compat.__compat?.status?.deprecated ?? false,
         },
       });
     }
@@ -291,4 +301,32 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
     ),
     features,
   } as BrowserCompatibility;
+}
+
+function extractConfigMap(source: string): string {
+  const match = source.match(/\$config:\s*(\([\s\S]*?\));/);
+  return match ? match[1] : "()";
+}
+
+export async function getBrowserCompatibilityForDemo(
+  elementName: string,
+  demoName: string,
+): Promise<BrowserCompatibility> {
+  const demoScssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
+  const elementScssPath = resolve(elementsScssDir, elementName, "index.scss");
+
+  const source = await readFile(demoScssPath, "utf8");
+  const configMap = extractConfigMap(source);
+
+  const syntheticScss = `
+    @use "${pathToFileURL(elementScssPath).href}" as element;
+    $config: ${configMap};
+    @include element.styles($config);
+  `;
+
+  const { css } = await compileStringAsync(syntheticScss, {
+    loadPaths: [nodeModulesDir],
+  });
+
+  return getBrowserCompatibilityForCss(css);
 }

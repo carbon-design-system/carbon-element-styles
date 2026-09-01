@@ -8,9 +8,12 @@
 import { describe } from "vitest";
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
 describe("paragraph", () => {
   scssExposesFunctioningPublicStylesMixin({
     module: "elements/paragraph",
   });
+
+  usesNoDeprecatedCssFeatures({ element: "paragraph" });
 });

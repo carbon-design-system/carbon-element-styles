@@ -8,9 +8,12 @@
 import { describe } from "vitest";
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
 describe("radio-button", () => {
   scssExposesFunctioningPublicStylesMixin({
     module: "elements/radio-button",
   });
+
+  usesNoDeprecatedCssFeatures({ element: "radio-button" });
 });

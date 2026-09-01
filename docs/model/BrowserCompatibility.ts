@@ -28,6 +28,7 @@ export type BrowserCompatibility = {
       label: string;
       type: "property" | "function" | "selector" | "at-rule" | "length";
       browsers: BrowserCompatibility["browsers"];
+      deprecated: boolean;
     }
   >;
 };

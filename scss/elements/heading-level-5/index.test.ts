@@ -8,9 +8,12 @@
 import { describe } from "vitest";
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
 describe("heading-level-5", () => {
   scssExposesFunctioningPublicStylesMixin({
     module: "elements/heading-level-5",
   });
+
+  usesNoDeprecatedCssFeatures({ element: "heading-level-5" });
 });

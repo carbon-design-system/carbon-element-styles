@@ -8,9 +8,12 @@
 import { describe } from "vitest";
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
 describe("search-input", () => {
   scssExposesFunctioningPublicStylesMixin({
     module: "elements/search-input",
   });
+
+  usesNoDeprecatedCssFeatures({ element: "search-input" });
 });
