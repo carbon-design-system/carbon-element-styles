@@ -122,7 +122,7 @@ export class CdsEsDocsBrowserCompatibility extends HTMLElement {
 
     return {
       color: "gray",
-      label: "Browser compatibility unkown",
+      label: "Browser compatibility unknown",
       icon: this.#getIconAsSvgElement(unknownAvailableIcon),
     };
   }
