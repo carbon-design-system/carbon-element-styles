@@ -5,15 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe } from "vitest";
-
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
 import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
-describe("deleted-text", () => {
-  scssExposesFunctioningPublicStylesMixin({
-    module: "elements/deleted-text",
-  });
-
-  usesNoDeprecatedCssFeatures({ element: "deleted-text" });
+scssExposesFunctioningPublicStylesMixin({
+  module: "elements/deleted-text",
 });
+
+usesNoDeprecatedCssFeatures({ element: "deleted-text" });

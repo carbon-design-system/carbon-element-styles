@@ -5,15 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe } from "vitest";
-
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
 import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
-describe("heading-level-1", () => {
-  scssExposesFunctioningPublicStylesMixin({
-    module: "elements/heading-level-1",
-  });
-
-  usesNoDeprecatedCssFeatures({ element: "heading-level-1" });
+scssExposesFunctioningPublicStylesMixin({
+  module: "elements/heading-level-1",
 });
+
+usesNoDeprecatedCssFeatures({ element: "heading-level-1" });
