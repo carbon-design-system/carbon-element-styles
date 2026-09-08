@@ -103,6 +103,12 @@ $-default-config: (
       inline-size: 1rem;
     }
 
+    & > nav ul li a:has(svg:only-child) {
+      padding-inline: unset;
+      inline-size: layout.$size--block-size;
+      justify-content: center;
+    }
+
     & > nav a {
       @include layout.mode--body-compact;
       color: theme.$text-primary;
