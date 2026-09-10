@@ -26,5 +26,8 @@ elementDemoContent.references = [
     url: "https://carbondesignsystem.com/components/UI-shell-left-panel/usage/",
   },
 ];
+elementDemoContent.notes = /* md */ `
+The styles support nesting of up to 8 levels.
+`;
 
 export default elementDemoContent;

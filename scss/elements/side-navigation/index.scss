@@ -15,6 +15,7 @@
 @use "../../utilities/icons";
 @use "../../utilities/guards";
 @use "../../utilities/active-indicator";
+@use "../../utilities/tokens";
 
 $config: () !default;
 
@@ -45,6 +46,18 @@ $-default-config: (
       list-style: none;
     }
 
+    @for $i from 1 through 8 {
+      $nesting-selector: "& ul";
+
+      @for $_ from 1 to $i {
+        $nesting-selector: "#{$nesting-selector} ul";
+      }
+
+      #{$nesting-selector} {
+        @include tokens.set("side-navigation--level", $i);
+      }
+    }
+
     & li {
       margin: 0;
       padding: 0;
@@ -68,7 +81,10 @@ $-default-config: (
       block-size: layout.$size--block-size;
       padding-block-start: layout.$size--padding-block-start;
       padding-block-end: layout.$size--padding-block-end;
-      padding-inline: layout.$density--padding;
+      padding-inline-start: calc(
+        layout.$density--padding * tokens.get("side-navigation--level", 1)
+      );
+      padding-inline-end: layout.$density--padding;
       cursor: pointer;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -113,7 +129,6 @@ $-default-config: (
 
     & li > button[aria-expanded] + ul a {
       @include layout.mode--body-compact;
-      padding-inline-start: calc(layout.$density--padding * 2);
     }
 
     & li > button[aria-expanded]:has(+ ul a[aria-current="page"]) {
@@ -146,17 +161,21 @@ $-default-config: (
       margin-inline: layout.$density--padding;
     }
 
-    & > ul > li a:has(svg) {
+    & ul > li a:has(svg) {
       padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
     }
 
-    & > ul > li a svg {
+    & ul > li a svg {
       fill: currentColor;
       block-size: 1rem;
       inline-size: 1rem;
       position: absolute;
       inset-inline-end: layout.$density--padding;
       inset-block-start: layout.$size--padding-block-start;
+    }
+
+    & ul ul button[aria-expanded] {
+      @include layout.mode--body-compact;
     }
 
     & + main,
