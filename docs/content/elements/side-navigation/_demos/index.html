@@ -7,24 +7,43 @@ LICENSE file in the root directory of this source tree.
 
 <nav>
   <section aria-labelledby="heading-one">
-    <header id="heading-one">Introduction</header>
+    <header id="heading-one">Section header</header>
     <ul>
       <li>
-        <a href="#">Overview</a>
+        <a href="#">Link</a>
       </li>
       <li>
-        <a href="#">Getting started</a>
+        <a href="#">Link</a>
       </li>
     </ul>
   </section>
   <section aria-labelledby="heading-two">
-    <header id="heading-two">Guide</header>
+    <header id="heading-two">Section header</header>
     <ul>
       <li>
-        <a href="#">Basic usage</a>
+        <button aria-expanded="true" type="button">Menu</button>
+        <ul>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <a href="#">Link</a>
+          </li>
+          <li>
+            <button aria-expanded="true" type="button">Menu</button>
+            <ul>
+              <li>
+                <a href="#">Link</a>
+              </li>
+              <li>
+                <a href="#">Link</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </li>
       <li>
-        <button aria-expanded="true" type="button">Advanced patterns</button>
+        <button aria-expanded="true" type="button">Menu</button>
         <ul>
           <li>
             <a href="#" aria-current="page">Link</a>
