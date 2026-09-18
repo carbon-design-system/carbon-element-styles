@@ -56,6 +56,16 @@ $-default-config: (
       padding-inline: layout.$density--padding;
     }
 
+    & th p,
+    & td p {
+      font: inherit;
+      margin: 0;
+    }
+
+    & td p + p {
+      margin-block-start: layout.$mode--margin-block;
+    }
+
     & tbody:has(+ tfoot) tr:last-child th,
     & tbody:has(+ tfoot) tr:last-child td,
     & tfoot th,
