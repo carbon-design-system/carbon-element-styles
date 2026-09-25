@@ -37,13 +37,11 @@ $-default-config: (
 
     @if map.get($props, "axis") == "block" {
       @include layout.mode--label;
-      // flex-direction: column;
       grid-auto-flow: row;
     }
 
     @if map.get($props, "axis") == "inline" {
       @include layout.mode--body-compact;
-      // flex-direction: row;
       grid-auto-flow: column;
       align-items: center;
       inline-size: fit-content;

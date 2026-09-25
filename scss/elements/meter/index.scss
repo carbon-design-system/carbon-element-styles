@@ -1,0 +1,74 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "sass:map";
+
+@use "@carbon/styles/scss/theme";
+
+@use "../label";
+
+@use "../../layout";
+
+$config: () !default;
+
+$-default-config: (
+  selector: "label:has(meter)",
+  axis: "block",
+);
+
+/// @group meter
+/// @param {Map} config [()]
+/// @param {Selector} config.selector ['label:has(meter)']
+/// @param {'block' | 'axis'} config.axis ['block']
+@mixin styles($config: $config) {
+  $props: map.deep-merge($-default-config, $config);
+
+  #{map.get($props, "selector")} {
+    @include label.styles(
+      (
+        selector: "&",
+        axis: map.get($props, "axis"),
+      )
+    );
+
+    meter {
+      min-inline-size: 6rem;
+      background: theme.$layer;
+      block-size: 0.5rem;
+      inline-size: 100%;
+    }
+
+    meter::-webkit-meter-bar {
+      background: theme.$layer;
+      block-size: 0.5rem;
+    }
+
+    meter::-webkit-meter-optimum-value {
+      background: theme.$support-success;
+    }
+
+    meter:-moz-meter-optimum::-moz-meter-bar {
+      background: theme.$support-success;
+    }
+
+    meter::-webkit-meter-suboptimum-value {
+      background: theme.$support-caution-minor;
+    }
+
+    meter:-moz-meter-sub-optimum::-moz-meter-bar {
+      background: theme.$support-caution-minor;
+    }
+
+    meter::-webkit-meter-even-less-good-value {
+      background: theme.$support-caution-major;
+    }
+
+    meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+      background: theme.$support-caution-major;
+    }
+  }
+}
