@@ -9,7 +9,7 @@ import { NavigationItem } from "@/model/NavigationItem";
 
 export default new NavigationItem({
   id: "unordered-list",
-  label: "Unrdered list",
+  label: "Unordered list",
   content: () => import("./content"),
   items: [
     new NavigationItem({
