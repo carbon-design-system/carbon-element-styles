@@ -21,7 +21,7 @@ function compile(scss: string) {
 
 describe("scss/utilities/_cascade-layer", () => {
   test("Top-level wrap mixin emits an @layer block", () => {
-    const result = compile(/* scss */ `
+    const { css } = compile(/* scss */ `
 @use "${cascadeLayerUrl}";
 
 @include cascade-layer.wrap {
@@ -31,14 +31,14 @@ describe("scss/utilities/_cascade-layer", () => {
 }
     `);
 
-    expect(result.css).toContain("@layer");
-    expect(result.css).toContain("selector");
+    expect(css).toContain("@layer");
+    expect(css).toContain("selector");
 
-    expect(result.css.indexOf("@layer")).toBeLessThan(result.css.indexOf("selector"));
+    expect(css.indexOf("@layer")).toBeLessThan(css.indexOf("selector"));
   });
 
   test("Nested wrap includes do not produce a redundant inner @layer block", () => {
-    const result = compile(/* scss */ `
+    const { css } = compile(/* scss */ `
 @use "${cascadeLayerUrl}";
 
 @include cascade-layer.wrap {
@@ -50,15 +50,15 @@ describe("scss/utilities/_cascade-layer", () => {
 }
     `);
 
-    const matches = result.css.match(/@layer/g);
+    const matches = css.match(/@layer/g);
     expect(matches).toHaveLength(1);
-    expect(result.css).toContain("selector");
+    expect(css).toContain("selector");
   });
 
   test("Cascade layer name is configurable via the config module", () => {
     const layerName = "test";
 
-    const result = compile(/* scss */ `
+    const { css } = compile(/* scss */ `
 @use "${configUrl}" with ($cascade-layer-name: "${layerName}");
 @use "${cascadeLayerUrl}";
 
@@ -69,11 +69,11 @@ describe("scss/utilities/_cascade-layer", () => {
 }
     `);
 
-    expect(result.css).toContain(`@layer ${layerName}`);
+    expect(css).toContain(`@layer ${layerName}`);
   });
 
   test("Consecutive top-level wrap includes each emit their own @layer block", () => {
-    const result = compile(/* scss */ `
+    const { css } = compile(/* scss */ `
 @use "${cascadeLayerUrl}";
 
 @include cascade-layer.wrap {
@@ -89,9 +89,9 @@ describe("scss/utilities/_cascade-layer", () => {
 }
     `);
 
-    const matches = result.css.match(/@layer/g);
+    const matches = css.match(/@layer/g);
     expect(matches).toHaveLength(2);
-    expect(result.css).toContain("first-selector");
-    expect(result.css).toContain("second-selector");
+    expect(css).toContain("first-selector");
+    expect(css).toContain("second-selector");
   });
 });
