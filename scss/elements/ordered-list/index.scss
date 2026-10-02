@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/spacing";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -23,28 +24,30 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    list-style-type: decimal;
-    padding: 0;
-    margin-inline-start: layout.$density--padding;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      list-style-type: decimal;
+      padding: 0;
+      margin-inline-start: layout.$density--padding;
 
-    & li {
-      @include layout.mode--body-compact;
-      max-inline-size: layout.$mode--max-inline-size;
-      margin-inline-start: spacing.$spacing-03;
-    }
+      & li {
+        @include layout.mode--body-compact;
+        max-inline-size: layout.$mode--max-inline-size;
+        margin-inline-start: spacing.$spacing-03;
+      }
 
-    & li p {
-      @include layout.mode--body-compact;
-      margin-block: 0;
-    }
+      & li p {
+        @include layout.mode--body-compact;
+        margin-block: 0;
+      }
 
-    & ol {
-      list-style-type: lower-alpha;
-    }
+      & ol {
+        list-style-type: lower-alpha;
+      }
 
-    & ol ol {
-      list-style-type: lower-roman;
+      & ol ol {
+        list-style-type: lower-roman;
+      }
     }
   }
 }

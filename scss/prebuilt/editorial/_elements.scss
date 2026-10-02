@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@use "../../utilities/cascade-layer";
+
 @use "../../elements/abbreviation";
 @use "../../elements/anchor";
 @use "../../elements/block-quotation";
@@ -36,37 +38,39 @@
 @use "../../elements/unordered-list";
 
 @mixin styles {
-  @include abbreviation.styles;
-  @include anchor.styles;
-  @include block-quotation.styles;
-  @include body.styles;
-  @include bold-text.styles;
-  @include code.styles;
-  @include deleted-text.styles;
-  @include description-list.styles;
-  @include details.styles;
-  @include heading-level-1.styles;
-  @include heading-level-2.styles;
-  @include heading-level-3.styles;
-  @include heading-level-4.styles;
-  @include heading-level-5.styles;
-  @include heading-level-6.styles;
-  @include horizontal-rule.styles;
-  @include image.styles;
-  @include inline-quotation.styles;
-  @include inserted-text.styles;
-  @include italic-text.styles;
-  @include keyboard-input.styles;
-  @include main.styles;
-  @include marked-text.styles;
-  @include ordered-list.styles;
-  @include paragraph.styles;
-  @include preformatted.styles;
-  @include small-text.styles;
-  @include table.styles(
-    (
-      kind: "structured-list--flush",
-    )
-  );
-  @include unordered-list.styles;
+  @include cascade-layer.wrap {
+    @include abbreviation.styles;
+    @include anchor.styles;
+    @include block-quotation.styles;
+    @include body.styles;
+    @include bold-text.styles;
+    @include code.styles;
+    @include deleted-text.styles;
+    @include description-list.styles;
+    @include details.styles;
+    @include heading-level-1.styles;
+    @include heading-level-2.styles;
+    @include heading-level-3.styles;
+    @include heading-level-4.styles;
+    @include heading-level-5.styles;
+    @include heading-level-6.styles;
+    @include horizontal-rule.styles;
+    @include image.styles;
+    @include inline-quotation.styles;
+    @include inserted-text.styles;
+    @include italic-text.styles;
+    @include keyboard-input.styles;
+    @include main.styles;
+    @include marked-text.styles;
+    @include ordered-list.styles;
+    @include paragraph.styles;
+    @include preformatted.styles;
+    @include small-text.styles;
+    @include table.styles(
+      (
+        kind: "structured-list--flush",
+      )
+    );
+    @include unordered-list.styles;
+  }
 }

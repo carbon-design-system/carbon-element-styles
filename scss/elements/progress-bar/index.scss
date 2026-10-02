@@ -15,6 +15,7 @@
 
 @use "../../config";
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/guards";
 
 $config: () !default;
@@ -33,85 +34,87 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include label.styles(
-      (
-        selector: "&",
-        axis: map.get($props, "axis"),
-      )
-    );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include label.styles(
+        (
+          selector: "&",
+          axis: map.get($props, "axis"),
+        )
+      );
 
-    & progress {
-      appearance: none;
-      background-color: theme.$layer;
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
-      overflow: hidden;
+      & progress {
+        appearance: none;
+        background-color: theme.$layer;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: hidden;
 
-      @if map.get($props, "thickness") == "thick" {
-        block-size: 0.5rem;
+        @if map.get($props, "thickness") == "thick" {
+          block-size: 0.5rem;
+        }
+
+        @if map.get($props, "thickness") == "thin" {
+          block-size: 0.25rem;
+        }
       }
 
-      @if map.get($props, "thickness") == "thin" {
-        block-size: 0.25rem;
-      }
-    }
-
-    & progress::-webkit-progress-bar {
-      background-color: theme.$layer;
-      block-size: inherit;
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
-      overflow: hidden;
-    }
-
-    & progress::-webkit-progress-value {
-      background-color: theme.$interactive;
-    }
-
-    & progress::-moz-progress-bar {
-      background-color: theme.$interactive;
-    }
-
-    & progress:not([value])::-moz-progress-bar {
-      background-color: transparent;
-      background-image: linear-gradient(90deg, theme.$interactive 12.5%, transparent 12.5%);
-      background-position-x: 0%;
-      background-size: 200% 100%;
-      animation-name: #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate;
-      animation-duration: calc(motion.$duration-slow-02 * 5);
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-
-      @include guards.motion {
-        animation-duration: calc(motion.$duration-slow-02 * 2);
-      }
-    }
-
-    & progress:not([value])::-webkit-progress-bar {
-      background-image: linear-gradient(90deg, theme.$interactive 12.5%, transparent 12.5%);
-      background-position-x: 0%;
-      background-size: 200% 100%;
-      animation-name: #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate;
-      animation-duration: calc(motion.$duration-slow-02 * 5);
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-
-      @include guards.motion {
-        animation-duration: calc(motion.$duration-slow-02 * 2);
-      }
-    }
-
-    @keyframes #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate {
-      0% {
-        background-position-x: 25%;
+      & progress::-webkit-progress-bar {
+        background-color: theme.$layer;
+        block-size: inherit;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: hidden;
       }
 
-      80%,
-      100% {
-        background-position-x: -105%;
+      & progress::-webkit-progress-value {
+        background-color: theme.$interactive;
+      }
+
+      & progress::-moz-progress-bar {
+        background-color: theme.$interactive;
+      }
+
+      & progress:not([value])::-moz-progress-bar {
+        background-color: transparent;
+        background-image: linear-gradient(90deg, theme.$interactive 12.5%, transparent 12.5%);
+        background-position-x: 0%;
+        background-size: 200% 100%;
+        animation-name: #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate;
+        animation-duration: calc(motion.$duration-slow-02 * 5);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        @include guards.motion {
+          animation-duration: calc(motion.$duration-slow-02 * 2);
+        }
+      }
+
+      & progress:not([value])::-webkit-progress-bar {
+        background-image: linear-gradient(90deg, theme.$interactive 12.5%, transparent 12.5%);
+        background-position-x: 0%;
+        background-size: 200% 100%;
+        animation-name: #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate;
+        animation-duration: calc(motion.$duration-slow-02 * 5);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        @include guards.motion {
+          animation-duration: calc(motion.$duration-slow-02 * 2);
+        }
+      }
+
+      @keyframes #{carbon-config.$prefix}--#{config.$prefix}--progress-bar--indeterminate {
+        0% {
+          background-position-x: 25%;
+        }
+
+        80%,
+        100% {
+          background-position-x: -105%;
+        }
       }
     }
   }

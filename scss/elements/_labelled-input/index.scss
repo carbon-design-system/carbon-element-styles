@@ -14,6 +14,7 @@
 @use "../_input";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 
 $config: () !default;
@@ -52,57 +53,59 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "label", "selector")} {
-    @include label.styles(
-      (
-        selector: "&",
-        axis: map.get($props, "label", "axis"),
-      )
-    );
-
-    position: relative;
-
-    #{map.get($props, "input", "selector")} {
-      @include input.styles(
+  @include cascade-layer.wrap {
+    #{map.get($props, "label", "selector")} {
+      @include label.styles(
         (
           selector: "&",
-          emit-readonly: map.get($props, "input", "emit-readonly"),
-          emit-disabled: map.get($props, "input", "emit-disabled"),
-          emit-invalid: map.get($props, "input", "emit-invalid"),
-          emit-focus: map.get($props, "input", "emit-focus"),
+          axis: map.get($props, "label", "axis"),
         )
       );
 
-      padding-inline-start: -get-slot-space(map.get($props, "fixed-input-leading-slots"));
-      padding-inline-end: -get-slot-space(map.get($props, "fixed-input-trailing-slots"));
-    }
+      position: relative;
 
-    &::before,
-    &::after {
-      z-index: 9999;
-      position: absolute;
-      pointer-events: none;
-      inset-block-start: calc(layout.$size--padding-block-start - ((1rem - 1lh) * 0.5));
+      #{map.get($props, "input", "selector")} {
+        @include input.styles(
+          (
+            selector: "&",
+            emit-readonly: map.get($props, "input", "emit-readonly"),
+            emit-disabled: map.get($props, "input", "emit-disabled"),
+            emit-invalid: map.get($props, "input", "emit-invalid"),
+            emit-focus: map.get($props, "input", "emit-focus"),
+          )
+        );
 
-      @if map.get($props, "label", "axis") == "block" {
-        grid-row: 2;
-      } @else {
-        grid-column: 2;
+        padding-inline-start: -get-slot-space(map.get($props, "fixed-input-leading-slots"));
+        padding-inline-end: -get-slot-space(map.get($props, "fixed-input-trailing-slots"));
       }
-    }
 
-    @if map.get($props, "input-invalid-slot") and map.get($props, "input", "emit-invalid") {
-      &:has(#{map.get($props, "input", "selector")}:invalid),
-      &:has(#{map.get($props, "input", "selector")}[aria-invalid="true"]) {
-        &::#{map.get($props, 'input-invalid-slot')} {
-          @include input-trailing-slot(map.get($props, "fixed-input-trailing-slots") + 1) {
-            @include icons.warning--filled;
-            color: theme.$support-error;
-          }
+      &::before,
+      &::after {
+        z-index: 9999;
+        position: absolute;
+        pointer-events: none;
+        inset-block-start: calc(layout.$size--padding-block-start - ((1rem - 1lh) * 0.5));
+
+        @if map.get($props, "label", "axis") == "block" {
+          grid-row: 2;
+        } @else {
+          grid-column: 2;
         }
+      }
 
-        #{map.get($props, "input", "selector")} {
-          padding-inline-end: -get-slot-space(map.get($props, "fixed-input-trailing-slots") + 1);
+      @if map.get($props, "input-invalid-slot") and map.get($props, "input", "emit-invalid") {
+        &:has(#{map.get($props, "input", "selector")}:invalid),
+        &:has(#{map.get($props, "input", "selector")}[aria-invalid="true"]) {
+          &::#{map.get($props, 'input-invalid-slot')} {
+            @include input-trailing-slot(map.get($props, "fixed-input-trailing-slots") + 1) {
+              @include icons.warning--filled;
+              color: theme.$support-error;
+            }
+          }
+
+          #{map.get($props, "input", "selector")} {
+            padding-inline-end: -get-slot-space(map.get($props, "fixed-input-trailing-slots") + 1);
+          }
         }
       }
     }

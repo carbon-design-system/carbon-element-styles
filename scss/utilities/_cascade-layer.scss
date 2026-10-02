@@ -1,0 +1,33 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use "../config";
+
+/// Internal state flag: true while the `wrap` mixin body is executing,
+/// preventing nested calls from emitting a redundant `@layer` block.
+/// @group cascade-layer
+/// @access private
+$is-inside-cascade-layer: false !default;
+
+/// Wraps `@content` in a `@layer` when called at the top level.
+/// When called from within another `wrap` invocation (i.e.
+/// `$is-inside-cascade-layer` is already `true`), the content is
+/// emitted directly without an extra layer.
+/// @group cascade-layer
+@mixin wrap {
+  @if $is-inside-cascade-layer {
+    @content;
+  } @else {
+    $is-inside-cascade-layer: true !global;
+
+    @layer #{config.$cascade-layer-name} {
+      @content;
+    }
+
+    $is-inside-cascade-layer: false !global;
+  }
+}

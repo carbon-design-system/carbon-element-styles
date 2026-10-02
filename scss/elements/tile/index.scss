@@ -14,6 +14,7 @@
 @use "../_layer";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 @use "../../utilities/guards";
 
@@ -29,58 +30,61 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include layer.styles;
-    padding: layout.$density--padding;
-    box-sizing: border-box;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include layer.styles;
+      padding: layout.$density--padding;
+      box-sizing: border-box;
 
-    &:is(a) {
-      position: relative;
-      display: block;
-      color: theme.$text-primary;
-      text-decoration: none;
-      padding-inline-end: spacing.$spacing-09;
-      border: 0.0625rem solid theme.$border-tile;
-      transition: background-color layout.$mode--transition-duration
-        layout.$mode--transition-timing-function;
+      &:is(a) {
+        position: relative;
+        display: block;
+        color: theme.$text-primary;
+        text-decoration: none;
+        padding-inline-end: spacing.$spacing-09;
+        border: 0.0625rem solid theme.$border-tile;
+        transition: background-color layout.$mode--transition-duration
+          layout.$mode--transition-timing-function;
 
-      &:visited {
-        color: inherit;
-      }
-
-      & svg,
-      &:visited svg {
-        fill: currentColor;
-      }
-
-      @include guards.hover {
-        &:hover {
-          @include layer.layer-background-hover;
+        &:visited {
           color: inherit;
         }
-      }
 
-      &:active {
-        @include layer.layer-background-active;
-      }
+        & svg,
+        &:visited svg {
+          fill: currentColor;
+        }
 
-      &:focus {
-        @include focus-outline.focus-outline("outline");
-      }
+        @include guards.hover {
+          &:hover {
+            @include layer.layer-background-hover;
+            color: inherit;
+          }
+        }
 
-      &::after {
-        @include icons.arrow--right;
-        content: "";
-        position: absolute;
-        color: theme.$link-primary;
-        inset-block-end: layout.$density--padding;
-        inset-inline-end: layout.$density--padding;
-        transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
-      }
+        &:active {
+          @include layer.layer-background-active;
+        }
 
-      @include guards.hover {
-        &:hover::after {
-          color: theme.$icon-primary;
+        &:focus {
+          @include focus-outline.focus-outline("outline");
+        }
+
+        &::after {
+          @include icons.arrow--right;
+          content: "";
+          position: absolute;
+          color: theme.$link-primary;
+          inset-block-end: layout.$density--padding;
+          inset-inline-end: layout.$density--padding;
+          transition: color layout.$mode--transition-duration
+            layout.$mode--transition-timing-function;
+        }
+
+        @include guards.hover {
+          &:hover::after {
+            color: theme.$icon-primary;
+          }
         }
       }
     }

@@ -13,6 +13,7 @@
 @use "@carbon/styles/scss/components/button/tokens" as carbon-button;
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/guards";
 
 $config: () !default;
@@ -29,242 +30,244 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include layout.mode--body-compact;
-    appearance: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-    text-align: start;
-    display: flex;
-    block-size: layout.$size--block-size;
-    padding-block-start: layout.$size--padding-block-start;
-    padding-block-end: layout.$size--padding-block-end;
-    padding-inline-start: layout.$density--padding;
-    padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
-    cursor: pointer;
-    transition-property: color, background-color;
-    transition-duration: layout.$mode--transition-duration;
-    transition-timing-function: layout.$mode--transition-timing-function;
-
-    &:focus {
-      outline: 0.125rem solid theme.$focus;
-      outline-offset: -0.125rem;
-      box-shadow: inset 0 0 0 0.1875rem theme.$layer-background;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-
-    & > svg {
-      fill: currentColor;
-      block-size: 1rem;
-      inline-size: 1rem;
-      translate: 0 0.125rem;
-    }
-
-    &:has(> svg:not(:only-child)) {
-      padding-inline-end: layout.$density--padding;
-
-      & > svg {
-        margin-inline-start: layout.$density--padding;
-      }
-    }
-
-    &:has(> svg:only-child),
-    &:has(> svg:first-child + [popover="hint"]:last-child) {
-      padding-inline: unset;
-      aspect-ratio: 1;
-      justify-content: center;
-
-      & > svg {
-        margin-inline: 0;
-      }
-    }
-
-    @if map.get($props, "kind") == "primary" {
-      background-color: carbon-button.$button-primary;
-      color: theme.$text-on-color;
-
-      @include guards.hover {
-        &:enabled:hover {
-          background-color: carbon-button.$button-primary-hover;
-        }
-      }
-
-      &:active {
-        background-color: carbon-button.$button-primary-active;
-      }
-
-      &:disabled {
-        background-color: carbon-button.$button-disabled;
-        color: theme.$text-on-color-disabled;
-      }
-    }
-
-    @if map.get($props, "kind") == "secondary" {
-      background-color: carbon-button.$button-secondary;
-      color: theme.$text-on-color;
-
-      @include guards.hover {
-        &:enabled:hover {
-          background-color: carbon-button.$button-secondary-hover;
-        }
-      }
-
-      &:enabled:active {
-        background-color: carbon-button.$button-secondary-active;
-      }
-
-      &:disabled {
-        background-color: carbon-button.$button-disabled;
-        color: theme.$text-on-color-disabled;
-      }
-    }
-
-    @if map.get($props, "kind") == "tertiary" {
-      background-color: transparent;
-      color: carbon-button.$button-tertiary;
-      outline: 0.0625rem solid carbon-button.$button-tertiary;
-      outline-offset: -0.0625rem;
-
-      @include guards.hover {
-        &:enabled:hover {
-          color: theme.$text-inverse;
-          background-color: carbon-button.$button-tertiary-hover;
-        }
-      }
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include layout.mode--body-compact;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      text-align: start;
+      display: flex;
+      block-size: layout.$size--block-size;
+      padding-block-start: layout.$size--padding-block-start;
+      padding-block-end: layout.$size--padding-block-end;
+      padding-inline-start: layout.$density--padding;
+      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+      cursor: pointer;
+      transition-property: color, background-color;
+      transition-duration: layout.$mode--transition-duration;
+      transition-timing-function: layout.$mode--transition-timing-function;
 
       &:focus {
-        color: theme.$text-inverse;
-        background-color: carbon-button.$button-tertiary;
-      }
-
-      &:enabled:active {
-        background-color: carbon-button.$button-tertiary-active;
+        outline: 0.125rem solid theme.$focus;
+        outline-offset: -0.125rem;
+        box-shadow: inset 0 0 0 0.1875rem theme.$layer-background;
       }
 
       &:disabled {
-        outline-color: carbon-button.$button-disabled;
-        color: theme.$text-disabled;
+        cursor: not-allowed;
       }
-    }
 
-    @if map.get($props, "kind") == "ghost" {
-      background-color: transparent;
-      color: theme.$link-primary;
-      padding-inline-end: layout.$density--padding;
+      & > svg {
+        fill: currentColor;
+        block-size: 1rem;
+        inline-size: 1rem;
+        translate: 0 0.125rem;
+      }
 
-      @include guards.hover {
-        &:enabled:hover {
-          color: theme.$link-primary-hover;
-          background-color: theme.$layer-hover;
+      &:has(> svg:not(:only-child)) {
+        padding-inline-end: layout.$density--padding;
+
+        & > svg {
+          margin-inline-start: layout.$density--padding;
         }
       }
 
-      &:enabled:active {
-        background-color: theme.$layer-active;
-      }
+      &:has(> svg:only-child),
+      &:has(> svg:first-child + [popover="hint"]:last-child) {
+        padding-inline: unset;
+        aspect-ratio: 1;
+        justify-content: center;
 
-      &:disabled {
-        color: theme.$text-disabled;
-      }
-
-      &:has(> svg:not(:only-child)) > svg {
-        margin-inline-start: spacing.$spacing-03;
-      }
-
-      & > svg:only-child,
-      & > svg:first-child:has(+ [popover="hint"]:last-child) {
-        color: theme.$icon-primary;
-      }
-
-      &:disabled > svg:only-child,
-      &:disabled > svg:first-child:has(+ [popover="hint"]:last-child) {
-        color: theme.$icon-disabled;
-      }
-
-      &[aria-pressed="true"]:has(> svg:only-child),
-      &[aria-pressed="true"]:has(> svg:first-child + [popover="hint"]:last-child) {
-        background-color: theme.$background-selected;
-      }
-    }
-
-    @if map.get($props, "kind") == "danger--primary" {
-      background-color: carbon-button.$button-danger-primary;
-      color: theme.$text-on-color;
-
-      @include guards.hover {
-        &:enabled:hover {
-          background-color: carbon-button.$button-danger-hover;
+        & > svg {
+          margin-inline: 0;
         }
       }
 
-      &:enabled:active {
-        background-color: carbon-button.$button-danger-active;
-      }
-
-      &:disabled {
-        background-color: carbon-button.$button-disabled;
-        color: theme.$text-on-color-disabled;
-      }
-    }
-
-    @if map.get($props, "kind") == "danger--tertiary" {
-      background-color: transparent;
-      color: carbon-button.$button-danger-secondary;
-      outline: 0.0625rem solid carbon-button.$button-danger-secondary;
-      outline-offset: -0.0625rem;
-
-      @include guards.hover {
-        &:enabled:hover {
-          color: theme.$text-on-color;
-          background-color: carbon-button.$button-danger-hover;
-          outline-color: carbon-button.$button-danger-hover;
-        }
-      }
-
-      &:focus {
+      @if map.get($props, "kind") == "primary" {
+        background-color: carbon-button.$button-primary;
         color: theme.$text-on-color;
-        background-color: carbon-button.$button-danger-primary;
-      }
 
-      &:enabled:active {
-        background-color: carbon-button.$button-danger-active;
-        outline-color: carbon-button.$button-danger-active;
-      }
+        @include guards.hover {
+          &:enabled:hover {
+            background-color: carbon-button.$button-primary-hover;
+          }
+        }
 
-      &:disabled {
-        outline-color: carbon-button.$button-disabled;
-        color: theme.$text-disabled;
-      }
-    }
+        &:active {
+          background-color: carbon-button.$button-primary-active;
+        }
 
-    @if map.get($props, "kind") == "danger--ghost" {
-      background-color: transparent;
-      color: carbon-button.$button-danger-secondary;
-      padding-inline-end: layout.$density--padding;
-
-      @include guards.hover {
-        &:enabled:hover {
-          color: theme.$text-on-color;
-          background-color: carbon-button.$button-danger-hover;
-          outline-color: carbon-button.$button-danger-hover;
+        &:disabled {
+          background-color: carbon-button.$button-disabled;
+          color: theme.$text-on-color-disabled;
         }
       }
 
-      &:enabled:active {
-        background-color: carbon-button.$button-danger-active;
-        outline-color: carbon-button.$button-danger-active;
+      @if map.get($props, "kind") == "secondary" {
+        background-color: carbon-button.$button-secondary;
+        color: theme.$text-on-color;
+
+        @include guards.hover {
+          &:enabled:hover {
+            background-color: carbon-button.$button-secondary-hover;
+          }
+        }
+
+        &:enabled:active {
+          background-color: carbon-button.$button-secondary-active;
+        }
+
+        &:disabled {
+          background-color: carbon-button.$button-disabled;
+          color: theme.$text-on-color-disabled;
+        }
       }
 
-      &:disabled {
-        color: theme.$text-disabled;
+      @if map.get($props, "kind") == "tertiary" {
+        background-color: transparent;
+        color: carbon-button.$button-tertiary;
+        outline: 0.0625rem solid carbon-button.$button-tertiary;
+        outline-offset: -0.0625rem;
+
+        @include guards.hover {
+          &:enabled:hover {
+            color: theme.$text-inverse;
+            background-color: carbon-button.$button-tertiary-hover;
+          }
+        }
+
+        &:focus {
+          color: theme.$text-inverse;
+          background-color: carbon-button.$button-tertiary;
+        }
+
+        &:enabled:active {
+          background-color: carbon-button.$button-tertiary-active;
+        }
+
+        &:disabled {
+          outline-color: carbon-button.$button-disabled;
+          color: theme.$text-disabled;
+        }
       }
 
-      &:has(> svg:not(:only-child)) > svg {
-        margin-inline-start: spacing.$spacing-03;
+      @if map.get($props, "kind") == "ghost" {
+        background-color: transparent;
+        color: theme.$link-primary;
+        padding-inline-end: layout.$density--padding;
+
+        @include guards.hover {
+          &:enabled:hover {
+            color: theme.$link-primary-hover;
+            background-color: theme.$layer-hover;
+          }
+        }
+
+        &:enabled:active {
+          background-color: theme.$layer-active;
+        }
+
+        &:disabled {
+          color: theme.$text-disabled;
+        }
+
+        &:has(> svg:not(:only-child)) > svg {
+          margin-inline-start: spacing.$spacing-03;
+        }
+
+        & > svg:only-child,
+        & > svg:first-child:has(+ [popover="hint"]:last-child) {
+          color: theme.$icon-primary;
+        }
+
+        &:disabled > svg:only-child,
+        &:disabled > svg:first-child:has(+ [popover="hint"]:last-child) {
+          color: theme.$icon-disabled;
+        }
+
+        &[aria-pressed="true"]:has(> svg:only-child),
+        &[aria-pressed="true"]:has(> svg:first-child + [popover="hint"]:last-child) {
+          background-color: theme.$background-selected;
+        }
+      }
+
+      @if map.get($props, "kind") == "danger--primary" {
+        background-color: carbon-button.$button-danger-primary;
+        color: theme.$text-on-color;
+
+        @include guards.hover {
+          &:enabled:hover {
+            background-color: carbon-button.$button-danger-hover;
+          }
+        }
+
+        &:enabled:active {
+          background-color: carbon-button.$button-danger-active;
+        }
+
+        &:disabled {
+          background-color: carbon-button.$button-disabled;
+          color: theme.$text-on-color-disabled;
+        }
+      }
+
+      @if map.get($props, "kind") == "danger--tertiary" {
+        background-color: transparent;
+        color: carbon-button.$button-danger-secondary;
+        outline: 0.0625rem solid carbon-button.$button-danger-secondary;
+        outline-offset: -0.0625rem;
+
+        @include guards.hover {
+          &:enabled:hover {
+            color: theme.$text-on-color;
+            background-color: carbon-button.$button-danger-hover;
+            outline-color: carbon-button.$button-danger-hover;
+          }
+        }
+
+        &:focus {
+          color: theme.$text-on-color;
+          background-color: carbon-button.$button-danger-primary;
+        }
+
+        &:enabled:active {
+          background-color: carbon-button.$button-danger-active;
+          outline-color: carbon-button.$button-danger-active;
+        }
+
+        &:disabled {
+          outline-color: carbon-button.$button-disabled;
+          color: theme.$text-disabled;
+        }
+      }
+
+      @if map.get($props, "kind") == "danger--ghost" {
+        background-color: transparent;
+        color: carbon-button.$button-danger-secondary;
+        padding-inline-end: layout.$density--padding;
+
+        @include guards.hover {
+          &:enabled:hover {
+            color: theme.$text-on-color;
+            background-color: carbon-button.$button-danger-hover;
+            outline-color: carbon-button.$button-danger-hover;
+          }
+        }
+
+        &:enabled:active {
+          background-color: carbon-button.$button-danger-active;
+          outline-color: carbon-button.$button-danger-active;
+        }
+
+        &:disabled {
+          color: theme.$text-disabled;
+        }
+
+        &:has(> svg:not(:only-child)) > svg {
+          margin-inline-start: spacing.$spacing-03;
+        }
       }
     }
   }

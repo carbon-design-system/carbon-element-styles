@@ -7,6 +7,8 @@
 
 @use "sass:map";
 
+@use "../../utilities/cascade-layer";
+
 $config: () !default;
 
 $-default-config: (
@@ -19,7 +21,9 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    max-inline-size: 100%;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      max-inline-size: 100%;
+    }
   }
 }

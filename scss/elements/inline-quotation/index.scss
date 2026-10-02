@@ -8,6 +8,7 @@
 @use "sass:map";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -21,8 +22,10 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    quotes: auto;
-    font-style: italic;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      quotes: auto;
+      font-style: italic;
+    }
   }
 }

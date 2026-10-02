@@ -12,6 +12,7 @@
 @use "../_labelled-input";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 @use "../../utilities/guards";
 
@@ -29,46 +30,48 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include labelled-input.styles(
-      (
-        label: (
-          selector: "&",
-          axis: map.get($props, "axis"),
-        ),
-        input: (
-          selector: "select",
-          emit-readonly: false,
-        ),
-        fixed-input-trailing-slots: 1,
-        input-invalid-slot: "after",
-      )
-    );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include labelled-input.styles(
+        (
+          label: (
+            selector: "&",
+            axis: map.get($props, "axis"),
+          ),
+          input: (
+            selector: "select",
+            emit-readonly: false,
+          ),
+          fixed-input-trailing-slots: 1,
+          input-invalid-slot: "after",
+        )
+      );
 
-    &::before {
-      @include labelled-input.input-trailing-slot {
-        @include icons.chevron--down;
-      }
-    }
-
-    & select {
-      cursor: pointer;
-
-      @include guards.hover {
-        &:enabled:hover {
-          background-color: theme.$field-hover;
+      &::before {
+        @include labelled-input.input-trailing-slot {
+          @include icons.chevron--down;
         }
       }
 
-      &:enabled:active {
-        background-color: theme.$layer-active;
-      }
+      & select {
+        cursor: pointer;
 
-      @if map.get($props, "axis") == "inline" {
-        &:enabled,
-        &:disabled {
-          background-color: transparent;
-          border-block-end: none;
+        @include guards.hover {
+          &:enabled:hover {
+            background-color: theme.$field-hover;
+          }
+        }
+
+        &:enabled:active {
+          background-color: theme.$layer-active;
+        }
+
+        @if map.get($props, "axis") == "inline" {
+          &:enabled,
+          &:disabled {
+            background-color: transparent;
+            border-block-end: none;
+          }
         }
       }
     }

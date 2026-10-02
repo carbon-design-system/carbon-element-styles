@@ -19,6 +19,7 @@
 @use "../_layer";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 @use "../../utilities/guards";
 
@@ -34,206 +35,208 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    position: relative;
-    padding: 0;
-
-    &:modal {
-      @include layout.size("md");
-      @include layout.density("normal");
-      @include layer.styles;
-
-      display: flex;
-      flex-direction: column;
-      color: theme.$text-primary;
-      border: none;
-      padding-inline: layout.$density--padding;
-      box-shadow: none;
-      margin: auto;
-      box-sizing: border-box;
-
-      &:focus {
-        @include focus-outline.focus-outline("outline");
-      }
-
-      @include breakpoint.breakpoint("xlg") {
-        inline-size: 48%;
-      }
-
-      @include breakpoint.breakpoint-down("xlg") {
-        inline-size: 60%;
-        max-block-size: 84%;
-      }
-
-      @include breakpoint.breakpoint-down("lg") {
-        inline-size: 84%;
-        max-block-size: 90%;
-      }
-
-      @include breakpoint.breakpoint-down("md") {
-        inline-size: 100%;
-        block-size: 100%;
-        max-inline-size: 100dvi;
-        max-block-size: 100dvb;
-      }
-    }
-
-    &:modal::backdrop {
-      background-color: theme.$overlay;
-    }
-
-    &:modal header {
-      @include layout.mode--heading-level-4;
-      margin-block: layout.$density--padding;
-      margin-inline-end: calc(layout.$size--block-size + spacing.$spacing-05);
-    }
-
-    &:modal footer {
-      @include layout.size("xl");
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin-inline: calc(layout.$density--padding * -1);
-      margin-block-start: spacing.$spacing-09;
-    }
-
-    &:modal:not(:has(footer)) {
-      padding-block-end: spacing.$spacing-09;
-    }
-
-    // single button
-    &:modal footer > button:only-child {
-      grid-column: 3 / span 2;
-      @include button.styles(
-        (
-          selector: "&",
-          kind: "primary",
-        )
-      );
-    }
-
-    // two buttons
-    &:modal footer > button:first-child:has(+ button:last-child) {
-      grid-column: 1 / span 2;
-      @include button.styles(
-        (
-          selector: "&",
-          kind: "secondary",
-        )
-      );
-    }
-
-    &:modal footer > button:first-child + button:last-child {
-      grid-column: 3 / span 2;
-      @include button.styles(
-        (
-          selector: "&",
-          kind: "primary",
-        )
-      );
-    }
-
-    // three buttons
-    &:modal footer > button:first-child:not(:has(+ button:last-child), :last-child) {
-      grid-column: 1;
-      @include button.styles(
-        (
-          selector: "&",
-          kind: "ghost",
-        )
-      );
-    }
-
-    &:modal footer > button:not(:first-child):has(+ button:last-child) {
-      grid-column: 3;
-      @include button.styles(
-        (
-          selector: "&",
-          kind: "secondary",
-        )
-      );
-    }
-
-    &:modal footer > button:not(:first-child) + button:last-child {
-      grid-column: 4;
-      @include button.styles(
-        (
-          selector: "&",
-          kind: "primary",
-        )
-      );
-    }
-
-    // header close button
-    &:modal header > button {
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline-end: 0;
-      appearance: none;
-      box-shadow: none;
-      border: none;
-      border-radius: 0;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      position: relative;
       padding: 0;
-      background-color: transparent;
-      color: theme.$icon-primary;
-      block-size: layout.$size--block-size;
-      inline-size: layout.$size--block-size;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color layout.$mode--transition-duration
-        layout.$mode--transition-timing-function;
 
-      @include guards.hover {
-        &:hover {
-          background-color: theme.$layer-hover;
+      &:modal {
+        @include layout.size("md");
+        @include layout.density("normal");
+        @include layer.styles;
+
+        display: flex;
+        flex-direction: column;
+        color: theme.$text-primary;
+        border: none;
+        padding-inline: layout.$density--padding;
+        box-shadow: none;
+        margin: auto;
+        box-sizing: border-box;
+
+        &:focus {
+          @include focus-outline.focus-outline("outline");
+        }
+
+        @include breakpoint.breakpoint("xlg") {
+          inline-size: 48%;
+        }
+
+        @include breakpoint.breakpoint-down("xlg") {
+          inline-size: 60%;
+          max-block-size: 84%;
+        }
+
+        @include breakpoint.breakpoint-down("lg") {
+          inline-size: 84%;
+          max-block-size: 90%;
+        }
+
+        @include breakpoint.breakpoint-down("md") {
+          inline-size: 100%;
+          block-size: 100%;
+          max-inline-size: 100dvi;
+          max-block-size: 100dvb;
         }
       }
 
-      &:active {
-        background-color: theme.$layer-active;
+      &:modal::backdrop {
+        background-color: theme.$overlay;
       }
 
-      &:focus {
-        @include focus-outline.focus-outline("outline");
+      &:modal header {
+        @include layout.mode--heading-level-4;
+        margin-block: layout.$density--padding;
+        margin-inline-end: calc(layout.$size--block-size + spacing.$spacing-05);
       }
-    }
 
-    &:modal header > button::after {
-      @include icons.close($size: 1.25rem);
-      display: block;
-      inset: 0;
-      content: "";
-    }
+      &:modal footer {
+        @include layout.size("xl");
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-inline: calc(layout.$density--padding * -1);
+        margin-block-start: spacing.$spacing-09;
+      }
 
-    // entry animation
-    &[open]:modal {
-      translate: 0 0;
-      opacity: 1;
-      transition-property: opacity;
-      transition-duration: motion.$duration-moderate-02;
-      transition-timing-function: layout.$mode--transition-timing-function;
+      &:modal:not(:has(footer)) {
+        padding-block-end: spacing.$spacing-09;
+      }
 
-      @include guards.motion {
-        transition-property: opacity, translate;
+      // single button
+      &:modal footer > button:only-child {
+        grid-column: 3 / span 2;
+        @include button.styles(
+          (
+            selector: "&",
+            kind: "primary",
+          )
+        );
+      }
+
+      // two buttons
+      &:modal footer > button:first-child:has(+ button:last-child) {
+        grid-column: 1 / span 2;
+        @include button.styles(
+          (
+            selector: "&",
+            kind: "secondary",
+          )
+        );
+      }
+
+      &:modal footer > button:first-child + button:last-child {
+        grid-column: 3 / span 2;
+        @include button.styles(
+          (
+            selector: "&",
+            kind: "primary",
+          )
+        );
+      }
+
+      // three buttons
+      &:modal footer > button:first-child:not(:has(+ button:last-child), :last-child) {
+        grid-column: 1;
+        @include button.styles(
+          (
+            selector: "&",
+            kind: "ghost",
+          )
+        );
+      }
+
+      &:modal footer > button:not(:first-child):has(+ button:last-child) {
+        grid-column: 3;
+        @include button.styles(
+          (
+            selector: "&",
+            kind: "secondary",
+          )
+        );
+      }
+
+      &:modal footer > button:not(:first-child) + button:last-child {
+        grid-column: 4;
+        @include button.styles(
+          (
+            selector: "&",
+            kind: "primary",
+          )
+        );
+      }
+
+      // header close button
+      &:modal header > button {
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        appearance: none;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        background-color: transparent;
+        color: theme.$icon-primary;
+        block-size: layout.$size--block-size;
+        inline-size: layout.$size--block-size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color layout.$mode--transition-duration
+          layout.$mode--transition-timing-function;
+
+        @include guards.hover {
+          &:hover {
+            background-color: theme.$layer-hover;
+          }
+        }
+
+        &:active {
+          background-color: theme.$layer-active;
+        }
+
+        &:focus {
+          @include focus-outline.focus-outline("outline");
+        }
+      }
+
+      &:modal header > button::after {
+        @include icons.close($size: 1.25rem);
+        display: block;
+        inset: 0;
+        content: "";
+      }
+
+      // entry animation
+      &[open]:modal {
+        translate: 0 0;
+        opacity: 1;
+        transition-property: opacity;
+        transition-duration: motion.$duration-moderate-02;
+        transition-timing-function: layout.$mode--transition-timing-function;
+
+        @include guards.motion {
+          transition-property: opacity, translate;
+
+          @starting-style {
+            opacity: 0;
+            translate: 0 -1.5rem;
+          }
+        }
 
         @starting-style {
           opacity: 0;
-          translate: 0 -1.5rem;
         }
       }
 
-      @starting-style {
-        opacity: 0;
-      }
-    }
+      &[open]:modal::backdrop {
+        opacity: 1;
+        transition: inherit;
 
-    &[open]:modal::backdrop {
-      opacity: 1;
-      transition: inherit;
-
-      @starting-style {
-        opacity: 0;
+        @starting-style {
+          opacity: 0;
+        }
       }
     }
   }

@@ -9,6 +9,7 @@
 
 @use "../_labelled-input";
 
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 
 $config: () !default;
@@ -25,24 +26,26 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include labelled-input.styles(
-      (
-        label: (
-          selector: "&",
-          axis: map.get($props, "axis"),
-        ),
-        input: (
-          selector: 'input[type="search"]',
-        ),
-        fixed-input-leading-slots: 1,
-        input-invalid-slot: "after",
-      )
-    );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include labelled-input.styles(
+        (
+          label: (
+            selector: "&",
+            axis: map.get($props, "axis"),
+          ),
+          input: (
+            selector: 'input[type="search"]',
+          ),
+          fixed-input-leading-slots: 1,
+          input-invalid-slot: "after",
+        )
+      );
 
-    &::before {
-      @include labelled-input.input-leading-slot {
-        @include icons.search;
+      &::before {
+        @include labelled-input.input-leading-slot {
+          @include icons.search;
+        }
       }
     }
   }
