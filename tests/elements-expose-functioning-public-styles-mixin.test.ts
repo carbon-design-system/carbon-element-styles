@@ -36,8 +36,8 @@ function discoverModules(): string[] {
   return modules;
 }
 
-describe.each(discoverModules().map((m) => [m]))("%s", (module) => {
-  test("All elements expose a functioning public `styles` mixin", () => {
+describe("All elements expose a functioning public `styles` mixin", () => {
+  test.each(discoverModules().map((m) => [m]))("%s", (module) => {
     const url = pathToFileURL(join(scssRoot, module));
 
     const scss = /* scss */ `
