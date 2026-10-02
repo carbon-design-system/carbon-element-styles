@@ -141,4 +141,17 @@ describe("Correctly parses CSS features", () => {
 
     expect(featureLabels).toContain("@starting-style");
   });
+
+  test("@layer", () => {
+    const featureLabels = getParsedFeatureLabels(/* css */ `
+      @layer reset, framework;
+      @layer framework {
+        div {
+          display: inline;
+        }
+      }
+    `);
+
+    expect(featureLabels).toContain("@layer");
+  });
 });
