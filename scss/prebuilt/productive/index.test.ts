@@ -8,10 +8,14 @@
 import { describe } from "vitest";
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { stylesAreWrappedInCascadeLayer } from "../../../tests/common/styles-are-wrapped-in-cascade-layer";
 
 describe("prebuilt/productive", () => {
   describe("_elements", () => {
     scssExposesFunctioningPublicStylesMixin({
+      module: "prebuilt/productive/_elements",
+    });
+    stylesAreWrappedInCascadeLayer({
       module: "prebuilt/productive/_elements",
     });
   });

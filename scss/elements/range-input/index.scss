@@ -13,6 +13,7 @@
 @use "../label";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -28,51 +29,53 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include label.styles(
-      (
-        selector: "&",
-        axis: map.get($props, "axis"),
-      )
-    );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include label.styles(
+        (
+          selector: "&",
+          axis: map.get($props, "axis"),
+        )
+      );
 
-    & input[type="range"] {
-      display: block;
-      appearance: none;
-      background-color: transparent;
-      block-size: 1.25rem;
-    }
+      & input[type="range"] {
+        display: block;
+        appearance: none;
+        background-color: transparent;
+        block-size: 1.25rem;
+      }
 
-    & input[type="range"]::-webkit-slider-thumb {
-      appearance: none;
-      block-size: 0.875rem;
-      inline-size: 0.875rem;
-      border-radius: 50%;
-      background-color: theme.$layer-selected-inverse;
-      translate: 0 calc(-50% + 0.125rem * 0.5);
-      cursor: pointer;
-    }
+      & input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        block-size: 0.875rem;
+        inline-size: 0.875rem;
+        border-radius: 50%;
+        background-color: theme.$layer-selected-inverse;
+        translate: 0 calc(-50% + 0.125rem * 0.5);
+        cursor: pointer;
+      }
 
-    & input[type="range"]::-webkit-slider-runnable-track {
-      height: 0.125rem;
-      background-color: theme.$border-subtle;
-      cursor: pointer;
-    }
+      & input[type="range"]::-webkit-slider-runnable-track {
+        height: 0.125rem;
+        background-color: theme.$border-subtle;
+        cursor: pointer;
+      }
 
-    & input[type="range"]:focus {
-      outline: none;
-    }
+      & input[type="range"]:focus {
+        outline: none;
+      }
 
-    & input[type="range"]:focus::-webkit-slider-thumb {
-      background-color: theme.$border-interactive;
-      outline: 0.125rem solid theme.$border-interactive;
-      outline-offset: calc(0.0625rem + 0.125rem);
-    }
+      & input[type="range"]:focus::-webkit-slider-thumb {
+        background-color: theme.$border-interactive;
+        outline: 0.125rem solid theme.$border-interactive;
+        outline-offset: calc(0.0625rem + 0.125rem);
+      }
 
-    & input[type="range"]:disabled::-webkit-slider-thumb,
-    & input[type="range"]::-webkit-slider-runnable-track {
-      background-color: theme.$border-disabled;
-      cursor: not-allowed;
+      & input[type="range"]:disabled::-webkit-slider-thumb,
+      & input[type="range"]::-webkit-slider-runnable-track {
+        background-color: theme.$border-disabled;
+        cursor: not-allowed;
+      }
     }
   }
 }

@@ -12,6 +12,7 @@
 @use "@carbon/styles/scss/utilities/focus-outline";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 @use "../../utilities/guards";
 @use "../../utilities/active-indicator";
@@ -29,170 +30,173 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    padding-block: layout.$density--padding;
-    inline-size: 16rem;
-    background-color: theme.$layer-background;
-    border-inline-end: 0.0625rem solid theme.$border-subtle;
-    position: fixed;
-    inset-inline-start: 0;
-    inset-block: 0;
-    overflow-y: auto;
-    box-sizing: border-box;
-
-    & section + section {
-      padding-block-start: layout.$density--padding;
-    }
-
-    & header {
-      @include layout.mode--helper-text;
-      color: theme.$text-helper;
-      padding-block-start: layout.$size--padding-block-start;
-      padding-block-end: spacing.$spacing-03;
-      padding-inline: layout.$density--padding;
-    }
-
-    & ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    @for $i from 1 through 8 {
-      $nesting-selector: "& ul";
-
-      @for $_ from 1 to $i {
-        $nesting-selector: "#{$nesting-selector} ul";
-      }
-
-      #{$nesting-selector} {
-        @include tokens.set("side-navigation--level", $i);
-      }
-    }
-
-    & li {
-      margin: 0;
-      padding: 0;
-    }
-
-    & li > button[aria-expanded],
-    & li > a {
-      @include layout.mode--heading-compact;
-      position: relative;
-      appearance: none;
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
-      inline-size: 100%;
-      text-align: start;
-      display: block;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      padding-block: layout.$density--padding;
+      inline-size: 16rem;
+      background-color: theme.$layer-background;
+      border-inline-end: 0.0625rem solid theme.$border-subtle;
+      position: fixed;
+      inset-inline-start: 0;
+      inset-block: 0;
+      overflow-y: auto;
       box-sizing: border-box;
-      color: theme.$text-secondary;
-      background-color: transparent;
-      text-decoration: none;
-      block-size: layout.$size--block-size;
-      padding-block-start: layout.$size--padding-block-start;
-      padding-block-end: layout.$size--padding-block-end;
-      padding-inline-start: calc(
-        layout.$density--padding * tokens.get("side-navigation--level", 1)
-      );
-      padding-inline-end: layout.$density--padding;
-      cursor: pointer;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      transition-property: color, background-color;
-      transition-duration: layout.$mode--transition-duration;
-      transition-timing-function: layout.$mode--transition-timing-function;
 
-      @include guards.hover {
-        &:hover {
-          background-color: theme.$layer-hover;
-          color: theme.$text-primary;
+      & section + section {
+        padding-block-start: layout.$density--padding;
+      }
+
+      & header {
+        @include layout.mode--helper-text;
+        color: theme.$text-helper;
+        padding-block-start: layout.$size--padding-block-start;
+        padding-block-end: spacing.$spacing-03;
+        padding-inline: layout.$density--padding;
+      }
+
+      & ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      @for $i from 1 through 8 {
+        $nesting-selector: "& ul";
+
+        @for $_ from 1 to $i {
+          $nesting-selector: "#{$nesting-selector} ul";
+        }
+
+        #{$nesting-selector} {
+          @include tokens.set("side-navigation--level", $i);
         }
       }
 
-      &:active {
-        background-color: theme.$layer-active;
+      & li {
+        margin: 0;
+        padding: 0;
       }
 
-      &:focus {
-        @include focus-outline.focus-outline("outline");
-      }
-    }
+      & li > button[aria-expanded],
+      & li > a {
+        @include layout.mode--heading-compact;
+        position: relative;
+        appearance: none;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        inline-size: 100%;
+        text-align: start;
+        display: block;
+        box-sizing: border-box;
+        color: theme.$text-secondary;
+        background-color: transparent;
+        text-decoration: none;
+        block-size: layout.$size--block-size;
+        padding-block-start: layout.$size--padding-block-start;
+        padding-block-end: layout.$size--padding-block-end;
+        padding-inline-start: calc(
+          layout.$density--padding * tokens.get("side-navigation--level", 1)
+        );
+        padding-inline-end: layout.$density--padding;
+        cursor: pointer;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        transition-property: color, background-color;
+        transition-duration: layout.$mode--transition-duration;
+        transition-timing-function: layout.$mode--transition-timing-function;
 
-    & li > button[aria-expanded] {
-      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
-    }
+        @include guards.hover {
+          &:hover {
+            background-color: theme.$layer-hover;
+            color: theme.$text-primary;
+          }
+        }
 
-    & li > button[aria-expanded]::after {
-      content: "";
-      @include icons.chevron--down;
-      display: block;
-      position: absolute;
-      inset-inline-end: layout.$density--padding;
-      inset-block-start: layout.$size--padding-block-start;
-      transition: rotate layout.$mode--transition-duration layout.$mode--transition-timing-function;
-    }
+        &:active {
+          background-color: theme.$layer-active;
+        }
 
-    & li > button[aria-expanded="true"]::after {
-      rotate: 180deg;
-    }
-
-    & li > button[aria-expanded] + ul a {
-      @include layout.mode--body-compact;
-    }
-
-    & li > button[aria-expanded]:has(+ ul a[aria-current="page"]) {
-      color: theme.$text-primary;
-    }
-
-    & li > button[aria-expanded="false"]:has(+ ul a[aria-current="page"]),
-    & li > button[aria-expanded] + ul a[aria-current="page"],
-    & li > a[aria-current="page"] {
-      @include layout.mode--heading-compact;
-      background-color: theme.$layer-selected;
-      box-shadow: active-indicator.left();
-      color: theme.$text-primary;
-
-      @include guards.hover {
-        &:hover {
-          background-color: theme.$layer-selected-hover;
+        &:focus {
+          @include focus-outline.focus-outline("outline");
         }
       }
-    }
 
-    & li > button[aria-expanded="false"] + ul {
-      display: none;
-    }
+      & li > button[aria-expanded] {
+        padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+      }
 
-    & li[role="separator"] {
-      block-size: 0.0625rem;
-      background-color: theme.$border-subtle;
-      margin-block: spacing.$spacing-03;
-      margin-inline: layout.$density--padding;
-    }
+      & li > button[aria-expanded]::after {
+        content: "";
+        @include icons.chevron--down;
+        display: block;
+        position: absolute;
+        inset-inline-end: layout.$density--padding;
+        inset-block-start: layout.$size--padding-block-start;
+        transition: rotate layout.$mode--transition-duration
+          layout.$mode--transition-timing-function;
+      }
 
-    & ul > li a:has(svg) {
-      padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
-    }
+      & li > button[aria-expanded="true"]::after {
+        rotate: 180deg;
+      }
 
-    & ul > li a svg {
-      fill: currentColor;
-      block-size: 1rem;
-      inline-size: 1rem;
-      position: absolute;
-      inset-inline-end: layout.$density--padding;
-      inset-block-start: layout.$size--padding-block-start;
-    }
+      & li > button[aria-expanded] + ul a {
+        @include layout.mode--body-compact;
+      }
 
-    & ul ul button[aria-expanded] {
-      @include layout.mode--body-compact;
-    }
+      & li > button[aria-expanded]:has(+ ul a[aria-current="page"]) {
+        color: theme.$text-primary;
+      }
 
-    & + main,
-    & + main + footer {
-      margin-inline-start: 16rem;
+      & li > button[aria-expanded="false"]:has(+ ul a[aria-current="page"]),
+      & li > button[aria-expanded] + ul a[aria-current="page"],
+      & li > a[aria-current="page"] {
+        @include layout.mode--heading-compact;
+        background-color: theme.$layer-selected;
+        box-shadow: active-indicator.left();
+        color: theme.$text-primary;
+
+        @include guards.hover {
+          &:hover {
+            background-color: theme.$layer-selected-hover;
+          }
+        }
+      }
+
+      & li > button[aria-expanded="false"] + ul {
+        display: none;
+      }
+
+      & li[role="separator"] {
+        block-size: 0.0625rem;
+        background-color: theme.$border-subtle;
+        margin-block: spacing.$spacing-03;
+        margin-inline: layout.$density--padding;
+      }
+
+      & ul > li a:has(svg) {
+        padding-inline-end: calc(layout.$density--padding + 1rem + layout.$density--padding);
+      }
+
+      & ul > li a svg {
+        fill: currentColor;
+        block-size: 1rem;
+        inline-size: 1rem;
+        position: absolute;
+        inset-inline-end: layout.$density--padding;
+        inset-block-start: layout.$size--padding-block-start;
+      }
+
+      & ul ul button[aria-expanded] {
+        @include layout.mode--body-compact;
+      }
+
+      & + main,
+      & + main + footer {
+        margin-inline-start: 16rem;
+      }
     }
   }
 }

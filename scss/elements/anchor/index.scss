@@ -12,6 +12,7 @@
 @use "@carbon/styles/scss/utilities/focus-outline";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/guards";
 
 $config: () !default;
@@ -29,44 +30,46 @@ $-default-config: (
   $props: map.deep-merge($-default-config, $config);
   $emit-visited: map.get($props, "emit-visited") == true;
 
-  #{map.get($props, "selector")} {
-    display: inline-flex;
-    align-items: center;
-    column-gap: spacing.$spacing-03;
-    color: theme.$link-primary;
-    text-decoration: underline;
-    transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      display: inline-flex;
+      align-items: center;
+      column-gap: spacing.$spacing-03;
+      color: theme.$link-primary;
+      text-decoration: underline;
+      transition: color layout.$mode--transition-duration layout.$mode--transition-timing-function;
 
-    // TODO: remove when fixed firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=868975
-    @if $emit-visited {
-      @supports (-moz-appearance: none) {
-        transition: none;
+      // TODO: remove when fixed firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=868975
+      @if $emit-visited {
+        @supports (-moz-appearance: none) {
+          transition: none;
+        }
       }
-    }
 
-    @include guards.hover {
-      &:hover {
-        color: theme.$link-primary-hover;
+      @include guards.hover {
+        &:hover {
+          color: theme.$link-primary-hover;
+        }
       }
-    }
 
-    @if $emit-visited {
-      &:visited {
-        color: theme.$link-visited;
+      @if $emit-visited {
+        &:visited {
+          color: theme.$link-visited;
+        }
+        &:visited svg {
+          fill: theme.$link-visited;
+        }
       }
-      &:visited svg {
-        fill: theme.$link-visited;
+
+      &:focus {
+        @include focus-outline.focus-outline("outline");
       }
-    }
 
-    &:focus {
-      @include focus-outline.focus-outline("outline");
-    }
-
-    & svg {
-      fill: currentColor;
-      block-size: 1rem;
-      inline-size: 1rem;
+      & svg {
+        fill: currentColor;
+        block-size: 1rem;
+        inline-size: 1rem;
+      }
     }
   }
 }

@@ -12,6 +12,7 @@
 @use "../label";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -25,19 +26,21 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    border: none;
-    padding: 0;
-    margin-block: layout.$mode--margin-block;
-
-    & legend {
-      @include label.styles(
-        (
-          selector: "&",
-        )
-      );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      border: none;
       padding: 0;
-      margin-block-end: spacing.$spacing-03;
+      margin-block: layout.$mode--margin-block;
+
+      & legend {
+        @include label.styles(
+          (
+            selector: "&",
+          )
+        );
+        padding: 0;
+        margin-block-end: spacing.$spacing-03;
+      }
     }
   }
 }

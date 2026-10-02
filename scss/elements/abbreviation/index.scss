@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/theme";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -23,9 +24,11 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    text-decoration: none;
-    cursor: help;
-    border-block-end: 0.0625rem dotted theme.$border-strong;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      text-decoration: none;
+      cursor: help;
+      border-block-end: 0.0625rem dotted theme.$border-strong;
+    }
   }
 }

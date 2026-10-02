@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/theme";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -23,9 +24,11 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include layout.mode--helper-text;
-    color: theme.$text-secondary;
-    font-style: normal;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include layout.mode--helper-text;
+      color: theme.$text-secondary;
+      font-style: normal;
+    }
   }
 }

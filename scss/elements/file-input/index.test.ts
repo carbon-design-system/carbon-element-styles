@@ -6,9 +6,14 @@
  */
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { stylesAreWrappedInCascadeLayer } from "../../../tests/common/styles-are-wrapped-in-cascade-layer";
 import { usesNoDeprecatedCssFeatures } from "../../../tests/common/uses-no-deprecated-css-features";
 
 scssExposesFunctioningPublicStylesMixin({
+  module: "elements/file-input",
+});
+
+stylesAreWrappedInCascadeLayer({
   module: "elements/file-input",
 });
 

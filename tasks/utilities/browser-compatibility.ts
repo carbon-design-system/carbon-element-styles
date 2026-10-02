@@ -221,6 +221,10 @@ function parseStartingStyleRule(): ParsedFeatureResult[] {
   ]);
 }
 
+function parseLayerRule(): ParsedFeatureResult[] {
+  return parsedFeatureResult("at-rule", [["@layer", bcd.css["at-rules"].layer]]);
+}
+
 export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility {
   const featureResults: ParsedFeatureResult[] = [];
 
@@ -258,6 +262,12 @@ export function getBrowserCompatibilityForCss(css: string): BrowserCompatibility
         },
         "starting-style"() {
           featureResults.push(...parseStartingStyleRule());
+        },
+        "layer-block"() {
+          featureResults.push(...parseLayerRule());
+        },
+        "layer-statement"() {
+          featureResults.push(...parseLayerRule());
         },
       },
     },

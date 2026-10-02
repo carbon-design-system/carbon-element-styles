@@ -12,6 +12,7 @@
 @use "@carbon/styles/scss/utilities/focus-outline";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/guards";
 @use "../../utilities/active-indicator";
 
@@ -27,122 +28,124 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    position: sticky;
-    inset-block-start: 0;
-    z-index: 9999;
-    inline-size: 100%;
-    block-size: layout.$size--block-size;
-    background-color: theme.$layer-background;
-    border-block-end: 0.0625rem solid theme.$border-subtle;
-    align-items: center;
-    display: flex;
-
-    & > nav {
-      flex-shrink: 0;
-      display: flex;
-      block-size: 100%;
-      flex-grow: 1;
-    }
-
-    & > nav ul {
-      position: relative;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      block-size: 100%;
-      display: flex;
-    }
-
-    & > nav ul:first-of-type {
-      flex-grow: 1;
-    }
-
-    & > nav ul li {
-      @include layout.mode--body-compact;
-      padding: 0;
-      margin: 0;
-      block-size: 100%;
-    }
-
-    & > nav ul li a {
-      display: flex;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 9999;
+      inline-size: 100%;
+      block-size: layout.$size--block-size;
+      background-color: theme.$layer-background;
+      border-block-end: 0.0625rem solid theme.$border-subtle;
       align-items: center;
-      text-decoration: none;
-      color: theme.$text-secondary;
-      block-size: 100%;
-      padding-inline: layout.$density--padding;
-      transition-property: color, background-color;
-      transition-duration: layout.$mode--transition-duration;
-      transition-timing-function: layout.$mode--transition-timing-function;
+      display: flex;
 
-      @include guards.hover {
-        &:hover {
+      & > nav {
+        flex-shrink: 0;
+        display: flex;
+        block-size: 100%;
+        flex-grow: 1;
+      }
+
+      & > nav ul {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        block-size: 100%;
+        display: flex;
+      }
+
+      & > nav ul:first-of-type {
+        flex-grow: 1;
+      }
+
+      & > nav ul li {
+        @include layout.mode--body-compact;
+        padding: 0;
+        margin: 0;
+        block-size: 100%;
+      }
+
+      & > nav ul li a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: theme.$text-secondary;
+        block-size: 100%;
+        padding-inline: layout.$density--padding;
+        transition-property: color, background-color;
+        transition-duration: layout.$mode--transition-duration;
+        transition-timing-function: layout.$mode--transition-timing-function;
+
+        @include guards.hover {
+          &:hover {
+            background-color: theme.$layer-hover;
+            color: theme.$text-primary;
+          }
+        }
+
+        &:active {
           background-color: theme.$layer-hover;
-          color: theme.$text-primary;
+        }
+
+        &:focus {
+          @include focus-outline.focus-outline("outline");
         }
       }
 
-      &:active {
-        background-color: theme.$layer-hover;
+      & > nav ul li a[aria-current="page"] {
+        color: theme.$text-primary;
+        box-shadow: active-indicator.bottom();
       }
 
-      &:focus {
-        @include focus-outline.focus-outline("outline");
+      & > nav ul li a svg {
+        fill: currentColor;
+        block-size: 1rem;
+        inline-size: 1rem;
       }
-    }
 
-    & > nav ul li a[aria-current="page"] {
-      color: theme.$text-primary;
-      box-shadow: active-indicator.bottom();
-    }
-
-    & > nav ul li a svg {
-      fill: currentColor;
-      block-size: 1rem;
-      inline-size: 1rem;
-    }
-
-    & > nav ul li a:has(svg:only-child) {
-      padding-inline: unset;
-      inline-size: layout.$size--block-size;
-      justify-content: center;
-    }
-
-    & > nav a {
-      @include layout.mode--body-compact;
-      color: theme.$text-primary;
-      text-decoration: none;
-      padding-inline: layout.$density--padding;
-      block-size: 100%;
-      display: inline-flex;
-      align-items: center;
-      column-gap: spacing.$spacing-02;
-      flex-shrink: 0;
-      white-space: nowrap;
-
-      &:focus {
-        @include focus-outline.focus-outline("outline");
+      & > nav ul li a:has(svg:only-child) {
+        padding-inline: unset;
+        inline-size: layout.$size--block-size;
+        justify-content: center;
       }
-    }
 
-    & > nav a + ul {
-      margin-inline-start: layout.$density--padding;
-      padding-inline-start: layout.$density--padding;
-    }
+      & > nav a {
+        @include layout.mode--body-compact;
+        color: theme.$text-primary;
+        text-decoration: none;
+        padding-inline: layout.$density--padding;
+        block-size: 100%;
+        display: inline-flex;
+        align-items: center;
+        column-gap: spacing.$spacing-02;
+        flex-shrink: 0;
+        white-space: nowrap;
 
-    & > nav a + ul::before {
-      content: "";
-      display: block;
-      inline-size: 0.0625rem;
-      inset-inline-start: -0.0625rem;
-      position: absolute;
-      inset-block: spacing.$spacing-04;
-      background-color: theme.$border-subtle;
-    }
+        &:focus {
+          @include focus-outline.focus-outline("outline");
+        }
+      }
 
-    & + nav {
-      inset-block-start: layout.$size--block-size;
+      & > nav a + ul {
+        margin-inline-start: layout.$density--padding;
+        padding-inline-start: layout.$density--padding;
+      }
+
+      & > nav a + ul::before {
+        content: "";
+        display: block;
+        inline-size: 0.0625rem;
+        inset-inline-start: -0.0625rem;
+        position: absolute;
+        inset-block: spacing.$spacing-04;
+        background-color: theme.$border-subtle;
+      }
+
+      & + nav {
+        inset-block-start: layout.$size--block-size;
+      }
     }
   }
 }

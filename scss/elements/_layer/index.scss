@@ -12,6 +12,7 @@
 @use "@carbon/styles/scss/utilities/custom-property";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/tokens";
 
 $config: () !default;
@@ -39,23 +40,25 @@ $-default-config: ();
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  // fallback for browers without container style query support
-  background-color: theme.$layer;
-
-  @include -on-layer("01", true) {
-    background-color: theme.$layer-background;
-    @include tokens.set("layer-level", "02");
-    @include layer-tokens.emit-layer-tokens(2);
-  }
-
-  @include -on-layer("02") {
-    background-color: theme.$layer-background;
-    @include tokens.set("layer-level", "03");
-    @include layer-tokens.emit-layer-tokens(3);
-  }
-
-  @include -on-layer("03") {
+  @include cascade-layer.wrap {
+    // fallback for browers without container style query support
     background-color: theme.$layer;
+
+    @include -on-layer("01", true) {
+      background-color: theme.$layer-background;
+      @include tokens.set("layer-level", "02");
+      @include layer-tokens.emit-layer-tokens(2);
+    }
+
+    @include -on-layer("02") {
+      background-color: theme.$layer-background;
+      @include tokens.set("layer-level", "03");
+      @include layer-tokens.emit-layer-tokens(3);
+    }
+
+    @include -on-layer("03") {
+      background-color: theme.$layer;
+    }
   }
 }
 

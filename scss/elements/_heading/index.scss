@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/spacing";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -20,8 +21,10 @@ $-default-config: ();
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  margin-block-end: layout.$mode--margin-block;
-  margin-block-start: calc(layout.$mode--margin-block + 0.75lh);
-  max-inline-size: min(layout.$mode--max-inline-size, 75%);
-  text-wrap: balance;
+  @include cascade-layer.wrap {
+    margin-block-end: layout.$mode--margin-block;
+    margin-block-start: calc(layout.$mode--margin-block + 0.75lh);
+    max-inline-size: min(layout.$mode--max-inline-size, 75%);
+    text-wrap: balance;
+  }
 }

@@ -10,6 +10,7 @@
 @use "../_heading";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -23,8 +24,10 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include heading.styles;
-    @include layout.mode--heading-level-3;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include heading.styles;
+      @include layout.mode--heading-level-3;
+    }
   }
 }

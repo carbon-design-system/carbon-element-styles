@@ -11,6 +11,7 @@
 @use "@carbon/styles/scss/spacing";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -26,25 +27,27 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    display: grid;
-    gap: spacing.$spacing-03;
-    color: theme.$text-secondary;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      display: grid;
+      gap: spacing.$spacing-03;
+      color: theme.$text-secondary;
 
-    &:has([disabled]) {
-      color: theme.$text-disabled;
-    }
+      &:has([disabled]) {
+        color: theme.$text-disabled;
+      }
 
-    @if map.get($props, "axis") == "block" {
-      @include layout.mode--label;
-      grid-auto-flow: row;
-    }
+      @if map.get($props, "axis") == "block" {
+        @include layout.mode--label;
+        grid-auto-flow: row;
+      }
 
-    @if map.get($props, "axis") == "inline" {
-      @include layout.mode--body-compact;
-      grid-auto-flow: column;
-      align-items: center;
-      inline-size: fit-content;
+      @if map.get($props, "axis") == "inline" {
+        @include layout.mode--body-compact;
+        grid-auto-flow: column;
+        align-items: center;
+        inline-size: fit-content;
+      }
     }
   }
 }

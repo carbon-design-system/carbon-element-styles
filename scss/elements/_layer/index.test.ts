@@ -6,7 +6,12 @@
  */
 
 import { scssExposesFunctioningPublicStylesMixin } from "../../../tests/common/scss-exposes-functioning-public-styles-mixin";
+import { stylesAreWrappedInCascadeLayer } from "../../../tests/common/styles-are-wrapped-in-cascade-layer";
 
 scssExposesFunctioningPublicStylesMixin({
+  module: "elements/_layer",
+});
+
+stylesAreWrappedInCascadeLayer({
   module: "elements/_layer",
 });

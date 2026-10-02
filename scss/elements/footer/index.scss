@@ -11,6 +11,7 @@
 @use "@carbon/styles/scss/spacing";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -24,11 +25,13 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include layout.mode--body-compact;
-    color: theme.$text-secondary;
-    border-block-start: 0.0625rem solid theme.$border-subtle;
-    padding-inline: spacing.$spacing-07;
-    padding-block: layout.$density--padding;
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include layout.mode--body-compact;
+      color: theme.$text-secondary;
+      border-block-start: 0.0625rem solid theme.$border-subtle;
+      padding-inline: spacing.$spacing-07;
+      padding-block: layout.$density--padding;
+    }
   }
 }

@@ -13,6 +13,7 @@
 @use "../_labelled-input";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 @use "../../utilities/icons";
 @use "../../utilities/guards";
 
@@ -30,23 +31,24 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include labelled-input.styles(
-      (
-        label: (
-          selector: "&",
-          axis: map.get($props, "axis"),
-        ),
-        input: (
-          selector: 'input[type="color"]',
-          emit-readonly: false,
-        ),
-        fixed-input-trailing-slots: 1,
-        input-invalid-slot: "after",
-      )
-    );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include labelled-input.styles(
+        (
+          label: (
+            selector: "&",
+            axis: map.get($props, "axis"),
+          ),
+          input: (
+            selector: 'input[type="color"]',
+            emit-readonly: false,
+          ),
+          fixed-input-trailing-slots: 1,
+          input-invalid-slot: "after",
+        )
+      );
 
-    /*
+      /*
         inline padding
       + color swatch
       + spacing-05
@@ -55,64 +57,65 @@ $-default-config: (
       + trailing icon space
       + inline padding
     */
-    $-min-inline-size: calc(
-      layout.$density--padding + 1rem + spacing.$spacing-05 + 1rem + spacing.$spacing-03 + 1rem +
-        layout.$density--padding
-    );
+      $-min-inline-size: calc(
+        layout.$density--padding + 1rem + spacing.$spacing-05 + 1rem + spacing.$spacing-03 + 1rem +
+          layout.$density--padding
+      );
 
-    & input[type="color"] {
-      min-inline-size: $-min-inline-size;
-      inline-size: 100%;
-      cursor: pointer;
+      & input[type="color"] {
+        min-inline-size: $-min-inline-size;
+        inline-size: 100%;
+        cursor: pointer;
 
-      @include guards.hover {
-        &:enabled:hover {
-          background-color: theme.$field-hover;
+        @include guards.hover {
+          &:enabled:hover {
+            background-color: theme.$field-hover;
+          }
+        }
+
+        &:enabled:active {
+          background-color: theme.$layer-active;
         }
       }
 
-      &:enabled:active {
-        background-color: theme.$layer-active;
+      & input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+        inline-size: 1rem;
+        block-size: 1rem;
       }
-    }
 
-    & input[type="color"]::-webkit-color-swatch-wrapper {
-      padding: 0;
-      inline-size: 1rem;
-      block-size: 1rem;
-    }
+      & input[type="color"]::-webkit-color-swatch {
+        position: relative;
+        inset-block-start: 0.0625rem;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        inline-size: 1rem;
+        block-size: 1rem;
+        border: none;
+        box-shadow: inset 0 0 0 0.0625rem rgb(from theme.$border-inverse r g b / 0.15);
+      }
 
-    & input[type="color"]::-webkit-color-swatch {
-      position: relative;
-      inset-block-start: 0.0625rem;
-      padding: 0;
-      margin: 0;
-      border-radius: 0;
-      inline-size: 1rem;
-      block-size: 1rem;
-      border: none;
-      box-shadow: inset 0 0 0 0.0625rem rgb(from theme.$border-inverse r g b / 0.15);
-    }
+      & input[type="color"]::-moz-color-swatch {
+        position: relative;
+        inset-block-start: 0.0625rem;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        inline-size: 1rem;
+        block-size: 1rem;
+        border: none;
+        box-shadow: inset 0 0 0 0.0625rem rgb(from theme.$border-inverse r g b / 0.15);
+      }
 
-    & input[type="color"]::-moz-color-swatch {
-      position: relative;
-      inset-block-start: 0.0625rem;
-      padding: 0;
-      margin: 0;
-      border-radius: 0;
-      inline-size: 1rem;
-      block-size: 1rem;
-      border: none;
-      box-shadow: inset 0 0 0 0.0625rem rgb(from theme.$border-inverse r g b / 0.15);
-    }
+      & input[type="color"]:disabled::-webkit-color-swatch-wrapper {
+        opacity: 0.5;
+      }
 
-    & input[type="color"]:disabled::-webkit-color-swatch-wrapper {
-      opacity: 0.5;
-    }
-
-    &::before {
-      @include labelled-input.input-trailing-slot {
-        @include icons.color-palette;
+      &::before {
+        @include labelled-input.input-trailing-slot {
+          @include icons.color-palette;
+        }
       }
     }
   }

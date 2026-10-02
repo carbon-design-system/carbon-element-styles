@@ -12,6 +12,7 @@
 @use "../popover";
 
 @use "../../layout";
+@use "../../utilities/cascade-layer";
 
 $config: () !default;
 
@@ -27,18 +28,20 @@ $-default-config: (
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
-  #{map.get($props, "selector")} {
-    @include popover.styles(
-      (
-        selector: "&",
-        caret: true,
-        alignment: map.get($props, "alignment"),
-      )
-    );
+  @include cascade-layer.wrap {
+    #{map.get($props, "selector")} {
+      @include popover.styles(
+        (
+          selector: "&",
+          caret: true,
+          alignment: map.get($props, "alignment"),
+        )
+      );
 
-    background-color: theme.$background-inverse;
-    color: theme.$text-inverse;
-    inline-size: max-content;
-    max-inline-size: 20rem;
+      background-color: theme.$background-inverse;
+      color: theme.$text-inverse;
+      inline-size: max-content;
+      max-inline-size: 20rem;
+    }
   }
 }
