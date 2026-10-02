@@ -113,6 +113,27 @@ Combining these options with custom selectors means you can emit multiple varian
 );
 ```
 
+#### Specificity
+
+All emitted element styles are wrapped in a CSS cascade layer (`@layer carbon-element-styles`) to ensure lower specificity and allow easy overrides without high-specificity selectors.
+
+If necessary, you can configure the layer name through the config module:
+
+```scss
+@use "@carbon/element-styles/scss/config" with (
+  $cascade-layer-name: "custom-layer-name"
+);
+@use "@carbon/element-styles/scss/elements/button";
+
+@include button.styles;
+
+/**
+ * ↪ @layer custom-layer-name {
+ *     button { … }
+ *   }
+ */
+```
+
 ### Using prebuilts
 
 This library offers several prebuilt (opinionated) stylesheets you can use out-of-the-box:
