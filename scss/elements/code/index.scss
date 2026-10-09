@@ -29,9 +29,9 @@ $-default-config: (
     #{map.get($props, "selector")} {
       @include layout.mode--code;
       background-color: theme.$layer;
-      padding-inline: spacing.$spacing-01;
+      padding-inline: 0.0625rem;
       border-radius: 0.0625rem;
-      box-shadow: 0 0 0 0.125rem theme.$layer;
+      box-shadow: 0 0 0 0.0625rem theme.$layer;
     }
   }
 }
