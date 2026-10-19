@@ -25,6 +25,10 @@ $-default-config: (
   @include cascade-layer.wrap {
     #{map.get($props, "selector")} {
       font-weight: 600;
+
+      & code {
+        font-weight: inherit;
+      }
     }
   }
 }
