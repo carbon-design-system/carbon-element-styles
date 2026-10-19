@@ -13,6 +13,7 @@ import { compileString } from "sass";
 
 const configUrl = pathToFileURL(join(__dirname, "../_config.scss")).href;
 const cascadeLayerUrl = pathToFileURL(join(__dirname, "_cascade-layer.scss")).href;
+const dialogStylesUrl = pathToFileURL(join(__dirname, "../elements/dialog/index.scss")).href;
 const nodeModules = join(__dirname, "../../node_modules");
 
 function compile(scss: string) {
@@ -53,6 +54,22 @@ describe("scss/utilities/_cascade-layer", () => {
     const matches = css.match(/@layer/g);
     expect(matches).toHaveLength(1);
     expect(css).toContain("selector");
+  });
+
+  test("Nested wrap includes across modules do not produce a redundant inner @layer block", () => {
+    const { css } = compile(/* scss */ `
+@use "${cascadeLayerUrl}";
+@use "${dialogStylesUrl}" as dialog;
+
+@include cascade-layer.wrap {
+  @include dialog.styles;
+}
+    `);
+
+    const matches = css.match(/@layer/g);
+    expect(matches).toHaveLength(1);
+    expect(css).toContain("dialog");
+    expect(css).toContain("button");
   });
 
   test("Cascade layer name is configurable via the config module", () => {
