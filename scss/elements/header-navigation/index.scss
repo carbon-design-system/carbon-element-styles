@@ -78,6 +78,10 @@ $-default-config: (
         transition-duration: layout.$mode--transition-duration;
         transition-timing-function: layout.$mode--transition-timing-function;
 
+        &:visited {
+          color: theme.$text-secondary;
+        }
+
         @include guards.hover {
           &:hover {
             background-color: theme.$layer-hover;
@@ -99,7 +103,8 @@ $-default-config: (
         box-shadow: active-indicator.bottom();
       }
 
-      & > nav ul li a svg {
+      & > nav ul li a svg,
+      & > nav ul li a:visited svg {
         fill: currentColor;
         block-size: 1rem;
         inline-size: 1rem;
@@ -122,6 +127,10 @@ $-default-config: (
         column-gap: spacing.$spacing-02;
         flex-shrink: 0;
         white-space: nowrap;
+
+        &:visited {
+          color: theme.$text-primary;
+        }
 
         &:focus {
           @include focus-outline.focus-outline("outline");
