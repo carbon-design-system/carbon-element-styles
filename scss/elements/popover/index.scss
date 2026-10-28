@@ -12,6 +12,7 @@
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/utilities/box-shadow";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../_layer";
 
@@ -48,7 +49,7 @@ $-default-config: (
       margin: 0;
       position: fixed;
       border: none;
-      border-radius: 0.125rem;
+      border-radius: border-radius.$border-radius-02;
       padding: layout.$density--padding;
       overflow: visible;
 
