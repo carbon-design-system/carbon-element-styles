@@ -1,6 +1,6 @@
 {
   "name": "@carbon/element-styles",
-  "version": "0.4.3-rc.0",
+  "version": "0.4.3",
   "description": "An experimental styling system for native HTML elements, relying on semantic, attribute-focused selectors instead of class names.",
   "keywords": [
     "carbon",
@@ -62,7 +62,7 @@
     "vitest": "^5.0.1"
   },
   "peerDependencies": {
-    "@carbon/styles": "^1.102.0"
+    "@carbon/styles": "^1.115.0"
   },
   "sass": "index.scss"
 }
