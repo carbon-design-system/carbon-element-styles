@@ -8,6 +8,7 @@
 @use "sass:map";
 
 @use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../../layout";
 @use "../../utilities/cascade-layer";
@@ -37,7 +38,7 @@ $-default-config: (
 
       & code {
         box-shadow: none;
-        border-radius: 0;
+        border-radius: border-radius.$border-radius-00;
         padding-inline: 0;
         background-color: transparent;
       }

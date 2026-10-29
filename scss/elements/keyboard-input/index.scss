@@ -9,6 +9,7 @@
 
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../../layout";
 @use "../../utilities/cascade-layer";
@@ -30,7 +31,7 @@ $-default-config: (
       @include layout.mode--code;
       background-color: transparent;
       outline: 0.0625rem solid theme.$border-subtle;
-      border-radius: 0.125rem;
+      border-radius: border-radius.$border-radius-02;
       padding-inline: spacing.$spacing-02;
     }
   }

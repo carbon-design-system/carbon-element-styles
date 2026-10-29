@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/config" as carbon-config;
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/motion";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../label";
 
@@ -48,7 +49,7 @@ $-default-config: (
         background-color: theme.$layer;
         border: none;
         box-shadow: none;
-        border-radius: 0;
+        border-radius: border-radius.$border-radius-00;
         overflow: hidden;
 
         @if map.get($props, "thickness") == "thick" {
@@ -65,7 +66,7 @@ $-default-config: (
         block-size: inherit;
         border: none;
         box-shadow: none;
-        border-radius: 0;
+        border-radius: border-radius.$border-radius-00;
         overflow: hidden;
       }
 

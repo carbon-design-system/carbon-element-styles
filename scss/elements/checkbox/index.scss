@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/utilities/focus-outline";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../label";
 
@@ -49,7 +50,7 @@ $-default-config: (
         block-size: 1rem;
         inline-size: 1rem;
         color: theme.$icon-primary;
-        border-radius: 0.125rem;
+        border-radius: border-radius.$border-radius-02;
 
         &:focus {
           @include focus-outline.focus-outline("outline");

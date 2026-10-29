@@ -10,6 +10,7 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/utilities/focus-outline";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../../layout";
 @use "../../utilities/cascade-layer";
@@ -84,7 +85,7 @@ $-default-config: (
         appearance: none;
         border: none;
         box-shadow: none;
-        border-radius: 0;
+        border-radius: border-radius.$border-radius-00;
         inline-size: 100%;
         text-align: start;
         display: block;

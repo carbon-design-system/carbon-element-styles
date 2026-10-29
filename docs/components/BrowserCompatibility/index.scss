@@ -9,6 +9,7 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/breakpoint";
 @use "@carbon/styles/scss/utilities/visually-hidden";
+@use "@carbon/styles/scss/border-radius";
 
 @use "../../../scss/elements/popover";
 @use "../../../scss/elements/button";
@@ -75,7 +76,7 @@
       position: absolute;
       inset-block-start: 0;
       inset-inline-end: 0;
-      border-start-end-radius: 0.125rem;
+      border-start-end-radius: border-radius.$border-radius-02;
     }
   }
 
