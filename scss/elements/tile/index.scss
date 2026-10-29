@@ -74,7 +74,7 @@ $-default-config: (
           @include icons.arrow--right;
           content: "";
           position: absolute;
-          color: theme.$link-primary;
+          color: theme.$icon-interactive;
           inset-block-end: layout.$density--padding;
           inset-inline-end: layout.$density--padding;
           transition: color layout.$mode--transition-duration
