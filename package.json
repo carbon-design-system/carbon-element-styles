@@ -62,7 +62,7 @@
     "vitest": "^5.0.1"
   },
   "peerDependencies": {
-    "@carbon/styles": "^1.102.0"
+    "@carbon/styles": "^1.115.0"
   },
   "sass": "index.scss"
 }
