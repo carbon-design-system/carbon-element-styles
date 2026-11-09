@@ -6,5 +6,11 @@
  */
 
 import * as default_demo from "./default";
+import * as alignment_start from "./alignment-start";
+import * as alignment_end from "./alignment-end";
 
-export const demos = new Map([["default", default_demo]]);
+export const demos = new Map([
+  ["default", default_demo],
+  ["alignment-start", alignment_start],
+  ["alignment-end", alignment_end],
+]);
