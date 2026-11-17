@@ -11,6 +11,7 @@ import type { UserConfig } from "vite";
 
 import { carbonIcons } from "../tasks/plugins/vite-carbon-icons.ts";
 import { docsInventory } from "../tasks/plugins/vite-docs-inventory.ts";
+import { elementDemo } from "../tasks/plugins/vite-element-demo.ts";
 import { elementDemos } from "../tasks/plugins/vite-element-demos.ts";
 import { prependBanner } from "../tasks/plugins/vite-prepend-banner.ts";
 import { scssConfig } from "../tasks/plugins/vite-scss-config.ts";
@@ -42,6 +43,7 @@ export const config: UserConfig = {
     scssConfig,
     browserCompatibility,
     scssDocs,
+    elementDemo,
     elementDemos,
     prependBanner,
   ],

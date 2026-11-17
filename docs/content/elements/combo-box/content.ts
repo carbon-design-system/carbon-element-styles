@@ -7,7 +7,7 @@
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 import scssDoc from "virtual:scss-docs/combo-box";
-import { demos } from "./_demos";
+import demos from "virtual:element-demos/combo-box";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",

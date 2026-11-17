@@ -7,13 +7,13 @@
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 import scssDoc from "virtual:scss-docs/anchor";
-import { demos } from "./_demos";
+import demos from "virtual:element-demos/anchor";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
 ) as CdsEsDocsElementDemoContent;
 
-elementDemoContent.label = "Abbreviation";
+elementDemoContent.label = "Anchor";
 elementDemoContent.scssDoc = scssDoc;
 elementDemoContent.demos = demos;
 elementDemoContent.references = [

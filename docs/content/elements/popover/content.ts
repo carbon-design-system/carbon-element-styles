@@ -7,7 +7,7 @@
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 import scssDoc from "virtual:scss-docs/popover";
-import { demos } from "./_demos";
+import demos from "virtual:element-demos/popover";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",

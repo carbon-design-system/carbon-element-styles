@@ -7,7 +7,7 @@
 
 import type { CdsEsDocsElementDemoContent } from "@/components/ElementDemoContent";
 import scssDoc from "virtual:scss-docs/heading-level-6";
-import { demos } from "./_demos";
+import demos from "virtual:element-demos/heading-level-6";
 
 const elementDemoContent = document.createElement(
   "cds-es-docs-element-demo-content",
