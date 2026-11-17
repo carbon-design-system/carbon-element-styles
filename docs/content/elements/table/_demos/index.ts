@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as dataTable from "./data-table";
-import * as structuredList from "./structured-list";
-import * as structuredListFlush from "./structured-list--flush";
+import * as default_demo from "virtual:element-demos/table/default";
+import * as dataTable from "virtual:element-demos/table/data-table";
+import * as structuredList from "virtual:element-demos/table/structured-list";
+import * as structuredListFlush from "virtual:element-demos/table/structured-list--flush";
 
 export const demos = new Map([
   ["default", default_demo],

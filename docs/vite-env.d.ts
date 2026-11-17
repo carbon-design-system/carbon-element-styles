@@ -33,3 +33,12 @@ declare module "virtual:browser-compatibility/*" {
   const browserCompatibility: BrowserCompatibility;
   export default browserCompatibility;
 }
+
+declare module "virtual:element-demos/*" {
+  import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
+  export const css: string;
+  export const html: string;
+  export const scssConfig: Record<string, string> | undefined;
+  export const browserCompatibility: BrowserCompatibility;
+  export const setup: ((frame: ShadowRoot) => void) | undefined;
+}

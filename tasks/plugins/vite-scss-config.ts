@@ -6,13 +6,11 @@
  */
 
 import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
 
 import type { Plugin } from "vite";
 
+import { getDemoScssPath } from "../utilities/demo-files.ts";
 import { parseScssConfig } from "../utilities/parse-scss-config.ts";
-
-const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
 
 const virtualPrefix = "virtual:scss-config/";
 const resolvedPrefix = "\0scss-config:";
@@ -34,7 +32,7 @@ export const scssConfig: Plugin = {
     },
     async handler(id) {
       const [elementName, demoName] = id.slice(resolvedPrefix.length).split("/");
-      const scssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
+      const scssPath = getDemoScssPath(elementName, demoName);
       this.addWatchFile(scssPath);
 
       const source = await readFile(scssPath, "utf8");

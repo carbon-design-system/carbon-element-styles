@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as alignment_start from "./alignment-start";
-import * as alignment_end from "./alignment-end";
+import * as default_demo from "virtual:element-demos/side-navigation/default";
+import * as alignment_start from "virtual:element-demos/side-navigation/alignment-start";
+import * as alignment_end from "virtual:element-demos/side-navigation/alignment-end";
 
 export const demos = new Map([
   ["default", default_demo],

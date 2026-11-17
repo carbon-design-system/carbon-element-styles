@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as subtle from "./subtle";
-import * as strong from "./strong";
+import * as default_demo from "virtual:element-demos/horizontal-rule/default";
+import * as subtle from "virtual:element-demos/horizontal-rule/subtle";
+import * as strong from "virtual:element-demos/horizontal-rule/strong";
 
 export const demos = new Map([
   ["default", default_demo],

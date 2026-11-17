@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as alignment_start_start from "./alignment-start-start";
-import * as alignment_start_center from "./alignment-start-center";
-import * as alignment_start_end from "./alignment-start-end";
-import * as alignment_center_start from "./alignment-center-start";
-import * as alignment_center_end from "./alignment-center-end";
-import * as alignment_end_start from "./alignment-end-start";
-import * as alignment_end_center from "./alignment-end-center";
-import * as alignment_end_end from "./alignment-end-end";
+import * as default_demo from "virtual:element-demos/tooltip/default";
+import * as alignment_start_start from "virtual:element-demos/tooltip/alignment-start-start";
+import * as alignment_start_center from "virtual:element-demos/tooltip/alignment-start-center";
+import * as alignment_start_end from "virtual:element-demos/tooltip/alignment-start-end";
+import * as alignment_center_start from "virtual:element-demos/tooltip/alignment-center-start";
+import * as alignment_center_end from "virtual:element-demos/tooltip/alignment-center-end";
+import * as alignment_end_start from "virtual:element-demos/tooltip/alignment-end-start";
+import * as alignment_end_center from "virtual:element-demos/tooltip/alignment-end-center";
+import * as alignment_end_end from "virtual:element-demos/tooltip/alignment-end-end";
 
 export const demos = new Map([
   ["default", default_demo],

@@ -11,6 +11,7 @@ import { join } from "node:path";
 import { existsSync, readdirSync } from "node:fs";
 
 import { getBrowserCompatibilityForDemo } from "../tasks/utilities/browser-compatibility.ts";
+import { getDemoNames } from "../tasks/utilities/demo-files.ts";
 
 const scssRoot = join(__dirname, "../scss");
 const demosBase = join(__dirname, "../docs/content/elements");
@@ -22,11 +23,7 @@ const elements = readdirSync(join(scssRoot, "elements"), { withFileTypes: true }
 
 describe("No deprecated CSS features are used", () => {
   describe.each(elements.map((e) => [e]))("%s", (element) => {
-    const demosDir = join(demosBase, element, "_demos");
-
-    const demoNames = readdirSync(demosDir, { withFileTypes: true })
-      .filter((e) => e.isDirectory())
-      .map((e) => [e.name]);
+    const demoNames = getDemoNames(element).map((name) => [name]);
 
     test.each(demoNames)("Demo: %s", async (demoName) => {
       const features = Object.values(
