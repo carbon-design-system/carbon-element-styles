@@ -6,13 +6,13 @@
  */
 
 import { existsSync } from "node:fs";
-import { resolve } from "node:path";
 
 import { normalizePath } from "vite";
 import type { Plugin } from "vite";
 
-import { elementsContentDir, getDemoScssPath, getDemosDir } from "../utilities/demo-files.ts";
+import { elementsContentDir, getDemoNames, getDemosDir } from "../utilities/demo-files.ts";
 import * as log from "../utilities/log.ts";
+import { elementDemoVirtualPrefix } from "./vite-element-demo.ts";
 
 const virtualPrefix = "virtual:element-demos/";
 const resolvedPrefix = "\0element-demos:";
@@ -35,48 +35,51 @@ export const elementDemos: Plugin = {
       },
     },
     handler(id) {
-      const [elementName, demoName] = id.slice(resolvedPrefix.length).split("/");
+      const elementName = id.slice(resolvedPrefix.length);
       const demosDir = getDemosDir(elementName);
-      const htmlPath = resolve(demosDir, "index.html");
-      const setupPath = resolve(demosDir, "setup.ts");
 
       if (!existsSync(demosDir)) {
         log.error(
-          `Could not load demo '${demoName}' of element '${elementName}': there is no demos directory at '${demosDir}'.`,
-        );
-      } else if (!existsSync(htmlPath)) {
-        log.error(
-          `Could not load demo '${demoName}' of element '${elementName}': missing '${htmlPath}'.`,
+          `Could not load the demos of element '${elementName}': there is no _demos directory at '${demosDir}'.`,
         );
       }
 
-      const scssPath = getDemoScssPath(elementName, demoName);
+      const demoNames = getDemoNames(elementName);
 
-      const setupExport = existsSync(setupPath)
-        ? `export { setup } from ${JSON.stringify(normalizePath(setupPath))};`
-        : "export const setup = undefined;";
+      if (demoNames.length === 0) {
+        log.error(
+          `Could not load the demos of element '${elementName}': there are no SCSS files in '${demosDir}'.`,
+        );
+      }
+
+      const imports = demoNames.map(
+        (demoName, index) =>
+          `import * as demo${index} from ${JSON.stringify(`${elementDemoVirtualPrefix}${elementName}/${demoName}`)};`,
+      );
+
+      const entries = demoNames.map(
+        (demoName, index) => `[${JSON.stringify(demoName)}, demo${index}]`,
+      );
 
       return `
-        export { default as css } from ${JSON.stringify(`${normalizePath(scssPath)}?inline`)};
-        export { default as html } from ${JSON.stringify(normalizePath(htmlPath))};
-        export { default as scssConfig } from ${JSON.stringify(`virtual:scss-config/${elementName}/${demoName}`)};
-        export { default as browserCompatibility } from ${JSON.stringify(`virtual:browser-compatibility/${elementName}/${demoName}`)};
-        ${setupExport}
+        ${imports.join("\n")}
+
+        export default new Map([${entries.join(", ")}]);
       `;
     },
   },
 
   /**
-   * Whether a demo has a `setup` export is decided when its module is loaded.
-   * Adding or removing `_demos/setup.ts` changes the generated code without
-   * changing any module that was imported before, so the affected modules are
-   * invalidated here.
+   * The demo map of an element is built from `_demos/*.scss`. Adding or
+   * removing such a file changes the generated code without changing any
+   * module that was imported before, so the map of the element is invalidated
+   * here.
    */
   configureServer(server) {
-    server.watcher.on("add", invalidateSetupDependents);
-    server.watcher.on("unlink", invalidateSetupDependents);
+    server.watcher.on("add", invalidateDemoMap);
+    server.watcher.on("unlink", invalidateDemoMap);
 
-    function invalidateSetupDependents(changedPath: string) {
+    function invalidateDemoMap(changedPath: string) {
       const normalized = normalizePath(changedPath);
 
       if (!normalized.startsWith(`${elementsContentDirNormalized}/`)) {
@@ -87,21 +90,15 @@ export const elementDemos: Plugin = {
         .slice(elementsContentDirNormalized.length + 1)
         .split("/");
 
-      if (demosDirName !== "_demos" || fileName !== "setup.ts") {
+      if (demosDirName !== "_demos" || !fileName?.endsWith(".scss")) {
         return;
       }
 
       const { moduleGraph, hot } = server.environments.client;
-      let invalidated = false;
+      const mod = moduleGraph.idToModuleMap.get(`${resolvedPrefix}${elementName}`);
 
-      for (const [id, mod] of moduleGraph.idToModuleMap) {
-        if (id.startsWith(`${resolvedPrefix}${elementName}/`)) {
-          moduleGraph.invalidateModule(mod);
-          invalidated = true;
-        }
-      }
-
-      if (invalidated) {
+      if (mod) {
+        moduleGraph.invalidateModule(mod);
         hot.send({ type: "full-reload" });
       }
     }

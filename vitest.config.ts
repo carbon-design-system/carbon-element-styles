@@ -5,9 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { resolve } from "node:path";
+
 import { defineConfig, configDefaults } from "vitest/config";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": resolve(import.meta.dirname, "docs"),
+    },
+  },
   test: {
     exclude: [...configDefaults.exclude, "**/*.postbuild.test.[jt]s"],
     isolate: false,

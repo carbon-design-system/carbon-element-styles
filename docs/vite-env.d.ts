@@ -34,11 +34,26 @@ declare module "virtual:browser-compatibility/*" {
   export default browserCompatibility;
 }
 
-declare module "virtual:element-demos/*" {
+declare module "virtual:element-demo/*" {
   import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
   export const css: string;
   export const html: string;
   export const scssConfig: Record<string, string> | undefined;
   export const browserCompatibility: BrowserCompatibility;
   export const setup: ((frame: ShadowRoot) => void) | undefined;
+}
+
+declare module "virtual:element-demos/*" {
+  import type { BrowserCompatibility } from "@/model/BrowserCompatibility";
+  const demos: Map<
+    string,
+    {
+      css: string;
+      html: string;
+      scssConfig: Record<string, string> | undefined;
+      browserCompatibility: BrowserCompatibility;
+      setup: ((frame: ShadowRoot) => void) | undefined;
+    }
+  >;
+  export default demos;
 }
