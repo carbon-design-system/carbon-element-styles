@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as block from "./block";
-import * as inline from "./inline";
+import * as default_demo from "virtual:element-demos/text-input/default";
+import * as block from "virtual:element-demos/text-input/block";
+import * as inline from "virtual:element-demos/text-input/inline";
 
 export const demos = new Map([
   ["default", default_demo],

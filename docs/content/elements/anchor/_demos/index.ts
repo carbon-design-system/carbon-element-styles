@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as with_visited_styles from "./with-visited-styles";
-import * as without_visited_styles from "./without-visited-styles";
+import * as default_demo from "virtual:element-demos/anchor/default";
+import * as with_visited_styles from "virtual:element-demos/anchor/with-visited-styles";
+import * as without_visited_styles from "virtual:element-demos/anchor/without-visited-styles";
 
 export const demos = new Map([
   ["default", default_demo],

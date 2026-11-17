@@ -10,8 +10,8 @@ import { resolve } from "node:path";
 import type { Plugin } from "vite";
 
 import { getBrowserCompatibilityForDemo } from "../utilities/browser-compatibility.ts";
+import { getDemoScssPath } from "../utilities/demo-files.ts";
 
-const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
 const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
 
 const virtualPrefix = "virtual:browser-compatibility/";
@@ -34,7 +34,7 @@ export const browserCompatibility: Plugin = {
     },
     async handler(id) {
       const [elementName, demoName] = id.slice(resolvedPrefix.length).split("/");
-      const demoScssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
+      const demoScssPath = getDemoScssPath(elementName, demoName);
       const elementScssPath = resolve(elementsScssDir, elementName, "index.scss");
 
       this.addWatchFile(demoScssPath);

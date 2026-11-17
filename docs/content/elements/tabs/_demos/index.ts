@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as line from "./line";
-import * as contained from "./contained";
-import * as content_switcher from "./content-switcher";
-import * as content_switcher__low_contrast from "./content-switcher--low-contrast";
+import * as default_demo from "virtual:element-demos/tabs/default";
+import * as line from "virtual:element-demos/tabs/line";
+import * as contained from "virtual:element-demos/tabs/contained";
+import * as content_switcher from "virtual:element-demos/tabs/content-switcher";
+import * as content_switcher__low_contrast from "virtual:element-demos/tabs/content-switcher--low-contrast";
 
 export const demos = new Map([
   ["default", default_demo],

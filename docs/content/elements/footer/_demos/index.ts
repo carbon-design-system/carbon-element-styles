@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
+import * as default_demo from "virtual:element-demos/footer/default";
 
 export const demos = new Map([["default", default_demo]]);

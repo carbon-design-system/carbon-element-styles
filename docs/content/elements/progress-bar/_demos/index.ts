@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as block from "./block";
-import * as inline from "./inline";
-import * as thick from "./thick";
-import * as thin from "./thin";
+import * as default_demo from "virtual:element-demos/progress-bar/default";
+import * as block from "virtual:element-demos/progress-bar/block";
+import * as inline from "virtual:element-demos/progress-bar/inline";
+import * as thick from "virtual:element-demos/progress-bar/thick";
+import * as thin from "virtual:element-demos/progress-bar/thin";
 
 export const demos = new Map([
   ["default", default_demo],

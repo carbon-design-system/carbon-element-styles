@@ -25,8 +25,8 @@ import bcd, { Identifier, type SupportBlock } from "@mdn/browser-compat-data" wi
 import { compileStringAsync } from "sass";
 
 import { browsers, type BrowserCompatibility } from "../../docs/model/BrowserCompatibility.ts";
+import { getDemoScssPath } from "./demo-files.ts";
 
-const demoContentDir = resolve(import.meta.dirname, "../../docs/content/elements");
 const elementsScssDir = resolve(import.meta.dirname, "../../scss/elements");
 const nodeModulesDir = resolve(import.meta.dirname, "../../node_modules");
 
@@ -322,7 +322,7 @@ export async function getBrowserCompatibilityForDemo(
   elementName: string,
   demoName: string,
 ): Promise<BrowserCompatibility> {
-  const demoScssPath = resolve(demoContentDir, elementName, "_demos", demoName, "index.scss");
+  const demoScssPath = getDemoScssPath(elementName, demoName);
   const elementScssPath = resolve(elementsScssDir, elementName, "index.scss");
 
   const source = await readFile(demoScssPath, "utf8");

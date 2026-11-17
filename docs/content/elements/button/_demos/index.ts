@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as default_demo from "./default";
-import * as primary from "./primary";
-import * as secondary from "./secondary";
-import * as tertiary from "./tertiary";
-import * as ghost from "./ghost";
-import * as danger__primary from "./danger--primary";
-import * as danger__tertiary from "./danger--tertiary";
-import * as danger__ghost from "./danger--ghost";
+import * as default_demo from "virtual:element-demos/button/default";
+import * as primary from "virtual:element-demos/button/primary";
+import * as secondary from "virtual:element-demos/button/secondary";
+import * as tertiary from "virtual:element-demos/button/tertiary";
+import * as ghost from "virtual:element-demos/button/ghost";
+import * as danger__primary from "virtual:element-demos/button/danger--primary";
+import * as danger__tertiary from "virtual:element-demos/button/danger--tertiary";
+import * as danger__ghost from "virtual:element-demos/button/danger--ghost";
 
 export const demos = new Map([
   ["default", default_demo],
