@@ -19,11 +19,13 @@ $config: () !default;
 
 $-default-config: (
   selector: "details",
+  alignment: "start",
 );
 
 /// @group details
 /// @param {Map} config [()]
 /// @param {Selector} config.selector ['details']
+/// @param {'start' | 'end'} config.alignment ['start']
 @mixin styles($config: $config) {
   $props: map.deep-merge($-default-config, $config);
 
@@ -31,8 +33,7 @@ $-default-config: (
     #{map.get($props, "selector")} {
       border-block-start: 0.0625rem solid theme.$border-subtle;
       box-sizing: border-box;
-      padding-inline-start: calc(layout.$density--padding + 1rem + layout.$density--padding);
-      padding-inline-end: layout.$density--padding;
+      padding-inline: layout.$density--padding;
 
       &:last-of-type {
         border-block-end: 0.0625rem solid theme.$border-subtle;
@@ -46,12 +47,8 @@ $-default-config: (
         display: flex;
         padding-block-start: layout.$size--padding-block-start;
         padding-block-end: layout.$size--padding-block-end;
-        margin-inline-start: calc(
-          (layout.$density--padding + 1rem + layout.$density--padding) * -1
-        );
-        padding-inline-start: layout.$density--padding;
-        margin-inline-end: calc(layout.$density--padding * -1);
-        padding-inline-end: layout.$density--padding;
+        padding-inline: layout.$density--padding;
+        margin-inline: calc(layout.$density--padding * -1);
 
         @include guards.hover {
           &:hover {
@@ -68,19 +65,6 @@ $-default-config: (
         }
       }
 
-      & summary::before {
-        content: "";
-        @include icons.chevron--down;
-        translate: 0 calc((1lh - 1rem) * 0.5);
-        display: inline-block;
-        margin-inline-end: layout.$density--padding;
-
-        @include guards.motion {
-          transition: rotate layout.$mode--transition-duration
-            layout.$mode--transition-timing-function;
-        }
-      }
-
       &[open] {
         padding-block-end: layout.$density--padding;
       }
@@ -89,8 +73,54 @@ $-default-config: (
         margin-block-end: layout.$density--padding;
       }
 
-      &[open] summary::before {
-        rotate: 180deg;
+      @if map.get($props, "alignment") == "start" {
+        padding-inline-start: calc(layout.$density--padding + 1rem + layout.$density--padding);
+
+        & summary {
+          margin-inline-start: calc(
+            (layout.$density--padding + 1rem + layout.$density--padding) * -1
+          );
+        }
+
+        & summary::before {
+          content: "";
+          @include icons.chevron--down;
+          translate: 0 calc((1lh - 1rem) * 0.5);
+          display: inline-block;
+          margin-inline-end: layout.$density--padding;
+
+          @include guards.motion {
+            transition: rotate layout.$mode--transition-duration
+              layout.$mode--transition-timing-function;
+          }
+        }
+
+        &[open] summary::before {
+          rotate: 180deg;
+        }
+      }
+
+      @if map.get($props, "alignment") == "end" {
+        & summary {
+          justify-content: space-between;
+        }
+
+        & summary::after {
+          content: "";
+          @include icons.chevron--down;
+          translate: 0 calc((1lh - 1rem) * 0.5);
+          display: inline-block;
+          margin-inline-start: layout.$density--padding;
+
+          @include guards.motion {
+            transition: rotate layout.$mode--transition-duration
+              layout.$mode--transition-timing-function;
+          }
+        }
+
+        &[open] summary::after {
+          rotate: 180deg;
+        }
       }
     }
   }
