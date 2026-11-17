@@ -16,5 +16,13 @@ export default new NavigationItem({
       id: "default",
       label: "Default",
     }),
+    new NavigationItem({
+      id: "alignment-start",
+      label: "Alignment: start",
+    }),
+    new NavigationItem({
+      id: "alignment-end",
+      label: "Alignment: end",
+    }),
   ],
 });
