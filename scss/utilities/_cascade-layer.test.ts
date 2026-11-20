@@ -17,7 +17,7 @@ const dialogStylesUrl = pathToFileURL(join(__dirname, "../elements/dialog/index.
 const nodeModules = join(__dirname, "../../node_modules");
 
 function compile(scss: string) {
-  return compileString(scss, { loadPaths: [nodeModules] });
+  return compileString(scss, { loadPaths: [nodeModules], quietDeps: true });
 }
 
 describe("scss/utilities/_cascade-layer", () => {

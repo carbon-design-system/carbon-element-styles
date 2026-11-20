@@ -49,6 +49,7 @@ describe("All element styles are wrapped in a cascade layer", () => {
 
     const { css } = compileString(scss, {
       loadPaths: [nodeModules],
+      quietDeps: true,
     });
 
     const matches = css.match(/@layer/g);

@@ -51,6 +51,7 @@ selector {
     expect(() =>
       compileString(scss, {
         loadPaths: [nodeModules],
+        quietDeps: true,
       }),
     ).not.toThrow();
   });
