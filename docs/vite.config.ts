@@ -37,6 +37,13 @@ export const config: UserConfig = {
       "@": resolve(import.meta.dirname),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+      },
+    },
+  },
   plugins: [
     carbonIcons,
     docsInventory,
