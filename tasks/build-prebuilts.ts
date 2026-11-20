@@ -31,6 +31,7 @@ for (const file of await readdir(sourceDir)) {
       style: "compressed",
       sourceMap: false,
       loadPaths: ["node_modules"],
+      quietDeps: true,
     });
 
     log.info(`Built ${name}`);

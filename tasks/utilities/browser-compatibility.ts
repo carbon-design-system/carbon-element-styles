@@ -336,6 +336,7 @@ export async function getBrowserCompatibilityForDemo(
 
   const { css } = await compileStringAsync(syntheticScss, {
     loadPaths: [nodeModulesDir],
+    quietDeps: true,
   });
 
   return getBrowserCompatibilityForCss(css);
