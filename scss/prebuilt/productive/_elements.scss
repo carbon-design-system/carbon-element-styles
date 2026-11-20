@@ -46,6 +46,7 @@
 @use "../../elements/main";
 @use "../../elements/marked-text";
 @use "../../elements/menu";
+@use "../../elements/meter";
 @use "../../elements/number-input";
 @use "../../elements/ordered-list";
 @use "../../elements/paragraph";
@@ -60,6 +61,7 @@
 @use "../../elements/side-navigation";
 @use "../../elements/small-text";
 @use "../../elements/table";
+@use "../../elements/tabs";
 @use "../../elements/telephone-number-input";
 @use "../../elements/text-area";
 @use "../../elements/text-input";
@@ -117,6 +119,8 @@
     @include label.styles;
     @include main.styles;
     @include marked-text.styles;
+    @include menu.styles;
+    @include meter.styles;
     @include number-input.styles;
     @include ordered-list.styles;
     @include paragraph.styles;
@@ -131,6 +135,7 @@
     @include side-navigation.styles;
     @include small-text.styles;
     @include table.styles;
+    @include tabs.styles;
     @include telephone-number-input.styles;
     @include text-area.styles;
     @include text-input.styles;
@@ -138,6 +143,7 @@
     @include time-input.styles;
     @include toggle.styles;
     @include tooltip.styles;
+    @include tree-view.styles;
     @include unordered-list.styles;
     @include url-input.styles;
   }
