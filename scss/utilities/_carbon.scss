@@ -52,8 +52,7 @@ $-component-token-groups: (
             $value: map.get($theme-value, value);
 
             @if theme.matches(map.get($theme-value, theme), $theme) and
-              meta.type-of($value) ==
-              color
+              meta.type-of($value) == color
             {
               $tokens: map.set($tokens, $key, $value);
             }

@@ -129,10 +129,8 @@ $-default-config: (
         }
       }
 
-      @if map.get($props, "kind") ==
-        "content-switcher" or
-        map.get($props, "kind") ==
-        "content-switcher--low-contrast"
+      @if map.get($props, "kind") == "content-switcher" or
+        map.get($props, "kind") == "content-switcher--low-contrast"
       {
         & {
           box-shadow: 0 0 0 0.0625rem theme.$border-inverse;

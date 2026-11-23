@@ -114,10 +114,8 @@ $-default-config: (
         }
       }
 
-      @if map.get($props, "kind") ==
-        "structured-list" or
-        map.get($props, "kind") ==
-        "structured-list--flush"
+      @if map.get($props, "kind") == "structured-list" or
+        map.get($props, "kind") == "structured-list--flush"
       {
         & tfoot th,
         & tfoot td {
